@@ -10,6 +10,9 @@ namespace Assets.Scripts.Player
     {
         public SteamVR_Input_Sources handType;
         public SteamVR_Action_Boolean triggerAction;
+        public AudioSource audioPlayer;
+
+        private bool release;
 
         public bool GetTrigger()
         {
@@ -19,7 +22,19 @@ namespace Assets.Scripts.Player
         public void Update()
         {
             bool value = GetTrigger();
-            if (value) print("Trigger state:" + value);
+            if (value)
+            {
+                if (release == false)
+                {
+                    print("Trigger state:" + value);
+                    audioPlayer.Play();
+                    release = true;
+                }
+            } else
+            {
+                release = false;
+            }
+            
         }
     }
 }
