@@ -1,7 +1,12 @@
 {
-   "app_key" : "application.generated.unity.steamvr.exe",
+   "alias_info" : {},
+   "app_key" : "application.generated.unity.vrshootingexam.exe",
    "bindings" : {
       "/actions/buggy" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
          "sources" : [
             {
                "inputs" : {
@@ -191,6 +196,9 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/trigger"
+                  },
                   "pull" : {
                      "output" : "/actions/default/in/squeeze"
                   }
@@ -200,6 +208,9 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/trigger"
+                  },
                   "pull" : {
                      "output" : "/actions/default/in/squeeze"
                   }
@@ -210,6 +221,10 @@
          ]
       },
       "/actions/platformer" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
          "sources" : [
             {
                "inputs" : {
@@ -251,6 +266,8 @@
       }
    },
    "controller_type" : "vive_controller",
-   "description" : "",
-   "name" : "vive_controller"
+   "description" : "Working tracing with bool shooting",
+   "name" : "vive_controller",
+   "options" : {},
+   "simulated_actions" : []
 }
