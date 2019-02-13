@@ -27,8 +27,8 @@ namespace Assets.Scripts.Player
 
         public void Update()
         {
-            if(leftHandInput != null) leftHand.HandleInput(leftHandInput.GetTriggerState());
-            if(rightHandInput != null) rightHand.HandleInput(rightHandInput.GetTriggerState());
+            if(leftHandInput != null) leftHand.HandleInput(leftHandInput);
+            if(rightHandInput != null) rightHand.HandleInput(rightHandInput);
         }
     }
 }
