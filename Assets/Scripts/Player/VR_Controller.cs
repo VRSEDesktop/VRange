@@ -10,10 +10,16 @@ namespace Assets.Scripts.Player
     {
         public SteamVR_Input_Sources handType;
         public SteamVR_Action_Boolean triggerAction;
+        public SteamVR_Action_Boolean gripAction;
 
         public bool GetTriggerState()
         {
             return triggerAction.GetState(handType);
+        }
+
+        public bool GetGripState()
+        {
+            return gripAction.GetState(handType);
         }
     }
 }

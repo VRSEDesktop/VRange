@@ -74,4 +74,9 @@ public class Gun : MonoBehaviour
 
         return true;
     }
+
+    public void Reload()
+    {
+        currentAmmo = magCapacity;
+    }
 }
