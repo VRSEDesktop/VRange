@@ -1,9 +1,4 @@
-﻿using UnityEngine;
-
-public class Hitable : MonoBehaviour
+﻿public interface Hitable
 {
-    void OnHit()
-    {
-        Debug.Log("CUBEEE");
-    }
+    void OnHit(BulletHit bulletHit);
 }
