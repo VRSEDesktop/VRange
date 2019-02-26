@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AI : MonoBehaviour
+public class NPCController : MonoBehaviour
 {
-    public StateMachine<AI> StateMachine;
-    public Transform[] NavPoints;
+    private List<Transform> navPoints = new List<Transform>();
     private int destPoint = 0;
     private NavMeshAgent agent;
+    private StateMachine<NPCController> StateMachine;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
+
+        foreach(GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
+        {
+            navPoints.Add(o.transform);
+        }
         
-        StateMachine = new StateMachine<AI>(this);
+        StateMachine = new StateMachine<NPCController>(this);
         StateMachine.ChangeState(Patrol.Instance);
     }
 
@@ -29,14 +34,14 @@ public class AI : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets destination to a random point
+    /// Sets destination to a random point.
     /// </summary>
     private void GotoNextPoint()
     {
-        if (NavPoints.Length == 0)
+        if (navPoints.Count == 0)
             return;
 
-        agent.destination = NavPoints[destPoint].position;
-        destPoint = Random.Range(0, NavPoints.Length);
+        agent.SetDestination(navPoints[destPoint].position);
+        destPoint = Random.Range(0, navPoints.Count);
     }
 }

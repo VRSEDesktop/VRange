@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : State<AI>
+public class Patrol : State<NPCController>
 {
     private static Patrol _instance;
 
@@ -24,17 +24,17 @@ public class Patrol : State<AI>
         }
     }
 
-    public override void EnterState(AI owner)
+    public override void EnterState(NPCController owner)
     {
         
     }
 
-    public override void ExitState(AI owner)
+    public override void ExitState(NPCController owner)
     {
         
     }
 
-    public override void Update(AI owner)
+    public override void Update(NPCController owner)
     {
         //owner.StateMachine.ChangeState(Patrol.Instance);
     }

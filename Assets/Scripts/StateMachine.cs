@@ -5,28 +5,28 @@ using UnityEngine;
 [System.Serializable]
 public class StateMachine<T>
 {
-    public State<T> currentState { get; private set; }
+    public State<T> CurrentState { get; private set; }
     public T Owner;
 
     public StateMachine(T owner)
     {
         Owner = owner;
-        currentState = null;
+        CurrentState = null;
     }
        
     public void ChangeState(State<T> newState)
     {
-        if(currentState != null)
-            currentState.ExitState(Owner);
-        currentState = newState;
-        currentState.EnterState(Owner);
+        if(CurrentState != null)
+            CurrentState.ExitState(Owner);
+        CurrentState = newState;
+        CurrentState.EnterState(Owner);
     }
 
     public void Update()
     {
-        if(currentState != null)
+        if(CurrentState != null)
         {
-            currentState.Update(Owner);
+            CurrentState.Update(Owner);
         }
     }
 }
