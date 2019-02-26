@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
 
         GetComponentInChildren<ParticleSystem>().Play();
 
-        DetectHit();       
+        DetectHit();
     }
 
     /// <summary>
@@ -36,21 +36,21 @@ public class Gun : MonoBehaviour
     /// </summary>
     private void DetectHit()
     {
-        RaycastHit hit;
+        if (debugMode) DrawLine(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
 
-        if(debugMode) DrawLine(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
-
-        if(Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out hit))
+        if (Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit))
         {
-            Debug.Log("Hit: " + hit.transform.name);
-            hit.transform.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
+            Debug.Log("Hit: " + ((MeshCollider)hit.collider).sharedMesh.name);
+
+            Hitable target = hit.transform.GetComponentInParent<Hitable>();
+            target?.OnHit(new BulletHit(this, hit));
         }           
     }
 
     /// <summary>
     /// Debug function for drawing the bullet trajectory
     /// </summary>
-    private void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.5f)
+    private void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 10f)
     {
         GameObject myLine = new GameObject();
         myLine.transform.position = start;
