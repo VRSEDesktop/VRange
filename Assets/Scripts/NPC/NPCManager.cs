@@ -12,10 +12,7 @@ public class NPCManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
-        {
-            SpawnPoints.Add(o.transform);
-        }
+        UpdateSpawnPoints();
     }
 
     private void Start()
@@ -26,15 +23,18 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     private void Spawn()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
         GameObject npc = Instantiate(NPC, SpawnPoints[spawnPoint]);
         NPCList.Add(npc);
+    }
+
+    private void UpdateSpawnPoints()
+    {
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
+        {
+            SpawnPoints.Add(o.transform);
+        }
     }
 }
