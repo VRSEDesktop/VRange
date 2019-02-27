@@ -4,37 +4,22 @@ using Valve.VR;
 namespace Assets.Scripts.Player
 {
     /// <summary>
-    /// Set the different button presses of a VR controller.
+    /// Gets inputs from the controller
     /// </summary>
     public class VR_Controller : MonoBehaviour
     {
         public SteamVR_Input_Sources handType;
         public SteamVR_Action_Boolean triggerAction;
-        public AudioSource audioPlayer;
+        public SteamVR_Action_Boolean gripAction;
 
-        private bool release;
-
-        public bool GetTrigger()
+        public bool GetTriggerState()
         {
             return triggerAction.GetState(handType);
         }
 
-        public void Update()
+        public bool GetGripState()
         {
-            bool value = GetTrigger();
-            if (value)
-            {
-                if (release == false)
-                {
-                    print("Trigger state:" + value);
-                    audioPlayer.Play();
-                    release = true;
-                }
-            } else
-            {
-                release = false;
-            }
-            
+            return gripAction.GetState(handType);
         }
     }
 }
