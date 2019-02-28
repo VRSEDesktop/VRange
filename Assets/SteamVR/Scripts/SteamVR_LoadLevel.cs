@@ -365,10 +365,12 @@ namespace Valve.VR
 
                     // Performing this in a while loop instead seems to help smooth things out.
                     //yield return async;
+
                     while (!async.isDone)
                     {
                         yield return null;
                     }
+
                 }
                 else
                 {
