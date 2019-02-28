@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour, Hitable
 {
@@ -14,13 +13,25 @@ public class Enemy : MonoBehaviour, Hitable
 
     public void OnHit(BulletHit bulletHit)
     {
-        //HitboxType
-        Debug.Log(((MeshCollider)(bulletHit.raycastHit.collider)).sharedMesh.name);
-    }
+		HitboxType partHit = HitboxType.NONE;
+        foreach (Hitbox hitbox in hitboxes)
+		{
+			if(hitbox.mesh == bulletHit.raycastHit.collider)
+			{
+				partHit = hitbox.type;
+				break;
+			}
+		}
 
-    public void OnAwake()
-    {
-        Animator animator = GetComponent<Animator>();
-        animator.Play("Movement");
+        switch (partHit) // add sth related to the part hit if we will need it
+		{
+			case HitboxType.HEAD:
+                Debug.Log("HIT HEAD");
+            break;
+
+            case HitboxType.TORSO:
+                Debug.Log("HIT TORSO");
+            break;
+        }
     }
 }
