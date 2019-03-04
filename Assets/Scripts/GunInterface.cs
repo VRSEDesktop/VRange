@@ -7,7 +7,7 @@ using UnityEngine;
 public class GunInterface : MonoBehaviour
 {
     private Gun gun;
-    private bool trigerPushed, reloadPushed;
+    private bool triggerPushed, reloadPushed;
     
     public GunInterface(Gun gun)
     {
@@ -16,22 +16,24 @@ public class GunInterface : MonoBehaviour
 
     public void HandleInput(VR_Controller input)
     {
-        if (!trigerPushed && input.GetTriggerState()) PushTriger();
-        else if(trigerPushed && !input.GetTriggerState()) ReleaseTriger();
+        if (!triggerPushed && input.GetTriggerState()) PushTrigger();
+        else if(triggerPushed && !input.GetTriggerState()) ReleaseTrigger();
 
         if (!reloadPushed && input.GetGripState()) PushReload();
         else if (reloadPushed && !input.GetGripState()) ReleaseReload();
     }
 
-    private void PushTriger()
+    private void PushTrigger()
     {
-        trigerPushed = true;
+        if (triggerPushed)
+            return;
         gun.SendMessage("Shoot");
+        triggerPushed = true;
     }
 
-    private void ReleaseTriger()
+    private void ReleaseTrigger()
     {
-        trigerPushed = false;
+        triggerPushed = false;
     }
 
     private void PushReload()

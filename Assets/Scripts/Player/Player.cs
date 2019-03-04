@@ -5,7 +5,7 @@ namespace Assets.Scripts.Player
     /// <summary>
     /// Saves data relevant to the player.
     /// </summary>
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, Hitable
     {
         public Vector3 playerHeight = new Vector3(0, 1.64f);
         public static Player Instance { get; private set; }
@@ -29,6 +29,13 @@ namespace Assets.Scripts.Player
         {
             if(leftHandInput != null) leftHand.HandleInput(leftHandInput);
             if(rightHandInput != null) rightHand.HandleInput(rightHandInput);
+        }
+
+        public Hitbox hitbox;
+
+        public void OnHit(BulletHit bulletHit)
+        {
+            Debug.Log("HIT HEAD");
         }
     }
 }

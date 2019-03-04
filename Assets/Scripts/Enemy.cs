@@ -2,13 +2,6 @@
 
 public class Enemy : MonoBehaviour, Hitable
 {
-    [System.Serializable]
-    public struct Hitbox
-    {
-        public Collider mesh;
-        public HitboxType type;
-    }
-
     public Hitbox[] hitboxes;
 
     public void OnHit(BulletHit bulletHit)

@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
 
     public AudioSource shotSound;
-    public AudioSource trigerSound;
+    public AudioSource triggerSound;
 
     public Transform barrelExit;
 
@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        trigerSound.Play();
+        triggerSound.Play();
 
         if (!CanShoot()) return;
 
@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour
 
         if (Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit))
         {
-            Debug.Log("Hit: " + ((MeshCollider)hit.collider).sharedMesh.name);
+            Debug.Log("Hit: " + hit.collider.name);
 
             Hitable target = hit.transform.GetComponentInParent<Hitable>();
             target?.OnHit(new BulletHit(this, hit));
