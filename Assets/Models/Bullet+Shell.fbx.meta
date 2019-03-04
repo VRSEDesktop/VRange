@@ -17,7 +17,17 @@ ModelImporter:
     3300002: Shell.001
     4300000: Shell.001
     4300002: Bullet.003
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 11492a5f45ef8b648aa5e43fc8a52813, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: f9d870fb61a159943a8c251f42039051, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -109,7 +109,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 243078391499754788, guid: ec12f7772c03e4c4c9e4c2f1643595ad,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 7ffd048083b175147a373d316a18da9e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -24072,10 +24072,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 51aa443ecbbc5574f9b18926055a6f2b, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0

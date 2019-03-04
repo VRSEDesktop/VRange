@@ -58,7 +58,37 @@ ModelImporter:
     13700006: P99Sight
     13700008: slide+Sights
     13700010: Trigger
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel + Internals
+    second: {fileID: 2100000, guid: b344e0abd5b98fb4f82c61b7029b5e53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LowerReciever+PistolGrip
+    second: {fileID: 2100000, guid: 6c89ad9dc5bbc054fb71f85121b96f7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mag
+    second: {fileID: 2100000, guid: 2809fec11d26c2347b85d05bbc190702, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: P99Sights
+    second: {fileID: 2100000, guid: 4f744251e8fbc154c8f2d6b78eb0f18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Slide+Sights
+    second: {fileID: 2100000, guid: af0deed5a2e6b6f4ca09776220512048, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trigger
+    second: {fileID: 2100000, guid: a4ebed85626357546a92b7ffd19985db, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
