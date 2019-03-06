@@ -29,8 +29,16 @@ namespace Assets.Scripts.Player
 
         public void Update()
         {
-            if(leftHandInput != null) leftHand.HandleInput(leftHandInput);
-            if(rightHandInput != null) rightHand.HandleInput(rightHandInput);
+            if (leftHandInput != null)
+            {
+                leftHand.HandleInput(leftHandInput);
+                leftGun.gameObject.SetActive(leftHandInput.IsControllerWorking());
+            }
+            if (rightHandInput != null)
+            {
+                rightHand.HandleInput(rightHandInput);
+                rightGun.gameObject.SetActive(rightHandInput.IsControllerWorking());
+            }
         }
 
         public void OnHit(BulletHit bulletHit)

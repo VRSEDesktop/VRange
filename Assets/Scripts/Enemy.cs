@@ -4,6 +4,12 @@ public class Enemy : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
 
+    public void Start()
+    {
+        GetComponent<Animator>().SetFloat("Speed", 10);
+        //GetComponent<Animator>()
+    }
+
     public void OnHit(BulletHit bulletHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(bulletHit);
