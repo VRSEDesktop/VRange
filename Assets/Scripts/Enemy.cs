@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour, Hitable
+public class Enemy : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
 
+    public void Start()
+    {
+        GetComponent<Animator>().SetFloat("Speed", 10);
+        //GetComponent<Animator>()
+    }
+
     public void OnHit(BulletHit bulletHit)
     {
-		HitboxType partHit = HitboxType.NONE;
-        foreach (Hitbox hitbox in hitboxes)
-		{
-			if(hitbox.mesh == bulletHit.raycastHit.collider)
-			{
-				partHit = hitbox.type;
-				break;
-			}
-		}
+        HitboxType partHit = GetHitboxTypeFromHit(bulletHit);
 
         switch (partHit) // add sth related to the part hit if we will need it
 		{
@@ -26,5 +24,22 @@ public class Enemy : MonoBehaviour, Hitable
                 Debug.Log("HIT TORSO");
             break;
         }
+
+        Scenario_Stats.RegisterHit(this, partHit, bulletHit);
+    }
+
+    /// <summary>
+    /// Get HitboxType which was hit with the bulletHit
+    /// </summary>
+    /// <param name="bulletHit"></param>
+    /// <returns></returns>
+    private HitboxType GetHitboxTypeFromHit(BulletHit bulletHit)
+    {
+        foreach (Hitbox hitbox in hitboxes)
+        {
+            if (hitbox.mesh == bulletHit.raycastHit.collider) return hitbox.type;
+        }
+
+        return HitboxType.NONE;
     }
 }

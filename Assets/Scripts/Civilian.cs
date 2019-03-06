@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Civilian : MonoBehaviour, Hitable
+public class Civilian : MonoBehaviour, IHitable
 {
 	public void OnHit(BulletHit bulletHit)
 	{

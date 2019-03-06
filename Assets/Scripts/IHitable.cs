@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface Hitable
+public interface IHitable
 {
     void OnHit(BulletHit bulletHit);
 }

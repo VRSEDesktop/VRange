@@ -221,7 +221,7 @@ MonoBehaviour:
   debugMode: 1
   magCapacity: 15
   shotSound: {fileID: 5858937369385156984}
-  triggerSound: {fileID: 0}
+  triggerSound: {fileID: 2246788448544925822}
   barrelExit: {fileID: 5304318815916214321}
 --- !u!1 &6538211501695581298
 GameObject:
@@ -24028,14 +24028,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: P99
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d67e1a3aea0bce24ba17526c5e9392e7, type: 2}
-    - target: {fileID: 9500000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -24092,60 +24084,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.7
       objectReference: {fileID: 0}
-    - target: {fileID: 400024, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.046346705
+    - target: {fileID: 9500000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_Controller
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 400024, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.13817324
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1.2560736e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 1.2560738e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0760846
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.047854822
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400030, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.017394824
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
-      propertyPath: m_LocalPosition.z
+    - target: {fileID: 9500000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 13700008, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
@@ -24232,6 +24176,10 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 4226328758674568089}
+    - target: {fileID: 13700000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 13700002, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

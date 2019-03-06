@@ -2,14 +2,21 @@
 
 public class Gun : MonoBehaviour
 {
+    /// <summary>
+    /// Used for drawing bullet's path
+    /// </summary>
     public bool debugMode = false;
 
     public int magCapacity;
+    public int shotsFired;
     private int currentAmmo;
 
     public AudioSource shotSound;
     public AudioSource triggerSound;
 
+    /// <summary>
+    /// The place where bullets spawn
+    /// </summary>
     public Transform barrelExit;
 
     public void Start()
@@ -25,6 +32,7 @@ public class Gun : MonoBehaviour
 
         shotSound.Play();
         currentAmmo--;
+        shotsFired++;
 
         GetComponentInChildren<ParticleSystem>().Play();
 
@@ -42,7 +50,7 @@ public class Gun : MonoBehaviour
         {
             Debug.Log("Hit: " + hit.collider.name);
 
-            Hitable target = hit.transform.GetComponentInParent<Hitable>();
+            IHitable target = hit.transform.GetComponentInParent<IHitable>();
             target?.OnHit(new BulletHit(this, hit));
         }           
     }
@@ -66,7 +74,7 @@ public class Gun : MonoBehaviour
     }
 
     /// <summary>
-    /// Can the gun fire, depends on available bullets and maybe other factors
+    /// Can the gun fire, depends on available bullets and other factors
     /// </summary>
     private bool CanShoot()
     {

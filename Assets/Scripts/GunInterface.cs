@@ -25,10 +25,9 @@ public class GunInterface : MonoBehaviour
 
     private void PushTrigger()
     {
-        if (triggerPushed)
-            return;
-        gun.SendMessage("Shoot");
+        if (triggerPushed) return;
         triggerPushed = true;
+        gun.SendMessage("Shoot");
     }
 
     private void ReleaseTrigger()
