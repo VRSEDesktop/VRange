@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, IHitable
                 Debug.Log("HIT TORSO");
             break;
         }
+
+        Scenario_Stats.RegisterHit(this, partHit, bulletHit);
     }
 
     /// <summary>

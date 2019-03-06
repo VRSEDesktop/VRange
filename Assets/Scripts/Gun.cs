@@ -32,6 +32,7 @@ public class Gun : MonoBehaviour
 
         shotSound.Play();
         currentAmmo--;
+        shotsFired++;
 
         GetComponentInChildren<ParticleSystem>().Play();
 
