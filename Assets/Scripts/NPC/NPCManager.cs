@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
+    /// <summary>
+    /// NPC GameObject
+    /// </summary>
     public GameObject NPC;
-    public int MaxNPCs;
+    /// <summary>
+    /// List of GameObjects suspects can use
+    /// </summary>
+    public GameObject[] Weapons;
+    /// <summary>
+    /// Number of normal NPCs
+    /// </summary>
+    public int Bystanders;
+    /// <summary>
+    /// Number of agressors
+    /// </summary>
+    public int Suspects;
 
     private List<Transform> SpawnPoints = new List<Transform>();
-    private List<GameObject> NPCList = new List<GameObject>();
+    private List<GameObject> BystanderList = new List<GameObject>();
+    private List<GameObject> SuspectList = new List<GameObject>();
 
     private void Awake()
     {
@@ -17,17 +32,36 @@ public class NPCManager : MonoBehaviour
 
     private void Start()
     {
-        while (NPCList.Count < MaxNPCs)
+        while (BystanderList.Count < Bystanders)
         {
-            Spawn();
+            SpawnBystander();
+        }
+        while (SuspectList.Count < Suspects)
+        {
+            SpawnSuspect();
         }
     }
 
-    private void Spawn()
+    private void SpawnBystander()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
-        GameObject npc = Instantiate(NPC, SpawnPoints[spawnPoint]);
-        NPCList.Add(npc);
+        GameObject bystander = Instantiate(NPC, SpawnPoints[spawnPoint]);
+        BystanderList.Add(bystander);
+    }
+
+    private void SpawnSuspect()
+    {
+        int spawnPoint = Random.Range(0, SpawnPoints.Count);
+        GameObject suspect = Instantiate(NPC, SpawnPoints[spawnPoint]);
+
+        int weaponindex = Random.Range(0, Weapons.Length);
+        GameObject weapon = Weapons[weaponindex];
+
+        //Add the gun to the prefab's script
+        NPCController suspectController = suspect.GetComponent<NPCController>();
+        suspectController.Weapon = weapon;
+
+        SuspectList.Add(suspect);
     }
 
     private void UpdateSpawnPoints()

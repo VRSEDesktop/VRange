@@ -36,6 +36,29 @@ public class Patrol : State<NPCController>
 
     public override void Update(NPCController owner)
     {
-        //owner.StateMachine.ChangeState(Patrol.Instance);
+        if (!owner.Agent.pathPending && owner.Agent.remainingDistance < 0.5f)
+            GotoNextPoint(owner);
+    }
+
+    public override void OnTriggerStay(NPCController owner, Collider other)
+    {
+        
+    }
+
+    public override void OnTriggerExit(NPCController owner, Collider other)
+    {
+
+    }
+
+    /// <summary>
+    /// Sets destination to a random point.
+    /// </summary>
+    private void GotoNextPoint(NPCController owner)
+    {
+        if (owner.NavPoints.Count == 0)
+            return;
+
+        owner.Agent.SetDestination(owner.NavPoints[owner.DestPoint].position);
+        owner.DestPoint = Random.Range(0, owner.NavPoints.Count);
     }
 }

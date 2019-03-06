@@ -18,6 +18,7 @@ public class StateMachine<T>
     {
         if(CurrentState != null)
             CurrentState.ExitState(Owner);
+
         CurrentState = newState;
         CurrentState.EnterState(Owner);
     }
@@ -25,9 +26,19 @@ public class StateMachine<T>
     public void Update()
     {
         if(CurrentState != null)
-        {
             CurrentState.Update(Owner);
-        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (CurrentState != null)
+            CurrentState.OnTriggerStay(Owner, other);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (CurrentState != null)
+            CurrentState.OnTriggerExit(Owner, other);
     }
 }
 
@@ -36,4 +47,6 @@ public abstract class State<T>
     public abstract void EnterState(T owner);
     public abstract void ExitState(T owner);
     public abstract void Update(T owner);
+    public abstract void OnTriggerStay(T owner, Collider other);
+    public abstract void OnTriggerExit(T owner, Collider other);
 }
