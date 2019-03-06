@@ -126,6 +126,9 @@ MonoBehaviour:
   rightHandInput: {fileID: 6733100916155965107}
   leftGun: {fileID: 4278016892390238743}
   rightGun: {fileID: 3350520233452585610}
+  hitbox:
+    mesh: {fileID: 0}
+    type: 0
 --- !u!1 &3525631720226850804
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +252,7 @@ GameObject:
   - component: {fileID: 5266055346700030395}
   - component: {fileID: 3697650212361242748}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player Body Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
