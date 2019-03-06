@@ -13,8 +13,14 @@ public class NPCController : MonoBehaviour
     public NavMeshAgent Agent;
     [HideInInspector]
     public GameObject Weapon;
+    [HideInInspector]
+    public StateMachine<NPCController> StateMachine;
 
-    private StateMachine<NPCController> StateMachine;
+    private void Awake()
+    {
+        StateMachine = new StateMachine<NPCController>(this);
+        StateMachine.ChangeState(Patrol.Instance);
+    }
 
     private void Start()
     {
@@ -25,9 +31,6 @@ public class NPCController : MonoBehaviour
         {
             NavPoints.Add(o.transform);
         }
-        
-        StateMachine = new StateMachine<NPCController>(this);
-        StateMachine.ChangeState(Patrol.Instance);
     }
 
     private void Update()
@@ -38,5 +41,11 @@ public class NPCController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         StateMachine.OnTriggerStay(other);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(StateMachine != null)
+            UnityEditor.Handles.Label(gameObject.transform.position, StateMachine.ToString());
     }
 }

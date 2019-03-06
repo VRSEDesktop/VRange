@@ -24,9 +24,20 @@ public class NPCManager : MonoBehaviour
     private List<Transform> SpawnPoints = new List<Transform>();
     private List<GameObject> BystanderList = new List<GameObject>();
     private List<GameObject> SuspectList = new List<GameObject>();
+    /// <summary>
+    /// GameObject to make the Bystander list easier on the eyes in the editor hierarchy.
+    /// </summary>
+    private GameObject BystanderObject;
+    /// <summary>
+    /// GameObject to make the Suspect list easier on the eyes in the editor hierarchy.
+    /// </summary>
+    private GameObject SuspectObject;
 
     private void Awake()
     {
+        BystanderObject = new GameObject("Bystanders");
+        SuspectObject = new GameObject("Suspects");
+
         UpdateSpawnPoints();
     }
 
@@ -45,14 +56,18 @@ public class NPCManager : MonoBehaviour
     private void SpawnBystander()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
-        GameObject bystander = Instantiate(NPC, SpawnPoints[spawnPoint]);
+        GameObject bystander = Instantiate(NPC, BystanderObject.transform);
+        bystander.transform.position = SpawnPoints[spawnPoint].position;
+
         BystanderList.Add(bystander);
     }
 
     private void SpawnSuspect()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
-        GameObject suspect = Instantiate(NPC, SpawnPoints[spawnPoint]);
+
+        GameObject suspect = Instantiate(NPC, SuspectObject.transform);
+        suspect.transform.position = SpawnPoints[spawnPoint].position;
 
         int weaponindex = Random.Range(0, Weapons.Length);
         GameObject weapon = Weapons[weaponindex];
@@ -60,6 +75,7 @@ public class NPCManager : MonoBehaviour
         //Add the gun to the prefab's script
         NPCController suspectController = suspect.GetComponent<NPCController>();
         suspectController.Weapon = weapon;
+        suspectController.StateMachine.ChangeState(AttackPlayer.Instance);
 
         SuspectList.Add(suspect);
     }

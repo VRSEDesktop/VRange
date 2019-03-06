@@ -235,7 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPC: {fileID: 561706765, guid: 2f34fb94c5de9b94b965f6bb62c66a7d, type: 3}
-  MaxNPCs: 2
+  Weapons:
+  - {fileID: 4226328758674993041, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
+  Bystanders: 0
+  Suspects: 2
 --- !u!4 &379965688
 Transform:
   m_ObjectHideFlags: 0
@@ -496,6 +499,9 @@ MonoBehaviour:
   rightHandInput: {fileID: 416208760}
   leftGun: {fileID: 416208759}
   rightGun: {fileID: 416208758}
+  hitbox:
+    mesh: {fileID: 0}
+    type: 0
 --- !u!4 &479765487
 Transform:
   m_ObjectHideFlags: 0

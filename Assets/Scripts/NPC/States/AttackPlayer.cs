@@ -39,7 +39,7 @@ public class AttackPlayer : State<NPCController>
         Collider = owner.GetComponent<CapsuleCollider>();
 
         //Start agression (draw weapon or whatever)
-        Weapon = Object.Instantiate(owner.Weapon);
+        Weapon = GameObject.Instantiate(owner.Weapon, owner.transform);
         WeaponController = Weapon.GetComponent<IWeapon>();
 
         //Initialize some scripted event here, need to think of how to implement that        
@@ -53,7 +53,9 @@ public class AttackPlayer : State<NPCController>
     public override void Update(NPCController owner)
     {
         //Todo: add behaviour for attacking player
-        
+
+        //Place the gun in the NPC's hand
+        Weapon.transform.position = new Vector3(owner.transform.position.x, owner.transform.position.y + 1f, owner.transform.position.z - 0.3f);
     }
 
     public override void OnTriggerStay(NPCController owner, Collider other)

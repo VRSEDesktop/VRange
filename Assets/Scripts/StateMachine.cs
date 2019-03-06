@@ -40,6 +40,15 @@ public class StateMachine<T>
         if (CurrentState != null)
             CurrentState.OnTriggerExit(Owner, other);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>The name of the current state.</returns>
+    public override string ToString()
+    {
+        return CurrentState.GetType().Name;
+    }
 }
 
 public abstract class State<T>
