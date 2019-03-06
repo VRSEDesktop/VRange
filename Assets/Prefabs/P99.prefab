@@ -221,7 +221,7 @@ MonoBehaviour:
   debugMode: 1
   magCapacity: 15
   shotSound: {fileID: 5858937369385156984}
-  trigerSound: {fileID: 2246788448544925822}
+  triggerSound: {fileID: 2246788448544925822}
   barrelExit: {fileID: 5304318815916214321}
 --- !u!1 &6538211501695581298
 GameObject:
@@ -24176,6 +24176,10 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 4226328758674568089}
+    - target: {fileID: 13700000, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 13700002, guid: 91de1ddfb4022f14eae83ac50d809ebe, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
