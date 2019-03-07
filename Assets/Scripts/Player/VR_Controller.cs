@@ -27,7 +27,7 @@ namespace Assets.Scripts.Player
         {
             Vector3 pos = position.GetLocalPosition(handType);
 
-            if (pos == null || pos.Equals(Vector3.zero)) return false;
+            if (pos == null) return false;
             return true;
         }
     }

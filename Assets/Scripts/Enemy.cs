@@ -4,10 +4,11 @@ public class Enemy : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
 
+    private Animator animator;
+
     public void Start()
     {
-        GetComponent<Animator>().SetFloat("Speed", 10);
-        //GetComponent<Animator>()
+        animator = GetComponent<Animator>();
     }
 
     public void OnHit(BulletHit bulletHit)
@@ -18,11 +19,13 @@ public class Enemy : MonoBehaviour, IHitable
 		{
 			case HitboxType.HEAD:
                 Debug.Log("HIT HEAD");
+                animator.SetBool("Death2", true);
             break;
 
             case HitboxType.TORSO:
                 Debug.Log("HIT TORSO");
-            break;
+                animator.SetFloat("Speed", 10);
+                break;
         }
 
         Scenario_Stats.RegisterHit(this, partHit, bulletHit);
