@@ -1,0 +1,942 @@
+fileFormatVersion: 2
+guid: 46bde7d3826b9d844bc7cfd2f431181e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: back_wall
+    100002: door_stuff
+    100004: floor
+    100006: front_wall
+    100008: hanger
+    100010: hanger 1
+    100012: hanger 2
+    100014: hanger 3
+    100016: hanger 4
+    100018: hanger 5
+    100020: hanger 6
+    100022: hanger 7
+    100024: hanger 8
+    100026: left_wall
+    100028: rail
+    100030: rail1
+    100032: rail2
+    100034: rail3
+    100036: rail4
+    100038: rail5
+    100040: rail6
+    100042: rail7
+    100044: rail8
+    100046: right_wall
+    100048: roof
+    100050: roof_hanger1
+    100052: roof_hanger1 1
+    100054: roof_hanger1 2
+    100056: roof_hanger1 3
+    100058: roof_hanger1 4
+    100060: roof_hanger1 5
+    100062: roof_hanger1 6
+    100064: roof_hanger1 7
+    100066: roof_hanger1 8
+    100068: roof_hanger10
+    100070: roof_hanger10 1
+    100072: roof_hanger10 2
+    100074: roof_hanger10 3
+    100076: roof_hanger10 4
+    100078: roof_hanger10 5
+    100080: roof_hanger10 6
+    100082: roof_hanger10 7
+    100084: roof_hanger10 8
+    100086: roof_hanger11
+    100088: roof_hanger11 1
+    100090: roof_hanger11 2
+    100092: roof_hanger11 3
+    100094: roof_hanger11 4
+    100096: roof_hanger11 5
+    100098: roof_hanger11 6
+    100100: roof_hanger11 7
+    100102: roof_hanger11 8
+    100104: roof_hanger12
+    100106: roof_hanger12 1
+    100108: roof_hanger12 2
+    100110: roof_hanger12 3
+    100112: roof_hanger12 4
+    100114: roof_hanger12 5
+    100116: roof_hanger12 6
+    100118: roof_hanger12 7
+    100120: roof_hanger12 8
+    100122: roof_hanger13
+    100124: roof_hanger13 1
+    100126: roof_hanger13 2
+    100128: roof_hanger13 3
+    100130: roof_hanger13 4
+    100132: roof_hanger13 5
+    100134: roof_hanger13 6
+    100136: roof_hanger13 7
+    100138: roof_hanger13 8
+    100140: roof_hanger14
+    100142: roof_hanger14 1
+    100144: roof_hanger14 2
+    100146: roof_hanger14 3
+    100148: roof_hanger14 4
+    100150: roof_hanger14 5
+    100152: roof_hanger14 6
+    100154: roof_hanger14 7
+    100156: roof_hanger14 8
+    100158: roof_hanger15
+    100160: roof_hanger15 1
+    100162: roof_hanger15 2
+    100164: roof_hanger15 3
+    100166: roof_hanger15 4
+    100168: roof_hanger15 5
+    100170: roof_hanger15 6
+    100172: roof_hanger15 7
+    100174: roof_hanger15 8
+    100176: roof_hanger2
+    100178: roof_hanger2 1
+    100180: roof_hanger2 2
+    100182: roof_hanger2 3
+    100184: roof_hanger2 4
+    100186: roof_hanger2 5
+    100188: roof_hanger2 6
+    100190: roof_hanger2 7
+    100192: roof_hanger2 8
+    100194: roof_hanger3
+    100196: roof_hanger3 1
+    100198: roof_hanger3 2
+    100200: roof_hanger3 3
+    100202: roof_hanger3 4
+    100204: roof_hanger3 5
+    100206: roof_hanger3 6
+    100208: roof_hanger3 7
+    100210: roof_hanger3 8
+    100212: roof_hanger4
+    100214: roof_hanger4 1
+    100216: roof_hanger4 2
+    100218: roof_hanger4 3
+    100220: roof_hanger4 4
+    100222: roof_hanger4 5
+    100224: roof_hanger4 6
+    100226: roof_hanger4 7
+    100228: roof_hanger4 8
+    100230: roof_hanger5
+    100232: roof_hanger5 1
+    100234: roof_hanger5 2
+    100236: roof_hanger5 3
+    100238: roof_hanger5 4
+    100240: roof_hanger5 5
+    100242: roof_hanger5 6
+    100244: roof_hanger5 7
+    100246: roof_hanger5 8
+    100248: roof_hanger6
+    100250: roof_hanger6 1
+    100252: roof_hanger6 2
+    100254: roof_hanger6 3
+    100256: roof_hanger6 4
+    100258: roof_hanger6 5
+    100260: roof_hanger6 6
+    100262: roof_hanger6 7
+    100264: roof_hanger6 8
+    100266: roof_hanger7
+    100268: roof_hanger7 1
+    100270: roof_hanger7 2
+    100272: roof_hanger7 3
+    100274: roof_hanger7 4
+    100276: roof_hanger7 5
+    100278: roof_hanger7 6
+    100280: roof_hanger7 7
+    100282: roof_hanger7 8
+    100284: roof_hanger8
+    100286: roof_hanger8 1
+    100288: roof_hanger8 2
+    100290: roof_hanger8 3
+    100292: roof_hanger8 4
+    100294: roof_hanger8 5
+    100296: roof_hanger8 6
+    100298: roof_hanger8 7
+    100300: roof_hanger8 8
+    100302: roof_hanger9
+    100304: roof_hanger9 1
+    100306: roof_hanger9 2
+    100308: roof_hanger9 3
+    100310: roof_hanger9 4
+    100312: roof_hanger9 5
+    100314: roof_hanger9 6
+    100316: roof_hanger9 7
+    100318: roof_hanger9 8
+    100320: //RootNode
+    100322: targert
+    100324: targert 1
+    100326: targert 2
+    100328: targert 3
+    100330: targert 4
+    100332: targert 5
+    100334: targert 6
+    100336: targert 7
+    100338: targert 8
+    400000: back_wall
+    400002: door_stuff
+    400004: floor
+    400006: front_wall
+    400008: hanger
+    400010: hanger 1
+    400012: hanger 2
+    400014: hanger 3
+    400016: hanger 4
+    400018: hanger 5
+    400020: hanger 6
+    400022: hanger 7
+    400024: hanger 8
+    400026: left_wall
+    400028: rail
+    400030: rail1
+    400032: rail2
+    400034: rail3
+    400036: rail4
+    400038: rail5
+    400040: rail6
+    400042: rail7
+    400044: rail8
+    400046: right_wall
+    400048: roof
+    400050: roof_hanger1
+    400052: roof_hanger1 1
+    400054: roof_hanger1 2
+    400056: roof_hanger1 3
+    400058: roof_hanger1 4
+    400060: roof_hanger1 5
+    400062: roof_hanger1 6
+    400064: roof_hanger1 7
+    400066: roof_hanger1 8
+    400068: roof_hanger10
+    400070: roof_hanger10 1
+    400072: roof_hanger10 2
+    400074: roof_hanger10 3
+    400076: roof_hanger10 4
+    400078: roof_hanger10 5
+    400080: roof_hanger10 6
+    400082: roof_hanger10 7
+    400084: roof_hanger10 8
+    400086: roof_hanger11
+    400088: roof_hanger11 1
+    400090: roof_hanger11 2
+    400092: roof_hanger11 3
+    400094: roof_hanger11 4
+    400096: roof_hanger11 5
+    400098: roof_hanger11 6
+    400100: roof_hanger11 7
+    400102: roof_hanger11 8
+    400104: roof_hanger12
+    400106: roof_hanger12 1
+    400108: roof_hanger12 2
+    400110: roof_hanger12 3
+    400112: roof_hanger12 4
+    400114: roof_hanger12 5
+    400116: roof_hanger12 6
+    400118: roof_hanger12 7
+    400120: roof_hanger12 8
+    400122: roof_hanger13
+    400124: roof_hanger13 1
+    400126: roof_hanger13 2
+    400128: roof_hanger13 3
+    400130: roof_hanger13 4
+    400132: roof_hanger13 5
+    400134: roof_hanger13 6
+    400136: roof_hanger13 7
+    400138: roof_hanger13 8
+    400140: roof_hanger14
+    400142: roof_hanger14 1
+    400144: roof_hanger14 2
+    400146: roof_hanger14 3
+    400148: roof_hanger14 4
+    400150: roof_hanger14 5
+    400152: roof_hanger14 6
+    400154: roof_hanger14 7
+    400156: roof_hanger14 8
+    400158: roof_hanger15
+    400160: roof_hanger15 1
+    400162: roof_hanger15 2
+    400164: roof_hanger15 3
+    400166: roof_hanger15 4
+    400168: roof_hanger15 5
+    400170: roof_hanger15 6
+    400172: roof_hanger15 7
+    400174: roof_hanger15 8
+    400176: roof_hanger2
+    400178: roof_hanger2 1
+    400180: roof_hanger2 2
+    400182: roof_hanger2 3
+    400184: roof_hanger2 4
+    400186: roof_hanger2 5
+    400188: roof_hanger2 6
+    400190: roof_hanger2 7
+    400192: roof_hanger2 8
+    400194: roof_hanger3
+    400196: roof_hanger3 1
+    400198: roof_hanger3 2
+    400200: roof_hanger3 3
+    400202: roof_hanger3 4
+    400204: roof_hanger3 5
+    400206: roof_hanger3 6
+    400208: roof_hanger3 7
+    400210: roof_hanger3 8
+    400212: roof_hanger4
+    400214: roof_hanger4 1
+    400216: roof_hanger4 2
+    400218: roof_hanger4 3
+    400220: roof_hanger4 4
+    400222: roof_hanger4 5
+    400224: roof_hanger4 6
+    400226: roof_hanger4 7
+    400228: roof_hanger4 8
+    400230: roof_hanger5
+    400232: roof_hanger5 1
+    400234: roof_hanger5 2
+    400236: roof_hanger5 3
+    400238: roof_hanger5 4
+    400240: roof_hanger5 5
+    400242: roof_hanger5 6
+    400244: roof_hanger5 7
+    400246: roof_hanger5 8
+    400248: roof_hanger6
+    400250: roof_hanger6 1
+    400252: roof_hanger6 2
+    400254: roof_hanger6 3
+    400256: roof_hanger6 4
+    400258: roof_hanger6 5
+    400260: roof_hanger6 6
+    400262: roof_hanger6 7
+    400264: roof_hanger6 8
+    400266: roof_hanger7
+    400268: roof_hanger7 1
+    400270: roof_hanger7 2
+    400272: roof_hanger7 3
+    400274: roof_hanger7 4
+    400276: roof_hanger7 5
+    400278: roof_hanger7 6
+    400280: roof_hanger7 7
+    400282: roof_hanger7 8
+    400284: roof_hanger8
+    400286: roof_hanger8 1
+    400288: roof_hanger8 2
+    400290: roof_hanger8 3
+    400292: roof_hanger8 4
+    400294: roof_hanger8 5
+    400296: roof_hanger8 6
+    400298: roof_hanger8 7
+    400300: roof_hanger8 8
+    400302: roof_hanger9
+    400304: roof_hanger9 1
+    400306: roof_hanger9 2
+    400308: roof_hanger9 3
+    400310: roof_hanger9 4
+    400312: roof_hanger9 5
+    400314: roof_hanger9 6
+    400316: roof_hanger9 7
+    400318: roof_hanger9 8
+    400320: //RootNode
+    400322: targert
+    400324: targert 1
+    400326: targert 2
+    400328: targert 3
+    400330: targert 4
+    400332: targert 5
+    400334: targert 6
+    400336: targert 7
+    400338: targert 8
+    2100000: shooting_range
+    2100002: roof1
+    2100004: rails
+    2100006: target
+    2300000: back_wall
+    2300002: door_stuff
+    2300004: floor
+    2300006: front_wall
+    2300008: hanger
+    2300010: hanger 1
+    2300012: hanger 2
+    2300014: hanger 3
+    2300016: hanger 4
+    2300018: hanger 5
+    2300020: hanger 6
+    2300022: hanger 7
+    2300024: hanger 8
+    2300026: left_wall
+    2300028: rail
+    2300030: rail1
+    2300032: rail2
+    2300034: rail3
+    2300036: rail4
+    2300038: rail5
+    2300040: rail6
+    2300042: rail7
+    2300044: rail8
+    2300046: right_wall
+    2300048: roof
+    2300050: roof_hanger1
+    2300052: roof_hanger1 1
+    2300054: roof_hanger1 2
+    2300056: roof_hanger1 3
+    2300058: roof_hanger1 4
+    2300060: roof_hanger1 5
+    2300062: roof_hanger1 6
+    2300064: roof_hanger1 7
+    2300066: roof_hanger1 8
+    2300068: roof_hanger10
+    2300070: roof_hanger10 1
+    2300072: roof_hanger10 2
+    2300074: roof_hanger10 3
+    2300076: roof_hanger10 4
+    2300078: roof_hanger10 5
+    2300080: roof_hanger10 6
+    2300082: roof_hanger10 7
+    2300084: roof_hanger10 8
+    2300086: roof_hanger11
+    2300088: roof_hanger11 1
+    2300090: roof_hanger11 2
+    2300092: roof_hanger11 3
+    2300094: roof_hanger11 4
+    2300096: roof_hanger11 5
+    2300098: roof_hanger11 6
+    2300100: roof_hanger11 7
+    2300102: roof_hanger11 8
+    2300104: roof_hanger12
+    2300106: roof_hanger12 1
+    2300108: roof_hanger12 2
+    2300110: roof_hanger12 3
+    2300112: roof_hanger12 4
+    2300114: roof_hanger12 5
+    2300116: roof_hanger12 6
+    2300118: roof_hanger12 7
+    2300120: roof_hanger12 8
+    2300122: roof_hanger13
+    2300124: roof_hanger13 1
+    2300126: roof_hanger13 2
+    2300128: roof_hanger13 3
+    2300130: roof_hanger13 4
+    2300132: roof_hanger13 5
+    2300134: roof_hanger13 6
+    2300136: roof_hanger13 7
+    2300138: roof_hanger13 8
+    2300140: roof_hanger14
+    2300142: roof_hanger14 1
+    2300144: roof_hanger14 2
+    2300146: roof_hanger14 3
+    2300148: roof_hanger14 4
+    2300150: roof_hanger14 5
+    2300152: roof_hanger14 6
+    2300154: roof_hanger14 7
+    2300156: roof_hanger14 8
+    2300158: roof_hanger15
+    2300160: roof_hanger15 1
+    2300162: roof_hanger15 2
+    2300164: roof_hanger15 3
+    2300166: roof_hanger15 4
+    2300168: roof_hanger15 5
+    2300170: roof_hanger15 6
+    2300172: roof_hanger15 7
+    2300174: roof_hanger15 8
+    2300176: roof_hanger2
+    2300178: roof_hanger2 1
+    2300180: roof_hanger2 2
+    2300182: roof_hanger2 3
+    2300184: roof_hanger2 4
+    2300186: roof_hanger2 5
+    2300188: roof_hanger2 6
+    2300190: roof_hanger2 7
+    2300192: roof_hanger2 8
+    2300194: roof_hanger3
+    2300196: roof_hanger3 1
+    2300198: roof_hanger3 2
+    2300200: roof_hanger3 3
+    2300202: roof_hanger3 4
+    2300204: roof_hanger3 5
+    2300206: roof_hanger3 6
+    2300208: roof_hanger3 7
+    2300210: roof_hanger3 8
+    2300212: roof_hanger4
+    2300214: roof_hanger4 1
+    2300216: roof_hanger4 2
+    2300218: roof_hanger4 3
+    2300220: roof_hanger4 4
+    2300222: roof_hanger4 5
+    2300224: roof_hanger4 6
+    2300226: roof_hanger4 7
+    2300228: roof_hanger4 8
+    2300230: roof_hanger5
+    2300232: roof_hanger5 1
+    2300234: roof_hanger5 2
+    2300236: roof_hanger5 3
+    2300238: roof_hanger5 4
+    2300240: roof_hanger5 5
+    2300242: roof_hanger5 6
+    2300244: roof_hanger5 7
+    2300246: roof_hanger5 8
+    2300248: roof_hanger6
+    2300250: roof_hanger6 1
+    2300252: roof_hanger6 2
+    2300254: roof_hanger6 3
+    2300256: roof_hanger6 4
+    2300258: roof_hanger6 5
+    2300260: roof_hanger6 6
+    2300262: roof_hanger6 7
+    2300264: roof_hanger6 8
+    2300266: roof_hanger7
+    2300268: roof_hanger7 1
+    2300270: roof_hanger7 2
+    2300272: roof_hanger7 3
+    2300274: roof_hanger7 4
+    2300276: roof_hanger7 5
+    2300278: roof_hanger7 6
+    2300280: roof_hanger7 7
+    2300282: roof_hanger7 8
+    2300284: roof_hanger8
+    2300286: roof_hanger8 1
+    2300288: roof_hanger8 2
+    2300290: roof_hanger8 3
+    2300292: roof_hanger8 4
+    2300294: roof_hanger8 5
+    2300296: roof_hanger8 6
+    2300298: roof_hanger8 7
+    2300300: roof_hanger8 8
+    2300302: roof_hanger9
+    2300304: roof_hanger9 1
+    2300306: roof_hanger9 2
+    2300308: roof_hanger9 3
+    2300310: roof_hanger9 4
+    2300312: roof_hanger9 5
+    2300314: roof_hanger9 6
+    2300316: roof_hanger9 7
+    2300318: roof_hanger9 8
+    2300320: targert
+    2300322: targert 1
+    2300324: targert 2
+    2300326: targert 3
+    2300328: targert 4
+    2300330: targert 5
+    2300332: targert 6
+    2300334: targert 7
+    2300336: targert 8
+    3300000: back_wall
+    3300002: door_stuff
+    3300004: floor
+    3300006: front_wall
+    3300008: hanger
+    3300010: hanger 1
+    3300012: hanger 2
+    3300014: hanger 3
+    3300016: hanger 4
+    3300018: hanger 5
+    3300020: hanger 6
+    3300022: hanger 7
+    3300024: hanger 8
+    3300026: left_wall
+    3300028: rail
+    3300030: rail1
+    3300032: rail2
+    3300034: rail3
+    3300036: rail4
+    3300038: rail5
+    3300040: rail6
+    3300042: rail7
+    3300044: rail8
+    3300046: right_wall
+    3300048: roof
+    3300050: roof_hanger1
+    3300052: roof_hanger1 1
+    3300054: roof_hanger1 2
+    3300056: roof_hanger1 3
+    3300058: roof_hanger1 4
+    3300060: roof_hanger1 5
+    3300062: roof_hanger1 6
+    3300064: roof_hanger1 7
+    3300066: roof_hanger1 8
+    3300068: roof_hanger10
+    3300070: roof_hanger10 1
+    3300072: roof_hanger10 2
+    3300074: roof_hanger10 3
+    3300076: roof_hanger10 4
+    3300078: roof_hanger10 5
+    3300080: roof_hanger10 6
+    3300082: roof_hanger10 7
+    3300084: roof_hanger10 8
+    3300086: roof_hanger11
+    3300088: roof_hanger11 1
+    3300090: roof_hanger11 2
+    3300092: roof_hanger11 3
+    3300094: roof_hanger11 4
+    3300096: roof_hanger11 5
+    3300098: roof_hanger11 6
+    3300100: roof_hanger11 7
+    3300102: roof_hanger11 8
+    3300104: roof_hanger12
+    3300106: roof_hanger12 1
+    3300108: roof_hanger12 2
+    3300110: roof_hanger12 3
+    3300112: roof_hanger12 4
+    3300114: roof_hanger12 5
+    3300116: roof_hanger12 6
+    3300118: roof_hanger12 7
+    3300120: roof_hanger12 8
+    3300122: roof_hanger13
+    3300124: roof_hanger13 1
+    3300126: roof_hanger13 2
+    3300128: roof_hanger13 3
+    3300130: roof_hanger13 4
+    3300132: roof_hanger13 5
+    3300134: roof_hanger13 6
+    3300136: roof_hanger13 7
+    3300138: roof_hanger13 8
+    3300140: roof_hanger14
+    3300142: roof_hanger14 1
+    3300144: roof_hanger14 2
+    3300146: roof_hanger14 3
+    3300148: roof_hanger14 4
+    3300150: roof_hanger14 5
+    3300152: roof_hanger14 6
+    3300154: roof_hanger14 7
+    3300156: roof_hanger14 8
+    3300158: roof_hanger15
+    3300160: roof_hanger15 1
+    3300162: roof_hanger15 2
+    3300164: roof_hanger15 3
+    3300166: roof_hanger15 4
+    3300168: roof_hanger15 5
+    3300170: roof_hanger15 6
+    3300172: roof_hanger15 7
+    3300174: roof_hanger15 8
+    3300176: roof_hanger2
+    3300178: roof_hanger2 1
+    3300180: roof_hanger2 2
+    3300182: roof_hanger2 3
+    3300184: roof_hanger2 4
+    3300186: roof_hanger2 5
+    3300188: roof_hanger2 6
+    3300190: roof_hanger2 7
+    3300192: roof_hanger2 8
+    3300194: roof_hanger3
+    3300196: roof_hanger3 1
+    3300198: roof_hanger3 2
+    3300200: roof_hanger3 3
+    3300202: roof_hanger3 4
+    3300204: roof_hanger3 5
+    3300206: roof_hanger3 6
+    3300208: roof_hanger3 7
+    3300210: roof_hanger3 8
+    3300212: roof_hanger4
+    3300214: roof_hanger4 1
+    3300216: roof_hanger4 2
+    3300218: roof_hanger4 3
+    3300220: roof_hanger4 4
+    3300222: roof_hanger4 5
+    3300224: roof_hanger4 6
+    3300226: roof_hanger4 7
+    3300228: roof_hanger4 8
+    3300230: roof_hanger5
+    3300232: roof_hanger5 1
+    3300234: roof_hanger5 2
+    3300236: roof_hanger5 3
+    3300238: roof_hanger5 4
+    3300240: roof_hanger5 5
+    3300242: roof_hanger5 6
+    3300244: roof_hanger5 7
+    3300246: roof_hanger5 8
+    3300248: roof_hanger6
+    3300250: roof_hanger6 1
+    3300252: roof_hanger6 2
+    3300254: roof_hanger6 3
+    3300256: roof_hanger6 4
+    3300258: roof_hanger6 5
+    3300260: roof_hanger6 6
+    3300262: roof_hanger6 7
+    3300264: roof_hanger6 8
+    3300266: roof_hanger7
+    3300268: roof_hanger7 1
+    3300270: roof_hanger7 2
+    3300272: roof_hanger7 3
+    3300274: roof_hanger7 4
+    3300276: roof_hanger7 5
+    3300278: roof_hanger7 6
+    3300280: roof_hanger7 7
+    3300282: roof_hanger7 8
+    3300284: roof_hanger8
+    3300286: roof_hanger8 1
+    3300288: roof_hanger8 2
+    3300290: roof_hanger8 3
+    3300292: roof_hanger8 4
+    3300294: roof_hanger8 5
+    3300296: roof_hanger8 6
+    3300298: roof_hanger8 7
+    3300300: roof_hanger8 8
+    3300302: roof_hanger9
+    3300304: roof_hanger9 1
+    3300306: roof_hanger9 2
+    3300308: roof_hanger9 3
+    3300310: roof_hanger9 4
+    3300312: roof_hanger9 5
+    3300314: roof_hanger9 6
+    3300316: roof_hanger9 7
+    3300318: roof_hanger9 8
+    3300320: targert
+    3300322: targert 1
+    3300324: targert 2
+    3300326: targert 3
+    3300328: targert 4
+    3300330: targert 5
+    3300332: targert 6
+    3300334: targert 7
+    3300336: targert 8
+    4300000: back_wall
+    4300002: front_wall
+    4300004: left_wall
+    4300006: right_wall
+    4300008: floor
+    4300010: roof
+    4300012: door_stuff
+    4300014: rail
+    4300016: hanger
+    4300018: targert
+    4300020: roof_hanger1
+    4300022: roof_hanger2
+    4300024: roof_hanger3
+    4300026: roof_hanger4
+    4300028: roof_hanger5
+    4300030: roof_hanger6
+    4300032: roof_hanger7
+    4300034: roof_hanger8
+    4300036: roof_hanger9
+    4300038: roof_hanger10
+    4300040: roof_hanger11
+    4300042: roof_hanger12
+    4300044: roof_hanger13
+    4300046: roof_hanger14
+    4300048: roof_hanger15
+    4300050: rail1
+    4300052: hanger
+    4300054: targert
+    4300056: roof_hanger1
+    4300058: roof_hanger2
+    4300060: roof_hanger3
+    4300062: roof_hanger4
+    4300064: roof_hanger5
+    4300066: roof_hanger6
+    4300068: roof_hanger7
+    4300070: roof_hanger8
+    4300072: roof_hanger9
+    4300074: roof_hanger10
+    4300076: roof_hanger11
+    4300078: roof_hanger12
+    4300080: roof_hanger13
+    4300082: roof_hanger14
+    4300084: roof_hanger15
+    4300086: rail2
+    4300088: hanger
+    4300090: targert
+    4300092: roof_hanger1
+    4300094: roof_hanger2
+    4300096: roof_hanger3
+    4300098: roof_hanger4
+    4300100: roof_hanger5
+    4300102: roof_hanger6
+    4300104: roof_hanger7
+    4300106: roof_hanger8
+    4300108: roof_hanger9
+    4300110: roof_hanger10
+    4300112: roof_hanger11
+    4300114: roof_hanger12
+    4300116: roof_hanger13
+    4300118: roof_hanger14
+    4300120: roof_hanger15
+    4300122: rail3
+    4300124: hanger
+    4300126: targert
+    4300128: roof_hanger1
+    4300130: roof_hanger2
+    4300132: roof_hanger3
+    4300134: roof_hanger4
+    4300136: roof_hanger5
+    4300138: roof_hanger6
+    4300140: roof_hanger7
+    4300142: roof_hanger8
+    4300144: roof_hanger9
+    4300146: roof_hanger10
+    4300148: roof_hanger11
+    4300150: roof_hanger12
+    4300152: roof_hanger13
+    4300154: roof_hanger14
+    4300156: roof_hanger15
+    4300158: rail4
+    4300160: hanger
+    4300162: targert
+    4300164: roof_hanger1
+    4300166: roof_hanger2
+    4300168: roof_hanger3
+    4300170: roof_hanger4
+    4300172: roof_hanger5
+    4300174: roof_hanger6
+    4300176: roof_hanger7
+    4300178: roof_hanger8
+    4300180: roof_hanger9
+    4300182: roof_hanger10
+    4300184: roof_hanger11
+    4300186: roof_hanger12
+    4300188: roof_hanger13
+    4300190: roof_hanger14
+    4300192: roof_hanger15
+    4300194: rail5
+    4300196: hanger
+    4300198: targert
+    4300200: roof_hanger1
+    4300202: roof_hanger2
+    4300204: roof_hanger3
+    4300206: roof_hanger4
+    4300208: roof_hanger5
+    4300210: roof_hanger6
+    4300212: roof_hanger7
+    4300214: roof_hanger8
+    4300216: roof_hanger9
+    4300218: roof_hanger10
+    4300220: roof_hanger11
+    4300222: roof_hanger12
+    4300224: roof_hanger13
+    4300226: roof_hanger14
+    4300228: roof_hanger15
+    4300230: rail6
+    4300232: hanger
+    4300234: targert
+    4300236: roof_hanger1
+    4300238: roof_hanger2
+    4300240: roof_hanger3
+    4300242: roof_hanger4
+    4300244: roof_hanger5
+    4300246: roof_hanger6
+    4300248: roof_hanger7
+    4300250: roof_hanger8
+    4300252: roof_hanger9
+    4300254: roof_hanger10
+    4300256: roof_hanger11
+    4300258: roof_hanger12
+    4300260: roof_hanger13
+    4300262: roof_hanger14
+    4300264: roof_hanger15
+    4300266: rail7
+    4300268: hanger
+    4300270: targert
+    4300272: roof_hanger1
+    4300274: roof_hanger2
+    4300276: roof_hanger3
+    4300278: roof_hanger4
+    4300280: roof_hanger5
+    4300282: roof_hanger6
+    4300284: roof_hanger7
+    4300286: roof_hanger8
+    4300288: roof_hanger9
+    4300290: roof_hanger10
+    4300292: roof_hanger11
+    4300294: roof_hanger12
+    4300296: roof_hanger13
+    4300298: roof_hanger14
+    4300300: roof_hanger15
+    4300302: rail8
+    4300304: hanger
+    4300306: targert
+    4300308: roof_hanger1
+    4300310: roof_hanger2
+    4300312: roof_hanger3
+    4300314: roof_hanger4
+    4300316: roof_hanger5
+    4300318: roof_hanger6
+    4300320: roof_hanger7
+    4300322: roof_hanger8
+    4300324: roof_hanger9
+    4300326: roof_hanger10
+    4300328: roof_hanger11
+    4300330: roof_hanger12
+    4300332: roof_hanger13
+    4300334: roof_hanger14
+    4300336: roof_hanger15
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
