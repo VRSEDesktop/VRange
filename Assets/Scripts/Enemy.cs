@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour, IHitable
 
     private Animator animator;
 
+    private bool isDead;
+
     public void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,13 +20,14 @@ public class Enemy : MonoBehaviour, IHitable
         switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HEAD:
+
                 Debug.Log("HIT HEAD");
-                animator.SetBool("Death2", true);
+                if (!isDead) Die();
+                else Revive();
             break;
 
             case HitboxType.TORSO:
                 Debug.Log("HIT TORSO");
-                animator.SetFloat("Speed", 10);
                 break;
         }
 
@@ -44,5 +47,19 @@ public class Enemy : MonoBehaviour, IHitable
         }
 
         return HitboxType.NONE;
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        animator.SetBool("Death2", true);
+    }
+
+    //  tmp remove it
+    private void Revive()
+    {
+        isDead = false;
+        animator.SetBool("Death2", false);
+        animator.SetBool("GetUp", true);
     }
 }
