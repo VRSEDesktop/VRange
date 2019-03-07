@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class NPCController : MonoBehaviour
 {
+    /// <summary>
+    /// List of Navigation points tagged in the editor with "Waypoint".
+    /// </summary>
     [HideInInspector]
     public List<Transform> NavPoints = new List<Transform>();
+    /// <summary>
+    /// Index of the current destination in NavPoints.
+    /// </summary>
     [HideInInspector]
     public int DestPoint = 0;
     [HideInInspector]
     public NavMeshAgent Agent;
+    /// <summary>
+    /// The weapon the NPC is wielding.
+    /// </summary>
     [HideInInspector]
     public GameObject Weapon;
+    /// <summary>
+    /// The class that manages the NPC's behaviour state.
+    /// </summary>
     [HideInInspector]
     public StateMachine<NPCController> StateMachine;
 
@@ -43,6 +56,9 @@ public class NPCController : MonoBehaviour
         StateMachine.OnTriggerStay(other);
     }
 
+    /// <summary>
+    /// Draw some information in the editor.
+    /// </summary>
     private void OnDrawGizmos()
     {
         if(StateMachine != null)

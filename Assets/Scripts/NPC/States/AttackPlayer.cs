@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Weapons.Abstraction;
+using UnityEngine.AI;
 
 public class AttackPlayer : State<NPCController>
 {
     private static AttackPlayer _instance;
     private GameObject Player;
     private GameObject Weapon;
-    private float FieldOfView = 110f;
+    private readonly float FieldOfView = 110f;
     private bool PlayerInSight;
     private CapsuleCollider Collider;
+
     /// <summary>
-    /// Access to the script for the weapon
+    /// Access to the script for the weapon.
     /// </summary>
-    private IWeapon WeaponController;
+    private Weapon WeaponController;
 
     private AttackPlayer()
     {
@@ -40,9 +43,8 @@ public class AttackPlayer : State<NPCController>
 
         //Start agression (draw weapon or whatever)
         Weapon = GameObject.Instantiate(owner.Weapon, owner.transform);
-        WeaponController = Weapon.GetComponent<IWeapon>();
-
-        //Initialize some scripted event here, need to think of how to implement that        
+        WeaponController = Weapon.GetComponent<Weapon>();
+        
     }
 
     public override void ExitState(NPCController owner)
@@ -52,10 +54,9 @@ public class AttackPlayer : State<NPCController>
 
     public override void Update(NPCController owner)
     {
-        //Todo: add behaviour for attacking player
-
-        //Place the gun in the NPC's hand
-        Weapon.transform.position = new Vector3(owner.transform.position.x, owner.transform.position.y + 1f, owner.transform.position.z - 0.3f);
+        SetWeaponPosition(owner);
+        SetMovement(owner);
+        SetState(owner);
     }
 
     public override void OnTriggerStay(NPCController owner, Collider other)
@@ -89,10 +90,52 @@ public class AttackPlayer : State<NPCController>
     }
 
     /// <summary>
-    /// Sets destination to a random point.
+    /// Place the weapon in the NPC's hand.
     /// </summary>
-    private void MoveTowardsPlayer(NPCController owner)
+    private void SetWeaponPosition(NPCController owner)
     {
         
+    }
+
+    /// <summary>
+    /// Logic of the NPC's movement and animations.
+    /// </summary>
+    private void SetMovement(NPCController owner)
+    {
+
+
+        //Logic for animation
+
+        //Reached a destination
+        if(owner.Agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete)
+        {
+            NavMeshHit navMeshHit;
+            if (owner.Agent.SamplePathPosition(NavMesh.AllAreas, 0f, out navMeshHit))
+            {
+                switch(navMeshHit.mask)
+                {
+                    //Walkable
+                    case 0:
+                        break;
+                    //Not Walkable
+                    case 1:
+                        break;
+                    //Jump
+                    case 2:
+                        break;
+                    //User 3 (Cover)
+                    case 3:
+                        break;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Logic for changing the state of the NPC's statemachine.
+    /// </summary>
+    private void SetState(NPCController owner)
+    {
+        //Someting about chances to surrender, dying, etc. in here. Perhaps something with level of fear and level of agression.
     }
 }

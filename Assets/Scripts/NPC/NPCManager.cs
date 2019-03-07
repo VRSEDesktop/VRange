@@ -9,7 +9,7 @@ public class NPCManager : MonoBehaviour
     /// </summary>
     public GameObject NPC;
     /// <summary>
-    /// List of GameObjects suspects can use
+    /// Array of weapon GameObjects suspects can use
     /// </summary>
     public GameObject[] Weapons;
     /// <summary>
@@ -17,7 +17,7 @@ public class NPCManager : MonoBehaviour
     /// </summary>
     public int Bystanders;
     /// <summary>
-    /// Number of agressors
+    /// Number of suspects
     /// </summary>
     public int Suspects;
 
@@ -53,6 +53,9 @@ public class NPCManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initialize and spawn a regular NPC
+    /// </summary>
     private void SpawnBystander()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
@@ -62,6 +65,9 @@ public class NPCManager : MonoBehaviour
         BystanderList.Add(bystander);
     }
 
+    /// <summary>
+    /// Initialize and spawn a suspect
+    /// </summary>
     private void SpawnSuspect()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
@@ -72,7 +78,7 @@ public class NPCManager : MonoBehaviour
         int weaponindex = Random.Range(0, Weapons.Length);
         GameObject weapon = Weapons[weaponindex];
 
-        //Add the gun to the prefab's script
+        //Add the gun to the NPC GameObject's script
         NPCController suspectController = suspect.GetComponent<NPCController>();
         suspectController.Weapon = weapon;
         suspectController.StateMachine.ChangeState(AttackPlayer.Instance);
