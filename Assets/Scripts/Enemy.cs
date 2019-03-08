@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour, IHitable
             if (hitbox.mesh == bulletHit.raycastHit.collider) return hitbox.type;
         }
 
-        return HitboxType.NONE;
+        return HitboxType.HEAD;
     }
 
     private void Die()
@@ -62,4 +62,21 @@ public class Enemy : MonoBehaviour, IHitable
         animator.SetBool("Death2", false);
         animator.SetBool("GetUp", true);
     }
+}
+
+[System.Serializable]
+public struct Hitbox
+{
+    public Collider mesh;
+    public HitboxType type;
+}
+
+public enum HitboxType
+{
+    HEAD,
+    TORSO,
+    LEFT_ARM,
+    RIGHT_ARM,
+    LEFT_LEG,
+    RIGHT_LEG
 }
