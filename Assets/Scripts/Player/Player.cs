@@ -34,6 +34,7 @@ namespace Assets.Scripts.Player
                 leftHand.HandleInput(leftHandInput);
                 leftGun.gameObject.SetActive(leftHandInput.IsControllerWorking());
             }
+
             if (rightHandInput != null)
             {
                 rightHand.HandleInput(rightHandInput);
