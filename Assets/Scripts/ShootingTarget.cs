@@ -27,6 +27,8 @@ class ShootingTarget : MonoBehaviour, IHitable
             case ShootingTargetHitboxType.TORSO_10: points = 10; break;
         }
 
+        Debug.Log(partHit.ToString() + " Points: " + points);
+
         //Scenario_Stats.RegisterHit(this, partHit, bulletHit);
     }
 
@@ -51,7 +53,6 @@ public struct ShootingTargetHitbox
 {
     public Collider mesh;
     public ShootingTargetHitboxType type;
-    public Collider2D test;
 }
 
 public enum ShootingTargetHitboxType
