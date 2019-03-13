@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     public AudioSource shotSound;
     public AudioSource triggerSound;
 
+    public Animator anim;
     /// <summary>
     /// The place where bullets spawn
     /// </summary>
@@ -21,7 +22,7 @@ public class Gun : MonoBehaviour
 
     public void Start()
     {
-        currentAmmo = magCapacity;
+        currentAmmo = magCapacity;      
     }
 
     public void Shoot()
@@ -33,6 +34,8 @@ public class Gun : MonoBehaviour
         shotSound.Play();
         currentAmmo--;
         shotsFired++;
+
+        anim.Play("Fire");
 
         GetComponentInChildren<ParticleSystem>().Play();
 
