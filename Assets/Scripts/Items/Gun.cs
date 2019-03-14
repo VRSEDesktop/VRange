@@ -5,7 +5,7 @@ public class Gun : MonoBehaviour
     /// <summary>
     /// Used for drawing bullet's path
     /// </summary>
-    public bool debugMode = false;
+    public bool debugMode;
 
     public int magCapacity;
     public int shotsFired;
@@ -46,7 +46,7 @@ public class Gun : MonoBehaviour
     /// </summary>
     private void DetectHit()
     {
-        if (debugMode) DrawLine(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+        if (debugMode) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
 
         if (Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit))
         {
@@ -72,7 +72,26 @@ public class Gun : MonoBehaviour
         lr.endWidth = 0.02f;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-        GameObject.Destroy(myLine, duration);
+        Destroy(myLine, duration);
+    }
+
+    // Creates the shot representation from shot info
+    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 60f)
+    {
+        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        float thickness = 0.005f;
+        float length = Vector3.Distance(start, end);
+
+        obj.transform.localScale = new Vector3(thickness, thickness, length);
+        obj.transform.position = start + ((end - start) / 2);
+        obj.transform.LookAt(end);
+
+        obj.GetComponent<MeshRenderer>().material.color = color;
+        obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        obj.SetActive(true);
+
+        Destroy(obj, duration);
     }
 
     /// <summary>

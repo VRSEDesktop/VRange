@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IHitable
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
-        Scenario_Stats.RegisterHit(this, partHit, bulletHit);
+        Scenario.logs.Add(new LoggedHit(this, partHit, bulletHit));
     }
 
     /// <summary>

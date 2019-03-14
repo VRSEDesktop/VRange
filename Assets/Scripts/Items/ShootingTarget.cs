@@ -27,7 +27,7 @@ class ShootingTarget : MonoBehaviour, IHitable
 
         Debug.Log("ShootingTarrget::OnHit() " + partHit.ToString());
 
-        Scenario_Stats.RegisterHit(this, partHit, bulletHit);
+        Scenario.logs.Add(new LoggedHit(this, partHit, bulletHit));
     }
 
     /// <summary>
