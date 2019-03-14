@@ -21,15 +21,15 @@ public class Enemy : MonoBehaviour, IHitable
 		{
 			case HitboxType.HEAD:
 
-                Debug.Log("HIT HEAD");
                 if (!isDead) Die();
                 else Revive();
             break;
 
             case HitboxType.TORSO:
-                Debug.Log("HIT TORSO");
                 break;
         }
+
+        Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
         Scenario_Stats.RegisterHit(this, partHit, bulletHit);
     }
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IHitable
     {
         foreach (Hitbox hitbox in hitboxes)
         {
-            if (hitbox.mesh == bulletHit.raycastHit.collider) return hitbox.type;
+            if (hitbox.mesh == bulletHit.RaycastHit.collider) return hitbox.type;
         }
 
         return HitboxType.HEAD;
@@ -62,21 +62,4 @@ public class Enemy : MonoBehaviour, IHitable
         animator.SetBool("Death2", false);
         animator.SetBool("GetUp", true);
     }
-}
-
-[System.Serializable]
-public struct Hitbox
-{
-    public Collider mesh;
-    public HitboxType type;
-}
-
-public enum HitboxType
-{
-    HEAD,
-    TORSO,
-    LEFT_ARM,
-    RIGHT_ARM,
-    LEFT_LEG,
-    RIGHT_LEG
 }

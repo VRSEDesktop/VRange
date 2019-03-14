@@ -32,14 +32,13 @@ public class Gun : MonoBehaviour
         if (!CanShoot()) return;
 
         shotSound.Play();
+        DetectHit();
+
         currentAmmo--;
         shotsFired++;
 
-        anim.Play("Fire");
-
         GetComponentInChildren<ParticleSystem>().Play();
-
-        DetectHit();
+        anim.Play("Fire");
     }
 
     /// <summary>
@@ -51,7 +50,7 @@ public class Gun : MonoBehaviour
 
         if (Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit))
         {
-            Debug.Log("Hit: " + hit.collider.name);
+            Debug.Log("Gun::DetecHit() " + hit.collider.name);
 
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             target?.OnHit(new BulletHit(this, hit));

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Script used for visualising the transition from the shooting range to the city
+/// </summary>
 public class Matrix_Effect : MonoBehaviour
 {
     public Animator animator;
@@ -8,10 +11,10 @@ public class Matrix_Effect : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WallfallDown());
+        StartCoroutine(Transition());
     }
 
-    private IEnumerator WallfallDown()
+    private IEnumerator Transition()
     {
         yield return new WaitForSeconds(5f);
         animator.Play("Fall down");
