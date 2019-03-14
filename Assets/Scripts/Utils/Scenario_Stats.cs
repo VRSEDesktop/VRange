@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,11 +18,11 @@ public class Scenario_Stats : MonoBehaviour
         public readonly BulletHit bulletHit;
         public readonly TimeSpan time;
 
-        public RegisteredHit(Enemy enemy, HitboxType partHit, BulletHit bulletHit)
+        public RegisteredHit(IHitable target, HitboxType part, BulletHit bulletHit)
         {
             this.bulletHit = bulletHit;
-            this.target = enemy;
-            this.part = partHit;
+            this.target = target;
+            this.part = part;
             this.bulletHit = bulletHit;
 
             time = DateTime.Now.Subtract(startTime);
@@ -35,8 +34,8 @@ public class Scenario_Stats : MonoBehaviour
         startTime = DateTime.Now;
     }
 
-    public static void RegisterHit(Enemy enemy, HitboxType partHit, BulletHit bulletHit)
+    public static void RegisterHit(IHitable target, HitboxType partHit, BulletHit bulletHit)
     {
-        hits.Add(new RegisteredHit(enemy, partHit, bulletHit));
+        hits.Add(new RegisteredHit(target, partHit, bulletHit));
     }
 }

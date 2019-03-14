@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// Small script for making the city emerge from the ground
+/// </summary>
 public class CityMatrixEffect : MonoBehaviour
 {
     public void EmergeFromGround()
