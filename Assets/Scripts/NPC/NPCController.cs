@@ -77,7 +77,12 @@ public class NPCController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        StateMachine.OnTriggerStay(other);
+        StateMachine.OnTriggerStay(this, other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        StateMachine.OnTriggerExit(this, other);
     }
 
     private void OnDrawGizmos()
