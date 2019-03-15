@@ -1,47 +1,93 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.StateMachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(CapsuleCollider))]
 public class NPCController : MonoBehaviour
 {
-    private List<Transform> navPoints = new List<Transform>();
-    private int destPoint = 0;
-    private NavMeshAgent agent;
-    private StateMachine<NPCController> StateMachine;
+    /// <summary>
+    /// List of Navigation points tagged in the editor with "Waypoint".
+    /// </summary>
+    [HideInInspector] public List<Transform> NavPoints = new List<Transform>();
+    /// <summary>
+    /// Index of the current destination in NavPoints.
+    /// </summary>
+    [HideInInspector] public int DestPoint = 0;
+    [HideInInspector] public NavMeshAgent Agent;
+    /// <summary>
+    /// The item the NPC is wielding.
+    /// </summary>
+    [HideInInspector] public GameObject Item;
+    /// <summary>
+    /// The script for the item the NPC is wielding.
+    /// </summary>
+    [HideInInspector] public MonoBehaviour ItemScript;
+    /// <summary>
+    /// The class that manages the NPC's behaviour state.
+    /// </summary>
+    [HideInInspector] public StateMachine<NPCController> StateMachine;
+    /// <summary>
+    /// Access to the Player GameObject
+    /// </summary>
+    [HideInInspector] public GameObject Player;
+    /// <summary>
+    /// Readonly value for NPCs FOV.
+    /// </summary>
+    public readonly float FieldOfView = 110f;
+    /// <summary>
+    /// Whether the NPC can see the Player.
+    /// </summary>
+    [HideInInspector] public bool PlayerInSight;
+    /// <summary>
+    /// The HitBox.
+    /// </summary>
+    [HideInInspector] public CapsuleCollider Collider;
+    /// <summary>
+    /// The level of agression.
+    /// </summary>
+    public float LevelOfAgression;
+    /// <summary>
+    /// The strategic competence of the NPC.
+    /// </summary>
+    public float LevelOfTactics;
 
-    private void Start()
+    private void OnEnable()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
-
-        foreach(GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
-        {
-            navPoints.Add(o.transform);
-        }
-        
         StateMachine = new StateMachine<NPCController>(this);
         StateMachine.ChangeState(Patrol.Instance);
+
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.autoBraking = false;
+
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
+        {
+            NavPoints.Add(o.transform);
+        }
+
+        LevelOfAgression = Random.Range(0, 100);
+        LevelOfTactics = Random.Range(0, 100);
     }
 
     private void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            GotoNextPoint();
-        
-
         StateMachine.Update();
     }
 
-    /// <summary>
-    /// Sets destination to a random point.
-    /// </summary>
-    private void GotoNextPoint()
+    private void OnTriggerStay(Collider other)
     {
-        if (navPoints.Count == 0)
-            return;
+        StateMachine.OnTriggerStay(this, other);
+    }
 
-        agent.SetDestination(navPoints[destPoint].position);
-        destPoint = Random.Range(0, navPoints.Count);
+    private void OnTriggerExit(Collider other)
+    {
+        StateMachine.OnTriggerExit(this, other);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(StateMachine != null)
+            UnityEditor.Handles.Label(gameObject.transform.position, StateMachine.ToString());
     }
 }
