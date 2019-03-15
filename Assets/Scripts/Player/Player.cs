@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Player
 
         private void Start()
         {
-            if(leftGun != null) leftHand = new GunInterface(leftGun);
+            if (leftGun != null) leftHand = new GunInterface(leftGun);
             if (rightGun != null) rightHand = new GunInterface(rightGun);
         }
 
@@ -29,8 +30,17 @@ namespace Assets.Scripts.Player
 
         public void Update()
         {
-            if(leftHandInput != null && leftHand != null) leftHand.HandleInput(leftHandInput);
-            if(rightHandInput != null && leftHand != null) rightHand.HandleInput(rightHandInput);
+            if (leftHandInput != null)
+            {
+                leftHand.HandleInput(leftHandInput);
+                leftGun.gameObject.SetActive(leftHandInput.IsControllerWorking());
+            }
+
+            if (rightHandInput != null)
+            {
+                rightHand.HandleInput(rightHandInput);
+                rightGun.gameObject.SetActive(rightHandInput.IsControllerWorking());
+            }
         }
 
         public void OnHit(BulletHit bulletHit)
@@ -40,7 +50,14 @@ namespace Assets.Scripts.Player
 
         void OnGUI()
         {
-            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: ");
+            IList<LoggedHit> hits = Scenario.GetHits();
+
+            GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (leftGun.shotsFired + rightGun.shotsFired));
+
+            for (int i = 0; i < hits.Count; i++)
+            {
+                GUI.Label(new Rect(Screen.width / 12, Screen.height / 24 * i, Screen.width / 4 * 2, Screen.height / 6), hits[i].part.ToString());
+            }
         }
     }
 }
