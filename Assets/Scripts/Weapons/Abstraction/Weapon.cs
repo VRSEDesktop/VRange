@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+using UnityEngine; 
 /// Abstract class for weapons.
 /// </summary>
 public abstract class Weapon : MonoBehaviour
