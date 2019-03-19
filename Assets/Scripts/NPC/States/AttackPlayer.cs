@@ -79,7 +79,7 @@ public class AttackPlayer : State<NPCController>
     }
 
     /// <summary>
-    /// Logic of the NPC's movement and animations.
+    /// Logic of the NPC's movement, aim and animations.
     /// </summary>
     private void SetMovement(NPCController owner)
     {
@@ -115,7 +115,6 @@ public class AttackPlayer : State<NPCController>
     {
         //Someting about chances to surrender, dying, etc. in here. Perhaps something with level of fear and level of agression.
         if (ShouldSurrender.Decide(owner))
-            owner.StateMachine.ChangeState(Patrol.Instance);
-        
+            owner.StateMachine.ChangeState(Surrender.Instance);
     }
 }

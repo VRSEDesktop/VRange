@@ -16,7 +16,7 @@ public enum DecisionStatus
 /// <summary>
 /// Logic behind changing the NPCs state.
 /// </summary>
-public abstract class Decision : ScriptableObject
+public abstract class Decision
 {
     public abstract bool Decide(NPCController owner);
 }
