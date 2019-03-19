@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts.Weapons.Abstraction
+﻿public interface IShootable
 {
-    interface IShootable
-    {
-        void Shoot();
-        bool CanShoot();
-    }
+    void Shoot();
+    bool CanShoot();
 }
