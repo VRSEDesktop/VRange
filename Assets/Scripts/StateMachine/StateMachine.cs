@@ -44,9 +44,8 @@ namespace Assets.Scripts.StateMachine
         }
 
         /// <summary>
-        /// 
+        /// Returns the name of the current state.
         /// </summary>
-        /// <returns>The name of the current state.</returns>
         public override string ToString()
         {
             return CurrentState.GetType().Name;
