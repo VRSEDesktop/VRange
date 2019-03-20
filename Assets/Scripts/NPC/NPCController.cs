@@ -69,9 +69,6 @@ public class NPCController : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         Agent.autoBraking = false;
 
-        // Setting up the animator
-        Anim = GetComponent<Animator>();
-
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
             NavPoints.Add(o.transform);

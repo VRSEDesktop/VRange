@@ -86,7 +86,7 @@ public class NPCManager : MonoBehaviour
         //Add the gun to the NPC GameObject's script
         NPCController suspectController = suspect.GetComponent<NPCController>();
         suspectController.Item = weapon;
-        suspectController.StateMachine.ChangeState(AttackPlayer.Instance);
+        suspectController.StateMachine.ChangeState(Patrol.Instance);
 
         SuspectList.Add(suspect);
     }
