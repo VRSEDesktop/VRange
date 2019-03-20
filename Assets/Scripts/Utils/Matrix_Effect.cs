@@ -25,7 +25,7 @@ public class Matrix_Effect : MonoBehaviour
         collapseSound.Play();
 
         DOTween.To(() => transform.position, pos => transform.position = pos, new Vector3(0, 0, 0), 5);
-        DOTween.To(() => plane.transform.position, pos => plane.transform.position = pos, new Vector3(0, 0.01f, 0), 5);
+        DOTween.To(() => plane.transform.position, pos => plane.transform.position = pos, new Vector3(0, -0.01f, 0), 5);
         DOTween.To(() => cameraRig.transform.position, pos => cameraRig.transform.position = pos, new Vector3(0, 0, 0), 5);
 
         Destroy(gameObject, 7f);
