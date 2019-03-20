@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : Weapon, IReloadable
 {
     /// <summary>
     /// Used for drawing bullet's path
@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour
         currentAmmo = magCapacity;      
     }
 
-    public void Shoot()
+    public override void Use()
     {
         triggerSound.Play();
 

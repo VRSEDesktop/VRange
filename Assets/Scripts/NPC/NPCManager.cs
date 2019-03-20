@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCManager : MonoBehaviour
@@ -11,7 +10,7 @@ public class NPCManager : MonoBehaviour
     /// <summary>
     /// Array of weapon GameObjects suspects can use
     /// </summary>
-    public GameObject[] Weapons;
+    public Weapon[] Weapons;
     /// <summary>
     /// Number of normal NPCs
     /// </summary>
@@ -76,7 +75,9 @@ public class NPCManager : MonoBehaviour
         suspect.transform.position = SpawnPoints[spawnPoint].position;
 
         int weaponindex = Random.Range(0, Weapons.Length);
-        GameObject weapon = Weapons[weaponindex];
+        Weapon weapon = Instantiate(Weapons[weaponindex], suspect.transform);
+        weapon.transform.parent = suspect.transform;
+        weapon.transform.SetAsFirstSibling();
 
         //Add the gun to the NPC GameObject's script
         NPCController suspectController = suspect.GetComponent<NPCController>();

@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Assets.Scripts.Weapons.Abstraction;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using Assets.Scripts.StateMachine;
 
 public class AttackPlayer : State<NPCController>
 { 
