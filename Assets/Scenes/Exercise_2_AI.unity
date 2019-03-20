@@ -240,12 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPC: {fileID: 561706765, guid: 2f34fb94c5de9b94b965f6bb62c66a7d, type: 3}
   Weapons:
-<<<<<<< HEAD
   - {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
-=======
-  - {fileID: 4226328758674993041, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
->>>>>>> 0fb6ed0dd6ebf742499bac72d7547f1bb0b46598
-  Bystanders: 100
+  Bystanders: 5
   Suspects: 2
 --- !u!4 &379965688
 Transform:
@@ -970,6 +966,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542197935669754436, guid: dc4571d04602f984d93e2e1b7e4b084b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542197935669754436, guid: dc4571d04602f984d93e2e1b7e4b084b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542197935669754438, guid: dc4571d04602f984d93e2e1b7e4b084b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542197935669754438, guid: dc4571d04602f984d93e2e1b7e4b084b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc4571d04602f984d93e2e1b7e4b084b, type: 3}

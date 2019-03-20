@@ -101,7 +101,7 @@ public class ShouldSurrender : Decision
     }
 
     /// <summary>
-    /// Checks whether the player has threatened with agression and changes the decision status.
+    /// Checks whether the player has used their weapon and changes the decision status.
     /// </summary>
     private void CheckWeaponUsed(NPCController owner)
     {
