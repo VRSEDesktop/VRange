@@ -35,7 +35,9 @@ public class NPCManager : MonoBehaviour
     private void Awake()
     {
         BystanderObject = new GameObject("Bystanders");
+        BystanderObject.transform.parent = transform;
         SuspectObject = new GameObject("Suspects");
+        SuspectObject.transform.parent = transform;
 
         UpdateSpawnPoints();
     }
@@ -60,6 +62,7 @@ public class NPCManager : MonoBehaviour
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
         GameObject bystander = Instantiate(NPC, BystanderObject.transform);
         bystander.transform.position = SpawnPoints[spawnPoint].position;
+        bystander.transform.parent = BystanderObject.transform;
 
         BystanderList.Add(bystander);
     }
@@ -73,6 +76,7 @@ public class NPCManager : MonoBehaviour
 
         GameObject suspect = Instantiate(NPC, SuspectObject.transform);
         suspect.transform.position = SpawnPoints[spawnPoint].position;
+        suspect.transform.parent = SuspectObject.transform;
 
         int weaponindex = Random.Range(0, Weapons.Length);
         Weapon weapon = Instantiate(Weapons[weaponindex], suspect.transform);

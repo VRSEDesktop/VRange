@@ -37,8 +37,9 @@ public class Patrol : State<NPCController>
 
     public override void Update(NPCController owner)
     {
+        // Checks if the the npc has reached the target
         if (!owner.Agent.pathPending && owner.Agent.remainingDistance < 0.5f)
-            GotoNextPoint(owner);
+            GotoNextPoint(owner); // Triggers function to set the new waypoint
     }
 
     public override void OnTriggerStay(NPCController owner, Collider other)
@@ -56,9 +57,11 @@ public class Patrol : State<NPCController>
     /// </summary>
     private void GotoNextPoint(NPCController owner)
     {
+        // Checks if there are waypoints
         if (owner.NavPoints.Count == 0)
             return;
 
+        // Setting new target
         owner.Agent.SetDestination(owner.NavPoints[owner.DestPoint].position);
         owner.DestPoint = Random.Range(0, owner.NavPoints.Count);
     }

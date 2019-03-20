@@ -21,11 +21,11 @@ public class ShouldSurrender : Decision
     public override bool Decide(NPCController owner)
     {
         if (IsIntimidatedByWeapon(owner))
-            return true;
+            return false;
         if (IsIntimidatedByWeaponUsage(owner))
-            return true;
+            return false;
         if (IsIntimidatedByInjury(owner))
-            return true;
+            return false;
 
         return false;
 

@@ -50,14 +50,27 @@ public class NPCController : MonoBehaviour
     /// The strategic competence of the NPC.
     /// </summary>
     public float LevelOfTactics;
+    /// <summary>
+    /// The animator for the animations
+    /// </summary>
+    public Animator Anim;
+    /// <summary>
+    /// The rigidbody for detecting speed
+    /// </summary>
+    public Rigidbody Rig;
 
     private void OnEnable()
     {
+        // Setting up the statemachine
         StateMachine = new StateMachine<NPCController>(this);
         StateMachine.ChangeState(Patrol.Instance);
 
+        // Setting up the agent
         Agent = GetComponent<NavMeshAgent>();
         Agent.autoBraking = false;
+
+        // Setting up the animator
+        Anim = GetComponent<Animator>();
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
@@ -71,6 +84,8 @@ public class NPCController : MonoBehaviour
     private void Update()
     {
         StateMachine.Update();
+        Anim.SetFloat("Speed", Rig.velocity.magnitude);
+        Debug.Log(Rig.velocity.magnitude + " ");
     }
 
     private void OnTriggerStay(Collider other)
