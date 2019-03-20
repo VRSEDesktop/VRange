@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.StateMachine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,7 +17,7 @@ public class NPCController : MonoBehaviour
     /// <summary>
     /// The item the NPC is wielding.
     /// </summary>
-    [HideInInspector] public GameObject Item;
+    [HideInInspector] public Weapon Item;
     /// <summary>
     /// The script for the item the NPC is wielding.
     /// </summary>
