@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Assets.Scripts.Weapons.Abstraction;
-using UnityEngine.AI;
-using Assets.Scripts.StateMachine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.NPC.States
 {
