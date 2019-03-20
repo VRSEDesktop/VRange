@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
-using Assets.Scripts.StateMachine;
+﻿using UnityEngine;
 
 class Surrender : State<NPCController>
 {
@@ -36,21 +32,21 @@ class Surrender : State<NPCController>
 
     public override void ExitState(NPCController owner)
     {
-        
+
     }
 
     public override void OnTriggerExit(NPCController owner, Collider other)
     {
-        
+
     }
 
     public override void OnTriggerStay(NPCController owner, Collider other)
     {
-        
+
     }
 
     public override void Update(NPCController owner)
     {
-        
+
     }
 }

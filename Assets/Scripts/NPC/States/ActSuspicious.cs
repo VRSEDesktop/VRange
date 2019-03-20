@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.AI;
-using Assets.Scripts.StateMachine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.NPC.States
 {
@@ -30,27 +25,27 @@ namespace Assets.Scripts.NPC.States
 
         public override void EnterState(NPCController owner)
         {
-            
+
         }
 
         public override void ExitState(NPCController owner)
         {
-            
+
         }
 
         public override void OnTriggerExit(NPCController owner, Collider other)
         {
-            
+
         }
 
         public override void OnTriggerStay(NPCController owner, Collider other)
         {
-            
+
         }
 
         public override void Update(NPCController owner)
         {
-            
+
         }
     }
 }
