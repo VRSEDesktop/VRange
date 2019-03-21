@@ -36,8 +36,10 @@ public class Matrix_Effect : MonoBehaviour
     /// </summary>
     private void MoveShootingRange()
     {
+        Vector3 planePos = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y - 0.1f, startPoint.transform.position.z);
+
         DOTween.To(() => transform.position, pos => transform.position = pos, startPoint.transform.position, 5);
-        DOTween.To(() => plane.transform.position, pos => plane.transform.position = pos, startPoint.transform.position - new Vector3(0, -0.1f, 0), 5);
-        DOTween.To(() => cameraRig.transform.position, pos => cameraRig.transform.position = pos, startPoint.transform.position + new Vector3(0, 0.01f, 0), 5);
+        DOTween.To(() => plane.transform.position, pos => plane.transform.position = pos, planePos, 5);
+        DOTween.To(() => cameraRig.transform.position, pos => cameraRig.transform.position = pos, startPoint.transform.position, 5);
     }
 }
