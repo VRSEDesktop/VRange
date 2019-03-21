@@ -13,7 +13,6 @@ public class Scenario : MonoBehaviour
         {
             if (log is LoggedHit) hits.Add((LoggedHit)log);
         }
-
         return hits;
     }
 }
