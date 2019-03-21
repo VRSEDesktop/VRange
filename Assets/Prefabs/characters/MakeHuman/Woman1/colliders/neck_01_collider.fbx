@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2019
 		Month: 3
-		Day: 20
-		Hour: 14
-		Minute: 19
-		Second: 50
-		Millisecond: 220
+		Day: 21
+		Hour: 13
+		Minute: 25
+		Second: 53
+		Millisecond: 361
 	}
 	Creator: "FBX SDK/FBX Plugins version 2018.1.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -34,13 +34,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "Maya"
 			P: "Original|ApplicationVersion", "KString", "", "", "201800"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "20/03/2019 13:19:50.218"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "21/03/2019 12:25:53.359"
 			P: "Original|FileName", "KString", "", "", "D:\038 Games\exports\colliders\Makehuman girl 1\neck_01_collider.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "Maya"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "201800"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "20/03/2019 13:19:50.218"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "21/03/2019 12:25:53.359"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "D:\038 Games\exports\colliders\Makehuman girl 1"
 			P: "Original|ApplicationNativeFile", "KString", "", "", "D:\038 Games\038 Games politie project\scenes\Make human coliders.mb"
 		}
@@ -57,7 +57,7 @@ GlobalSettings:  {
 		P: "CoordAxisSign", "int", "Integer", "",1
 		P: "OriginalUpAxis", "int", "Integer", "",1
 		P: "OriginalUpAxisSign", "int", "Integer", "",1
-		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "UnitScaleFactor", "double", "Number", "",0.1
 		P: "OriginalUnitScaleFactor", "double", "Number", "",1
 		P: "AmbientColor", "ColorRGB", "Color", "",0,0,0
 		P: "DefaultCamera", "KString", "", "", "Producer Perspective"
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2420128464864, "", "Scene" {
+	Document: 1359884342384, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -260,13 +260,13 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	NodeAttribute: 2419789797616, "NodeAttribute::", "Null" {
+	NodeAttribute: 1359726448560, "NodeAttribute::", "Null" {
 		Properties70:  {
 			P: "Look", "enum", "", "",0
 		}
 		TypeFlags: "Null"
 	}
-	Geometry: 2420110083488, "Geometry::", "Mesh" {
+	Geometry: 1359729440816, "Geometry::", "Mesh" {
 		Vertices: *120 {
 			a: 48.7874717712402,1334.88342285156,-86.6612548828125,0.361575543880463,1331.11706542969,-84.9836654663086,-47.799488067627,1336.2119140625,-85.4718017578125,-60.8426055908203,1312.92138671875,-10.8414630889893,-37.6348686218262,1308.97546386719,12.6023864746094,0.913229882717133,1310.76794433594,17.0879096984863,38.6440200805664,1309.58581542969,11.2933883666992,60.2345886230469,1312.21704101563,-11.4380331039429,41.8825836181641,1451.71643066406,-55.7186126708984,0.442938357591629,1456.18774414063,-77.2373657226563,-36.2092475891113,1449.05505371094,-55.443717956543,-47.1645317077637,1411.89038085938,-7.87326049804688,-41.5365104675293,1403.01599121094,11.1854705810547,0.369668751955032,1389.27294921875,32.6587333679199,45.0208129882813,1403.07299804688,13.3862724304199,52.0700645446777,1411.99243164063,-7.36700820922852,38.4771995544434,1373.39172363281,-55.0790710449219,0.777329802513123,1375.63464355469,-63.4257354736328,-35.6819801330566,1372.33801269531,-52.6418304443359,-43.4303436279297,1359.33947753906,-15.6369524002075,-34.5594863891602,1353.4267578125,3.67798233032227,0.586106657981873,1351.58288574219,20.9820785522461,38.2440795898438,1354.04614257813,5.63516998291016,48.1757774353027,1360.8662109375,-15.7151174545288,-70.0881423950195,1336.18640136719,-58.9030075073242,-43.3016967773438,1369.19079589844,-38.8942756652832,-53.6100692749023,1442.68884277344,-23.5107269287109,66.3018188476563,1338.75317382813,-59.4943771362305,47.7549285888672,1370.97314453125,-40.6781158447266,55.8046226501465,1442.57214355469,-24.7024154663086,35.0226173400879,1413.02380371094,-49.5237655639648,0.806446254253387,1416.66064453125,-63.0515098571777,-30.3588809967041,1411.23120117188,-47.8753051757813,-41.5574150085449,1406.45861816406,-29.5602703094482,-42.0736618041992,1386.05090332031,-12.3222789764404,-34.9967041015625,1379.0185546875,4.94953536987305,0.496468842029572,1370.57238769531,26.2705726623535,39.3156242370605,1379.21142578125,7.44933319091797,48.3687591552734,1386.65234375,-11.8210515975952,
 47.1775093078613,1407.05334472656,-31.5258636474609
@@ -330,22 +330,23 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2420153634928, "Model::colliders", "Null" {
+	Model: 1359884325360, "Model::colliders", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",10,10,10
 		}
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 2420153639568, "Model::neck_01_collider", "Mesh" {
+	Model: 1359884332320, "Model::neck_01_collider", "Mesh" {
 		Version: 232
 		Properties70:  {
-			P: "RotationPivot", "Vector3D", "Vector", "",-1.89316177368164,1382.58160400391,-27.0012607574463
-			P: "ScalingPivot", "Vector3D", "Vector", "",-1.89316177368164,1382.58160400391,-27.0012607574463
+			P: "RotationPivot", "Vector3D", "Vector", "",0.361575543880466,1346.7509765625,-55.0234718322754
+			P: "ScalingPivot", "Vector3D", "Vector", "",0.361575543880466,1346.7509765625,-55.0234718322754
 			P: "RotationActive", "bool", "", "",1
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -355,7 +356,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2420137831184, "Material::lambert1", "" {
+	Material: 1359808565536, "Material::lambert1", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -370,7 +371,7 @@ Objects:  {
 			P: "Opacity", "double", "Number", "",1
 		}
 	}
-	AnimationStack: 2420136817744, "AnimStack::Take 001", "" {
+	AnimationStack: 1359720794384, "AnimStack::Take 001", "" {
 		Properties70:  {
 			P: "LocalStart", "KTime", "Time", "",1924423250
 			P: "LocalStop", "KTime", "Time", "",230930790000
@@ -378,7 +379,7 @@ Objects:  {
 			P: "ReferenceStop", "KTime", "Time", "",230930790000
 		}
 	}
-	AnimationLayer: 2419956234736, "AnimLayer::BaseLayer", "" {
+	AnimationLayer: 1359822643984, "AnimLayer::BaseLayer", "" {
 	}
 }
 
@@ -388,22 +389,22 @@ Objects:  {
 Connections:  {
 	
 	;Model::colliders, Model::RootNode
-	C: "OO",2420153634928,0
+	C: "OO",1359884325360,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",2419956234736,2420136817744
+	C: "OO",1359822643984,1359720794384
 	
 	;NodeAttribute::, Model::colliders
-	C: "OO",2419789797616,2420153634928
+	C: "OO",1359726448560,1359884325360
 	
 	;Model::neck_01_collider, Model::colliders
-	C: "OO",2420153639568,2420153634928
+	C: "OO",1359884332320,1359884325360
 	
 	;Geometry::, Model::neck_01_collider
-	C: "OO",2420110083488,2420153639568
+	C: "OO",1359729440816,1359884332320
 	
 	;Material::lambert1, Model::neck_01_collider
-	C: "OO",2420137831184,2420153639568
+	C: "OO",1359808565536,1359884332320
 }
 ;Takes section
 ;----------------------------------------------------
