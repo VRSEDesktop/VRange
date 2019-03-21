@@ -76,7 +76,7 @@ public class Gun : Weapon, IReloadable
     }
 
     // Creates the shot representation from shot info
-    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 60f)
+    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 10f)
     {
         GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
@@ -89,8 +89,10 @@ public class Gun : Weapon, IReloadable
 
         obj.GetComponent<MeshRenderer>().material.color = color;
         obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        obj.SetActive(true);
 
+        obj.GetComponent<BoxCollider>().enabled = false;
+
+        obj.SetActive(true);
         Destroy(obj, duration);
     }
 

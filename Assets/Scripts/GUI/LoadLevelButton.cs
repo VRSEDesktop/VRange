@@ -4,16 +4,19 @@ using Valve.VR;
 
 public class LoadLevelButton : MonoBehaviour, IHitable
 {
+    public SteamVR_LoadLevel levelLoader;
+
+    public string text;
     public string levelName;
 
     public void Start()
     {
-        GetComponentInChildren<TextMeshPro>().text = name;
+        GetComponentInChildren<TextMeshPro>().text = text;
     }
 
     public void OnHit(BulletHit bulletHit)
     {
-        GetComponent<SteamVR_LoadLevel>().levelName = levelName;
-        GetComponent<SteamVR_LoadLevel>().Trigger();
+        levelLoader.levelName = levelName;
+        levelLoader.Trigger();
     }
 }
