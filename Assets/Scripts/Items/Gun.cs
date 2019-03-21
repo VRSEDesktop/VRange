@@ -89,8 +89,10 @@ public class Gun : Weapon, IReloadable
 
         obj.GetComponent<MeshRenderer>().material.color = color;
         obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        obj.SetActive(true);
 
+        obj.GetComponent<BoxCollider>().enabled = false;
+
+        obj.SetActive(true);
         Destroy(obj, duration);
     }
 
