@@ -82,7 +82,7 @@ public class NPCController : MonoBehaviour
     {
         StateMachine.Update();
         Anim.SetFloat("Speed", Rig.velocity.magnitude);
-        Debug.Log(Rig.velocity.magnitude + " ");
+        
     }
 
     private void OnTriggerStay(Collider other)
