@@ -76,7 +76,7 @@ public class Gun : Weapon, IReloadable
     }
 
     // Creates the shot representation from shot info
-    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 60f)
+    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 10f)
     {
         GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
