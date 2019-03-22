@@ -81,7 +81,8 @@ public class NPCController : MonoBehaviour
     private void Update()
     {
         StateMachine.Update();
-        Anim.SetFloat("Speed", Rig.velocity.magnitude);
+        Anim.SetFloat("Speed", Rig.velocity.magnitude * 10);
+        Debug.Log(" " + Rig.velocity.magnitude * 10);
         
     }
 
