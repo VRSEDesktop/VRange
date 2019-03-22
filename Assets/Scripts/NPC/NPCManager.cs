@@ -20,7 +20,7 @@ public class NPCManager : MonoBehaviour
     /// </summary>
     public int Suspects;
 
-    private List<Transform> SpawnPoints = new List<Transform>();
+    private Transform[] SpawnPoints;
     private List<GameObject> BystanderList = new List<GameObject>();
     private List<GameObject> SuspectList = new List<GameObject>();
     /// <summary>
@@ -44,54 +44,47 @@ public class NPCManager : MonoBehaviour
     {
         while (BystanderList.Count < Bystanders)
         {
-            SpawnBystander();
+            SpawnNPC(Patrol.Instance, false);
         }
         while (SuspectList.Count < Suspects)
         {
-            SpawnSuspect();
+            SpawnNPC(AttackPlayer.Instance, true);
         }
     }
 
-    /// <summary>
-    /// Initialize and spawn a regular NPC
-    /// </summary>
-    private void SpawnBystander()
+    private void SpawnNPC(State<NPCController> startingState, bool isSuspect)
     {
-        int spawnPoint = Random.Range(0, SpawnPoints.Count);
-        GameObject bystander = Instantiate(NPC, BystanderObject.transform);
-        bystander.transform.position = SpawnPoints[spawnPoint].position;
+        int spawnPoint = Random.Range(0, SpawnPoints.Length);
+        GameObject npc = Instantiate(NPC, isSuspect ? SuspectObject.transform : BystanderObject.transform);
+        npc.transform.position = SpawnPoints[spawnPoint].position;
 
-        BystanderList.Add(bystander);
-    }
+        NPCController npcController = npc.GetComponent<NPCController>();
+        npcController.StateMachine.ChangeState(startingState);
+        if(isSuspect)
+        {
+            int weaponindex = Random.Range(0, Weapons.Length);
+            Weapon weapon = Instantiate(Weapons[weaponindex], npc.transform);
+            weapon.transform.parent = npc.transform;
+            weapon.transform.SetAsFirstSibling();
 
-    /// <summary>
-    /// Initialize and spawn a suspect
-    /// </summary>
-    private void SpawnSuspect()
-    {
-        int spawnPoint = Random.Range(0, SpawnPoints.Count);
-
-        GameObject suspect = Instantiate(NPC, SuspectObject.transform);
-        suspect.transform.position = SpawnPoints[spawnPoint].position;
-
-        int weaponindex = Random.Range(0, Weapons.Length);
-        Weapon weapon = Instantiate(Weapons[weaponindex], suspect.transform);
-        weapon.transform.parent = suspect.transform;
-        weapon.transform.SetAsFirstSibling();
-
-        //Add the gun to the NPC GameObject's script
-        NPCController suspectController = suspect.GetComponent<NPCController>();
-        suspectController.Item = weapon;
-        suspectController.StateMachine.ChangeState(AttackPlayer.Instance);
-
-        SuspectList.Add(suspect);
+            //Add the gun to the NPC GameObject's script
+            npcController.Item = weapon;
+            SuspectList.Add(npc);
+        }
+        else
+        {
+            BystanderList.Add(npc);
+        }
     }
 
     private void UpdateSpawnPoints()
     {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
+        List<Transform> spawnPointList = new List<Transform>();
+        GameObject[] gameObjectArray = GameObject.FindGameObjectsWithTag("Waypoint");
+        for (int i = 0; i <  gameObjectArray.Length; ++i )
         {
-            SpawnPoints.Add(o.transform);
+            spawnPointList.Add(gameObjectArray[i].transform);
         }
+        SpawnPoints = spawnPointList.ToArray();
     }
 }

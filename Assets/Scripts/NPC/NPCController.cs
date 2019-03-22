@@ -54,7 +54,6 @@ public class NPCController : MonoBehaviour
     private void OnEnable()
     {
         StateMachine = new StateMachine<NPCController>(this);
-        StateMachine.ChangeState(Patrol.Instance);
 
         Agent = GetComponent<NavMeshAgent>();
         Agent.autoBraking = false;

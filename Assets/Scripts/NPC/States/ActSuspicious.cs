@@ -1,56 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Weapons.Abstraction;
 using UnityEngine.AI;
 using Assets.Scripts.StateMachine;
 
-namespace Assets.Scripts.NPC.States
+class ActSuspicious : State<NPCController>
 {
-    class ActSuspicious : State<NPCController>
+    private static ActSuspicious _instance;
+
+    public ActSuspicious()
     {
-        private static ActSuspicious _instance;
+        if (_instance != null)
+            return;
 
-        public ActSuspicious()
+        _instance = this;
+    }
+
+    public static ActSuspicious Instance
+    {
+        get
         {
-            if (_instance != null)
-                return;
-
-            _instance = this;
+            if (_instance == null)
+                new ActSuspicious();
+            return _instance;
         }
+    }
 
-        public static ActSuspicious Instance {
-            get
-            {
-                if (_instance == null)
-                    new ActSuspicious();
-                return _instance;
-            }
-        }
+    public override void EnterState(NPCController owner)
+    {
 
-        public override void EnterState(NPCController owner)
-        {
-            
-        }
+    }
 
-        public override void ExitState(NPCController owner)
-        {
-            
-        }
+    public override void ExitState(NPCController owner)
+    {
 
-        public override void OnTriggerExit(NPCController owner, Collider other)
-        {
-            
-        }
+    }
 
-        public override void OnTriggerStay(NPCController owner, Collider other)
-        {
-            
-        }
+    public override void OnTriggerExit(NPCController owner, Collider other)
+    {
 
-        public override void Update(NPCController owner)
-        {
-            
-        }
+    }
+
+    public override void OnTriggerStay(NPCController owner, Collider other)
+    {
+
+    }
+
+    public override void Update(NPCController owner)
+    {
+
     }
 }

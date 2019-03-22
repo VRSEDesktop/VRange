@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
+enum MovementBehaviour { FollowingPlayer, ReachedPlayer, MovingIntoCover, ReachedCover };
+
 public class AttackPlayer : State<NPCController>
 { 
     private static AttackPlayer _instance;
+    private MovementBehaviour MovementBehaviour;
     private ShouldSurrender ShouldSurrender = new ShouldSurrender();
 
     private AttackPlayer()
@@ -27,6 +30,8 @@ public class AttackPlayer : State<NPCController>
     public override void EnterState(NPCController owner)
     {
         owner.Player = GameObject.FindGameObjectWithTag("Player");
+
+        owner.Agent.SetDestination(owner.Player.transform.position);
     }
 
     public override void ExitState(NPCController owner)
@@ -79,10 +84,12 @@ public class AttackPlayer : State<NPCController>
     /// </summary>
     private void SetMovement(NPCController owner)
     {
-        owner.Agent.SetDestination(owner.Player.transform.position);
+        float distanceToPlayer = Vector3.Distance(owner.Player.transform.position, owner.transform.position);
+
         //Reached a destination
         if(owner.Agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
+            
             if (owner.Agent.SamplePathPosition(NavMesh.AllAreas, 0f, out NavMeshHit navMeshHit))
             {
                 switch (navMeshHit.mask)
@@ -96,7 +103,7 @@ public class AttackPlayer : State<NPCController>
                     //Jump
                     case 2:
                         break;
-                    //User 3 (Cover)
+                    //User 3
                     case 3:
                         break;
                 }
