@@ -43,6 +43,10 @@ public class NPCController : MonoBehaviour
     /// </summary>
     [HideInInspector] public CapsuleCollider Collider;
     /// <summary>
+    /// The current NavMesh the NPC is walking on. Only used in a State.
+    /// </summary>
+    [HideInInspector] public NavMeshHit CurrentNavMesh;
+    /// <summary>
     /// The level of agression.
     /// </summary>
     public float LevelOfAgression;

@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-enum MovementBehaviour { FollowingPlayer, ReachedPlayer, MovingIntoCover, ReachedCover };
-
 public class AttackPlayer : State<NPCController>
 { 
     private static AttackPlayer _instance;
-    private MovementBehaviour MovementBehaviour;
     private ShouldSurrender ShouldSurrender = new ShouldSurrender();
+    private ShouldMoveToCover ShouldMoveToCover = new ShouldMoveToCover();
 
     private AttackPlayer()
     {
@@ -89,25 +87,8 @@ public class AttackPlayer : State<NPCController>
         //Reached a destination
         if(owner.Agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            
-            if (owner.Agent.SamplePathPosition(NavMesh.AllAreas, 0f, out NavMeshHit navMeshHit))
-            {
-                switch (navMeshHit.mask)
-                {
-                    //Walkable
-                    case 0:
-                        break;
-                    //Not Walkable
-                    case 1:
-                        break;
-                    //Jump
-                    case 2:
-                        break;
-                    //User 3
-                    case 3:
-                        break;
-                }
-            }
+
+            owner.Agent.SamplePathPosition(NavMesh.AllAreas, 0f, out owner.CurrentNavMesh);
         }
     }
 
@@ -119,5 +100,28 @@ public class AttackPlayer : State<NPCController>
         //Someting about chances to surrender, dying, etc. in here. Perhaps something with level of fear and level of agression.
         if (ShouldSurrender.Decide(owner))
             owner.StateMachine.ChangeState(Surrender.Instance);
+
+        if(ShouldMoveToCover.Decide(owner))
+        {
+            //Find nearest cover
+            //owner.Agent.SetDestination();
+        }
+
+        switch (owner.CurrentNavMesh.mask)
+        {
+            //Walkable
+            case 0:
+                break;
+            //Not Walkable
+            case 1:
+                break;
+            //Jump
+            case 2:
+                break;
+            //User 3
+            case 3:
+                owner.StateMachine.ChangeState(TakeCover.Instance);
+                break;
+        }
     }
 }
