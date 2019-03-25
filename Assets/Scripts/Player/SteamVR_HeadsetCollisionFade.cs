@@ -25,27 +25,16 @@ using Valve.VR;
 
 public class SteamVR_HeadsetCollisionFade : MonoBehaviour
 {
-    public float blinkTransitionSpeed = 0.1f;
+    public float inTransitionTime, outTransitionTime;
     public Color fadeColor = Color.black;
 
-    public void Start ()
+    public void OnTriggerEnter(Collider other)
     {
-        SphereCollider collider = GetComponent<SphereCollider>();
-	}
-
-    public void OnTriggerStay(Collider collider)
-    {
-        if (!collider.name.Contains("Camera"))
-        {
-            SteamVR_Fade.Start(fadeColor, blinkTransitionSpeed);
-        }
+        SteamVR_Fade.Start(fadeColor, inTransitionTime);
     }
 
-    public void OnTriggerExit(Collider collider)
+    public void OnTriggerExit(Collider other)
     {
-        if (!collider.name.Contains("Camera"))
-        {
-            SteamVR_Fade.Start(Color.clear, blinkTransitionSpeed);
-        }
+        SteamVR_Fade.Start(Color.clear, outTransitionTime);
     }
 }
