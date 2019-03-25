@@ -25,11 +25,15 @@ public class Gun : Weapon, IReloadable
         currentAmmo = magCapacity;      
     }
 
-    public override void Use()
+    /// <summary>
+    /// Use the gun and return if the gun fired
+    /// </summary>
+    /// <returns></returns>
+    public override bool Use()
     {
         triggerSound.Play();
 
-        if (!CanShoot()) return;
+        if (!CanShoot()) return false;
 
         shotSound.Play();
         DetectHit();
@@ -39,6 +43,9 @@ public class Gun : Weapon, IReloadable
 
         GetComponentInChildren<ParticleSystem>().Play();
         anim.Play("Fire");
+
+        Debug.Log("GUN SHOT");
+        return true;
     }
 
     /// <summary>

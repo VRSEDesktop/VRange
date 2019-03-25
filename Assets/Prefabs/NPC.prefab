@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1554377328327498299}
   - component: {fileID: 4904217973099761697}
   - component: {fileID: 349699517130815693}
-  - component: {fileID: 6067841607502997348}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -69,7 +68,13 @@ MonoBehaviour:
   NavPoints: []
   DestPoint: 0
   Agent: {fileID: 0}
-  Weapon: {fileID: 0}
+  Item: {fileID: 0}
+  ItemScript: {fileID: 0}
+  Player: {fileID: 0}
+  PlayerInSight: 0
+  Collider: {fileID: 0}
+  LevelOfAgression: 0
+  LevelOfTactics: 0
 --- !u!195 &349699517130815693
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -92,20 +97,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &6067841607502997348
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561706765}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.35
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &46492842492575228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,7 +1463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1410884050637246286
 Transform:
   m_ObjectHideFlags: 0

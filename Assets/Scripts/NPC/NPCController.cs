@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class NPCController : MonoBehaviour
 {
     /// <summary>
@@ -73,7 +73,7 @@ public class NPCController : MonoBehaviour
 
     private void Update()
     {
-        StateMachine.Update();
+        if (Time.frameCount % 10 == 0) StateMachine.Update();
     }
 
     private void OnTriggerStay(Collider other)

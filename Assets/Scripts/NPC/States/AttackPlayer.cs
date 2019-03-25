@@ -42,6 +42,8 @@ public class AttackPlayer : State<NPCController>
         SetWeaponPosition(owner);
         SetMovement(owner);
         SetState(owner);
+
+        ShootGun(owner);
     }
 
     public override void OnTriggerStay(NPCController owner, Collider other)
@@ -67,6 +69,12 @@ public class AttackPlayer : State<NPCController>
     public override void OnTriggerExit(NPCController owner, Collider other)
     {
         owner.PlayerInSight = !(other.gameObject == owner.Player);
+    }
+
+
+    private void ShootGun(NPCController owner)
+    {
+        owner.Item.Use();
     }
 
     /// <summary>
