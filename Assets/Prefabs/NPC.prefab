@@ -142,6 +142,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Woman1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 79a7ce1839844d14db7866c3c1ee7959, type: 2}
+    - target: {fileID: 9500000, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed by
+        Humanoid clips.\n\tTransform 'shoulder.R'\n\tFrom animation clip 'WalkingHuman'"
+      objectReference: {fileID: 0}
     - target: {fileID: 400134, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -185,16 +195,6 @@ PrefabInstance:
     - target: {fileID: 400134, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 79a7ce1839844d14db7866c3c1ee7959, type: 2}
-    - target: {fileID: 9500000, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'shoulder.R'\n\tFrom animation clip 'WalkingHuman'"
       objectReference: {fileID: 0}
     - target: {fileID: 400038, guid: c43d962623b4ba04985a58fd668a8cb0, type: 3}
       propertyPath: m_LocalRotation.x
