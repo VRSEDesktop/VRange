@@ -27,9 +27,8 @@ public class AttackPlayer : State<AIController>
 
     public override void EnterState(AIController owner)
     {
-        owner.Player = GameObject.FindGameObjectWithTag("Player");
-
-        owner.Agent.SetDestination(owner.Player.transform.position);
+        AISuspectController owner2 = (AISuspectController) owner;
+        owner2.NavAgent.SetDestination(owner2.Player.transform.position);
     }
 
     public override void ExitState(AIController owner)
@@ -40,7 +39,7 @@ public class AttackPlayer : State<AIController>
     public override void Update(AIController owner)
     {
         SetWeaponPosition(owner);
-        SetMovement(owner);
+        SetMovement((AISuspectController) owner);
         SetState(owner);
 
         AttackWithGun(owner);
@@ -48,6 +47,8 @@ public class AttackPlayer : State<AIController>
 
     private void AttackWithGun(AIController owner)
     {
+        IsPlayerVisible((AISuspectController) owner);
+
         bool hasShot = owner.Item.Use();
 
         if(!hasShot)
@@ -84,27 +85,43 @@ public class AttackPlayer : State<AIController>
 
     public override void OnTriggerStay(AIController owner, Collider other)
     {
-        if(other.gameObject == owner.Player)
-        {
-            owner.PlayerInSight = false;
-            Vector3 direction = other.transform.position - owner.transform.position;
-            float angle = Vector3.Angle(direction, owner.transform.forward);
+        owner.PlayerInSight = IsPlayerVisible((AISuspectController) owner);
+    }
 
-            //Is player in the field of view of the NPC
-            if(angle < owner.FieldOfView * 0.5f)
-            {
-                //Are there any objects obstructing the view
-                if (Physics.Raycast(owner.transform.position = owner.transform.up, direction.normalized, out RaycastHit hit, owner.Collider.radius))
-                {
-                    owner.PlayerInSight = hit.collider.gameObject == owner.Player;
-                }
-            }
-        }
+    private bool IsPlayerVisible(AISuspectController suspect)
+    {
+        Vector3 playerHeadPos = suspect.Player.transform.position;
+        Vector3 suspectHeadPos = suspect.transform.position;
+        Vector3 toPlayer = new Vector3(playerHeadPos.x, playerHeadPos.y, playerHeadPos.z) - suspectHeadPos;
+
+        const float searchRadius = 50f;
+        Physics.Raycast(suspectHeadPos, toPlayer.normalized, out RaycastHit hit, searchRadius);
+        if(hit.transform == null) return false;
+
+        return hit.transform.Equals(suspect.Player.transform);
+    }
+
+    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 5f)
+    {
+        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        float thickness = 0.005f;
+        float length = Vector3.Distance(start, end);
+
+        obj.transform.localScale = new Vector3(thickness, thickness, length);
+        obj.transform.position = start + ((end - start) / 2);
+        obj.transform.LookAt(end);
+
+        obj.GetComponent<MeshRenderer>().material.color = color;
+        obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        obj.SetActive(true);
+
+        GameObject.Destroy(obj, duration);
     }
 
     public override void OnTriggerExit(AIController owner, Collider other)
     {
-        owner.PlayerInSight = !(other.gameObject == owner.Player);
+        // owner.PlayerInSight = !(other.gameObject == owner.Player);
     }
 
     /// <summary>
@@ -118,15 +135,15 @@ public class AttackPlayer : State<AIController>
     /// <summary>
     /// Logic of the NPC's movement, aim and animations.
     /// </summary>
-    private void SetMovement(AIController owner)
+    private void SetMovement(AISuspectController owner)
     {
         float distanceToPlayer = Vector3.Distance(owner.Player.transform.position, owner.transform.position);
 
         //Reached a destination
-        if(owner.Agent.pathStatus == NavMeshPathStatus.PathComplete)
+        if(owner.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
         {
 
-            owner.Agent.SamplePathPosition(NavMesh.AllAreas, 0f, out owner.CurrentNavMesh);
+            owner.NavAgent.SamplePathPosition(NavMesh.AllAreas, 0f, out owner.CurrentNavMesh);
         }
     }
 

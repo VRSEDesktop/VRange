@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Player : MonoBehaviour, IHitable
 {
-    public Vector3 playerHeight = new Vector3(0, 1.64f);
+    public float playerHeight = 1.8f;
     public static Player Instance { get; private set; }
 
     public VR_Controller leftHandInput, rightHandInput;

@@ -37,7 +37,7 @@ public class Patrol : State<AIController>
 
     public override void Update(AIController owner)
     {
-        if (!owner.Agent.pathPending && owner.Agent.remainingDistance < 0.5f)
+        if (!owner.NavAgent.pathPending && owner.NavAgent.remainingDistance < 0.5f)
             GotoNextPoint(owner);
     }
 
@@ -59,7 +59,7 @@ public class Patrol : State<AIController>
         if (owner.NavPoints.Count == 0)
             return;
 
-        owner.Agent.SetDestination(owner.NavPoints[owner.DestPoint].position);
+        owner.NavAgent.SetDestination(owner.NavPoints[owner.DestPoint].position);
         owner.DestPoint = Random.Range(0, owner.NavPoints.Count);
     }
 }

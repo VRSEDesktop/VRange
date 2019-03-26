@@ -31,7 +31,7 @@ class Surrender : State<AIController>
         //Set anims to surrender anims
 
         //Stop the navmesh agent
-        owner.Agent.isStopped = true;
+        owner.NavAgent.isStopped = true;
     }
 
     public override void ExitState(AIController owner)

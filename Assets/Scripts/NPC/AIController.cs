@@ -13,7 +13,7 @@ public class AIController : MonoBehaviour
     /// Index of the current destination in NavPoints.
     /// </summary>
     [HideInInspector] public int DestPoint = 0;
-    [HideInInspector] public NavMeshAgent Agent;
+    [HideInInspector] public NavMeshAgent NavAgent;
     /// <summary>
     /// The item the NPC is wielding.
     /// </summary>
@@ -22,10 +22,6 @@ public class AIController : MonoBehaviour
     /// The class that manages the NPC's behaviour state.
     /// </summary>
     [HideInInspector] public StateMachine<AIController> StateMachine;
-    /// <summary>
-    /// Access to the Player GameObject
-    /// </summary>
-    [HideInInspector] public GameObject Player;
     /// <summary>
     /// Readonly value for NPCs FOV.
     /// </summary>
@@ -47,8 +43,8 @@ public class AIController : MonoBehaviour
     {
         StateMachine = new StateMachine<AIController>(this);
 
-        Agent = GetComponent<NavMeshAgent>();
-        Agent.autoBraking = false;
+        NavAgent = GetComponent<NavMeshAgent>();
+        NavAgent.autoBraking = false;
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
         {

@@ -459,7 +459,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3697650212361242748, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4974885121505030584, guid: 83dc7dc0dd1c9a24bb94996e2114c56c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 83dc7dc0dd1c9a24bb94996e2114c56c, type: 3}
 --- !u!114 &416208758 stripped
 MonoBehaviour:
@@ -538,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809c81c7bf80fb46b05bb0f06d258d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHeight: {x: 0, y: 1.64, z: 0}
+  playerHeight: 1.8
   leftHandInput: {fileID: 416208761}
   rightHandInput: {fileID: 416208760}
   leftGun: {fileID: 416208759}
