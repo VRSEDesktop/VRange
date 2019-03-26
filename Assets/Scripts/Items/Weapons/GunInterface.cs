@@ -27,7 +27,6 @@ public class GunInterface : MonoBehaviour
         if (triggerPushed) return;
         triggerPushed = true;
         gun.SendMessage("Shoot");
-        Scenario.logs.Add(new LoggedShot(gun));
     }
 
     private void ReleaseTrigger()

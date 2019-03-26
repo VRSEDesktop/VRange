@@ -52,12 +52,33 @@ public class AttackPlayer : State<AIController>
 
         if(!hasShot)
         {
-            ReloadGun(owner);
+            if (HasSpareMagazines(owner)) ReloadGun(owner);
+            else
+            {
+                // TODO we can change some values such as surrender probability
+            }
         }
     }
 
+    /// <summary>
+    /// Check if the AI has spare magazines for a gun
+    /// </summary>
+    /// <param name="owner"></param>
+    /// <returns></returns>
+    private bool HasSpareMagazines(AIController owner)
+    {
+        return ((AISuspectController)owner).SpareMagazines >= 1;
+    }
+
+    /// <summary>
+    /// Start reloading the gun
+    /// </summary>
+    /// <param name="owner"></param>
     private void ReloadGun(AIController owner)
     {
+        Debug.Log("RELOAD");
+        // TODO trigger animation, add time requirement without blocking the AI
+        ((AISuspectController)owner).SpareMagazines--;
         ((Gun)owner.Item).Reload();
     }
 
@@ -116,7 +137,7 @@ public class AttackPlayer : State<AIController>
     {
         //Someting about chances to surrender, dying, etc. in here. Perhaps something with level of fear and level of agression.
         if (ShouldSurrender.Decide(owner))
-            owner.StateMachine.ChangeState(Surrender.Instance);
+            // TODO remporary change owner.StateMachine.ChangeState(Surrender.Instance);
 
         if(ShouldMoveToCover.Decide(owner))
         {

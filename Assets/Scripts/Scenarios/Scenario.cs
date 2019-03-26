@@ -16,4 +16,16 @@ public class Scenario : MonoBehaviour
 
         return hits;
     }
+
+    public static IList<LoggedShot> GetShotsFromGun(Gun gun)
+    {
+        IList<LoggedShot> shots = new List<LoggedShot>();
+
+        foreach (ScenarioLog log in logs)
+        {
+            if (log is LoggedShot && ((LoggedShot)log).gun.Equals(gun)) shots.Add((LoggedShot)log);           
+        }
+
+        return shots;
+    }
 }

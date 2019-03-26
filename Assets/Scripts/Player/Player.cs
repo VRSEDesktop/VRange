@@ -50,7 +50,7 @@ public class Player : MonoBehaviour, IHitable
     {
         IList<LoggedHit> hits = Scenario.GetHits();
 
-        GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (leftGun.shotsFired + rightGun.shotsFired));
+        GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (Scenario.GetShotsFromGun(leftGun).Count + Scenario.GetShotsFromGun(rightGun).Count));
 
         for (int i = 0; i < hits.Count; i++)
         {

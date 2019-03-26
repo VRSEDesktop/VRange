@@ -8,7 +8,6 @@ public class Gun : Weapon, IReloadable
     public bool debugMode;
 
     public int magCapacity;
-    public int shotsFired;
     private int currentAmmo;
 
     public AudioSource shotSound;
@@ -33,18 +32,21 @@ public class Gun : Weapon, IReloadable
     {
         triggerSound.Play();
 
-        if (!CanShoot()) return false;
+        if(!CanShoot())
+        {
+            Scenario.logs.Add(new LoggedShot(this, true));
+            return false;
+        }
 
         shotSound.Play();
         DetectHit();
 
         currentAmmo--;
-        shotsFired++;
 
         GetComponentInChildren<ParticleSystem>().Play();
         anim.Play("Fire");
 
-        Debug.Log("GUN SHOT");
+        Scenario.logs.Add(new LoggedShot(this, true));
         return true;
     }
 
@@ -67,25 +69,13 @@ public class Gun : Weapon, IReloadable
     /// <summary>
     /// Debug function for drawing the bullet trajectory
     /// </summary>
-    private void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 10f)
-    {
-        GameObject myLine = new GameObject();
-        myLine.transform.position = start;
-        myLine.AddComponent<LineRenderer>();
-        LineRenderer lr = myLine.GetComponent<LineRenderer>();
-        lr.startColor = color;
-        lr.endColor = color;
-        lr.startWidth = 0.02f;
-        lr.endWidth = 0.02f;
-        lr.SetPosition(0, start);
-        lr.SetPosition(1, end);
-        Destroy(myLine, duration);
-    }
-
-    // Creates the shot representation from shot info
     private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 60f)
     {
+        GameObject shotsContainer = GameObject.Find("ShotsRays");
+        if (shotsContainer == null) shotsContainer = new GameObject("ShotsRays");
+
         GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        obj.transform.parent = shotsContainer.transform;
 
         float thickness = 0.005f;
         float length = Vector3.Distance(start, end);
