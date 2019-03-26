@@ -7,6 +7,8 @@ public class AttackPlayer : State<AIController>
     private ShouldSurrender ShouldSurrender = new ShouldSurrender();
     private ShouldMoveToCover ShouldMoveToCover = new ShouldMoveToCover();
 
+    private float LastShotTime;
+
     private AttackPlayer()
     {
         if(_instance != null)
@@ -47,9 +49,17 @@ public class AttackPlayer : State<AIController>
 
     private void AttackWithGun(AIController owner)
     {
-        IsPlayerVisible((AISuspectController) owner);
+        if (Time.frameCount % 10 != 0) return;
+
+        AdjustGun((AISuspectController)owner);
+
+        if(!IsPlayerVisible((AISuspectController)owner)) return;
+
+        if(!ShouldShot()) return;
 
         bool hasShot = owner.Item.Use();
+
+        LastShotTime = Time.time;
 
         if(!hasShot)
         {
@@ -59,6 +69,35 @@ public class AttackPlayer : State<AIController>
                 // TODO we can change some values such as surrender probability
             }
         }
+    }
+
+    private bool ShouldShot()
+    {
+        const float maxThreshold = 10;
+        const float timeShift = 1f;
+        float d = Mathf.Sqrt(1.0f);
+
+        float delta = Mathf.Abs(Time.time - LastShotTime);
+        if (delta > maxThreshold) delta = 0;
+
+        float probability = Mathf.Exp(-Mathf.Pow(0-timeShift, 2f) / (2f*d*d)) 
+            / (d * Mathf.Sqrt(2f*Mathf.PI));
+
+        Debug.Log("Last: " + LastShotTime + " Delta: " + delta+" Prob: " + probability);
+        return probability >= Random.Range(0f, 1f);
+    }
+
+    // tmp way to adjust gun transform to shoot in the player direction
+    private void AdjustGun(AISuspectController owner)
+    {        
+        Vector3 headPos = owner.transform.position; // change to head pos
+        
+        owner.Item.transform.position = new Vector3(headPos.x, headPos.y + 10f, headPos.z);
+        Vector3 suspectRotation = owner.transform.rotation.eulerAngles;
+
+        //Debug.Log(headPos + " " + owner.Item.transform.position);
+
+        owner.Item.transform.localEulerAngles = new Vector3(suspectRotation.x, suspectRotation.y - 45, suspectRotation.z);     
     }
 
     /// <summary>

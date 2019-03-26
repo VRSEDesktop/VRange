@@ -52,9 +52,9 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Time.frameCount % 10 == 0) StateMachine.Update();
+        StateMachine.Update();
     }
 
     private void OnTriggerStay(Collider other)
