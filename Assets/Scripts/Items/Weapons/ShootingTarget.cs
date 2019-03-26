@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class ShootingTarget : MonoBehaviour, IHitable
+public class ShootingTarget : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
 

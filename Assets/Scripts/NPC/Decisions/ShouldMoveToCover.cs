@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.StateMachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShouldMoveToCover : Decision
 {
@@ -18,7 +15,7 @@ public class ShouldMoveToCover : Decision
     /// </summary>
     private DecisionStatus NPCInjured;
 
-    public override bool Decide(NPCController owner)
+    public override bool Decide(AIController owner)
     {
         if (IsIntimidatedByWeapon(owner))
             return true;
@@ -34,7 +31,7 @@ public class ShouldMoveToCover : Decision
     /// <summary>
     /// Is the NPC intimidated by the weapon being aimed at them.
     /// </summary>
-    private bool IsIntimidatedByWeapon(NPCController owner)
+    private bool IsIntimidatedByWeapon(AIController owner)
     {
         switch(WeaponAimed)
         {
@@ -43,7 +40,7 @@ public class ShouldMoveToCover : Decision
                 return false;
             case DecisionStatus.ShouldDecide:
                 WeaponAimed = DecisionStatus.DidDecide;
-                return MakeRandomDecision(0 + owner.LevelOfTactics);
+                return MakeRandomDecision(0 + ((AISuspectController)owner).LevelOfTactics);
             case DecisionStatus.DidDecide:
                 return false;
             default:
@@ -54,7 +51,7 @@ public class ShouldMoveToCover : Decision
     /// <summary>
     /// Is the NPC intimidated by the weapon being used.
     /// </summary>
-    private bool IsIntimidatedByWeaponUsage(NPCController owner)
+    private bool IsIntimidatedByWeaponUsage(AIController owner)
     {
         switch (WeaponUsed)
         {
@@ -63,7 +60,7 @@ public class ShouldMoveToCover : Decision
                 return false;
             case DecisionStatus.ShouldDecide:
                 WeaponUsed = DecisionStatus.DidDecide;
-                return MakeRandomDecision(25 + owner.LevelOfTactics);
+                return MakeRandomDecision(25 + ((AISuspectController) owner).LevelOfTactics);
             case DecisionStatus.DidDecide:
                 return false;
             default:
@@ -74,7 +71,7 @@ public class ShouldMoveToCover : Decision
     /// <summary>
     /// Is the NPC intimidated after being injured.
     /// </summary>
-    private bool IsIntimidatedByInjury(NPCController owner)
+    private bool IsIntimidatedByInjury(AIController owner)
     {
         switch (NPCInjured)
         {
@@ -83,7 +80,7 @@ public class ShouldMoveToCover : Decision
                 return false;
             case DecisionStatus.ShouldDecide:
                 NPCInjured = DecisionStatus.DidDecide;
-                return MakeRandomDecision(50 + owner.LevelOfTactics);
+                return MakeRandomDecision(50 + ((AISuspectController)owner).LevelOfTactics);
             case DecisionStatus.DidDecide:
                 return false;
             default:
@@ -94,7 +91,7 @@ public class ShouldMoveToCover : Decision
     /// <summary>
     /// Checks whether the NPC is being aimed at and changes the decision status.
     /// </summary>
-    private void CheckWeaponDrawn(NPCController owner)
+    private void CheckWeaponDrawn(AIController owner)
     {
         if (true)
             WeaponAimed = DecisionStatus.ShouldDecide;
@@ -103,7 +100,7 @@ public class ShouldMoveToCover : Decision
     /// <summary>
     /// Checks whether the player has used their weapon and changes the decision status.
     /// </summary>
-    private void CheckWeaponUsed(NPCController owner)
+    private void CheckWeaponUsed(AIController owner)
     {
         if (true)
             WeaponUsed = DecisionStatus.ShouldDecide;
@@ -112,7 +109,7 @@ public class ShouldMoveToCover : Decision
     /// <summary>
     /// Checks whether the NPC is injured changes the decision status.
     /// </summary>
-    private void CheckNPCInjured(NPCController owner)
+    private void CheckNPCInjured(AIController owner)
     {
         if (true)
             NPCInjured = DecisionStatus.ShouldDecide;

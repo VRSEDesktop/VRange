@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class AttackPlayer : State<NPCController>
+public class AttackPlayer : State<AIController>
 { 
     private static AttackPlayer _instance;
     private ShouldSurrender ShouldSurrender = new ShouldSurrender();
@@ -25,28 +25,43 @@ public class AttackPlayer : State<NPCController>
         }
     }
 
-    public override void EnterState(NPCController owner)
+    public override void EnterState(AIController owner)
     {
         owner.Player = GameObject.FindGameObjectWithTag("Player");
 
         owner.Agent.SetDestination(owner.Player.transform.position);
     }
 
-    public override void ExitState(NPCController owner)
+    public override void ExitState(AIController owner)
     {
         
     }
 
-    public override void Update(NPCController owner)
+    public override void Update(AIController owner)
     {
         SetWeaponPosition(owner);
         SetMovement(owner);
         SetState(owner);
 
-        ShootGun(owner);
+        AttackWithGun(owner);
     }
 
-    public override void OnTriggerStay(NPCController owner, Collider other)
+    private void AttackWithGun(AIController owner)
+    {
+        bool hasShot = owner.Item.Use();
+
+        if(!hasShot)
+        {
+            ReloadGun(owner);
+        }
+    }
+
+    private void ReloadGun(AIController owner)
+    {
+        ((Gun)owner.Item).Reload();
+    }
+
+    public override void OnTriggerStay(AIController owner, Collider other)
     {
         if(other.gameObject == owner.Player)
         {
@@ -66,21 +81,15 @@ public class AttackPlayer : State<NPCController>
         }
     }
 
-    public override void OnTriggerExit(NPCController owner, Collider other)
+    public override void OnTriggerExit(AIController owner, Collider other)
     {
         owner.PlayerInSight = !(other.gameObject == owner.Player);
-    }
-
-
-    private void ShootGun(NPCController owner)
-    {
-        owner.Item.Use();
     }
 
     /// <summary>
     /// Place the weapon in the NPC's hand.
     /// </summary>
-    private void SetWeaponPosition(NPCController owner)
+    private void SetWeaponPosition(AIController owner)
     {
         
     }
@@ -88,7 +97,7 @@ public class AttackPlayer : State<NPCController>
     /// <summary>
     /// Logic of the NPC's movement, aim and animations.
     /// </summary>
-    private void SetMovement(NPCController owner)
+    private void SetMovement(AIController owner)
     {
         float distanceToPlayer = Vector3.Distance(owner.Player.transform.position, owner.transform.position);
 
@@ -103,7 +112,7 @@ public class AttackPlayer : State<NPCController>
     /// <summary>
     /// Logic for changing the state of the NPC's statemachine.
     /// </summary>
-    private void SetState(NPCController owner)
+    private void SetState(AIController owner)
     {
         //Someting about chances to surrender, dying, etc. in here. Perhaps something with level of fear and level of agression.
         if (ShouldSurrender.Decide(owner))

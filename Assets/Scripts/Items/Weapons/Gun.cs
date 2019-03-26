@@ -102,17 +102,29 @@ public class Gun : Weapon, IReloadable
     }
 
     /// <summary>
-    /// Can the gun fire, depends on available bullets and other factors
+    /// Check if the gun can fire
     /// </summary>
     private bool CanShoot()
     {
-        if (currentAmmo <= 0) return false;
+        if (!HasAmmo()) return false;
 
         return true;
     }
 
+    /// <summary>
+    /// Reload the gun magazine
+    /// </summary>
     public void Reload()
     {
         currentAmmo = magCapacity;
+    }
+
+    /// <summary>
+    /// Check if the gun has ammo
+    /// </summary>
+    /// <returns></returns>
+    public bool HasAmmo()
+    {
+        return currentAmmo > 0;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class NPCController : MonoBehaviour
+public class AIController : MonoBehaviour
 {
     /// <summary>
     /// List of Navigation points tagged in the editor with "Waypoint".
@@ -19,13 +19,9 @@ public class NPCController : MonoBehaviour
     /// </summary>
     [HideInInspector] public Weapon Item;
     /// <summary>
-    /// The script for the item the NPC is wielding.
-    /// </summary>
-    [HideInInspector] public MonoBehaviour ItemScript;
-    /// <summary>
     /// The class that manages the NPC's behaviour state.
     /// </summary>
-    [HideInInspector] public StateMachine<NPCController> StateMachine;
+    [HideInInspector] public StateMachine<AIController> StateMachine;
     /// <summary>
     /// Access to the Player GameObject
     /// </summary>
@@ -46,18 +42,10 @@ public class NPCController : MonoBehaviour
     /// The current NavMesh the NPC is walking on. Only used in a State.
     /// </summary>
     [HideInInspector] public NavMeshHit CurrentNavMesh;
-    /// <summary>
-    /// The level of agression.
-    /// </summary>
-    public float LevelOfAgression;
-    /// <summary>
-    /// The strategic competence of the NPC.
-    /// </summary>
-    public float LevelOfTactics;
 
-    private void OnEnable()
+    protected void OnEnable()
     {
-        StateMachine = new StateMachine<NPCController>(this);
+        StateMachine = new StateMachine<AIController>(this);
 
         Agent = GetComponent<NavMeshAgent>();
         Agent.autoBraking = false;
@@ -66,9 +54,6 @@ public class NPCController : MonoBehaviour
         {
             NavPoints.Add(o.transform);
         }
-
-        LevelOfAgression = Random.Range(0, 100);
-        LevelOfTactics = Random.Range(0, 100);
     }
 
     private void Update()

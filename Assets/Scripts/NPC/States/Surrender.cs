@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Assets.Scripts.StateMachine;
 
-class Surrender : State<NPCController>
+class Surrender : State<AIController>
 {
     private static Surrender _instance;
 
@@ -26,7 +26,7 @@ class Surrender : State<NPCController>
         }
     }
 
-    public override void EnterState(NPCController owner)
+    public override void EnterState(AIController owner)
     {
         //Set anims to surrender anims
 
@@ -34,22 +34,22 @@ class Surrender : State<NPCController>
         owner.Agent.isStopped = true;
     }
 
-    public override void ExitState(NPCController owner)
+    public override void ExitState(AIController owner)
     {
         
     }
 
-    public override void OnTriggerExit(NPCController owner, Collider other)
+    public override void OnTriggerExit(AIController owner, Collider other)
     {
         
     }
 
-    public override void OnTriggerStay(NPCController owner, Collider other)
+    public override void OnTriggerStay(AIController owner, Collider other)
     {
         
     }
 
-    public override void Update(NPCController owner)
+    public override void Update(AIController owner)
     {
         
     }

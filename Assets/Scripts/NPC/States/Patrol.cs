@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : State<NPCController>
+public class Patrol : State<AIController>
 {
     private static Patrol _instance;
 
@@ -25,28 +25,28 @@ public class Patrol : State<NPCController>
         }
     }
 
-    public override void EnterState(NPCController owner)
+    public override void EnterState(AIController owner)
     {
         
     }
 
-    public override void ExitState(NPCController owner)
+    public override void ExitState(AIController owner)
     {
         
     }
 
-    public override void Update(NPCController owner)
+    public override void Update(AIController owner)
     {
         if (!owner.Agent.pathPending && owner.Agent.remainingDistance < 0.5f)
             GotoNextPoint(owner);
     }
 
-    public override void OnTriggerStay(NPCController owner, Collider other)
+    public override void OnTriggerStay(AIController owner, Collider other)
     {
         
     }
 
-    public override void OnTriggerExit(NPCController owner, Collider other)
+    public override void OnTriggerExit(AIController owner, Collider other)
     {
 
     }
@@ -54,7 +54,7 @@ public class Patrol : State<NPCController>
     /// <summary>
     /// Sets destination to a random point.
     /// </summary>
-    private void GotoNextPoint(NPCController owner)
+    private void GotoNextPoint(AIController owner)
     {
         if (owner.NavPoints.Count == 0)
             return;
