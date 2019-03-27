@@ -30,7 +30,7 @@ public class AttackPlayer : State<AIController>
     public override void EnterState(AIController owner)
     {
         AISuspectController owner2 = (AISuspectController) owner;
-        owner2.NavAgent.SetDestination(owner2.Player.transform.position);
+        // tmp  owner2.NavAgent.SetDestination(owner2.Player.transform.position);
     }
 
     public override void ExitState(AIController owner)
@@ -80,6 +80,7 @@ public class AttackPlayer : State<AIController>
         float delta = Mathf.Abs(Time.time - LastShotTime);
         if (delta > maxThreshold) delta = 0;
 
+        /// normal/Gaussian distribution
         float probability = Mathf.Exp(-Mathf.Pow(0-timeShift, 2f) / (2f*d*d)) 
             / (d * Mathf.Sqrt(2f*Mathf.PI));
 
@@ -92,12 +93,29 @@ public class AttackPlayer : State<AIController>
     {        
         Vector3 headPos = owner.transform.position; // change to head pos
         
-        owner.Item.transform.position = new Vector3(headPos.x, headPos.y + 10f, headPos.z);
+        owner.Item.transform.position = new Vector3(headPos.x, headPos.y + 1f, headPos.z);
         Vector3 suspectRotation = owner.transform.rotation.eulerAngles;
 
         //Debug.Log(headPos + " " + owner.Item.transform.position);
 
-        owner.Item.transform.localEulerAngles = new Vector3(suspectRotation.x, suspectRotation.y - 45, suspectRotation.z);     
+        owner.Item.transform.localEulerAngles = new Vector3(suspectRotation.x, suspectRotation.y - 45, suspectRotation.z);
+
+        owner.Item.transform.Rotate(CalculateShotOffset());
+    }
+
+    /// <summary>
+    /// Calculate new shot direction basing on the target position adding some offset
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 CalculateShotOffset()
+    {
+        const float baseOffset = 5;
+        float skill = Random.Range(0f, 1f); // TODO replace with NPC parameter
+        float maxAngularOffset = baseOffset * (1 - (Mathf.Pow(10f, skill)-1f)/9f);
+        float dX = Random.Range(-maxAngularOffset, maxAngularOffset);
+        float dY = Random.Range(-maxAngularOffset, maxAngularOffset);
+
+        return new Vector3(dX, dY, 0);
     }
 
     /// <summary>
