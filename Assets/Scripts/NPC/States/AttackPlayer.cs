@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class AttackPlayer : State<AIController>
@@ -29,8 +30,36 @@ public class AttackPlayer : State<AIController>
 
     public override void EnterState(AIController owner)
     {
+        const float targetDistanceToPlayer = 5f; // desired distance to player
+
         AISuspectController owner2 = (AISuspectController) owner;
-        // tmp  owner2.NavAgent.SetDestination(owner2.Player.transform.position);
+        Vector3 playerPos = owner2.Player.transform.position;
+        Vector3 aiPos = owner2.transform.position;
+
+        // Calculate destination in a straight line from the player
+        Vector3 offset = new Vector3(playerPos.x - aiPos.x, playerPos.y - aiPos.y, playerPos.z - aiPos.z);
+        offset.Normalize();
+        offset *= targetDistanceToPlayer;
+        Vector3 destination = new Vector3(playerPos.x, playerPos.y, playerPos.z);
+        destination -= offset;
+
+        NavMeshPath path = new NavMeshPath();
+        owner2.NavAgent.CalculatePath(destination, path);
+        if(path.status == NavMeshPathStatus.PathInvalid) // try other destination if this is invalid
+        {
+            do
+            {
+                // check random positions around player
+                destination.Set(Random.Range(-targetDistanceToPlayer, targetDistanceToPlayer),
+                                Random.Range(-targetDistanceToPlayer, targetDistanceToPlayer),
+                                Random.Range(-targetDistanceToPlayer, targetDistanceToPlayer));
+                destination += playerPos;
+                owner2.NavAgent.CalculatePath(destination, path);
+            }
+            while (path.status == NavMeshPathStatus.PathInvalid);
+        }
+
+        //owner2.NavAgent.SetDestination(destination);
     }
 
     public override void ExitState(AIController owner)
@@ -40,11 +69,60 @@ public class AttackPlayer : State<AIController>
 
     public override void Update(AIController owner)
     {
-        SetWeaponPosition(owner);
-        SetMovement((AISuspectController) owner);
-        SetState(owner);
+        //SetWeaponPosition(owner);
+        //SetMovement((AISuspectController) owner);
+        //SetState(owner);
 
-        AttackWithGun(owner);
+        //AttackWithGun(owner);
+        TakeCover((AISuspectController)owner);
+    }
+
+    private void TakeCover(AISuspectController owner)
+    {
+        IList<GameObject> covers = FindCovers(owner);
+        if (covers.Count == 0) return;
+
+        GameObject nearestCover = null;
+        float minDistance = 100000;
+
+        foreach(GameObject cover in covers)
+        {
+            float distance = Vector3.Distance(cover.transform.position, owner.transform.position);
+
+            if(distance < minDistance)
+            {
+                minDistance = distance;
+                nearestCover = cover;
+            }
+        }
+
+        owner.NavAgent.SetDestination(nearestCover.transform.position);
+    }
+
+    private IList<GameObject> FindCovers(AISuspectController owner)
+    {
+        IList<GameObject> covers = new List<GameObject>();
+
+        const float maxDistance = 50f;
+
+        GameObject[] allCovers = GameObject.FindGameObjectsWithTag("Cover");
+        foreach (GameObject cover in allCovers)
+        {
+            float distance = Vector3.Distance(cover.transform.position, owner.transform.position);
+            if(distance > maxDistance) continue;
+
+            Vector3 playerPos = owner.Player.transform.position;
+            Vector3 suspectPos = owner.transform.position;
+            Vector3 dirToPlayer = new Vector3(playerPos.x - suspectPos.x, playerPos.y - suspectPos.y, playerPos.z - suspectPos.z);
+            dirToPlayer.Normalize();
+
+            float dot = Vector3.Dot(cover.transform.forward, dirToPlayer);
+            if (dot < 0.7) continue;
+
+            covers.Add(cover);
+        }
+
+        return covers;
     }
 
     private void AttackWithGun(AIController owner)
@@ -200,7 +278,7 @@ public class AttackPlayer : State<AIController>
         if(owner.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
         {
 
-            owner.NavAgent.SamplePathPosition(NavMesh.AllAreas, 0f, out owner.CurrentNavMesh);
+            //owner.NavAgent.SamplePathPosition(NavMesh.AllAreas, 0f, out owner.CurrentNavMesh);
         }
     }
 
@@ -232,7 +310,7 @@ public class AttackPlayer : State<AIController>
                 break;
             //User 3
             case 3:
-                owner.StateMachine.ChangeState(TakeCover.Instance);
+                //owner.StateMachine.ChangeState(TakeCover.Instance);
                 break;
         }
     }
