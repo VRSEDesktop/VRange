@@ -9,11 +9,10 @@ public class NPCController : MonoBehaviour
     /// List of Navigation points tagged in the editor with "Waypoint".
     /// </summary>
     [HideInInspector] public List<Transform> NavPoints = new List<Transform>();
-    /// <summary>
     /// Index of the current destination in NavPoints.
     /// </summary>
     [HideInInspector] public int DestPoint = 0;
-    [HideInInspector] public NavMeshAgent Agent;
+    public NavMeshAgent Agent;
     /// <summary>
     /// The item the NPC is wielding.
     /// </summary>
@@ -51,10 +50,6 @@ public class NPCController : MonoBehaviour
     /// </summary>
     public float LevelOfTactics;
     /// <summary>
-    /// The animator for the animations
-    /// </summary>
-    public Animator Anim;
-    /// <summary>
     /// The rigidbody for detecting speed
     /// </summary>
     public Rigidbody Rig;
@@ -81,7 +76,7 @@ public class NPCController : MonoBehaviour
     private void Update()
     {
         StateMachine.Update();
-        Anim.SetFloat("Speed", 10);   
+        
     }
 
     private void OnTriggerStay(Collider other)
