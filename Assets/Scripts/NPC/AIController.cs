@@ -42,11 +42,13 @@ public class AIController : MonoBehaviour
     /// </summary>
     [HideInInspector] public NavMeshHit CurrentNavMesh;
 
+    public Animator anim;
+
     protected void OnEnable()
     {
+        anim = GetComponent<Animator>();
         // Setting up the statemachine
         StateMachine = new StateMachine<AIController>(this);
-        StateMachine.ChangeState(Patrol.Instance);
 
         // Setting up the agent
         NavAgent = GetComponent<NavMeshAgent>();

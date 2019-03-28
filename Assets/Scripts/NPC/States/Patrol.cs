@@ -24,7 +24,9 @@ public class Patrol : State<AIController>
 
     public override void EnterState(AIController owner)
     {
-        
+        owner.DestPoint = Random.Range(0, owner.NavPoints.Count);
+        owner.NavAgent.SetDestination(owner.NavPoints[owner.DestPoint].position);
+      
     }
 
     public override void ExitState(AIController owner)
@@ -44,9 +46,16 @@ public class Patrol : State<AIController>
 
     public override void Update(AIController owner)
     {
+        owner.anim.SetFloat("Speed", 10);
         // Checks if the the npc has reached the target
         if (!owner.NavAgent.pathPending && owner.NavAgent.remainingDistance < 0.5f)
             GotoNextPoint(owner); // Triggers function to set the new waypoint
+
+        //  Vector3.Distance(((AISuspectController)owner).Player.transform.position, owner.transform.position) <= 20
+        if (AttackPlayer.IsPlayerVisible((AISuspectController) owner))
+        {
+            owner.StateMachine.ChangeState(TakeCover.Instance);
+        }
     }
 
     /// <summary>
