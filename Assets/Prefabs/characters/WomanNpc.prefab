@@ -461,7 +461,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 79a7ce1839844d14db7866c3c1ee7959, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -517,15 +517,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NavPoints: []
   DestPoint: 0
-  Agent: {fileID: 6819456484186273413}
+  NavAgent: {fileID: 0}
   Item: {fileID: 0}
   ItemScript: {fileID: 0}
-  Player: {fileID: 0}
   PlayerInSight: 0
   Collider: {fileID: 0}
-  LevelOfAgression: 0
-  LevelOfTactics: 0
-  Rig: {fileID: 220838492565280951}
 --- !u!54 &220838492565280951
 Rigidbody:
   m_ObjectHideFlags: 0
