@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IHitable
 {
@@ -8,9 +9,12 @@ public class Enemy : MonoBehaviour, IHitable
 
     private bool isDead;
 
+    private NavMeshAgent navMeshAgent;
+
     public void Start()
     {
         animator = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public void OnHit(BulletHit bulletHit)
@@ -26,6 +30,14 @@ public class Enemy : MonoBehaviour, IHitable
             break;
 
             case HitboxType.TORSO:
+                break;
+
+            case HitboxType.LEFT_LEG:
+                navMeshAgent.speed = 0.5f;
+                break;
+
+            case HitboxType.RIGHT_LEG:
+                navMeshAgent.speed = 0.5f;
                 break;
         }
 
@@ -53,6 +65,7 @@ public class Enemy : MonoBehaviour, IHitable
     {
         isDead = true;
         animator.SetBool("Death2", true);
+        navMeshAgent.speed = 0f;
     }
 
     //  tmp remove it
@@ -61,5 +74,6 @@ public class Enemy : MonoBehaviour, IHitable
         isDead = false;
         animator.SetBool("Death2", false);
         animator.SetBool("GetUp", true);
+        navMeshAgent.speed = 1.5f;
     }
 }

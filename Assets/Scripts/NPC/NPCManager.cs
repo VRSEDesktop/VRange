@@ -44,14 +44,8 @@ public class NPCManager : MonoBehaviour
 
     private void Start()
     {
-        while (BystanderList.Count < Bystanders)
-        {
-            SpawnBystander();
-        }
-        while (SuspectList.Count < Suspects)
-        {
-            SpawnSuspect();
-        }
+        while (BystanderList.Count < Bystanders)    SpawnBystander();
+        while (SuspectList.Count < Suspects)        SpawnSuspect();
     }
 
     /// <summary>
@@ -63,6 +57,7 @@ public class NPCManager : MonoBehaviour
         GameObject bystander = Instantiate(NPC, BystanderObject.transform);
         bystander.transform.position = SpawnPoints[spawnPoint].position;
         bystander.transform.parent = BystanderObject.transform;
+        bystander.AddComponent<AIController>();
 
         BystanderList.Add(bystander);
     }
@@ -77,6 +72,7 @@ public class NPCManager : MonoBehaviour
         GameObject suspect = Instantiate(NPC, SuspectObject.transform);
         suspect.transform.position = SpawnPoints[spawnPoint].position;
         suspect.transform.parent = SuspectObject.transform;
+        suspect.AddComponent<AISuspectController>();
 
         int weaponindex = Random.Range(0, Weapons.Length);
         Weapon weapon = Instantiate(Weapons[weaponindex], suspect.transform);
@@ -84,9 +80,9 @@ public class NPCManager : MonoBehaviour
         weapon.transform.SetAsFirstSibling();
 
         //Add the gun to the NPC GameObject's script
-        NPCController suspectController = suspect.GetComponent<NPCController>();
+        AISuspectController suspectController = suspect.GetComponent<AISuspectController>();
         suspectController.Item = weapon;
-        suspectController.StateMachine.ChangeState(Patrol.Instance);
+        suspectController.StateMachine.ChangeState(AttackPlayer.Instance);
 
         SuspectList.Add(suspect);
     }
