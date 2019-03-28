@@ -20,7 +20,7 @@ public class NPCManager : MonoBehaviour
     /// </summary>
     public int Suspects;
 
-    private Transform[] SpawnPoints;
+    private List<Transform> SpawnPoints = new List<Transform>();
     private List<GameObject> BystanderList = new List<GameObject>();
     private List<GameObject> SuspectList = new List<GameObject>();
     /// <summary>
@@ -35,7 +35,9 @@ public class NPCManager : MonoBehaviour
     private void Awake()
     {
         BystanderObject = new GameObject("Bystanders");
+        BystanderObject.transform.parent = transform;
         SuspectObject = new GameObject("Suspects");
+        SuspectObject.transform.parent = transform;
 
         UpdateSpawnPoints();
     }
@@ -44,49 +46,56 @@ public class NPCManager : MonoBehaviour
     {
         while (BystanderList.Count < Bystanders)
         {
-            SpawnNPC(Patrol.Instance, false);
+            SpawnBystander();
         }
         while (SuspectList.Count < Suspects)
         {
-            SpawnNPC(AttackPlayer.Instance, true);
+            SpawnSuspect();
         }
     }
 
-    private void SpawnNPC(State<AIController> startingState, bool isSuspect)
+    /// <summary>
+    /// Initialize and spawn a regular NPC
+    /// </summary>
+    private void SpawnBystander()
     {
-        int spawnPoint = Random.Range(0, SpawnPoints.Length);
-        GameObject npc = Instantiate(NPC, isSuspect ? SuspectObject.transform : BystanderObject.transform);
-        npc.transform.position = SpawnPoints[spawnPoint].position;
+        int spawnPoint = Random.Range(0, SpawnPoints.Count);
+        GameObject bystander = Instantiate(NPC, BystanderObject.transform);
+        bystander.transform.position = SpawnPoints[spawnPoint].position;
+        bystander.transform.parent = BystanderObject.transform;
 
-        if(isSuspect)
-        {
-            int weaponindex = Random.Range(0, Weapons.Length);
-            Weapon weapon = Instantiate(Weapons[weaponindex], npc.transform);
-            weapon.transform.parent = npc.transform;
-            weapon.transform.SetAsFirstSibling();
+        BystanderList.Add(bystander);
+    }
 
-            //Add the gun to the NPC GameObject's script
-            AISuspectController npcController = npc.AddComponent<AISuspectController>();
-            npcController.StateMachine.ChangeState(startingState);
-            npcController.Item = weapon;
-            SuspectList.Add(npc);
-        }
-        else
-        {
-            AIController npcController = npc.AddComponent<AIController>();
-            npcController.StateMachine.ChangeState(startingState);
-            BystanderList.Add(npc);
-        }
+    /// <summary>
+    /// Initialize and spawn a suspect
+    /// </summary>
+    private void SpawnSuspect()
+    {
+        int spawnPoint = Random.Range(0, SpawnPoints.Count);
+
+        GameObject suspect = Instantiate(NPC, SuspectObject.transform);
+        suspect.transform.position = SpawnPoints[spawnPoint].position;
+        suspect.transform.parent = SuspectObject.transform;
+
+        int weaponindex = Random.Range(0, Weapons.Length);
+        Weapon weapon = Instantiate(Weapons[weaponindex], suspect.transform);
+        weapon.transform.parent = suspect.transform;
+        weapon.transform.SetAsFirstSibling();
+
+        //Add the gun to the NPC GameObject's script
+        NPCController suspectController = suspect.GetComponent<NPCController>();
+        suspectController.Item = weapon;
+        suspectController.StateMachine.ChangeState(Patrol.Instance);
+
+        SuspectList.Add(suspect);
     }
 
     private void UpdateSpawnPoints()
     {
-        List<Transform> spawnPointList = new List<Transform>();
-        GameObject[] gameObjectArray = GameObject.FindGameObjectsWithTag("Waypoint");
-        for (int i = 0; i <  gameObjectArray.Length; ++i )
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
-            spawnPointList.Add(gameObjectArray[i].transform);
+            SpawnPoints.Add(o.transform);
         }
-        SpawnPoints = spawnPointList.ToArray();
     }
 }

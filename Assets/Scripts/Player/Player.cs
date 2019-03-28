@@ -28,13 +28,13 @@ public class Player : MonoBehaviour, IHitable
 
     public void Update()
     {
-        if (leftHandInput != null && leftHand != null)
+        if (leftHandInput != null)
         {
             leftHand.HandleInput(leftHandInput);
             leftGun.gameObject.SetActive(leftHandInput.IsControllerWorking());
         }
 
-        if (rightHandInput != null && rightHand != null)
+        if (rightHandInput != null)
         {
             rightHand.HandleInput(rightHandInput);
             rightGun.gameObject.SetActive(rightHandInput.IsControllerWorking());

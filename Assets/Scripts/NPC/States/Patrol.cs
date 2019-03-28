@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : State<AIController>
+public class Patrol : State<NPCController>
 {
     private static Patrol _instance;
 
@@ -25,28 +25,29 @@ public class Patrol : State<AIController>
         }
     }
 
-    public override void EnterState(AIController owner)
+    public override void EnterState(NPCController owner)
     {
         
     }
 
-    public override void ExitState(AIController owner)
+    public override void ExitState(NPCController owner)
     {
         
     }
 
-    public override void Update(AIController owner)
+    public override void Update(NPCController owner)
     {
-        if (!owner.NavAgent.pathPending && owner.NavAgent.remainingDistance < 0.5f)
-            GotoNextPoint(owner);
+        // Checks if the the npc has reached the target
+        if (!owner.Agent.pathPending && owner.Agent.remainingDistance < 0.5f)
+            GotoNextPoint(owner); // Triggers function to set the new waypoint
     }
 
-    public override void OnTriggerStay(AIController owner, Collider other)
+    public override void OnTriggerStay(NPCController owner, Collider other)
     {
         
     }
 
-    public override void OnTriggerExit(AIController owner, Collider other)
+    public override void OnTriggerExit(NPCController owner, Collider other)
     {
 
     }
@@ -54,12 +55,14 @@ public class Patrol : State<AIController>
     /// <summary>
     /// Sets destination to a random point.
     /// </summary>
-    private void GotoNextPoint(AIController owner)
+    private void GotoNextPoint(NPCController owner)
     {
+        // Checks if there are waypoints
         if (owner.NavPoints.Count == 0)
             return;
 
-        owner.NavAgent.SetDestination(owner.NavPoints[owner.DestPoint].position);
+        // Setting new target
+        owner.Agent.SetDestination(owner.NavPoints[owner.DestPoint].position);
         owner.DestPoint = Random.Range(0, owner.NavPoints.Count);
     }
 }

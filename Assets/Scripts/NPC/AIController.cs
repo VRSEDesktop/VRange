@@ -2,8 +2,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class AIController : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(CapsuleCollider))]
+public class NPCController : MonoBehaviour
 {
     /// <summary>
     /// List of Navigation points tagged in the editor with "Waypoint".
@@ -13,15 +13,23 @@ public class AIController : MonoBehaviour
     /// Index of the current destination in NavPoints.
     /// </summary>
     [HideInInspector] public int DestPoint = 0;
-    [HideInInspector] public NavMeshAgent NavAgent;
+    [HideInInspector] public NavMeshAgent Agent;
     /// <summary>
     /// The item the NPC is wielding.
     /// </summary>
     [HideInInspector] public Weapon Item;
     /// <summary>
+    /// The script for the item the NPC is wielding.
+    /// </summary>
+    [HideInInspector] public MonoBehaviour ItemScript;
+    /// <summary>
     /// The class that manages the NPC's behaviour state.
     /// </summary>
-    [HideInInspector] public StateMachine<AIController> StateMachine;
+    [HideInInspector] public StateMachine<NPCController> StateMachine;
+    /// <summary>
+    /// Access to the Player GameObject
+    /// </summary>
+    [HideInInspector] public GameObject Player;
     /// <summary>
     /// Readonly value for NPCs FOV.
     /// </summary>
@@ -35,26 +43,45 @@ public class AIController : MonoBehaviour
     /// </summary>
     [HideInInspector] public CapsuleCollider Collider;
     /// <summary>
-    /// The current NavMesh the NPC is walking on. Only used in a State.
+    /// The level of agression.
     /// </summary>
-    [HideInInspector] public NavMeshHit CurrentNavMesh;
+    public float LevelOfAgression;
+    /// <summary>
+    /// The strategic competence of the NPC.
+    /// </summary>
+    public float LevelOfTactics;
+    /// <summary>
+    /// The animator for the animations
+    /// </summary>
+    public Animator Anim;
+    /// <summary>
+    /// The rigidbody for detecting speed
+    /// </summary>
+    public Rigidbody Rig;
 
-    protected void OnEnable()
+    private void OnEnable()
     {
-        StateMachine = new StateMachine<AIController>(this);
+        // Setting up the statemachine
+        StateMachine = new StateMachine<NPCController>(this);
+        StateMachine.ChangeState(Patrol.Instance);
 
-        NavAgent = GetComponent<NavMeshAgent>();
-        NavAgent.autoBraking = false;
+        // Setting up the agent
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.autoBraking = false;
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
             NavPoints.Add(o.transform);
         }
+
+        LevelOfAgression = Random.Range(0, 100);
+        LevelOfTactics = Random.Range(0, 100);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         StateMachine.Update();
+        Anim.SetFloat("Speed", 100);   
     }
 
     private void OnTriggerStay(Collider other)
