@@ -9,7 +9,6 @@ public class AIController : MonoBehaviour
     /// List of Navigation points tagged in the editor with "Waypoint".
     /// </summary>
     [HideInInspector] public List<Transform> NavPoints = new List<Transform>();
-    /// <summary>
     /// Index of the current destination in NavPoints.
     /// </summary>
     [HideInInspector] public int DestPoint = 0;
@@ -61,7 +60,7 @@ public class AIController : MonoBehaviour
 
     private void Update()
     {
-        StateMachine.Update(); 
+        StateMachine.Update();
     }
 
     private void OnTriggerStay(Collider other)
