@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(CapsuleCollider))]
-public class NPCController : MonoBehaviour
+public class AIController : MonoBehaviour
 {
     /// <summary>
     /// List of Navigation points tagged in the editor with "Waypoint".
@@ -13,7 +13,7 @@ public class NPCController : MonoBehaviour
     /// Index of the current destination in NavPoints.
     /// </summary>
     [HideInInspector] public int DestPoint = 0;
-    [HideInInspector] public NavMeshAgent Agent;
+    [HideInInspector] public NavMeshAgent NavAgent;
     /// <summary>
     /// The item the NPC is wielding.
     /// </summary>
@@ -25,11 +25,7 @@ public class NPCController : MonoBehaviour
     /// <summary>
     /// The class that manages the NPC's behaviour state.
     /// </summary>
-    [HideInInspector] public StateMachine<NPCController> StateMachine;
-    /// <summary>
-    /// Access to the Player GameObject
-    /// </summary>
-    [HideInInspector] public GameObject Player;
+    [HideInInspector] public StateMachine<AIController> StateMachine;
     /// <summary>
     /// Readonly value for NPCs FOV.
     /// </summary>
@@ -43,45 +39,29 @@ public class NPCController : MonoBehaviour
     /// </summary>
     [HideInInspector] public CapsuleCollider Collider;
     /// <summary>
-    /// The level of agression.
+    /// The current NavMesh the NPC is walking on. Only used in a State.
     /// </summary>
-    public float LevelOfAgression;
-    /// <summary>
-    /// The strategic competence of the NPC.
-    /// </summary>
-    public float LevelOfTactics;
-    /// <summary>
-    /// The animator for the animations
-    /// </summary>
-    public Animator Anim;
-    /// <summary>
-    /// The rigidbody for detecting speed
-    /// </summary>
-    public Rigidbody Rig;
+    [HideInInspector] public NavMeshHit CurrentNavMesh;
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         // Setting up the statemachine
-        StateMachine = new StateMachine<NPCController>(this);
+        StateMachine = new StateMachine<AIController>(this);
         StateMachine.ChangeState(Patrol.Instance);
 
         // Setting up the agent
-        Agent = GetComponent<NavMeshAgent>();
-        Agent.autoBraking = false;
+        NavAgent = GetComponent<NavMeshAgent>();
+        NavAgent.autoBraking = false;
 
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
             NavPoints.Add(o.transform);
         }
-
-        LevelOfAgression = Random.Range(0, 100);
-        LevelOfTactics = Random.Range(0, 100);
     }
 
     private void Update()
     {
-        StateMachine.Update();
-        Anim.SetFloat("Speed", 100);   
+        StateMachine.Update(); 
     }
 
     private void OnTriggerStay(Collider other)

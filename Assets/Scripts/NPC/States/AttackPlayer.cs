@@ -47,6 +47,8 @@ public class AttackPlayer : State<AIController>
         owner2.NavAgent.CalculatePath(destination, path);
         if(path.status == NavMeshPathStatus.PathInvalid) // try other destination if this is invalid
         {
+            int tries = 0;
+            const int maxTries = 10;
             do
             {
                 // check random positions around player
@@ -55,8 +57,9 @@ public class AttackPlayer : State<AIController>
                                 Random.Range(-targetDistanceToPlayer, targetDistanceToPlayer));
                 destination += playerPos;
                 owner2.NavAgent.CalculatePath(destination, path);
+                tries++;
             }
-            while (path.status == NavMeshPathStatus.PathInvalid);
+            while (path.status == NavMeshPathStatus.PathInvalid && tries <= maxTries);
         }
 
         //owner2.NavAgent.SetDestination(destination);
