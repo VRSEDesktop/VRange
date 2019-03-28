@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Enumeration for decisionmaking.
 /// </summary>
 public enum DecisionStatus
@@ -18,5 +13,5 @@ public enum DecisionStatus
 /// </summary>
 public abstract class Decision
 {
-    public abstract bool Decide(NPCController owner);
+    public abstract bool Decide(AIController owner);
 }

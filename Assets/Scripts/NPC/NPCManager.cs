@@ -52,14 +52,12 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    private void SpawnNPC(State<NPCController> startingState, bool isSuspect)
+    private void SpawnNPC(State<AIController> startingState, bool isSuspect)
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Length);
         GameObject npc = Instantiate(NPC, isSuspect ? SuspectObject.transform : BystanderObject.transform);
         npc.transform.position = SpawnPoints[spawnPoint].position;
 
-        NPCController npcController = npc.GetComponent<NPCController>();
-        npcController.StateMachine.ChangeState(startingState);
         if(isSuspect)
         {
             int weaponindex = Random.Range(0, Weapons.Length);
@@ -68,11 +66,15 @@ public class NPCManager : MonoBehaviour
             weapon.transform.SetAsFirstSibling();
 
             //Add the gun to the NPC GameObject's script
+            AISuspectController npcController = npc.AddComponent<AISuspectController>();
+            npcController.StateMachine.ChangeState(startingState);
             npcController.Item = weapon;
             SuspectList.Add(npc);
         }
         else
         {
+            AIController npcController = npc.AddComponent<AIController>();
+            npcController.StateMachine.ChangeState(startingState);
             BystanderList.Add(npc);
         }
     }
