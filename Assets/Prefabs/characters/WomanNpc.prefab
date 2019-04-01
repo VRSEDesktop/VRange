@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 220838492564981072}
   - component: {fileID: 220838492576846850}
   m_Layer: 0
-  m_Name: woman2Mesh
+  m_Name: skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,7 +476,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.47
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -497,7 +497,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 220838492565280950}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 220838492564981032}
   - component: {fileID: 220838492576846852}
   m_Layer: 0
-  m_Name: female_casualsuit01Mesh
+  m_Name: cloths
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1122,7 +1122,7 @@ GameObject:
   - component: {fileID: 220838492564981054}
   - component: {fileID: 220838492576846854}
   m_Layer: 0
-  m_Name: high-polyMesh
+  m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1886,7 +1886,7 @@ GameObject:
   - component: {fileID: 220838492564981004}
   - component: {fileID: 220838492576846848}
   m_Layer: 0
-  m_Name: long01Mesh
+  m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

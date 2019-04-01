@@ -17,16 +17,16 @@ public class Enemy : MonoBehaviour, IHitable
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void OnHit(BulletHit bulletHit)
+    public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
-        HitboxType partHit = GetHitboxTypeFromHit(bulletHit);
+        HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
 
         switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HEAD:
 
-                if (!isDead) Die();
-                else Revive();
+                //if (!isDead) Die();
+                //else Revive();
             break;
 
             case HitboxType.TORSO:
@@ -34,16 +34,19 @@ public class Enemy : MonoBehaviour, IHitable
 
             case HitboxType.LEFT_LEG:
                 navMeshAgent.speed = 0.5f;
+                animator.SetBool("Limbing", true);
                 break;
 
             case HitboxType.RIGHT_LEG:
                 navMeshAgent.speed = 0.5f;
+                animator.SetBool("Limbing", true);
                 break;
         }
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
-        Scenario.logs.Add(new LoggedHit(this, partHit, bulletHit));
+        Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
+        return HitType.RIGHT;
     }
 
     /// <summary>
@@ -51,11 +54,11 @@ public class Enemy : MonoBehaviour, IHitable
     /// </summary>
     /// <param name="bulletHit"></param>
     /// <returns></returns>
-    private HitboxType GetHitboxTypeFromHit(BulletHit bulletHit)
+    private HitboxType GetHitboxTypeFromHit(RaycastHit raycastHit)
     {
         foreach (Hitbox hitbox in hitboxes)
         {
-            if (hitbox.mesh == bulletHit.RaycastHit.collider) return hitbox.type;
+            if (hitbox.mesh == raycastHit.collider) return hitbox.type;
         }
 
         return HitboxType.HEAD;

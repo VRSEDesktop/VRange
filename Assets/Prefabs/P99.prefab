@@ -474,7 +474,6 @@ GameObject:
   - component: {fileID: 4226328758665501785}
   - component: {fileID: 2246788448544925822}
   - component: {fileID: 5858937369385156984}
-  - component: {fileID: 741624046002583097}
   - component: {fileID: 6244595763532074314}
   m_Layer: 0
   m_Name: P99
@@ -718,18 +717,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &741624046002583097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4226328758674993041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f57c72d2f12d34ea416003b68a1a69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6244595763532074314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,9 +729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c8a112d13248b4cbb57dd342836eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
+  drawLines: 0
   magCapacity: 15
-  shotsFired: 0
   shotSound: {fileID: 5858937369385156984}
   triggerSound: {fileID: 2246788448544925822}
   anim: {fileID: 4226328758665501785}

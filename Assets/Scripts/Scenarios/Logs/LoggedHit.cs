@@ -1,12 +1,16 @@
-﻿public class LoggedHit : ScenarioLog
+﻿using UnityEngine;
+
+public class LoggedHit : ScenarioLog
 {
     public readonly IHitable target;
     public readonly HitboxType part;
-    public readonly BulletHit bulletHit;
+    public readonly Gun gun;
+    public readonly RaycastHit raycastHit;
 
-    public LoggedHit(IHitable target, HitboxType part, BulletHit bulletHit) : base()
+    public LoggedHit(IHitable target, HitboxType part, Gun gun, RaycastHit raycastHit) : base()
     {
-        this.bulletHit = bulletHit;
+        this.gun = gun;
+        this.raycastHit = raycastHit;
         this.target = target;
         this.part = part;
     }

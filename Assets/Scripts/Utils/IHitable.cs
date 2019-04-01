@@ -2,7 +2,7 @@
 
 public interface IHitable
 {
-    void OnHit(BulletHit bulletHit);
+    HitType OnHit(Gun gun, RaycastHit raycastHit);
 }
 
 [System.Serializable]

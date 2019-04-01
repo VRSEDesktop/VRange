@@ -59,6 +59,10 @@ public class NPCManager : MonoBehaviour
         bystander.transform.parent = BystanderObject.transform;
         bystander.AddComponent<AIController>();
 
+        //Add the gun to the NPC GameObject's script
+        AIController suspectController = bystander.GetComponent<AIController>();
+        suspectController.StateMachine.ChangeState(Patrol.Instance);
+
         BystanderList.Add(bystander);
     }
 

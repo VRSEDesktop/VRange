@@ -9,17 +9,8 @@ public class Player : MonoBehaviour, IHitable
     public float playerHeight = 1.8f;
     public static Player Instance { get; private set; }
 
-    public VR_Controller leftHandInput, rightHandInput;
-    public Gun leftGun, rightGun;
-    private GunInterface leftHand, rightHand;
-
+    public VR_Controller leftHand, rightHand;
     public Hitbox hitbox;
-
-    private void Start()
-    {
-        if (leftGun != null) leftHand = new GunInterface(leftGun);
-        if (rightGun != null) rightHand = new GunInterface(rightGun);
-    }
 
     private void Awake()
     {
@@ -28,29 +19,21 @@ public class Player : MonoBehaviour, IHitable
 
     public void Update()
     {
-        if (leftHandInput != null)
-        {
-            leftHand.HandleInput(leftHandInput);
-            leftGun.gameObject.SetActive(leftHandInput.IsControllerWorking());
-        }
-
-        if (rightHandInput != null)
-        {
-            rightHand.HandleInput(rightHandInput);
-            rightGun.gameObject.SetActive(rightHandInput.IsControllerWorking());
-        }
+        if(leftHand != null)  leftHand.GetComponent<HandController>().HandleInput();
+        if(rightHand != null) rightHand.GetComponent<HandController>().HandleInput();       
     }
 
-    public void OnHit(BulletHit bulletHit)
+    public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
-        Debug.Log("PLAYER WAS SHOT");
+        Debug.Log("PLAYER WAS KILLED BY ENEMY");
+        return HitType.UNWANTED;
     }
 
     void OnGUI()
     {
         IList<LoggedHit> hits = Scenario.GetHits();
 
-        GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (Scenario.GetShotsFromGun(leftGun).Count + Scenario.GetShotsFromGun(rightGun).Count));
+        //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (Scenario.GetShotsFromGun(leftGun).Count + Scenario.GetShotsFromGun(rightGun).Count));
 
         for (int i = 0; i < hits.Count; i++)
         {

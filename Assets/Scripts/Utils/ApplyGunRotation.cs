@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class ApplyGunRotation : MonoBehaviour
+public class ApplyGunRotation : MonoBehaviour
 {
     public Gun gun;
     public bool normalGun = false;

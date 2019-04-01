@@ -4,30 +4,28 @@ public class ShootingTarget : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
 
-    public void OnHit(BulletHit bulletHit)
+    public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
-        HitboxType partHit = GetHitboxTypeFromHit(bulletHit);
-
-        switch(partHit)
-        {
-            case HitboxType.HEAD: break;
-
-            case HitboxType.LEFT_ARM: break;
-            case HitboxType.LEFT_HAND: break;
-            case HitboxType.LEFT_LEG: break;
-            case HitboxType.RIGHT_ARM: break;
-            case HitboxType.RIGHT_HAND: break;
-            case HitboxType.RIGHT_LEG: break;
-
-            case HitboxType.TORSO_7:  break;
-            case HitboxType.TORSO_8: break;
-            case HitboxType.TORSO_9: break;
-            case HitboxType.TORSO_10: break;
-        }
+        HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
 
         Debug.Log("ShootingTarrget::OnHit() " + partHit.ToString());
+        Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
 
-        Scenario.logs.Add(new LoggedHit(this, partHit, bulletHit));
+        switch (partHit)
+        {
+            case HitboxType.HEAD:
+            case HitboxType.LEFT_ARM:
+            case HitboxType.LEFT_HAND:
+            case HitboxType.LEFT_LEG:
+            case HitboxType.RIGHT_ARM:
+            case HitboxType.RIGHT_HAND:
+            case HitboxType.RIGHT_LEG:
+            case HitboxType.TORSO_7:
+            case HitboxType.TORSO_8:
+            case HitboxType.TORSO_9:
+            case HitboxType.TORSO_10: return HitType.RIGHT;
+            default: return HitType.MISS;
+        }
     }
 
     /// <summary>
@@ -35,11 +33,11 @@ public class ShootingTarget : MonoBehaviour, IHitable
     /// </summary>
     /// <param name="bulletHit"></param>
     /// <returns></returns>
-    private HitboxType GetHitboxTypeFromHit(BulletHit bulletHit)
+    private HitboxType GetHitboxTypeFromHit(RaycastHit raycastHit)
     {
         foreach (Hitbox hitbox in hitboxes)
         {
-            if (hitbox.mesh == bulletHit.RaycastHit.collider) return hitbox.type;
+            if (hitbox.mesh == raycastHit.collider) return hitbox.type;
         }
 
         return HitboxType.HEAD;

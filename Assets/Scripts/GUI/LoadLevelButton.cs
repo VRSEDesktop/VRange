@@ -14,9 +14,11 @@ public class LoadLevelButton : MonoBehaviour, IHitable
         GetComponentInChildren<TextMeshPro>().text = text;
     }
 
-    public void OnHit(BulletHit bulletHit)
+    public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         levelLoader.levelName = levelName;
         levelLoader.Trigger();
+
+        return HitType.RIGHT;
     }
 }

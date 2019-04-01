@@ -14,3 +14,11 @@ public class BulletHit : MonoBehaviour
         RaycastHit = raycastHit;
     }
 }
+
+/// <summary>
+/// Enums for the feedback, right for proper hit in the suspect, unwanted for civilians etc.
+/// </summary>
+public enum HitType
+{
+    MISS, UNWANTED, RIGHT 
+}

@@ -5,7 +5,7 @@ public class Gun : Weapon, IReloadable
     /// <summary>
     /// Used for drawing bullet's path
     /// </summary>
-    public bool debugMode;
+    public bool drawLines;
 
     public int magCapacity;
     private int currentAmmo;
@@ -55,21 +55,46 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     private void DetectHit()
     {
-        if (debugMode) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+        bool hasHit = Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit);
 
-        if (Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit))
+        if (hasHit)
         {
             Debug.Log("Gun::DetecHit() " + hit.collider.name);
 
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
-            target?.OnHit(new BulletHit(this, hit));
-        }           
+            if(target == null)
+            {
+                CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                return;
+            }
+            HitType type = target.OnHit(this, hit);
+
+            if (drawLines)
+            {
+               switch(type)
+                {
+                    case HitType.MISS:
+                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                        break;
+                    case HitType.RIGHT:
+                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.green);
+                        break;
+                    case HitType.UNWANTED:
+                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                        break;
+                }
+            }
+        }      
+        else
+        {
+            if(drawLines) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+        }
     }
 
     /// <summary>
     /// Debug function for drawing the bullet trajectory
     /// </summary>
-    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 60f)
+    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 15f)
     {
         GameObject shotsContainer = GameObject.Find("ShotsRays");
         if (shotsContainer == null) shotsContainer = new GameObject("ShotsRays");
@@ -87,6 +112,7 @@ public class Gun : Weapon, IReloadable
         obj.GetComponent<MeshRenderer>().material.color = color;
         obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         obj.SetActive(true);
+        obj.GetComponent<Collider>().enabled = false;
 
         Destroy(obj, duration);
     }
