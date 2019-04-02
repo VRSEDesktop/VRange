@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ShootingTarget : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
+    public Animation anim;
 
+    public void Start()
+    {
+       
+    }
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
@@ -42,4 +48,6 @@ public class ShootingTarget : MonoBehaviour, IHitable
 
         return HitboxType.HEAD;
     }
+
+    
 }

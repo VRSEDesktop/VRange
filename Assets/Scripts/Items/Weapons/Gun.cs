@@ -6,6 +6,7 @@ public class Gun : Weapon, IReloadable
     /// Used for drawing bullet's path
     /// </summary>
     public bool drawLines;
+    public bool isShooting;
 
     public int magCapacity;
     private int currentAmmo;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Saves data relevant to the player.
@@ -10,8 +11,12 @@ public class Player : MonoBehaviour, IHitable
     public static Player Instance { get; private set; }
 
     public VR_Controller leftHand, rightHand;
+    public Gun lefGun, rightGun;
+
     public Hitbox hitbox;
 
+    public Text textLabel;
+    
     private void Awake()
     {
         Instance = this;
