@@ -11,6 +11,8 @@ public class Exercise : MonoBehaviour
 
     public bool HasSettedGUI { get; set; }
 
+    public static int State { get; set; }
+
     public void Initialize()
     {
         rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponent<Gun>();
