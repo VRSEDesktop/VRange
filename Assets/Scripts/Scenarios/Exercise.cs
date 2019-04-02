@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Exercise : MonoBehaviour
@@ -11,12 +10,6 @@ public class Exercise : MonoBehaviour
     public IList<LoggedHit> hits;
 
     public bool HasSettedGUI { get; set; }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void UpdateGUI()
     {
