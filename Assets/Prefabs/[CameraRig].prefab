@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1667024173140747117}
   - component: {fileID: 28980224761581496}
   - component: {fileID: 7414896544271718117}
+  - component: {fileID: 54540540683259106}
   m_Layer: 0
   m_Name: '[CameraRig]'
   m_TagString: Untagged
@@ -108,6 +109,45 @@ MonoBehaviour:
   - {x: -1.65, y: 0.01, z: -1.275}
   - {x: -1.65, y: 0.01, z: 1.275}
   - {x: 1.65, y: 0.01, z: 1.275}
+--- !u!114 &54540540683259106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154005686878843516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a6a70209b6e6345bfe18b02314a54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
+  internalProcessPath: 
+  internalProcessArgs: 
+  loadAdditive: 0
+  loadAsync: 1
+  loadingScreen: {fileID: 0}
+  progressBarEmpty: {fileID: 0}
+  progressBarFull: {fileID: 0}
+  loadingScreenWidthInMeters: 6
+  progressBarWidthInMeters: 3
+  loadingScreenDistance: 0
+  loadingScreenTransform: {fileID: 0}
+  progressBarTransform: {fileID: 0}
+  front: {fileID: 0}
+  back: {fileID: 0}
+  left: {fileID: 0}
+  right: {fileID: 0}
+  top: {fileID: 0}
+  bottom: {fileID: 0}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  showGrid: 0
+  fadeOutTime: 0.5
+  fadeInTime: 0.5
+  postLoadSettleTime: 0
+  loadingScreenFadeInTime: 1
+  loadingScreenFadeOutTime: 0.25
+  autoTriggerOnEnable: 0
 --- !u!1 &3525631720226850804
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,9 +653,12 @@ MonoBehaviour:
   playerHeight: 1.8
   leftHand: {fileID: 6658489301664320898}
   rightHand: {fileID: 6733100916155965107}
+  lefGun: {fileID: 0}
+  rightGun: {fileID: 0}
   hitbox:
     mesh: {fileID: 0}
     type: 0
+  textLabel: {fileID: 0}
 --- !u!1001 &7924034549069604701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -627,11 +670,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P99
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
-        type: 3}
-      propertyPath: drawLines
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4226328758674568113, guid: 906e0b8fdce42b941b51d3f9090bd648,
         type: 3}
@@ -687,6 +725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
+        type: 3}
+      propertyPath: drawLines
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
@@ -720,11 +763,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: P99
       objectReference: {fileID: 0}
-    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
-        type: 3}
-      propertyPath: drawLines
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4226328758674568113, guid: 906e0b8fdce42b941b51d3f9090bd648,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -779,6 +817,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
+        type: 3}
+      propertyPath: drawLines
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}

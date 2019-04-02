@@ -33,12 +33,12 @@ public class Enemy : MonoBehaviour, IHitable
                 break;
 
             case HitboxType.LEFT_LEG:
-                navMeshAgent.speed = 0.5f;
+                if(navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
                 break;
 
             case HitboxType.RIGHT_LEG:
-                navMeshAgent.speed = 0.5f;
+                if(navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
                 break;
         }
