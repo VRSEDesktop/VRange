@@ -1,0 +1,50 @@
+
+Modified Lab Renderer --- Recommended Unity 2017.2.0 or above.
+ 
+
+Added new methods of light transport to help add to realism.
+
+Some new features:
+
+-Fluorescence (Also including UV light from light Alpha)
+-Retroreflective (Great for reflectors)
+-Proper edge highlight falloff Scaler (cubemap scaler is hacky)
+-Light Hardness (Lambert wrap)
+-Colored Light Cookie Support - Put all cookies into an array
+-PCSS shadow support (wip)
+-Transparent falloff (looks good in VR)
+-Transparency Shadows
+-AlphaToCoverage on cutout materials (Better anti-aliasing on cutout edges)
+-Falloff option for emissive materials
+-Tinting Color mask
+-Primitive based AO
+-Light probe proxy group support
+-BRDF LUT Map (faux SSS, iridescence)
+-Anisotropic Specular (Adding texture support ATM)
+-GPU Instancing
+-Depth Offsetting (Good for decals and reducing z-fighting)
+-Detail map blending modes
+-Normal to Occlusion
+-Texture Packing
+-Shadow casting control per material
+-Parallax Map with multiple iterations
+-Smoothness Scaler
+
+-------
+OG Text
+
+The Lab Renderer
+
+Valve’s VR renderer used in The Lab (Valve’s VR launch title for the HTC Vive). 
+
+This is the set of scripts and shaders that drove rendering in The Lab. It is a forward renderer with support for up to 18 dynamic shadowing lights in a single pass with MSAA enabled, and it included the Adaptive Quality system that dynamically adjusts rendering resolution to maintain framerate in VR. 
+
+Requires Unity 5.4.b15 or newer.
+
+More information:
+http://steamcommunity.com/games/250820/announcements/detail/604985915045842668
+
+
+
+
+
