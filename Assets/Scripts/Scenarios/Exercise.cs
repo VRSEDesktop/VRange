@@ -11,6 +11,12 @@ public class Exercise : MonoBehaviour
 
     public bool HasSettedGUI { get; set; }
 
+    public void Initialize()
+    {
+        rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponent<Gun>();
+        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponent<TextMesh>();
+
+    }
     public void UpdateGUI()
     {
         if (!rightGun.HasAmmo())
