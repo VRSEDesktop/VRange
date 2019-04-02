@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Exercise1 : Exercise
+public class Exercise2 : Exercise
 {
     public Animation anim;
 
     void Start()
     {
         StartCoroutine(TurningCardBoard());
+        Initialize();
     }
 
     void Update()
