@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class Exercise2 : Exercise
 {
-    public Animation anim;
+    public Animation flipAnimation;
+    /// <summary>
+    /// Time in seconds after which the cardboard with shooting target will filp
+    /// </summary>
+    public float timeToFlipCardboard = 5f;
 
     void Start()
     {
@@ -16,9 +20,9 @@ public class Exercise2 : Exercise
         UpdateGUI();
     }
 
-    IEnumerator TurningCardBoard()
+    private IEnumerator TurningCardBoard()
     {
-        yield return new WaitForSeconds(5f);
-        anim.Play();
+        yield return new WaitForSeconds(timeToFlipCardboard);
+        flipAnimation.Play();
     }
 }

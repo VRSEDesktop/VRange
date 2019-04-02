@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Exercise : MonoBehaviour
 {
     public Gun rightGun;
 
     public TextMesh text;
-
-    public IList<LoggedHit> hits;
 
     public bool HasSettedGUI { get; set; }
 
@@ -33,12 +30,11 @@ public class Exercise : MonoBehaviour
         }
     }
 
-    public void DisplayStats()
+    private void DisplayStats()
     {
-        hits = Scenario.GetHits();
         text.text = "Shooting State:";
 
-        foreach (var hit in hits)
+        foreach (var hit in Scenario.GetHits())
         {
             text.text += "\n" + hit.part.ToString();
         }
