@@ -2,45 +2,28 @@
 
 public class Exercise : MonoBehaviour
 {
-    public Gun rightGun;
+    /// <summary>
+    /// States of the excersises
+    /// </summary>
+    public static ExcersiseState[] states;
+    private static int currentState = 0;
 
-    public TextMesh text;
-
-    public bool HasSettedGUI { get; set; }
-
-    public static int State { get; set; }
-
-    public void Initialize()
-    {
-        rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponent<Gun>();
-        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponent<TextMesh>();
-
-    }
-    public void UpdateGUI()
-    {
-        if (!rightGun.HasAmmo())
-        {
-            if (!HasSettedGUI)
-            {
-                DisplayStats();
-                Scenario.Clear();
-            }
-        }
-        else
-        {
-            HasSettedGUI = false;
-        }
+    public void Update()
+    {      
+        states[currentState].OnUpdate();
     }
 
-    private void DisplayStats()
+    public static void PreviousStep()
     {
-        text.text = "Shooting State:";
+        states[currentState].OnExit();
+        currentState--;
+        states[currentState].OnStart();
+    }
 
-        foreach (var hit in Scenario.GetHits())
-        {
-            text.text += "\n" + hit.part.ToString();
-        }
-
-        HasSettedGUI = true;
+    public static void NextStep()
+    {
+        states[currentState].OnExit();
+        currentState++;
+        states[currentState].OnStart();
     }
 }
