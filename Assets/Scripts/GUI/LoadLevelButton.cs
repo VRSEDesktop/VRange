@@ -16,6 +16,8 @@ public class LoadLevelButton : MonoBehaviour, IHitable
 
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
+        Scenario.Clear();
+
         levelLoader.levelName = levelName;
         levelLoader.Trigger();
 

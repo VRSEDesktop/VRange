@@ -27,4 +27,9 @@ public class Scenario : MonoBehaviour
 
         return shots;
     }
+
+    public static void Clear()
+    {
+        logs.Clear();
+    }
 }

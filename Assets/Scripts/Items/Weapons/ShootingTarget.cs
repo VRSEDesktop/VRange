@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShootingTarget : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
-    public Animation anim;
+    
 
     public void Start()
     {
