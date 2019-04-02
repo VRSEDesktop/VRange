@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 1431189617}
   - component: {fileID: 1431189621}
   - component: {fileID: 329714829008645073}
+  - component: {fileID: 3671897323703829610}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -659,6 +660,37 @@ MonoBehaviour:
     mesh: {fileID: 0}
     type: 0
   textLabel: {fileID: 0}
+--- !u!114 &3671897323703829610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998585770778958936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c5acf727c4d5d43bc69e892a516630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_valveShadowTextureWidth: 4096
+  m_valveShadowTextureHeight: 4096
+  EnableCookies: 1
+  m_renderShadowsInLateUpdate: 0
+  ShadowType: 1
+  PenumbraSize: 1.5
+  ShadowBias: 0.001
+  ShadowSamples: 25
+  m_aoEnabled: 1
+  m_indirectLightmapsOnly: 0
+  m_adaptiveQualityEnabled: 1
+  m_adaptiveQualityDebugVis: 0
+  m_MSAALevel: 4
+  m_minRenderTargetScale: 0.65
+  m_maVRenderTargetScale: 2
+  m_maVRenderTargetDimension: 4096
+  m_cullLightsInSceneEditor: 0
+  m_cullLightsFromEditorCamera: 0
+  m_hideAllValveMaterials: 0
 --- !u!1001 &7924034549069604701
 PrefabInstance:
   m_ObjectHideFlags: 0

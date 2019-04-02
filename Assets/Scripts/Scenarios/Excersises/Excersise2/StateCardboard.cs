@@ -19,15 +19,15 @@ public class StateCardboard : ExcersiseState
     {
         base.OnStart();
 
-        rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponent<Gun>();
-        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponent<TextMesh>();
+        rightGun = GameObject.Find("[CameraRig]").GetComponentInChildren<Gun>();
+        text = GameObject.Find("GUI").GetComponentInChildren<TextMesh>();
 
         StartCoroutine(TurningCardBoard());
     }
 
     public override void OnUpdate()
     {
-        UpdateGUI();
+        //UpdateGUI();
     }
 
     public override void OnExit()
