@@ -31,4 +31,9 @@ public class Exercise : MonoBehaviour
         currentState++;
         states[currentState].OnStart();
     }
+
+    public void Restart()
+    {
+        states[currentState].OnStart();
+    }
 }

@@ -7,9 +7,9 @@ public class StateCardboard : ExcersiseState
     /// <summary>
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
-    public float timeToFlipCardboard = 5f;
+    public float timeToStart = 5f;
 
-    
+    private float maxTime = 15f;
 
     public override void OnStart()
     {
@@ -30,7 +30,7 @@ public class StateCardboard : ExcersiseState
 
     private IEnumerator TurningCardBoard()
     {
-        yield return new WaitForSeconds(timeToFlipCardboard);
+        yield return new WaitForSeconds(timeToStart);
         flipAnimation.Play();
     }
 

@@ -31,36 +31,31 @@ public class StateModel : ExcersiseState
     {
         System.Random random = new System.Random();
 
-        waitTime = (float)random.Next(2, 5);
+        waitTime = random.Next(2, 5);
 
-        switch(random.Next(1, 2))
-        {
-            case 1:
-                StartCoroutine(PullGun());
-                break;
-            case 2:
-                StartCoroutine(PullPhone());
-                break;
-        }      
+        PullItem(random.Next(1, 2));    
     }
 
     /// <summary>
     /// Triggers the pullgun animation
     /// </summary>
     /// <returns></returns>
-    private IEnumerator PullGun()
+    private IEnumerator PullItem(int num)
     {
         yield return new WaitForSeconds(waitTime);
-        anim.Play("Equip Pistol");
+        switch (num)
+        {
+            case 1:
+                anim.Play("Equip Pistol");
+                break;
+            case 2:
+                anim.Play("Equip Phone");
+                break;
+            case 3:
+                anim.Play("Equip Phone");
+                break;
+        }
+        
     }
 
-    /// <summary>
-    /// triggers the pullphone animation
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator PullPhone()
-    {
-        yield return new WaitForSeconds(waitTime);
-        anim.Play("Equip Phone");
-    }
 }

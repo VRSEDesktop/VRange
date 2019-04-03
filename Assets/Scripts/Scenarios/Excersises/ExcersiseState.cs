@@ -8,6 +8,8 @@ public abstract class ExcersiseState : MonoBehaviour
     public TextMesh text;
     public bool HasSettedGUI { get; set; }
 
+    private float startTime;
+
     public virtual void OnStart()
     {
         Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -18,6 +20,8 @@ public abstract class ExcersiseState : MonoBehaviour
 
         rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponentInChildren<Gun>();
         text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponentInChildren<TextMesh>();
+
+        startTime = Time.realtimeSinceStartup;
     }
 
     public abstract void OnUpdate();
@@ -52,7 +56,9 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     private void DisplayStats()
     {
-        text.text = "Shooting State:";
+        float time = Time.realtimeSinceStartup - startTime;
+        text.text = "Time: " + time;
+        text.text += "\nShooting State:";
 
         foreach (var hit in Scenario.GetHits())
         {

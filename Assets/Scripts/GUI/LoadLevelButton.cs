@@ -16,7 +16,7 @@ public class LoadLevelButton : MonoBehaviour, ISightActivable
 
     public void Draw()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void Activate()

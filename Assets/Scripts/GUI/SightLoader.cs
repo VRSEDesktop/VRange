@@ -4,7 +4,7 @@ public class SightLoader : MonoBehaviour
 {
     private static int layer;
     private static readonly int maxRange = 50;
-    private static readonly float timeToLoad = 3f;
+    private static readonly float timeToLoad = 2f;
 
     /// <summary>
     /// Object which was in sight line in the last frame
@@ -15,6 +15,7 @@ public class SightLoader : MonoBehaviour
     /// Time player is looking at specific UI object
     /// </summary>
     private float timer = 0;
+    private bool activated = false;
 
     public void Start()
     {
@@ -23,26 +24,37 @@ public class SightLoader : MonoBehaviour
 
     public void Update()
     {
-        bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxRange, layer);
-
-        if (hasHit && hit.collider.gameObject.GetComponent<ISightActivable>() != null)
+        bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxRange);
+        if (hasHit)
         {
-            ISightActivable uiElement = hit.collider.gameObject.GetComponent<ISightActivable>();
+            if (hit.collider.gameObject.GetComponent<ISightActivable>() != null)
+            {
+                ISightActivable uiElement = hit.collider.gameObject.GetComponent<ISightActivable>();
 
-            Debug.Log(hit.collider.transform.name);
+                if (hit.collider.gameObject.Equals(lastObject)) timer += Time.deltaTime;
+                else timer = 0;
 
-            if (lastObject.Equals(hit.collider.gameObject)) timer += Time.deltaTime;
-            else timer = 0;
+                lastObject = hit.collider.gameObject;
 
-            lastObject = hit.collider.gameObject;
-
-            if (timer >= timeToLoad) uiElement.Activate();
-            uiElement.Draw();
+                if (timer >= timeToLoad && !activated)
+                {
+                    uiElement.Activate();
+                    activated = true;
+                }
+                else uiElement.Draw();
+            }
+            else
+            {
+                lastObject = null;
+                timer = 0;
+                activated = false;
+            }
         }
         else
         {
             lastObject = null;
             timer = 0;
+            activated = false;
         }
     }
 }
