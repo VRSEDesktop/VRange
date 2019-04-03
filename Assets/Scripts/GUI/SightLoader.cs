@@ -2,7 +2,7 @@
 
 public class SightLoader : MonoBehaviour
 {
-    private static readonly int layer = LayerMask.NameToLayer("UI");
+    private static int layer;
     private static readonly int maxRange = 50;
     private static readonly float timeToLoad = 3f;
 
@@ -15,6 +15,11 @@ public class SightLoader : MonoBehaviour
     /// Time player is looking at specific UI object
     /// </summary>
     private float timer = 0;
+
+    public void Start()
+    {
+        layer = LayerMask.NameToLayer("UI");
+    }
 
     public void Update()
     {
