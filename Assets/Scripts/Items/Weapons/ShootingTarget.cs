@@ -13,19 +13,20 @@ public class ShootingTarget : MonoBehaviour, IHitable
 
         switch (partHit)
         {
-            case HitboxType.HEAD:
-            case HitboxType.LEFT_ARM:
-            case HitboxType.LEFT_HAND:
-            case HitboxType.LEFT_LEG:
-            case HitboxType.RIGHT_ARM:
-            case HitboxType.RIGHT_HAND:
-            case HitboxType.RIGHT_LEG:
-            case HitboxType.TORSO_7:
-            case HitboxType.TORSO_8:
-            case HitboxType.TORSO_9:
-            case HitboxType.TORSO_10: return HitType.RIGHT;
-            default: return HitType.MISS;
+            case HitboxType.TARGET_HEAD:
+            case HitboxType.TARGET_ARM_LEFT:
+            case HitboxType.TARGET_ARM_RIGHT:
+            case HitboxType.TARGET_LEG_LEFT:
+            case HitboxType.TARGET_LEG_RIGHT:
+            case HitboxType.TARGET_HAND_LEFT:
+            case HitboxType.TARGET_HAND_RIGHT:
+            case HitboxType.TARGET_TORSO_7:
+            case HitboxType.TARGET_TORSO_8:
+            case HitboxType.TARGET_TORSO_9:
+            case HitboxType.TARGET_TORSO_10: return HitType.RIGHT;
         }
+
+        return HitType.MISS;
     }
 
     /// <summary>
@@ -40,6 +41,6 @@ public class ShootingTarget : MonoBehaviour, IHitable
             if (hitbox.mesh == raycastHit.collider) return hitbox.type;
         }
 
-        return HitboxType.HEAD;
+        return HitboxType.NONE;
     }
 }
