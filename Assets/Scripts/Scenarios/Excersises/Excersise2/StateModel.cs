@@ -9,7 +9,7 @@ public class StateModel : ExcersiseState
 
     public override void OnUpdate()
     {
-        
+        UpdateGUI();
     }
 
     public override void OnExit()
