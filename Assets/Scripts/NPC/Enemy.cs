@@ -34,11 +34,11 @@ public class Enemy : MonoBehaviour, IHitable
             case HitboxType.HUMAN_SPINE_2: break;
             case HitboxType.HUMAN_SPINE_3: break;
 
-            case HitboxType.HUMAN_THIGHT_LEFT:
+            case HitboxType.HUMAN_THIGH_LEFT:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
             break;
-            case HitboxType.HUMAN_THIGHT_RIGHT:
+            case HitboxType.HUMAN_THIGH_RIGHT:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
             break;

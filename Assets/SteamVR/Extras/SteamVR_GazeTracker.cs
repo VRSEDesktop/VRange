@@ -26,7 +26,6 @@ namespace Valve.VR.Extras
 
         protected virtual void Update()
         {
-            Debug.Log("hmdTrackedObject" + hmdTrackedObject);
             // If we haven't set up hmdTrackedObject find what the user is looking at
             if (hmdTrackedObject == null)
             {

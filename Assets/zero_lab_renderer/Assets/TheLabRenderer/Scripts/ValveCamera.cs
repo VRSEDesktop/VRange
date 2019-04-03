@@ -500,8 +500,8 @@ public class ValveCamera : MonoBehaviour
             ValveShadowBufferRender();
         }
 
-#if UNITY_5_5
-         UpdateAdaptiveQuality();
+#if UNITY_5_5_OR_NEWER
+        UpdateAdaptiveQuality();
 #endif
 
 		// Adaptive quality debug quad
