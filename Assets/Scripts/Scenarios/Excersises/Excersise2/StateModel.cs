@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateModel : ExcersiseState
 {
-    public Animation pullGunAnimation;
+    public Animator pullGunAnimation;
     /// <summary>
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
@@ -30,6 +30,6 @@ public class StateModel : ExcersiseState
     private IEnumerator PullGun()
     {
         yield return new WaitForSeconds(timeToPullGun);
-        pullGunAnimation.Play();
+        pullGunAnimation.Play("Equip Pistol");
     }
 }
