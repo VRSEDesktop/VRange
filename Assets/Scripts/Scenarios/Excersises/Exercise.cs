@@ -1,50 +1,34 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Exercise : MonoBehaviour
 {
-    public Gun rightGun;
+    /// <summary>
+    /// States of the excersises
+    /// </summary>
+    public ExcersiseState[] states;
+    private static int currentState = 0;
 
-    public TextMesh text;
-
-    public IList<LoggedHit> hits;
-
-    public bool HasSettedGUI { get; set; }
-
-    public static int State { get; set; }
-
-    public void Initialize()
+    public void Start()
     {
-        rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponent<Gun>();
-        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponent<TextMesh>();
-
-    }
-    public void UpdateGUI()
-    {
-        if (!rightGun.HasAmmo())
-        {
-            if (!HasSettedGUI)
-            {
-                DisplayStats();
-                Scenario.Clear();
-            }
-        }
-        else
-        {
-            HasSettedGUI = false;
-        }
+        states[currentState].OnStart();
     }
 
-    public void DisplayStats()
+    public void Update()
+    {      
+        states[currentState].OnUpdate();
+    }
+
+    public void PreviousStep()
     {
-        hits = Scenario.GetHits();
-        text.text = "Shooting State:";
+        states[currentState].OnExit();
+        currentState--;
+        states[currentState].OnStart();
+    }
 
-        foreach (var hit in hits)
-        {
-            text.text += "\n" + hit.part.ToString();
-        }
-
-        HasSettedGUI = true;
+    public void NextStep()
+    {
+        states[currentState].OnExit();
+        currentState++;
+        states[currentState].OnStart();
     }
 }
