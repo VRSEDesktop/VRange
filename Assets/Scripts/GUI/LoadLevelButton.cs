@@ -2,7 +2,7 @@
 using UnityEngine;
 using Valve.VR;
 
-public class LoadLevelButton : MonoBehaviour, IHitable
+public class LoadLevelButton : MonoBehaviour, ISightActivable
 {
     public SteamVR_LoadLevel levelLoader;
 
@@ -14,13 +14,16 @@ public class LoadLevelButton : MonoBehaviour, IHitable
         GetComponentInChildren<TextMeshPro>().text = text;
     }
 
-    public HitType OnHit(Gun gun, RaycastHit raycastHit)
+    public void Draw()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Activate()
     {
         Scenario.Clear();
 
         levelLoader.levelName = levelName;
         levelLoader.Trigger();
-
-        return HitType.RIGHT;
     }
 }
