@@ -25,28 +25,32 @@ public class SightLoader : MonoBehaviour
     public void Update()
     {
         bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxRange);
+
         if (hasHit)
         {
-            if (hit.collider.gameObject.GetComponent<ISightActivable>() != null)
+            if (hit.collider.gameObject.GetComponentInChildren<ISightActivable>() != null)
             {
-                ISightActivable uiElement = hit.collider.gameObject.GetComponent<ISightActivable>();
+                ISightActivable uiElement = hit.collider.gameObject.GetComponentInChildren<ISightActivable>();
 
-                if (hit.collider.gameObject.Equals(lastObject)) timer += Time.deltaTime;
+                if (hit.collider.gameObject.Equals(lastObject))
+                {
+                    timer += Time.deltaTime;
+
+                    if (timer >= timeToLoad && !activated)
+                    {
+                        uiElement.Activate();
+                        activated = true;
+                        uiElement.OnHoverEnd();
+                    }
+                }
                 else
                 {
                     timer = 0;
-                    lastObject.GetComponent<ISightActivable>().OnHoverEnd();
+                    if (lastObject && lastObject.GetComponentInChildren<ISightActivable>() != null) lastObject.GetComponentInChildren<ISightActivable>().OnHoverEnd();
                     uiElement.OnHoverStart();
                 }
 
                 lastObject = hit.collider.gameObject;
-
-                if (timer >= timeToLoad && !activated)
-                {
-                    uiElement.Activate();
-                    activated = true;
-                    uiElement.OnHoverEnd();
-                }
             }
             else ResetLoader();
         }
@@ -55,7 +59,7 @@ public class SightLoader : MonoBehaviour
 
     private void ResetLoader()
     {
-        if (lastObject.GetComponent<ISightActivable>() != null) lastObject.GetComponent<ISightActivable>().OnHoverEnd();
+        if (lastObject != null && lastObject.GetComponentInChildren<ISightActivable>() != null) lastObject.GetComponentInChildren<ISightActivable>().OnHoverEnd();
         lastObject = null;
         timer = 0;
         activated = false;

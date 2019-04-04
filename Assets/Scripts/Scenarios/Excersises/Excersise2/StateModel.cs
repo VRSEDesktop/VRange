@@ -58,4 +58,8 @@ public class StateModel : ExcersiseState
         
     }
 
+    public override void Restart()
+    {
+        throw new NotImplementedException();
+    }
 }
