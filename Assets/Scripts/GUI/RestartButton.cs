@@ -1,19 +1,10 @@
 ﻿using UnityEngine;
 
-public class RestartButton : MonoBehaviour, ISightActivable
+public class RestartButton : Button
 {
-    public void Activate()
+    public override void Activate()
     {
+        Scenario.Clear();
         GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Restart();
-    }
-
-    public void OnHoverEnd()
-    {
-       
-    }
-
-    public void OnHoverStart()
-    {
-       
     }
 }

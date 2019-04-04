@@ -34,6 +34,6 @@ public class Exercise : MonoBehaviour
 
     public void Restart()
     {
-        states[currentState].OnStart();
+        states[currentState].Restart();
     }
 }

@@ -14,8 +14,8 @@ public class StateCardboard : ExcersiseState
     public override void OnStart()
     {
         base.OnStart();
-
         StartCoroutine(TurningCardBoard());
+        
     }
 
     public override void OnUpdate()
@@ -32,6 +32,13 @@ public class StateCardboard : ExcersiseState
     {
         yield return new WaitForSeconds(timeToStart);
         flipAnimation.Play();
+    }
+
+    public override void Restart()
+    {
+        flipAnimation.transform.rotation = new Quaternion(0, -90, 0, 0);
+
+        StartCoroutine(TurningCardBoard());
     }
 
     

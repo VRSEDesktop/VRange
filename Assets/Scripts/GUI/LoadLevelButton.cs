@@ -2,33 +2,25 @@
 using UnityEngine;
 using Valve.VR;
 
-public class LoadLevelButton : MonoBehaviour, ISightActivable
+public class LoadLevelButton : Button
 {
     public SteamVR_LoadLevel levelLoader;
 
     public string text;
     public string levelName;
 
-    public void Start()
+    public override void Start()
     {
+        base.Start();
+
         GetComponentInChildren<TextMeshPro>().text = text;
     }
 
-    public void Activate()
+    public override void Activate()
     {
         Scenario.Clear();
 
         levelLoader.levelName = levelName;
         levelLoader.Trigger();
-    }
-
-    public void OnHoverStart()
-    {
-        GetComponentInChildren<Animator>().Play("");
-    }
-
-    public void OnHoverEnd()
-    {
-        GetComponentInChildren<Animator>();
     }
 }

@@ -26,6 +26,8 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public abstract void OnUpdate();
 
+    public abstract void Restart();
+
     public virtual void OnExit()
     {
         Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -67,4 +69,6 @@ public abstract class ExcersiseState : MonoBehaviour
 
         HasSettedGUI = true;
     }
+
+
 }
