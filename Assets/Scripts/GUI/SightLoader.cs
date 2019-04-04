@@ -32,7 +32,12 @@ public class SightLoader : MonoBehaviour
                 ISightActivable uiElement = hit.collider.gameObject.GetComponent<ISightActivable>();
 
                 if (hit.collider.gameObject.Equals(lastObject)) timer += Time.deltaTime;
-                else timer = 0;
+                else
+                {
+                    timer = 0;
+                    lastObject.GetComponent<ISightActivable>().OnHoverEnd();
+                    uiElement.OnHoverStart();
+                }
 
                 lastObject = hit.collider.gameObject;
 
@@ -40,21 +45,19 @@ public class SightLoader : MonoBehaviour
                 {
                     uiElement.Activate();
                     activated = true;
+                    uiElement.OnHoverEnd();
                 }
-                else uiElement.Draw();
             }
-            else
-            {
-                lastObject = null;
-                timer = 0;
-                activated = false;
-            }
+            else ResetLoader();
         }
-        else
-        {
-            lastObject = null;
-            timer = 0;
-            activated = false;
-        }
+        else ResetLoader();
+    }
+
+    private void ResetLoader()
+    {
+        if (lastObject.GetComponent<ISightActivable>() != null) lastObject.GetComponent<ISightActivable>().OnHoverEnd();
+        lastObject = null;
+        timer = 0;
+        activated = false;
     }
 }
