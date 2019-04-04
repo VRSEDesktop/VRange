@@ -81,7 +81,7 @@ public class Gun : Weapon, IReloadable
                         CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.green);
                         break;
                     case HitType.UNWANTED:
-                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.magenta);
                         break;
                 }
             }
