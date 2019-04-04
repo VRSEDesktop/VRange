@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour, IHitable
     {
         isDead = true;
         animator.SetBool("Death2", true);
-        navMeshAgent.speed = 0f;
+        if (navMeshAgent) navMeshAgent.speed = 0f;
     }
 
     //  tmp remove it
@@ -97,6 +97,6 @@ public class Enemy : MonoBehaviour, IHitable
         isDead = false;
         animator.SetBool("Death2", false);
         animator.SetBool("GetUp", true);
-        navMeshAgent.speed = 1.5f;
+        if(navMeshAgent) navMeshAgent.speed = 1.5f;
     }
 }

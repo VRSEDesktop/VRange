@@ -9,13 +9,10 @@ public class StateCardboard : ExcersiseState
     /// </summary>
     public float timeToStart = 5f;
 
-    private float maxTime = 15f;
-
     public override void OnStart()
     {
         base.OnStart();
-        StartCoroutine(TurningCardBoard());
-        
+        StartCoroutine(TurningCardBoard());        
     }
 
     public override void OnUpdate()
@@ -36,10 +33,9 @@ public class StateCardboard : ExcersiseState
 
     public override void Restart()
     {
+        base.Restart();
         flipAnimation.transform.rotation = new Quaternion(0, -90, 0, 0);
-
         StartCoroutine(TurningCardBoard());
     }
-
-    
+ 
 }
