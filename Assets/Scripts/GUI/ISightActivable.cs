@@ -1,5 +1,6 @@
 ﻿public interface ISightActivable
 {
-    void Draw();
     void Activate();
+    void OnHoverStart();
+    void OnHoverEnd();
 }

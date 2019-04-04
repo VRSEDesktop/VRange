@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RestartButton : MonoBehaviour, ISightActivable
 {
@@ -9,20 +7,13 @@ public class RestartButton : MonoBehaviour, ISightActivable
         GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Restart();
     }
 
-    public void Draw()
+    public void OnHoverEnd()
     {
-        
+       
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnHoverStart()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+       
     }
 }

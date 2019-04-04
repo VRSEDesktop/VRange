@@ -14,16 +14,21 @@ public class LoadLevelButton : MonoBehaviour, ISightActivable
         GetComponentInChildren<TextMeshPro>().text = text;
     }
 
-    public void Draw()
-    {
-
-    }
-
     public void Activate()
     {
         Scenario.Clear();
 
         levelLoader.levelName = levelName;
         levelLoader.Trigger();
+    }
+
+    public void OnHoverStart()
+    {
+        GetComponentInChildren<Animator>().Play("");
+    }
+
+    public void OnHoverEnd()
+    {
+        GetComponentInChildren<Animator>();
     }
 }
