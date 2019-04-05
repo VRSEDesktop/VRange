@@ -6,7 +6,6 @@ public class Gun : Weapon, IReloadable
     /// Used for drawing bullet's path
     /// </summary>
     public bool drawLines;
-    public bool isShooting;
 
     public int magCapacity;
     private int currentAmmo;
@@ -19,6 +18,9 @@ public class Gun : Weapon, IReloadable
     /// The place where bullets spawn
     /// </summary>
     public Transform barrelExit;
+
+    public GameObject bulletLine;
+    public GameObject bulletHole;
 
     public void Start()
     {
@@ -62,12 +64,15 @@ public class Gun : Weapon, IReloadable
         {
             Debug.Log("Gun::DetecHit() " + hit.collider.name);
 
+            SpawnBulletHole(hit);
+
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if(target == null)
             {
                 if (ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
                 return;
             }
+
             HitType type = target.OnHit(this, hit);
 
                switch(type)
@@ -87,6 +92,18 @@ public class Gun : Weapon, IReloadable
         {
             if (ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
         }
+    }
+
+    private void SpawnBulletHole(RaycastHit hit)
+    {
+        Vector3 offset = new Vector3(barrelExit.transform.forward.x, barrelExit.transform.forward.y, barrelExit.transform.forward.z);
+        offset.Scale(new Vector3(0.01f, 0.01f, 0.01f));
+        Vector3 position = hit.point - offset;
+
+        GameObject hole = Instantiate(bulletHole, hit.collider.gameObject.transform);
+        hole.transform.rotation = Quaternion.LookRotation(hit.normal);
+        hole.transform.position = position;
+        hole.transform.localScale = new Vector3(0.7f / hole.transform.lossyScale.x, 0.7f / hole.transform.lossyScale.y, 0.7f / hole.transform.lossyScale.z);
     }
 
     private bool ShouldDrawLine()
@@ -119,9 +136,9 @@ public class Gun : Weapon, IReloadable
 
         obj.GetComponent<MeshRenderer>().material.color = color;
         obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        obj.SetActive(true);
         obj.GetComponent<Collider>().enabled = false;
 
+        obj.SetActive(true);
         Destroy(obj, duration);
     }
 

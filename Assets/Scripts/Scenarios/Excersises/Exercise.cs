@@ -8,6 +8,10 @@ public class Exercise : MonoBehaviour
     public ExcersiseState[] states;
     private static int currentState = 0;
 
+    public delegate void ButtonDelegate();
+
+    public event ButtonDelegate ButtonPressEvent;
+
     public void Start()
     {
         states[currentState].OnStart();
@@ -35,5 +39,10 @@ public class Exercise : MonoBehaviour
     public void Restart()
     {
         states[currentState].Restart();
+    }
+
+    public void FireButtonEvent()
+    {
+        ButtonPressEvent += FireButtonEvent;
     }
 }
