@@ -3,11 +3,15 @@
 public abstract class Button : MonoBehaviour, ISightActivable
 {
     private Animator loadingAnimation;
+    public string type;
+    public bool isActivated;
 
     public virtual void Start()
     {
         loadingAnimation = GetComponentInChildren<Animator>();
         loadingAnimation.SetBool("Loading", false);
+
+       // GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().;
     }
 
     public abstract void Activate();

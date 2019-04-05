@@ -10,7 +10,6 @@ public class StateModel : ExcersiseState
     /// </summary>
     public float waitTime = 5f;
 
-
     public override void OnStart()
     {
         base.OnStart();
@@ -60,6 +59,8 @@ public class StateModel : ExcersiseState
 
     public override void Restart()
     {
-        throw new NotImplementedException();
+        base.Restart();
+
+        Randomizer();
     }
 }
