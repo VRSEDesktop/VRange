@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public abstract class ExcersiseState : MonoBehaviour
 {
     [HideInInspector]
     public Gun rightGun;
     [HideInInspector]
-    public TextMesh text;
+    public TextMeshPro text;
     public bool HasSettedGUI { get; set; }
 
-    private float startTime;
+    protected float startTime;
 
     public virtual void OnStart()
     {
@@ -19,14 +20,21 @@ public abstract class ExcersiseState : MonoBehaviour
         }
 
         rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponentInChildren<Gun>();
-        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponentInChildren<TextMesh>();
+        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponentInChildren<TextMeshPro>();
 
         startTime = Time.realtimeSinceStartup;
     }
 
     public abstract void OnUpdate();
 
-    public abstract void Restart();
+    public virtual void Restart()
+    {     
+        Scenario.Clear();
+
+        startTime = Time.realtimeSinceStartup;
+        text.text = "";
+        HasSettedGUI = false;
+    }
 
     public virtual void OnExit()
     {
@@ -47,7 +55,6 @@ public abstract class ExcersiseState : MonoBehaviour
             if (!HasSettedGUI)
             {
                 DisplayStats();
-                Scenario.Clear();
             }
         }
         else HasSettedGUI = false;
@@ -59,8 +66,8 @@ public abstract class ExcersiseState : MonoBehaviour
     private void DisplayStats()
     {
         float time = Time.realtimeSinceStartup - startTime;
-        text.text = "Time: " + time;
-        text.text += "\nShooting State:";
+        text.text = "Tijd: " + time.ToString("0.00") + " s" + '\n';
+        text.text += "Schoten:";
 
         foreach (var hit in Scenario.GetHits())
         {
@@ -69,6 +76,4 @@ public abstract class ExcersiseState : MonoBehaviour
 
         HasSettedGUI = true;
     }
-
-
 }
