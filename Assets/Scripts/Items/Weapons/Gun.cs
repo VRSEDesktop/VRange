@@ -65,31 +65,34 @@ public class Gun : Weapon, IReloadable
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if(target == null)
             {
-                CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                if (ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
                 return;
             }
             HitType type = target.OnHit(this, hit);
 
-            if (drawLines)
-            {
                switch(type)
                 {
                     case HitType.MISS:
-                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                        if(ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
                         break;
                     case HitType.RIGHT:
-                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.green);
+                        if (ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.green);
                         break;
                     case HitType.UNWANTED:
-                        CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.magenta);
+                        if (ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.magenta);
                         break;
                 }
-            }
         }      
         else
         {
-            if(drawLines) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+            if (ShouldDrawLine()) CreateShotRepresentation(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
         }
+    }
+
+    private bool ShouldDrawLine()
+    {
+        GameObject exercise = GameObject.FindGameObjectWithTag("Exercise");
+        return (exercise && exercise.GetComponent<Settings>().drawLines);
     }
 
     /// <summary>
