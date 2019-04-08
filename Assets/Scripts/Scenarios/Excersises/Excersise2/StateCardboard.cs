@@ -28,6 +28,8 @@ public class StateCardboard : ExcersiseState
     private IEnumerator TurningCardBoard()
     {
         yield return new WaitForSeconds(timeToStart);
+
+        startTime = Time.realtimeSinceStartup;
         flipAnimation.SetBool("Visible", true);
     }
 

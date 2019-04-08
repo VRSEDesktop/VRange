@@ -3,8 +3,7 @@ using UnityEngine;
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-    [HideInInspector]
-    public Gun rightGun;
+    public Gun leftGun, rightGun;
     [HideInInspector]
     public TextMeshPro text;
     public bool HasSettedGUI { get; set; }
@@ -13,16 +12,13 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public virtual void OnStart()
     {
-        Transform[] allChildren = GetComponentsInChildren<Transform>();
-        foreach (Transform child in allChildren)
-        {
-            child.gameObject.SetActive(true);
-        }
+        GetComponent<Transform>().gameObject.SetActive(true);
 
-        rightGun = GameObject.FindGameObjectWithTag("RightGun").GetComponentInChildren<Gun>();
-        text = GameObject.FindGameObjectWithTag("ShootingStats").GetComponentInChildren<TextMeshPro>();
+        text = GameObject.FindWithTag("ShootingStats").GetComponentInChildren<TextMeshPro>();
 
         startTime = Time.realtimeSinceStartup;
+        leftGun?.Reload();
+        rightGun?.Reload();
     }
 
     public abstract void OnUpdate();
@@ -31,6 +27,8 @@ public abstract class ExcersiseState : MonoBehaviour
     {     
         Scenario.Clear();
 
+        leftGun?.Reload();
+        rightGun?.Reload();
         startTime = Time.realtimeSinceStartup;
         text.text = "";
         HasSettedGUI = false;
@@ -38,11 +36,8 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public virtual void OnExit()
     {
-        Transform[] allChildren = GetComponentsInChildren<Transform>();
-        foreach (Transform child in allChildren)
-        {
-            child.gameObject.SetActive(false);
-        }
+        if(text) text.text = "";
+        GetComponent<Transform>().gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -50,7 +45,7 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     public void UpdateGUI()
     {
-        if (!rightGun.HasAmmo())
+        if (!leftGun.HasAmmo() || !rightGun.HasAmmo())
         {
             if (!HasSettedGUI)
             {

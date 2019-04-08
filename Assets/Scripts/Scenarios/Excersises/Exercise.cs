@@ -14,6 +14,8 @@ public class Exercise : MonoBehaviour
 
     public void Start()
     {
+        foreach(ExcersiseState state in states) state.OnExit();
+        currentState = 0;
         states[currentState].OnStart();
     }
 
@@ -38,7 +40,9 @@ public class Exercise : MonoBehaviour
 
     public void Restart()
     {
+        Debug.Log("Restart " + states[currentState]);
         states[currentState].Restart();
+
     }
 
     public void FireButtonEvent()
