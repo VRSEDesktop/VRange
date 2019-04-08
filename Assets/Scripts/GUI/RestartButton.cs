@@ -11,6 +11,6 @@ public class RestartButton : Button
         foreach (Gun gun in guns) gun.Reload();
 
         GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
-        foreach (GameObject obj in bulletHoles) GameObject.Destroy(obj);
+        foreach (GameObject obj in bulletHoles) Destroy(obj);
     }
 }

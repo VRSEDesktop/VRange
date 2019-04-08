@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StateCardboard : ExcersiseState
 {
-    public Animation flipAnimation;
+    public Animator flipAnimation;
     /// <summary>
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
@@ -28,13 +28,13 @@ public class StateCardboard : ExcersiseState
     private IEnumerator TurningCardBoard()
     {
         yield return new WaitForSeconds(timeToStart);
-        flipAnimation.Play();
+        flipAnimation.SetBool("Visible", true);
     }
 
     public override void Restart()
     {
         base.Restart();
-        flipAnimation.transform.rotation = new Quaternion(0, -90, 0, 0);
+        flipAnimation.SetBool("Visible", false);
         StartCoroutine(TurningCardBoard());
     }
  
