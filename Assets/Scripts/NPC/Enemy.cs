@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour, IHitable
     private bool isDead;
 
     private NavMeshAgent navMeshAgent;
-    public GameObject leftHand, rightHand;
+    public GameObject gun, phone;
 
     public void Start()
     {
@@ -68,12 +68,6 @@ public class Enemy : MonoBehaviour, IHitable
 
         Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         return HitType.RIGHT;
-    }
-
-    public void EquipItem(GameObject item)
-    {
-        GameObject spawnedItem = Instantiate(item, rightHand.transform.position, rightHand.transform.rotation);
-        spawnedItem.transform.parent = rightHand.transform;
     }
 
     /// <summary>
