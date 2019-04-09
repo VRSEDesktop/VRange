@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StandAlbedoTest
-  m_Shader: {fileID: 4800000, guid: 908b379d4818cd64184b95a21123d909, type: 3}
-  m_ShaderKeywords: D_CASTSHADOW S_RECEIVE_SHADOWS S_SPECULAR_METALLIC _ALPHAPREMULTIPLY_ON
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: D_CASTSHADOW S_RECEIVE_SHADOWS S_SPECULAR_METALLIC _DETAIL_MULX2
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -85,7 +85,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailMode: 0
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EmissionFalloff: 0
     - _EmissiveMode: 0
     - _FogMultiplier: 1
@@ -93,7 +93,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Mode: 3
+    - _Mode: 0
     - _NormalToOcclusion: 1
     - _OcclusionStrength: 1
     - _OcclusionStrengthDirectDiffuse: 1
@@ -114,7 +114,7 @@ Material:
     - _Test: 0
     - _UVSec: 0
     - _VertexMode: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     - g_bCastShadows: 1
     - g_bReceiveShadows: 1
     - g_bRenderBackfaces: 0
