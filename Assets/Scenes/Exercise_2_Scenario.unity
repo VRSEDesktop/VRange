@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -208,41 +208,7 @@ Transform:
   m_Father: {fileID: 1112572350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &317120240
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!43 &383203204
+--- !u!43 &399861368
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -641,13 +607,7 @@ PrefabInstance:
     - target: {fileID: 7972075036667834599, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform
-        'upperarm_r'\n\tTransform 'upperarm_l'\n\tTransform 'neck_01'\n\tTransform
-        'head'\n\tTransform 'spine_03'\n\tTransform 'spine_01'\n\tTransform 'clavicle_r'\n\tTransform
-        'lowerarm_r'\n\tand more ...\n\tFrom animation clip 'Game_engine_GunAim'\n\tFrom
-        animation clip 'Game_engine_PullGun1'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7972075036667834599, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
@@ -742,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 7972075036675579729, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.50000006
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7972075036675579729, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
@@ -757,17 +717,17 @@ PrefabInstance:
     - target: {fileID: 7972075036675579729, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.026579997
+      value: -0.02658
       objectReference: {fileID: 0}
     - target: {fileID: 7972075036675579729, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1368684e-10
+      value: 1.3896662e-12
       objectReference: {fileID: 0}
     - target: {fileID: 7972075036675579729, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.50000006
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7972075036675579729, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
@@ -853,12 +813,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 317120240}
+      objectReference: {fileID: 1469079875}
     - target: {fileID: 28980224761581496, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 383203204}
+      objectReference: {fileID: 399861368}
     - target: {fileID: 4787569642125746257, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
         type: 3}
       propertyPath: m_TagString
@@ -1360,6 +1320,40 @@ Transform:
   m_Father: {fileID: 1112572350}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 152.992, y: -0.000015258789, z: -0.000015258789}
+--- !u!21 &1469079875
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1600786395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,7 +1445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713061549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32341933, y: 0.5884533, z: -0.28410316}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

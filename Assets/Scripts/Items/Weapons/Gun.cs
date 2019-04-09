@@ -96,8 +96,8 @@ public class Gun : Weapon, IReloadable
 
     private void SpawnBulletHole(RaycastHit hit)
     {
-        Vector3 offset = new Vector3(barrelExit.transform.forward.x, barrelExit.transform.forward.y, barrelExit.transform.forward.z);
-        offset.Scale(new Vector3(0.01f, 0.01f, 0.01f));
+        Vector3 offset = transform.rotation * -Vector3.forward;
+        offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
         Vector3 position = hit.point - offset;
 
         GameObject hole = Instantiate(bulletHole, hit.collider.gameObject.transform);
