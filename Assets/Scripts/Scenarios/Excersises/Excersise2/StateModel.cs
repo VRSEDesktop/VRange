@@ -12,6 +12,8 @@ public class StateModel : ExcersiseState
 
     private int currentAnimation = -1;
 
+    public GameObject gun, phone;
+
     public override void OnStart()
     {
         base.OnStart();
@@ -45,8 +47,14 @@ public class StateModel : ExcersiseState
         yield return new WaitForSeconds(waitTime);      
         switch (num)
         {
-            case 0: anim.SetBool("Equip Pistol", true); break; 
-            case 1: anim.SetBool("Equip Phone", true); break;
+            case 0:
+		anim.SetBool("Equip Pistol", true);
+		anim.GetComponent<Enemy>().EquipItem(gun);
+		break; 
+            case 1:
+		anim.SetBool("Equip Phone", true);
+		anim.GetComponent<Enemy>().EquipItem(phone);
+		break;
         }      
     }
 

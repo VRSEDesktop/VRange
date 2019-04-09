@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7155601296343387766}
   m_LocalRotation: {x: 0.50000006, y: 0.50000006, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -2.872, y: 6.817, z: 11.089}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8444011, y: 0.021110028, z: 0.42220056}
   m_Children:
   - {fileID: 7155601297549428579}
@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb9d352122a1f44d87bba6e4102bfe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
+  isActivated: 0
 --- !u!1 &7155601297549428572
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 3577906014207844786, guid: c9296324c63a8b34183e6d4d5692a838,
         type: 3}
       propertyPath: m_Name
-      value: LoadingCircleSheet_0_0
+      value: Loading Circle
       objectReference: {fileID: 0}
     - target: {fileID: 7322361531360504492, guid: c9296324c63a8b34183e6d4d5692a838,
         type: 3}

@@ -39,5 +39,4 @@ public class StateCardboard : ExcersiseState
         flipAnimation.SetBool("Visible", false);
         StartCoroutine(TurningCardBoard());
     }
- 
 }
