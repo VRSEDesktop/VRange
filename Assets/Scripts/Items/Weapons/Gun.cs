@@ -64,7 +64,7 @@ public class Gun : Weapon, IReloadable
         {
             Debug.Log("Gun::DetecHit() " + hit.collider.name);
 
-            SpawnBulletHole(hit);
+            if(!hit.collider.gameObject.GetComponent<Enemy>()) SpawnBulletHole(hit);
 
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if(target == null)
@@ -158,6 +158,7 @@ public class Gun : Weapon, IReloadable
     public void Reload()
     {
         currentAmmo = magCapacity;
+        //FindObjectOfType<Exercise>()?.Restart();
     }
 
     /// <summary>

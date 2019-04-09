@@ -31,7 +31,7 @@ public class StateModel : ExcersiseState
     private void Randomizer()
     {
         float waitTime = Random.Range(minWaitTime, maxWaitTime);
-        StartCoroutine(PullItem(waitTime, Random.Range(0, 1)));    
+        StartCoroutine(PullItem(waitTime, Random.Range(0, 2)));    
     }
 
     /// <summary>
@@ -49,11 +49,13 @@ public class StateModel : ExcersiseState
 		        anim.SetBool("Equip Pistol", true);
                 yield return new WaitForSeconds(0.8f);
                 anim.GetComponent<Enemy>().gun.gameObject.SetActive(true);
+                anim.GetComponent<Enemy>().isAgressive = true;
             break; 
             case 1:
 		        anim.SetBool("Equip Phone", true);
                 anim.GetComponent<Enemy>().phone.gameObject.SetActive(true);
-            break;
+                anim.GetComponent<Enemy>().isAgressive = false;
+                break;
         }      
     }
 
