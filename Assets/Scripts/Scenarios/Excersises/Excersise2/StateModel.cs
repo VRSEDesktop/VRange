@@ -45,8 +45,15 @@ public class StateModel : ExcersiseState
         yield return new WaitForSeconds(waitTime);      
         switch (num)
         {
-            case 0: anim.SetBool("Equip Pistol", true); break; 
-            case 1: anim.SetBool("Equip Phone", true); break;
+            case 0:
+		        anim.SetBool("Equip Pistol", true);
+                yield return new WaitForSeconds(0.8f);
+                anim.GetComponent<Enemy>().gun.gameObject.SetActive(true);
+            break; 
+            case 1:
+		        anim.SetBool("Equip Phone", true);
+                anim.GetComponent<Enemy>().phone.gameObject.SetActive(true);
+            break;
         }      
     }
 

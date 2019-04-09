@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IHitable
     private bool isDead;
 
     private NavMeshAgent navMeshAgent;
+    public GameObject gun, phone;
 
     public void Start()
     {
@@ -65,18 +66,8 @@ public class Enemy : MonoBehaviour, IHitable
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
-        SpawnBulletHole(raycastHit);
-
         Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         return HitType.RIGHT;
-    }
-
-    /// <summary>
-    /// Temporary method with simplic behaviour
-    /// </summary>
-    private void SpawnBulletHole(RaycastHit raycastHit)
-    {
-
     }
 
     /// <summary>

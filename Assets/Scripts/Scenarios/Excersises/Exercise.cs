@@ -40,7 +40,6 @@ public class Exercise : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("Restart " + states[currentState]);
         states[currentState].Restart();
 
     }
