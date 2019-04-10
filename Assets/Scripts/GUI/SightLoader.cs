@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Checks for IGazeable objects being gazed at and activates them accordingly.
+/// </summary>
 public class SightLoader : MonoBehaviour
 {
     private static int layer;
@@ -28,9 +31,9 @@ public class SightLoader : MonoBehaviour
 
         if (hasHit)
         {
-            if (hit.collider.gameObject.GetComponentInChildren<ISightActivable>() != null)
+            if (hit.collider.gameObject.GetComponentInChildren<IGazeable>() != null)
             {
-                ISightActivable uiElement = hit.collider.gameObject.GetComponentInChildren<ISightActivable>();
+                IGazeable uiElement = hit.collider.gameObject.GetComponentInChildren<IGazeable>();
 
                 if (hit.collider.gameObject.Equals(lastObject))
                 {
@@ -46,7 +49,7 @@ public class SightLoader : MonoBehaviour
                 else
                 {
                     timer = 0;
-                    if (lastObject && lastObject.GetComponentInChildren<ISightActivable>() != null) lastObject.GetComponentInChildren<ISightActivable>().OnHoverEnd();
+                    if (lastObject && lastObject.GetComponentInChildren<IGazeable>() != null) lastObject.GetComponentInChildren<IGazeable>().OnHoverEnd();
                     uiElement.OnHoverStart();
                 }
 
@@ -59,7 +62,7 @@ public class SightLoader : MonoBehaviour
 
     private void ResetLoader()
     {
-        if (lastObject != null && lastObject.GetComponentInChildren<ISightActivable>() != null) lastObject.GetComponentInChildren<ISightActivable>().OnHoverEnd();
+        if (lastObject != null && lastObject.GetComponentInChildren<IGazeable>() != null) lastObject.GetComponentInChildren<IGazeable>().OnHoverEnd();
         lastObject = null;
         timer = 0;
         activated = false;

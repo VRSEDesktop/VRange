@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Button : MonoBehaviour, ISightActivable
+public abstract class Button : MonoBehaviour, IGazeable
 {
     private Animator loadingAnimation;
     public string type;

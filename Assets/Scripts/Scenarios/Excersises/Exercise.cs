@@ -6,11 +6,8 @@ public class Exercise : MonoBehaviour
     /// States of the excersises
     /// </summary>
     public ExcersiseState[] states;
+    public Settings Settings;
     private static int currentState = 0;
-
-    public delegate void ButtonDelegate();
-
-    public event ButtonDelegate ButtonPressEvent;
 
     public void Start()
     {
@@ -22,6 +19,7 @@ public class Exercise : MonoBehaviour
     public void Update()
     {      
         states[currentState].OnUpdate();
+        HandleButtons();
     }
 
     public void PreviousStep()
@@ -41,11 +39,10 @@ public class Exercise : MonoBehaviour
     public void Restart()
     {
         states[currentState].Restart();
-
     }
 
-    public void FireButtonEvent()
+    private void HandleButtons()
     {
-        ButtonPressEvent += FireButtonEvent;
+        Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
     }
 }

@@ -109,9 +109,9 @@ public class Gun : Weapon, IReloadable
     private bool ShouldDrawLine()
     {
         GameObject exercise = GameObject.FindGameObjectWithTag("Exercise");
-        if (exercise && exercise.GetComponent<Settings>())
+        if (exercise && exercise.GetComponent<Exercise>())
         {
-            return (drawLines && exercise.GetComponent<Settings>().drawLines);
+            return (drawLines && exercise.GetComponent<Exercise>().Settings.drawLines);
         }
         else return drawLines;
     }
