@@ -11,6 +11,7 @@ public class SightLoader : MonoBehaviour
     /// </summary>
     private GameObject lastObject;
     private SpriteRenderer loadingCircle;
+    private GameObject sightLine;
 
     /// <summary>
     /// Time player is looking at specific UI object
@@ -64,24 +65,24 @@ public class SightLoader : MonoBehaviour
         }
         else ResetLoader();
 
-        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        obj.transform.parent = transform;
+        if(sightLine == null) sightLine = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        sightLine.transform.parent = transform;
 
         float thickness = 0.005f;
         Vector3 start = transform.position;
         Vector3 end = transform.position + transform.rotation * Vector3.forward * 10;
         float length = Vector3.Distance(start, end);
 
-        obj.transform.localScale = new Vector3(thickness, thickness, length);
-        obj.transform.position = start + ((end - start) / 2);
-        obj.transform.LookAt(end);
+        sightLine.transform.localScale = new Vector3(thickness, thickness, length);
+        sightLine.transform.position = start + ((end - start) / 2);
+        sightLine.transform.LookAt(end);
 
-        obj.GetComponent<MeshRenderer>().material.color = Color.black;
-        obj.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        obj.GetComponent<Collider>().enabled = false;
+        sightLine.GetComponent<MeshRenderer>().material.color = Color.black;
+        sightLine.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        sightLine.GetComponent<Collider>().enabled = false;
 
-        obj.SetActive(true);
-        Destroy(obj, 1);
+        sightLine.SetActive(true);
+        Destroy(sightLine, 1);
     }
 
     private void ResetLoader()
