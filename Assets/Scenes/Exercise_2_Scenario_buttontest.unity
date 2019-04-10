@@ -208,7 +208,7 @@ Transform:
   m_Father: {fileID: 1112572350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &399861368
+--- !u!43 &281133819
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -625,6 +625,40 @@ Transform:
   m_Father: {fileID: 1600786396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1007765704
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1017820045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -846,12 +880,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1469079875}
+      objectReference: {fileID: 1007765704}
     - target: {fileID: 28980224761581496, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 399861368}
+      objectReference: {fileID: 281133819}
     - target: {fileID: 4787569642125746257, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
         type: 3}
       propertyPath: m_TagString
@@ -1353,40 +1387,6 @@ Transform:
   m_Father: {fileID: 1112572350}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 152.992, y: -0.000015258789, z: -0.000015258789}
---- !u!21 &1469079875
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1600786395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Toggle Sightline
-  loadingAnimation: {fileID: 0}
 --- !u!65 &1756782963
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1787,7 +1786,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Toggle Bulletlines
-  loadingAnimation: {fileID: 0}
 --- !u!65 &1996048541
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2045,6 +2043,11 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 170240973947049089, guid: 4b0cdd0a222f2c6409b5f7357eeab127,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 64.95606
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b0cdd0a222f2c6409b5f7357eeab127, type: 3}
 --- !u!1001 &2519340424849817189
@@ -2167,12 +2170,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2519340424718351364, guid: 1d94a7e05f876084da239ab734c42aef, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d94a7e05f876084da239ab734c42aef, type: 3}
---- !u!95 &2519340424849817190 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3301880343260011338, guid: 1d94a7e05f876084da239ab734c42aef,
-    type: 3}
-  m_PrefabInstance: {fileID: 2519340424849817189}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2519340424849817191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6592323645355585602, guid: 1d94a7e05f876084da239ab734c42aef,
@@ -2192,7 +2189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Restart
-  loadingAnimation: {fileID: 2519340424849817190}
 --- !u!1001 &7553413090344137091
 PrefabInstance:
   m_ObjectHideFlags: 0
