@@ -12,11 +12,11 @@ public class GazeButton : UIElement, IGazeable
 
     public void OnHoverStart()
     {
-        loadingAnimation.SetBool("Loading", true);
+        
     }
 
     public void OnHoverEnd()
     {
-        loadingAnimation.SetBool("Loading", true);
+        
     }
 }

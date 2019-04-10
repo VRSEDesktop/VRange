@@ -16,6 +16,8 @@ public class SightLoader : MonoBehaviour
     private SpriteRenderer loadingCircle;
     private GameObject sightLine;
 
+    Renderer lineRenderer;
+
     /// <summary>
     /// Time player is looking at specific UI object
     /// </summary>
@@ -68,7 +70,11 @@ public class SightLoader : MonoBehaviour
         }
         else ResetLoader();
 
+        //Change this to a prefab instead of a primitive so we can use valve shaders.
         if(sightLine == null) sightLine = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        if(lineRenderer == null) lineRenderer = sightLine.GetComponent<Renderer>();
+        Shader lineShader = Shader.Find("Valve/vr_standard");
+        if (lineShader != null) lineRenderer.material.shader = lineShader;
         sightLine.transform.parent = transform;
 
         float thickness = 0.005f;

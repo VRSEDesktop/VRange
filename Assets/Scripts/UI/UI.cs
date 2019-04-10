@@ -2,7 +2,7 @@
 
 public static class UI
 {
-    private static List<string> ActiveButtons;
+    private static List<string> ActiveButtons = new List<string>();
 
     public static bool GetButtonActivated(string name)
     {
