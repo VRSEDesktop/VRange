@@ -13,6 +13,8 @@ public class SightLoader : MonoBehaviour
     /// Object which was in sight line in the last frame
     /// </summary>
     private GameObject lastObject;
+    private SpriteRenderer loadingCircle;
+    private GameObject sightLine;
 
     /// <summary>
     /// Time player is looking at specific UI object
@@ -23,6 +25,7 @@ public class SightLoader : MonoBehaviour
     public void Start()
     {
         layer = LayerMask.NameToLayer("UI");
+        loadingCircle = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Update()
@@ -43,21 +46,46 @@ public class SightLoader : MonoBehaviour
                     {
                         uiElement.Activate();
                         activated = true;
+                        loadingCircle.GetComponent<Animator>().SetBool("Loading", true);
                         uiElement.OnHoverEnd();
                     }
                 }
                 else
                 {
+                    loadingCircle.GetComponent<Animator>().SetBool("Loading", true);
                     timer = 0;
                     if (lastObject && lastObject.GetComponentInChildren<IGazeable>() != null) lastObject.GetComponentInChildren<IGazeable>().OnHoverEnd();
                     uiElement.OnHoverStart();
                 }
 
                 lastObject = hit.collider.gameObject;
+
+                loadingCircle.transform.position = hit.point;
+                loadingCircle.transform.rotation = Quaternion.LookRotation(hit.normal);
+
             }
             else ResetLoader();
         }
         else ResetLoader();
+
+        if(sightLine == null) sightLine = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        sightLine.transform.parent = transform;
+
+        float thickness = 0.005f;
+        Vector3 start = transform.position;
+        Vector3 end = transform.position + transform.rotation * Vector3.forward * 10;
+        float length = Vector3.Distance(start, end);
+
+        sightLine.transform.localScale = new Vector3(thickness, thickness, length);
+        sightLine.transform.position = start + ((end - start) / 2);
+        sightLine.transform.LookAt(end);
+
+        sightLine.GetComponent<MeshRenderer>().material.color = Color.black;
+        sightLine.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        sightLine.GetComponent<Collider>().enabled = false;
+
+        sightLine.SetActive(true);
+        Destroy(sightLine, 1);
     }
 
     private void ResetLoader()
@@ -66,5 +94,6 @@ public class SightLoader : MonoBehaviour
         lastObject = null;
         timer = 0;
         activated = false;
+        loadingCircle.GetComponent<Animator>().SetBool("Loading", false);
     }
 }

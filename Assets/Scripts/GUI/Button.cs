@@ -9,20 +9,18 @@ public abstract class Button : MonoBehaviour, IGazeable
     public virtual void Start()
     {
         loadingAnimation = GetComponentInChildren<Animator>();
-        loadingAnimation.SetBool("Loading", false);
-
-       // GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().;
+        //loadingAnimation.SetBool("Loading", false);
     }
 
     public abstract void Activate();
 
     public void OnHoverStart()
     {
-        loadingAnimation.SetBool("Loading", true);
+        //loadingAnimation.SetBool("Loading", true);
     }
 
     public void OnHoverEnd()
     {
-        loadingAnimation.SetBool("Loading", false);
+        //loadingAnimation.SetBool("Loading", false);
     }
 }

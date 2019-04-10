@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464118788150765404}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.9739, y: 1.344, z: 2.111}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 11.181999, y: 11.181999, z: 11.181999}
   m_Children:
   - {fileID: 2464118788150279038}
   - {fileID: 7952089233848332407}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2464118788151606110}
   - component: {fileID: 2464118788152703390}
   m_Layer: 0
-  m_Name: bakje_low
+  m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ RectTransform:
   m_GameObject: {fileID: 8116752923221771770}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.0012}
-  m_LocalScale: {x: 0.19, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.185, y: 0.095, z: 1}
   m_Children: []
   m_Father: {fileID: 2464118788150279036}
   m_RootOrder: 1
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 0.1
+  m_fontSizeMin: 0.5
   m_fontSizeMax: 1
   m_fontStyle: 0
   m_textAlignment: 257

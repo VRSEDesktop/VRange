@@ -1032,7 +1032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7972075036675211925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.92, y: -0.01, z: 2.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7972075036675579659}
@@ -1058,7 +1058,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform 'upperarm_r'\n\tTransform
+    'upperarm_l'\n\tTransform 'neck_01'\n\tTransform 'head'\n\tTransform 'spine_03'\n\tTransform
+    'spine_01'\n\tTransform 'clavicle_r'\n\tTransform 'lowerarm_r'\n\tand more ...\n\tFrom
+    animation clip 'Game_engine|GunAim'\n\tFrom animation clip 'Game_engine|PullGun1'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1129,6 +1134,7 @@ MonoBehaviour:
     type: 8
   gun: {fileID: 7335397740868710825}
   phone: {fileID: 4679903044184567538}
+  isAgressive: 0
 --- !u!1 &7972075036675211927
 GameObject:
   m_ObjectHideFlags: 0
