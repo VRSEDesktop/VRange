@@ -84,8 +84,13 @@ public class SightLoader : MonoBehaviour
         sightLine.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         sightLine.GetComponent<Collider>().enabled = false;
 
-        sightLine.SetActive(true);
+        HandleButtons();
         Destroy(sightLine, 1);
+    }
+
+    private void HandleButtons()
+    {
+        sightLine.SetActive(UI.GetButtonActivated("Toggle Sightline"));
     }
 
     private void ResetLoader()

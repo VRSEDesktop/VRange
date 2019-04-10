@@ -5,8 +5,6 @@
 /// </summary>
 public class GazeButton : UIElement, IGazeable
 {
-    [SerializeField] private Animator loadingAnimation;
-
     public void Activate()
     {
         SetActive();
