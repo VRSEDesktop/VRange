@@ -1,33 +1,94 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
+    /// <summary>
+    /// NPC GameObject
+    /// </summary>
     public GameObject NPC;
-    public int MaxNPCs;
+    /// <summary>
+    /// Array of weapon GameObjects suspects can use
+    /// </summary>
+    public Weapon[] Weapons;
+    /// <summary>
+    /// Number of normal NPCs
+    /// </summary>
+    public int Bystanders;
+    /// <summary>
+    /// Number of suspects
+    /// </summary>
+    public int Suspects;
 
     private List<Transform> SpawnPoints = new List<Transform>();
-    private List<GameObject> NPCList = new List<GameObject>();
+    private List<GameObject> BystanderList = new List<GameObject>();
+    private List<GameObject> SuspectList = new List<GameObject>();
+    /// <summary>
+    /// GameObject to make the Bystander list easier on the eyes in the editor hierarchy.
+    /// </summary>
+    private GameObject BystanderObject;
+    /// <summary>
+    /// GameObject to make the Suspect list easier on the eyes in the editor hierarchy.
+    /// </summary>
+    private GameObject SuspectObject;
 
     private void Awake()
     {
+        BystanderObject = new GameObject("Bystanders");
+        BystanderObject.transform.parent = transform;
+        SuspectObject = new GameObject("Suspects");
+        SuspectObject.transform.parent = transform;
+
         UpdateSpawnPoints();
     }
 
     private void Start()
     {
-        while (NPCList.Count < MaxNPCs)
-        {
-            Spawn();
-        }
+        while (BystanderList.Count < Bystanders)    SpawnBystander();
+        while (SuspectList.Count < Suspects)        SpawnSuspect();
     }
 
-    private void Spawn()
+    /// <summary>
+    /// Initialize and spawn a regular NPC
+    /// </summary>
+    private void SpawnBystander()
     {
         int spawnPoint = Random.Range(0, SpawnPoints.Count);
-        GameObject npc = Instantiate(NPC, SpawnPoints[spawnPoint]);
-        NPCList.Add(npc);
+        GameObject bystander = Instantiate(NPC, BystanderObject.transform);
+        bystander.transform.position = SpawnPoints[spawnPoint].position;
+        bystander.transform.parent = BystanderObject.transform;
+        bystander.AddComponent<AIController>();
+
+        //Add the gun to the NPC GameObject's script
+        AIController suspectController = bystander.GetComponent<AIController>();
+        suspectController.StateMachine.ChangeState(Patrol.Instance);
+
+        BystanderList.Add(bystander);
+    }
+
+    /// <summary>
+    /// Initialize and spawn a suspect
+    /// </summary>
+    private void SpawnSuspect()
+    {
+        int spawnPoint = Random.Range(0, SpawnPoints.Count);
+
+        GameObject suspect = Instantiate(NPC, SuspectObject.transform);
+        suspect.transform.position = SpawnPoints[spawnPoint].position;
+        suspect.transform.parent = SuspectObject.transform;
+        suspect.AddComponent<AISuspectController>();
+
+        int weaponindex = Random.Range(0, Weapons.Length);
+        Weapon weapon = Instantiate(Weapons[weaponindex], suspect.transform);
+        weapon.transform.parent = suspect.transform;
+        weapon.transform.SetAsFirstSibling();
+
+        //Add the gun to the NPC GameObject's script
+        AISuspectController suspectController = suspect.GetComponent<AISuspectController>();
+        suspectController.Item = weapon;
+        suspectController.StateMachine.ChangeState(Patrol.Instance);
+
+        SuspectList.Add(suspect);
     }
 
     private void UpdateSpawnPoints()

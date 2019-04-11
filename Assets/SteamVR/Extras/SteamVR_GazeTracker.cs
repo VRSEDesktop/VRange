@@ -1,6 +1,5 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
-using System.Collections;
 
 namespace Valve.VR.Extras
 {
@@ -17,14 +16,12 @@ namespace Valve.VR.Extras
 
         public virtual void OnGazeOn(GazeEventArgs gazeEventArgs)
         {
-            if (GazeOn != null)
-                GazeOn(this, gazeEventArgs);
+            GazeOn?.Invoke(this, gazeEventArgs);
         }
 
         public virtual void OnGazeOff(GazeEventArgs gazeEventArgs)
         {
-            if (GazeOff != null)
-                GazeOff(this, gazeEventArgs);
+            GazeOff?.Invoke(this, gazeEventArgs);
         }
 
         protected virtual void Update()
