@@ -14,9 +14,6 @@ public class SightLoader : MonoBehaviour
     /// </summary>
     private GameObject lastObject;
     private SpriteRenderer loadingCircle;
-    private GameObject sightLine;
-
-    Renderer lineRenderer;
 
     /// <summary>
     /// Time player is looking at specific UI object
@@ -28,6 +25,7 @@ public class SightLoader : MonoBehaviour
     {
         layer = LayerMask.NameToLayer("UI");
         loadingCircle = GetComponentInChildren<SpriteRenderer>();
+        loadingCircle.transform.localScale = new Vector3(0.1f/loadingCircle.transform.lossyScale.x, 0.1f / loadingCircle.transform.lossyScale.y, 0.1f / loadingCircle.transform.lossyScale.z);
     }
 
     public void Update()
@@ -69,34 +67,6 @@ public class SightLoader : MonoBehaviour
             else ResetLoader();
         }
         else ResetLoader();
-
-        //Change this to a prefab instead of a primitive so we can use valve shaders.
-        if(sightLine == null) sightLine = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        if(lineRenderer == null) lineRenderer = sightLine.GetComponent<Renderer>();
-        Shader lineShader = Shader.Find("Valve/vr_standard");
-        if (lineShader != null) lineRenderer.material.shader = lineShader;
-        sightLine.transform.parent = transform;
-
-        float thickness = 0.005f;
-        Vector3 start = transform.position;
-        Vector3 end = transform.position + transform.rotation * Vector3.forward * 10;
-        float length = Vector3.Distance(start, end);
-
-        sightLine.transform.localScale = new Vector3(thickness, thickness, length);
-        sightLine.transform.position = start + ((end - start) / 2);
-        sightLine.transform.LookAt(end);
-
-        sightLine.GetComponent<MeshRenderer>().material.color = Color.black;
-        sightLine.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        sightLine.GetComponent<Collider>().enabled = false;
-
-        HandleButtons();
-        Destroy(sightLine, 1);
-    }
-
-    private void HandleButtons()
-    {
-        sightLine.SetActive(UI.GetButtonActivated("Toggle Sightline"));
     }
 
     private void ResetLoader()

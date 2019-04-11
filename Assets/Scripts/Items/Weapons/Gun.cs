@@ -96,6 +96,9 @@ public class Gun : Weapon, IReloadable
 
     private void SpawnBulletHole(RaycastHit hit)
     {
+        //tmp TODO FIX IT
+        if (hit.collider.GetComponentInParent<Enemy>()) return;
+
         Vector3 offset = transform.rotation * -Vector3.forward;
         offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
         Vector3 position = hit.point - offset;
