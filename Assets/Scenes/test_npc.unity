@@ -249,13 +249,12 @@ PrefabInstance:
     - target: {fileID: 7972075036667834599, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform
-        'upperarm_r'\n\tTransform 'upperarm_l'\n\tTransform 'neck_01'\n\tTransform
-        'head'\n\tTransform 'spine_03'\n\tTransform 'spine_01'\n\tTransform 'clavicle_r'\n\tTransform
-        'lowerarm_r'\n\tand more ...\n\tFrom animation clip 'Game_engine_GunAim'\n\tFrom
-        animation clip 'Game_engine_PullGun1'"
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972075036667834599, guid: 1cdeb3c055b1ec2458a15946f73c281a,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7972075036675579765, guid: 1cdeb3c055b1ec2458a15946f73c281a,
         type: 3}

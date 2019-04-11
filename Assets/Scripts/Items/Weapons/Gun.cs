@@ -18,8 +18,6 @@ public class Gun : Weapon, IReloadable
     /// The place where bullets spawn
     /// </summary>
     public Transform barrelExit;
-
-    public GameObject bulletLine;
     public GameObject bulletHole;
 
     public void Start()

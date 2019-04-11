@@ -25,7 +25,6 @@ public class SightLoader : MonoBehaviour
     {
         layer = LayerMask.NameToLayer("UI");
         loadingCircle = GetComponentInChildren<SpriteRenderer>();
-        loadingCircle.transform.localScale = new Vector3(0.1f/loadingCircle.transform.lossyScale.x, 0.1f / loadingCircle.transform.lossyScale.y, 0.1f / loadingCircle.transform.lossyScale.z);
     }
 
     public void Update()
@@ -60,7 +59,12 @@ public class SightLoader : MonoBehaviour
 
                 lastObject = hit.collider.gameObject;
 
-                loadingCircle.transform.position = hit.point;
+                ///Vector3 offset = transform.rotation * Vector3.forward;
+                Vector3 offset = hit.normal;
+                offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
+                Vector3 position = hit.point + offset;
+
+                loadingCircle.transform.position = position;
                 loadingCircle.transform.rotation = Quaternion.LookRotation(hit.normal);
 
             }
