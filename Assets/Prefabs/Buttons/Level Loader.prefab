@@ -400,11 +400,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8758056144071396474}
     m_Modifications:
-    - target: {fileID: 3577906014207844786, guid: c9296324c63a8b34183e6d4d5692a838,
-        type: 3}
-      propertyPath: m_Name
-      value: Loading Circle
-      objectReference: {fileID: 0}
     - target: {fileID: 7322361531360504492, guid: c9296324c63a8b34183e6d4d5692a838,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -469,6 +464,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577906014207844786, guid: c9296324c63a8b34183e6d4d5692a838,
+        type: 3}
+      propertyPath: m_Name
+      value: Loading Circle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9296324c63a8b34183e6d4d5692a838, type: 3}
