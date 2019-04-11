@@ -120,7 +120,7 @@ public class Gun : Weapon, IReloadable
     /// <summary>
     /// Debug function for drawing the bullet trajectory
     /// </summary>
-    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 15f)
+    private void CreateShotRepresentation(Vector3 start, Vector3 end, Color color, float duration = 5f)
     {
         GameObject shotsContainer = GameObject.Find("ShotsRays");
         if (shotsContainer == null) shotsContainer = new GameObject("ShotsRays");

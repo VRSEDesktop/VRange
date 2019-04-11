@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour, IHitable
     private void Die()
     {
         isDead = true;
-        animator.SetBool("Death2", true);
+        animator.enabled = false;
         if (navMeshAgent) navMeshAgent.speed = 0f;
     }
 
@@ -95,7 +95,8 @@ public class Enemy : MonoBehaviour, IHitable
     private void Revive()
     {
         isDead = false;
-        animator.SetBool("Death2", false);
+        animator.enabled = true;
+        //animator.SetBool("Death2", false);
         animator.SetBool("GetUp", true);
         if(navMeshAgent) navMeshAgent.speed = 1.5f;
     }

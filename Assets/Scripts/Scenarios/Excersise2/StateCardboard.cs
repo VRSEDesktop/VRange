@@ -23,6 +23,8 @@ public class StateCardboard : ExcersiseState
     public override void OnExit()
     {
         base.OnExit();
+
+        flipAnimation.SetBool("Visible", false);
     }
 
     private IEnumerator TurningCardBoard()

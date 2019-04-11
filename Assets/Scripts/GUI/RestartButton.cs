@@ -6,8 +6,5 @@ public class RestartButton : Button
     {
         Scenario.Clear();
         GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Restart();
-
-        GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
-        foreach (GameObject obj in bulletHoles) Destroy(obj);
     }
 }

@@ -1,15 +1,18 @@
-﻿/// <summary>
+﻿using UnityEngine;
+/// <summary>
 /// Gaze Button that toggles.
 /// </summary>
 public class GazeButtonToggle : GazeButton
 {
     private bool isActive;
 
-    public new void Activate()
+    public override void Activate()
     {
         if (isActive)
             SetInactive();
         else
             SetActive();
+
+        isActive = !isActive;
     }
 }

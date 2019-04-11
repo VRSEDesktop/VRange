@@ -1,6 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
-using Valve.VR;
+﻿using Valve.VR;
 
 public class LoadLevelButton : Button
 {

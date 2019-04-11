@@ -5,17 +5,17 @@
 /// </summary>
 public class GazeButton : UIElement, IGazeable
 {
-    public void Activate()
+    public virtual void Activate()
     {
         SetActive();
     }
 
-    public void OnHoverStart()
+    public virtual void OnHoverStart()
     {
         
     }
 
-    public void OnHoverEnd()
+    public virtual void OnHoverEnd()
     {
         
     }

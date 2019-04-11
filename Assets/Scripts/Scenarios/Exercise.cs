@@ -28,6 +28,8 @@ public class Exercise : MonoBehaviour
         states[currentState].OnExit();
         currentState--;
         states[currentState].OnStart();
+
+        DeleteBulletHoles();
     }
 
     public void NextStep()
@@ -35,15 +37,24 @@ public class Exercise : MonoBehaviour
         states[currentState].OnExit();
         currentState++;
         states[currentState].OnStart();
+
+        DeleteBulletHoles();
     }
 
     public void Restart()
     {
+        DeleteBulletHoles();
         states[currentState].Restart();
     }
 
     private void HandleButtons()
     {
         Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
+    }
+
+    private void DeleteBulletHoles()
+    {
+        GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
+        foreach (GameObject obj in bulletHoles) Destroy(obj);
     }
 }

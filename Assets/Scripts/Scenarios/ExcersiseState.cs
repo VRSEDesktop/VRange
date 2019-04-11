@@ -38,6 +38,9 @@ public abstract class ExcersiseState : MonoBehaviour
     {
         if(text) text.text = "";
         GetComponent<Transform>().gameObject.SetActive(false);
+
+        Scenario.Clear();
+        HasSettedGUI = false;
     }
 
     /// <summary>
@@ -66,7 +69,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
         foreach (var hit in Scenario.GetHits())
         {
-            text.text += "\n" + hit.part.ToString();
+            text.text += "\n" + hit.part.ToDescriptionString();
         }
 
         HasSettedGUI = true;
