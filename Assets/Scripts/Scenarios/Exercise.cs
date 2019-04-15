@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Valve.VR;
 
 [RequireComponent(typeof(Settings))]
 public class Exercise : MonoBehaviour
@@ -8,6 +9,7 @@ public class Exercise : MonoBehaviour
     /// </summary>
     public ExcersiseState[] states;
     public Settings Settings;
+    public SteamVR_LoadLevel levelLoader;
     private static int currentState = 0;
 
     public void Start()
@@ -50,6 +52,32 @@ public class Exercise : MonoBehaviour
     private void HandleButtons()
     {
         Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
+
+        if (UI.GetButtonActivated("Restart Scenario"))
+        {
+            Scenario.Clear();
+            Restart();
+            UI.DeactivateButton("Restart Scenario");
+        }
+
+        if (UI.GetButtonActivated("Mainmenu"))
+        {
+            Scenario.Clear();
+            levelLoader.levelName = "MainMenu";
+            levelLoader.Trigger();
+        }
+
+        if (UI.GetButtonActivated("Next Scenario"))
+        {
+            Scenario.Clear();
+            NextStep();
+        }
+
+        if (UI.GetButtonActivated("Previous Scenario"))
+        {
+            Scenario.Clear();
+            PreviousStep();
+        }
     }
 
     private void DeleteBulletHoles()

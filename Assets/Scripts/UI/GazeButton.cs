@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Button that activates when gazed at.
 /// </summary>
 public class GazeButton : UIElement, IGazeable
@@ -10,13 +8,7 @@ public class GazeButton : UIElement, IGazeable
         SetActive();
     }
 
-    public virtual void OnHoverStart()
-    {
-        
-    }
+    public virtual void OnHoverStart() {}
 
-    public virtual void OnHoverEnd()
-    {
-        
-    }
+    public virtual void OnHoverEnd() {}
 }
