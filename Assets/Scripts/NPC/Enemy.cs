@@ -54,10 +54,14 @@ public class Enemy : MonoBehaviour, IHitable
             case HitboxType.HUMAN_FOOT_RIGHT: break;
 
             case HitboxType.HUMAN_UPPER_ARM_LEFT: break;
-            case HitboxType.HUMAN_UPPER_ARM_RIGHT: break;
+            case HitboxType.HUMAN_UPPER_ARM_RIGHT:
+                animator.SetBool("Shoulder", true);
+                    break;
 
             case HitboxType.HUMAN_LOWER_ARM_LEFT: break;
-            case HitboxType.HUMAN_LOWER_ARM_RIGHT: break;
+            case HitboxType.HUMAN_LOWER_ARM_RIGHT:
+                animator.SetBool("Shoulder", true);
+                break;
 
             case HitboxType.HUMAN_HAND_LEFT: break;
             case HitboxType.HUMAN_HAND_RIGHT: break;
