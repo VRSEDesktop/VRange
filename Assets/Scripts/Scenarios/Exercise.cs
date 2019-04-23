@@ -10,6 +10,7 @@ public class Exercise : MonoBehaviour
     public Settings Settings;
     public SteamVR_LoadLevel levelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
+    public GameObject ShootingRange;
 
     private static int currentState = 0;
 

@@ -10,7 +10,6 @@ public class StateCardboard : ExcersiseState
     public float timeToStart = 5f;
 
     private static readonly float timeToReact = 2.5f;
-
     public override void OnStart()
     {
         base.OnStart();
