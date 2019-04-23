@@ -169,8 +169,7 @@ MonoBehaviour:
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 1833356711}
   text: {fileID: 0}
-  DrawPreviousScenarioButton: 1
-  DrawNextScenarioButton: 0
+  text2: {fileID: 0}
   womanPrefab: {fileID: 7972075036675211925, guid: 1cdeb3c055b1ec2458a15946f73c281a,
     type: 3}
   anim: {fileID: 699645903}
@@ -1123,8 +1122,7 @@ MonoBehaviour:
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 1833356711}
   text: {fileID: 0}
-  DrawPreviousScenarioButton: 1
-  DrawNextScenarioButton: 1
+  text2: {fileID: 0}
   womanPrefab: {fileID: 8062746389523552633, guid: fc80e481f241eff448fb8334f1a35518,
     type: 3}
   anim: {fileID: 1718541687}
@@ -2380,8 +2378,7 @@ MonoBehaviour:
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 1833356711}
   text: {fileID: 0}
-  DrawPreviousScenarioButton: 0
-  DrawNextScenarioButton: 1
+  text2: {fileID: 0}
   flipAnimation: {fileID: 242567599}
   timeToStart: 5
 --- !u!1 &1713061549
@@ -2419,8 +2416,8 @@ MonoBehaviour:
   - {fileID: 118193539}
   Settings: {fileID: 11400000, guid: 15910a12dbd271341b0a194d521ae338, type: 2}
   levelLoader: {fileID: 2146935800}
-  PreviousScenario: {fileID: 1083132997}
-  NextScenario: {fileID: 933506053}
+  PreviousScenarioButton: {fileID: 1083132997}
+  NextScenarioButton: {fileID: 933506053}
 --- !u!4 &1713061551
 Transform:
   m_ObjectHideFlags: 0
@@ -3413,6 +3410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222444709336190905, guid: 6cab0d4291a9b6d438441e0f277af122,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cab0d4291a9b6d438441e0f277af122, type: 3}
