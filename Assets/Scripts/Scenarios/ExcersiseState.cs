@@ -7,18 +7,23 @@ public abstract class ExcersiseState : MonoBehaviour
     [HideInInspector]
     public TextMeshPro text;
     public bool HasSettedGUI { get; set; }
-
-    protected float startTime;
+    public bool DrawPreviousScenarioButton, DrawNextScenarioButton;
+    private Exercise Exercise;
+    protected float StartTime;
 
     public virtual void OnStart()
     {
         GetComponent<Transform>().gameObject.SetActive(true);
+        Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
 
         text = GameObject.FindWithTag("ShootingStats").GetComponentInChildren<TextMeshPro>();
 
-        startTime = Time.realtimeSinceStartup;
+        StartTime = Time.realtimeSinceStartup;
         leftGun?.Reload();
         rightGun?.Reload();
+
+        Exercise.PreviousScenario.gameObject.SetActive(DrawPreviousScenarioButton);
+        Exercise.NextScenario.gameObject.SetActive(DrawNextScenarioButton);
     }
 
     public abstract void OnUpdate();
@@ -29,7 +34,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
         leftGun?.Reload();
         rightGun?.Reload();
-        startTime = Time.realtimeSinceStartup;
+        StartTime = Time.realtimeSinceStartup;
         text.text = "";
         HasSettedGUI = false;
     }
@@ -63,7 +68,7 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     private void DisplayStats()
     {
-        float time = Time.realtimeSinceStartup - startTime;
+        float time = Time.realtimeSinceStartup - StartTime;
         text.text = "Tijd: " + time.ToString("0.00") + " s" + '\n';
         text.text += "Schoten:";
 

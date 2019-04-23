@@ -10,6 +10,8 @@ public class Exercise : MonoBehaviour
     public ExcersiseState[] states;
     public Settings Settings;
     public SteamVR_LoadLevel levelLoader;
+    public GazeButton PreviousScenario, NextScenario;
+
     private static int currentState = 0;
 
     public void Start()
