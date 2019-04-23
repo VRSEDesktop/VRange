@@ -5,11 +5,11 @@ public class GazeButtonToggle : GazeButton
 {
     private bool isActive;
 
-    public new void Activate()
+    public override void Activate()
     {
-        if (isActive)
-            SetInactive();
-        else
-            SetActive();
+        if (isActive) SetInactive();
+        else          SetActive();
+
+        isActive = !isActive;
     }
 }

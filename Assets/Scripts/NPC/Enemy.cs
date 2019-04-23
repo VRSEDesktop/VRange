@@ -54,10 +54,14 @@ public class Enemy : MonoBehaviour, IHitable
             case HitboxType.HUMAN_FOOT_RIGHT: break;
 
             case HitboxType.HUMAN_UPPER_ARM_LEFT: break;
-            case HitboxType.HUMAN_UPPER_ARM_RIGHT: break;
+            case HitboxType.HUMAN_UPPER_ARM_RIGHT:
+                animator.setBool("Shoulder", true);
+                    break;
 
             case HitboxType.HUMAN_LOWER_ARM_LEFT: break;
-            case HitboxType.HUMAN_LOWER_ARM_RIGHT: break;
+            case HitboxType.HUMAN_LOWER_ARM_RIGHT:
+                animator.setBool("Shoulder", true);
+                break;
 
             case HitboxType.HUMAN_HAND_LEFT: break;
             case HitboxType.HUMAN_HAND_RIGHT: break;
@@ -87,7 +91,7 @@ public class Enemy : MonoBehaviour, IHitable
     private void Die()
     {
         isDead = true;
-        animator.SetBool("Death2", true);
+        animator.enabled = false;
         if (navMeshAgent) navMeshAgent.speed = 0f;
     }
 
@@ -95,7 +99,8 @@ public class Enemy : MonoBehaviour, IHitable
     private void Revive()
     {
         isDead = false;
-        animator.SetBool("Death2", false);
+        animator.enabled = true;
+        //animator.SetBool("Death2", false);
         animator.SetBool("GetUp", true);
         if(navMeshAgent) navMeshAgent.speed = 1.5f;
     }

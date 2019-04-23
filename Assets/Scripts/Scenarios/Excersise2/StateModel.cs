@@ -26,6 +26,7 @@ public class StateModel : ExcersiseState
     public override void OnExit()
     {
         base.OnExit();
+        RespawnWoman();
     }
 
     private void Randomizer()
@@ -53,6 +54,7 @@ public class StateModel : ExcersiseState
             break; 
             case 1:
 		        anim.SetBool("Equip Phone", true);
+                yield return new WaitForSeconds(0.8f);
                 anim.GetComponent<Enemy>().phone.gameObject.SetActive(true);
                 anim.GetComponent<Enemy>().isAgressive = false;
                 break;
@@ -63,12 +65,16 @@ public class StateModel : ExcersiseState
     {
         base.Restart();
 
+        RespawnWoman();
+        Randomizer();
+    }
+
+    private void RespawnWoman()
+    {
         Enemy woman = GetComponentInChildren<Enemy>();
         GameObject newWoman = Instantiate(womanPrefab, woman.transform.position, woman.transform.rotation);
         newWoman.transform.parent = transform;
         Destroy(woman.gameObject);
         anim = newWoman.GetComponent<Animator>();
-
-        Randomizer();
     }
 }

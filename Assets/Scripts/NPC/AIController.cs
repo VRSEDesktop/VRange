@@ -77,7 +77,8 @@ public class AIController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(StateMachine != null)
-            UnityEditor.Handles.Label(gameObject.transform.position, StateMachine.ToString());
+        #if UNITY_EDITOR
+            if(StateMachine != null) UnityEditor.Handles.Label(gameObject.transform.position, StateMachine.ToString());
+        #endif
     }
 }

@@ -9,6 +9,8 @@ public class StateCardboard : ExcersiseState
     /// </summary>
     public float timeToStart = 5f;
 
+    private static readonly float timeToReact = 2.5f;
+
     public override void OnStart()
     {
         base.OnStart();
@@ -23,14 +25,21 @@ public class StateCardboard : ExcersiseState
     public override void OnExit()
     {
         base.OnExit();
+
+        flipAnimation.SetBool("Visible", false);
     }
 
     private IEnumerator TurningCardBoard()
     {
-        yield return new WaitForSeconds(timeToStart);
+        StartTime = Time.realtimeSinceStartup;
 
-        startTime = Time.realtimeSinceStartup;
-        flipAnimation.SetBool("Visible", true);
+        for(int i = 0; i < 7; i++)
+        {
+            yield return new WaitForSeconds(timeToStart);
+            flipAnimation.SetBool("Visible", true);
+            yield return new WaitForSeconds(timeToReact);
+            flipAnimation.SetBool("Visible", false);
+        }     
     }
 
     public override void Restart()

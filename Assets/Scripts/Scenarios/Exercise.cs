@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
+using Valve.VR;
 
-[RequireComponent(typeof(Settings))]
 public class Exercise : MonoBehaviour
 {
     /// <summary>
@@ -8,6 +8,9 @@ public class Exercise : MonoBehaviour
     /// </summary>
     public ExcersiseState[] states;
     public Settings Settings;
+    public SteamVR_LoadLevel levelLoader;
+    public GazeButton PreviousScenario, NextScenario;
+
     private static int currentState = 0;
 
     public void Start()
@@ -28,6 +31,8 @@ public class Exercise : MonoBehaviour
         states[currentState].OnExit();
         currentState--;
         states[currentState].OnStart();
+
+        DeleteBulletHoles();
     }
 
     public void NextStep()
@@ -35,15 +40,50 @@ public class Exercise : MonoBehaviour
         states[currentState].OnExit();
         currentState++;
         states[currentState].OnStart();
+
+        DeleteBulletHoles();
     }
 
     public void Restart()
     {
+        DeleteBulletHoles();
         states[currentState].Restart();
     }
 
     private void HandleButtons()
     {
         Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
+
+        if (UI.GetButtonActivated("Restart Scenario"))
+        {
+            Scenario.Clear();
+            Restart();
+            UI.DeactivateButton("Restart Scenario");
+        }
+
+        if (UI.GetButtonActivated("Mainmenu"))
+        {
+            Scenario.Clear();
+            levelLoader.levelName = "MainMenu";
+            levelLoader.Trigger();
+        }
+
+        if (UI.GetButtonActivated("Next Scenario"))
+        {
+            Scenario.Clear();
+            NextStep();
+        }
+
+        if (UI.GetButtonActivated("Previous Scenario"))
+        {
+            Scenario.Clear();
+            PreviousStep();
+        }
+    }
+
+    private void DeleteBulletHoles()
+    {
+        GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
+        foreach (GameObject obj in bulletHoles) Destroy(obj);
     }
 }

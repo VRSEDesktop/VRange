@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.ComponentModel;
+using UnityEngine;
 
 public interface IHitable
 {
@@ -14,20 +15,75 @@ public struct Hitbox
 
 public enum HitboxType
 {
+    [Description("Mis")]
     NONE,
 
-    HUMAN_PELVIS, HUMAN_NECK, HUMAN_HEAD,
-    HUMAN_SPINE_1, HUMAN_SPINE_2, HUMAN_SPINE_3,
-    HUMAN_THIGH_LEFT,       HUMAN_THIGH_RIGHT,
-    HUMAN_CALF_LEFT,        HUMAN_CALF_RIGHT,
-    HUMAN_FOOT_LEFT,        HUMAN_FOOT_RIGHT,
-    HUMAN_UPPER_ARM_LEFT,   HUMAN_UPPER_ARM_RIGHT,
-    HUMAN_LOWER_ARM_LEFT,   HUMAN_LOWER_ARM_RIGHT,
-    HUMAN_HAND_LEFT,        HUMAN_HAND_RIGHT,
+    [Description("Torso")]
+    HUMAN_PELVIS,
+    [Description("Hoofd")]
+    HUMAN_NECK,
+    [Description("Hoofd")]
+    HUMAN_HEAD,
 
-    Hoofd,
-    Linkerarm, Rechterarm,
-    Linkerbeen, Rechterbeen,
-    Linkerhand, Rechterhand,
-    TARGET_TORSO_7, TARGET_TORSO_8, TARGET_TORSO_9, TARGET_TORSO_10, Torso
+    [Description("Torso")]
+    HUMAN_SPINE_1,
+    [Description("Torso")]
+    HUMAN_SPINE_2,
+    [Description("Torso")]
+    HUMAN_SPINE_3,
+
+    [Description("Linkerbeen")]
+    HUMAN_THIGH_LEFT,
+    [Description("Rechterbeen")]
+    HUMAN_THIGH_RIGHT,
+    [Description("Linkerbeen")]
+    HUMAN_CALF_LEFT,
+    [Description("Rechterbeen")]
+    HUMAN_CALF_RIGHT,
+    [Description("Linkerbeen")]
+    HUMAN_FOOT_LEFT,
+    [Description("Rechterbeen")]
+    HUMAN_FOOT_RIGHT,
+
+    [Description("Linkerarm")]
+    HUMAN_UPPER_ARM_LEFT,
+    [Description("Rechterarm")]
+    HUMAN_UPPER_ARM_RIGHT,
+    [Description("Linkerarm")]
+    HUMAN_LOWER_ARM_LEFT,
+    [Description("Rechterarm")]
+    HUMAN_LOWER_ARM_RIGHT,
+    [Description("Linkerarm")]
+    HUMAN_HAND_LEFT,
+    [Description("Rechterarm")]
+    HUMAN_HAND_RIGHT,
+
+    [Description("Hoofd")]
+    TARGET_HEAD,
+    [Description("Linkerarm")]
+    TARGET_ARM_LEFT,
+    [Description("Rechterarm")]
+    TARGET_ARM_RIGHT,
+    [Description("Linkerbeen")]
+    TARGET_LEG_LEFT,
+    [Description("Rechterbeen")]
+    TARGET_LEG_RIGHT,
+    [Description("Linkerarm")]
+    TARGET_HAND_LEFT,
+    [Description("Rechterarm")]
+    TARGET_HAND_RIGHT,
+    [Description("Torso")]
+    TARGET_TORSO,
+}
+
+public static class EnumUtils
+{
+    public static string ToDescriptionString(this HitboxType val)
+    {
+        DescriptionAttribute[] attributes = (DescriptionAttribute[])val
+           .GetType()
+           .GetField(val.ToString())
+           .GetCustomAttributes(typeof(DescriptionAttribute), false);
+        return attributes.Length > 0 ? attributes[0].Description : string.Empty;
+    }
 }

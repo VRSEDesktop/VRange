@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Saves data relevant to the player.
@@ -15,8 +14,6 @@ public class Player : MonoBehaviour, IHitable
 
     public Hitbox hitbox;
 
-    public Text textLabel;
-    
     private void Awake()
     {
         Instance = this;
