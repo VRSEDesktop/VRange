@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Valve.VR;
 
-[RequireComponent(typeof(Settings))]
 public class Exercise : MonoBehaviour
 {
     /// <summary>
