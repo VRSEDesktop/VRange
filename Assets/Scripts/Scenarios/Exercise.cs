@@ -25,7 +25,7 @@ public class Exercise : MonoBehaviour
     {      
         states[currentState].OnUpdate();
         HandleButtons();
-        BulletLine.Parent.SetActive(Settings.drawLines);
+        if(BulletLine.Parent) BulletLine.Parent.SetActive(Settings.drawLines);
     }
 
     public void PreviousStep()

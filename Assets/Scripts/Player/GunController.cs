@@ -8,7 +8,7 @@ public class GunController : HandController
     public Gun gun;
     private bool triggerPushed, reloadPushed;
     private float LastTime;
-    private float DoubleClickDelay = 0.1f;
+    private float DoubleClickDelay = 0.5f;
 
     public override void HandleInput()
     {

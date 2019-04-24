@@ -27,6 +27,7 @@ public class BulletLine : MonoBehaviour
         const float thickness = 0.005f;
         float length = Vector3.Distance(start, end);
 
+        gameObject.transform.parent = Parent.transform;
         gameObject.transform.localScale = new Vector3(thickness, thickness, length);
         gameObject.transform.position = start + ((end - start) / 2);
         gameObject.transform.LookAt(end);
@@ -34,6 +35,7 @@ public class BulletLine : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().material.color = color;
         gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Renderer>().sharedMaterial.SetColor("_BaseColor", color);
 
         Lifespan = lifespan;
 
