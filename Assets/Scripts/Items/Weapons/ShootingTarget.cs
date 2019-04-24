@@ -17,14 +17,14 @@ public class ShootingTarget : MonoBehaviour, IHitable
         }
         switch (partHit)
         {
-            case HitboxType.TARGET_HEAD:
-            case HitboxType.TARGET_ARM_LEFT:
-            case HitboxType.TARGET_ARM_RIGHT:
-            case HitboxType.TARGET_LEG_LEFT:
-            case HitboxType.TARGET_LEG_RIGHT:
-            case HitboxType.TARGET_HAND_LEFT:
-            case HitboxType.TARGET_HAND_RIGHT:
-            case HitboxType.TARGET_TORSO: return HitType.UNWANTED;
+            case HitboxType.TargetHead:
+            case HitboxType.TargetArmLeft:
+            case HitboxType.TargetArmRight:
+            case HitboxType.TargetLegLeft:
+            case HitboxType.TargetLegRight:
+            case HitboxType.TargetHandLeft:
+            case HitboxType.TargetHandRight:
+            case HitboxType.TargetTorso: return HitType.UNWANTED;
         }
 
         return HitType.MISS;
@@ -42,6 +42,6 @@ public class ShootingTarget : MonoBehaviour, IHitable
             if (hitbox.mesh == raycastHit.collider) return hitbox.type;
         }
 
-        return HitboxType.NONE;
+        return HitboxType.None;
     }
 }

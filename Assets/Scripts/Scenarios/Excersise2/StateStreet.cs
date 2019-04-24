@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StateStreet : MonoBehaviour
+public class StateStreet : ExcersiseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnStart()
     {
-        
+        base.OnStart();
+        Exercise.ShootingRange.gameObject.SetActive(false);
+        Exercise.City.gameObject.SetActive(true);
+
+        GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+        foreach (GameObject button in buttons) button.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnUpdate()
     {
-        
+    
     }
 }

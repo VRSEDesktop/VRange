@@ -14,6 +14,9 @@ public class StateCovers : ExcersiseState
     {
         base.OnStart();
         Randomizer();
+
+        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
+        Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
     public override void OnUpdate()

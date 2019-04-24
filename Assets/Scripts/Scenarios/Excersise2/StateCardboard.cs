@@ -14,7 +14,12 @@ public class StateCardboard : ExcersiseState
     public override void OnStart()
     {
         base.OnStart();
-        StartCoroutine(TurningCardBoard());        
+        StartCoroutine(TurningCardBoard());
+
+        Exercise.City.gameObject.SetActive(true);
+
+        Exercise.PreviousScenarioButton.gameObject.SetActive(false);
+        Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
     public override void OnUpdate()

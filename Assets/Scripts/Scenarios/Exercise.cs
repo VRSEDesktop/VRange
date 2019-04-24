@@ -10,6 +10,7 @@ public class Exercise : MonoBehaviour
     public Settings Settings;
     public SteamVR_LoadLevel levelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
+    public GameObject ShootingRange, City;
 
     private static int currentState = 0;
 
@@ -18,8 +19,6 @@ public class Exercise : MonoBehaviour
         foreach(ExcersiseState state in states) state.OnExit();
         currentState = 0;
         states[currentState].OnStart();
-
-        PreviousScenarioButton.gameObject.SetActive(currentState != 0);
     }
 
     public void Update()
@@ -34,8 +33,6 @@ public class Exercise : MonoBehaviour
         currentState--;
         states[currentState].OnStart();
 
-        PreviousScenarioButton.gameObject.SetActive(currentState != 0);
-
         DeleteBulletHoles();
     }
 
@@ -44,8 +41,6 @@ public class Exercise : MonoBehaviour
         states[currentState].OnExit();
         currentState++;
         states[currentState].OnStart();
-
-        NextScenarioButton.gameObject.SetActive(currentState != (states.Length-1));
 
         DeleteBulletHoles();
     }

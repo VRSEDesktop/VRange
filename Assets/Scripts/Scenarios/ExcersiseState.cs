@@ -1,7 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
-using System;
 
 public abstract class ExcersiseState : MonoBehaviour
 {
@@ -16,9 +14,11 @@ public abstract class ExcersiseState : MonoBehaviour
     public bool HasSettedGUI { get; set; }
 
     protected float StartTime;
+    protected Exercise Exercise;
 
     public virtual void OnStart()
     {
+        Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
         text = GameObject.FindWithTag("Shootingstats").GetComponentInChildren<TextMeshPro>();
