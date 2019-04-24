@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
+using Valve.VR;
 
-[RequireComponent(typeof(Settings))]
 public class Exercise : MonoBehaviour
 {
     /// <summary>
@@ -8,6 +8,10 @@ public class Exercise : MonoBehaviour
     /// </summary>
     public ExcersiseState[] states;
     public Settings Settings;
+    public SteamVR_LoadLevel levelLoader;
+    public GazeButton PreviousScenarioButton, NextScenarioButton;
+    public GameObject ShootingRange;
+
     private static int currentState = 0;
 
     public void Start()
@@ -15,6 +19,8 @@ public class Exercise : MonoBehaviour
         foreach(ExcersiseState state in states) state.OnExit();
         currentState = 0;
         states[currentState].OnStart();
+
+        PreviousScenarioButton.gameObject.SetActive(currentState != 0);
     }
 
     public void Update()
@@ -29,6 +35,8 @@ public class Exercise : MonoBehaviour
         currentState--;
         states[currentState].OnStart();
 
+        PreviousScenarioButton.gameObject.SetActive(currentState != 0);
+
         DeleteBulletHoles();
     }
 
@@ -37,6 +45,8 @@ public class Exercise : MonoBehaviour
         states[currentState].OnExit();
         currentState++;
         states[currentState].OnStart();
+
+        NextScenarioButton.gameObject.SetActive(currentState != (states.Length-1));
 
         DeleteBulletHoles();
     }
@@ -50,6 +60,34 @@ public class Exercise : MonoBehaviour
     private void HandleButtons()
     {
         Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
+
+        if (UI.GetButtonActivated("Restart Scenario"))
+        {
+            Scenario.Clear();
+            Restart();
+            UI.DeactivateButton("Restart Scenario");
+        }
+
+        if (UI.GetButtonActivated("Mainmenu"))
+        {
+            Scenario.Clear();
+            levelLoader.levelName = "MainMenu";
+            levelLoader.Trigger();
+        }
+
+        if (UI.GetButtonActivated("Next Scenario"))
+        {
+            Scenario.Clear();
+            NextStep();
+            UI.DeactivateButton("Next Scenario");
+        }
+
+        if (UI.GetButtonActivated("Previous Scenario"))
+        {
+            Scenario.Clear();
+            PreviousStep();
+            UI.DeactivateButton("Previous Scenario");
+        }
     }
 
     private void DeleteBulletHoles()

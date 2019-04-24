@@ -16,64 +16,64 @@ public struct Hitbox
 public enum HitboxType
 {
     [Description("Mis")]
-    NONE,
+    None,
 
     [Description("Torso")]
-    HUMAN_PELVIS,
+    HumanPelvis,
     [Description("Hoofd")]
-    HUMAN_NECK,
+    HumanNeck,
     [Description("Hoofd")]
-    HUMAN_HEAD,
+    HumanHead,
 
     [Description("Torso")]
-    HUMAN_SPINE_1,
+    HumanSpine1,
     [Description("Torso")]
-    HUMAN_SPINE_2,
+    HumanSpine2,
     [Description("Torso")]
-    HUMAN_SPINE_3,
+    HumanSpine3,
 
     [Description("Linkerbeen")]
-    HUMAN_THIGH_LEFT,
+    HumanThighLeft,
     [Description("Rechterbeen")]
-    HUMAN_THIGH_RIGHT,
+    HumanThighRight,
     [Description("Linkerbeen")]
-    HUMAN_CALF_LEFT,
+    HumanCalfLeft,
     [Description("Rechterbeen")]
-    HUMAN_CALF_RIGHT,
+    HumanCalfRight,
     [Description("Linkerbeen")]
-    HUMAN_FOOT_LEFT,
+    HumanFootLeft,
     [Description("Rechterbeen")]
-    HUMAN_FOOT_RIGHT,
+    HumanFootRight,
 
     [Description("Linkerarm")]
-    HUMAN_UPPER_ARM_LEFT,
+    HumanUpperArmLeft,
     [Description("Rechterarm")]
-    HUMAN_UPPER_ARM_RIGHT,
+    HumanUpperArmRight,
     [Description("Linkerarm")]
-    HUMAN_LOWER_ARM_LEFT,
+    HumanLowerArmLeft,
     [Description("Rechterarm")]
-    HUMAN_LOWER_ARM_RIGHT,
+    HumanLowerArmRight,
     [Description("Linkerarm")]
-    HUMAN_HAND_LEFT,
+    HumanHandLeft,
     [Description("Rechterarm")]
-    HUMAN_HAND_RIGHT,
+    HumanHandRight,
 
     [Description("Hoofd")]
-    TARGET_HEAD,
+    TargetHead,
     [Description("Linkerarm")]
-    TARGET_ARM_LEFT,
+    TargetArmLeft,
     [Description("Rechterarm")]
-    TARGET_ARM_RIGHT,
+    TargetArmRight,
     [Description("Linkerbeen")]
-    TARGET_LEG_LEFT,
+    TargetLegLeft,
     [Description("Rechterbeen")]
-    TARGET_LEG_RIGHT,
+    TargetLegRight,
     [Description("Linkerarm")]
-    TARGET_HAND_LEFT,
+    TargetHandLeft,
     [Description("Rechterarm")]
-    TARGET_HAND_RIGHT,
+    TargetHandRight,
     [Description("Torso")]
-    TARGET_TORSO,
+    TargetTorso,
 }
 
 public static class EnumUtils
