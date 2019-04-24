@@ -1,7 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
-using System;
 
 public abstract class ExcersiseState : MonoBehaviour
 {
@@ -15,16 +13,18 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public bool HasSettedGUI { get; set; }
 
-    protected float startTime;
+    protected float StartTime;
+    protected Exercise Exercise;
 
     public virtual void OnStart()
     {
+        Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
         text = GameObject.FindWithTag("Shootingstats").GetComponentInChildren<TextMeshPro>();
         text2 = GameObject.FindGameObjectWithTag("Shootingstats2").GetComponentInChildren<TextMeshPro>();
 
-        startTime = Time.realtimeSinceStartup;
+        StartTime = Time.realtimeSinceStartup;
         leftGun?.Reload();
         rightGun?.Reload();
     }
@@ -37,7 +37,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
         leftGun?.Reload();
         rightGun?.Reload();
-        startTime = Time.realtimeSinceStartup;
+        StartTime = Time.realtimeSinceStartup;
         text.text = "";
         text2.text = "";
         HasSettedGUI = false;
@@ -72,8 +72,7 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     private void DisplayStats()
     {
-
-        float time = Time.realtimeSinceStartup - startTime;
+        float time = Time.realtimeSinceStartup - StartTime;
 
         ResetGUI();
         ConvertingHits();

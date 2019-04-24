@@ -23,44 +23,48 @@ public class Enemy : MonoBehaviour, IHitable
 
         switch (partHit) // add sth related to the part hit if we will need it
 		{
-			case HitboxType.HUMAN_HEAD:
+			case HitboxType.HumanHead:
                 if (!isDead) Die();
                 else Revive();
             break;
-            case HitboxType.HUMAN_NECK:    break;
-            case HitboxType.HUMAN_PELVIS:  break;
+            case HitboxType.HumanNeck:    break;
+            case HitboxType.HumanPelvis:  break;
 
-            case HitboxType.HUMAN_SPINE_1: break;
-            case HitboxType.HUMAN_SPINE_2: break;
-            case HitboxType.HUMAN_SPINE_3: break;
+            case HitboxType.HumanSpine1: break;
+            case HitboxType.HumanSpine2: break;
+            case HitboxType.HumanSpine3: break;
 
-            case HitboxType.HUMAN_THIGH_LEFT:
+            case HitboxType.HumanThighLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
             break;
-            case HitboxType.HUMAN_THIGH_RIGHT:
+            case HitboxType.HumanThighRight:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
             break;
 
-            case HitboxType.HUMAN_CALF_LEFT:
+            case HitboxType.HumanCalfLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true); break;
-            case HitboxType.HUMAN_CALF_RIGHT:
+            case HitboxType.HumanCalfRight:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true); break;
 
-            case HitboxType.HUMAN_FOOT_LEFT: break;
-            case HitboxType.HUMAN_FOOT_RIGHT: break;
+            case HitboxType.HumanFootLeft: break;
+            case HitboxType.HumanFootRight: break;
 
-            case HitboxType.HUMAN_UPPER_ARM_LEFT: break;
-            case HitboxType.HUMAN_UPPER_ARM_RIGHT: break;
+            case HitboxType.HumanUpperArmLeft: break;
+            case HitboxType.HumanUpperArmRight:
+                animator.SetBool("Shoulder", true);
+                    break;
 
-            case HitboxType.HUMAN_LOWER_ARM_LEFT: break;
-            case HitboxType.HUMAN_LOWER_ARM_RIGHT: break;
+            case HitboxType.HumanLowerArmLeft: break;
+            case HitboxType.HumanLowerArmRight:
+                animator.SetBool("Shoulder", true);
+                break;
 
-            case HitboxType.HUMAN_HAND_LEFT: break;
-            case HitboxType.HUMAN_HAND_RIGHT: break;
+            case HitboxType.HumanHandLeft: break;
+            case HitboxType.HumanHandRight: break;
         }
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
@@ -81,7 +85,7 @@ public class Enemy : MonoBehaviour, IHitable
             if (hitbox.mesh == raycastHit.collider) return hitbox.type;
         }
 
-        return HitboxType.NONE;
+        return HitboxType.None;
     }
 
     private void Die()
