@@ -19,7 +19,7 @@ public class ApplyGunRotation : MonoBehaviour
 
     private void ApplyRealGunRotation()
     {
-        gun.transform.rotation = Quaternion.Euler(0, -85, 90);
+        gun.transform.rotation = Quaternion.Euler(0, -88, 90);
         gun.transform.position += new Vector3(0.05f, 0, -0.1f);
     } 
 }
