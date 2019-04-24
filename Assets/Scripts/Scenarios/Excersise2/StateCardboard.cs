@@ -16,7 +16,7 @@ public class StateCardboard : ExcersiseState
         base.OnStart();
         StartCoroutine(TurningCardBoard());
 
-        Exercise.City.gameObject.SetActive(true);
+        Exercise.City.gameObject.SetActive(false);
 
         Exercise.PreviousScenarioButton.gameObject.SetActive(false);
         Exercise.NextScenarioButton.gameObject.SetActive(true);
