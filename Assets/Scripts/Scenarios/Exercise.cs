@@ -25,6 +25,7 @@ public class Exercise : MonoBehaviour
     {      
         states[currentState].OnUpdate();
         HandleButtons();
+        BulletLine.Parent.SetActive(Settings.drawLines);
     }
 
     public void PreviousStep()
@@ -34,6 +35,7 @@ public class Exercise : MonoBehaviour
         states[currentState].OnStart();
 
         DeleteBulletHoles();
+        DeleteLines();
     }
 
     public void NextStep()
@@ -43,11 +45,13 @@ public class Exercise : MonoBehaviour
         states[currentState].OnStart();
 
         DeleteBulletHoles();
+        DeleteLines();
     }
 
     public void Restart()
     {
         DeleteBulletHoles();
+        DeleteLines();
         states[currentState].Restart();
     }
 
@@ -88,5 +92,11 @@ public class Exercise : MonoBehaviour
     {
         GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
         foreach (GameObject obj in bulletHoles) Destroy(obj);
+    }
+
+    private void DeleteLines()
+    {
+        GameObject shotsContainer = GameObject.Find("ShotsRays");
+        Destroy(shotsContainer);
     }
 }

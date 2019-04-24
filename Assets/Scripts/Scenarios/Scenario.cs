@@ -4,6 +4,7 @@ using UnityEngine;
 public class Scenario : MonoBehaviour
 {
     public static IList<ScenarioLog> logs = new List<ScenarioLog>();
+    public static IList<BulletLine> lines = new List<BulletLine>();
 
     public static IList<LoggedHit> GetHits()
     {
@@ -33,12 +34,6 @@ public class Scenario : MonoBehaviour
         logs.Clear();
 
         GameObject shotsContainer = GameObject.Find("ShotsRays");
-        if (shotsContainer)
-        {
-            for(int i = 0; i < shotsContainer.transform.childCount; i++)
-            {
-                Destroy(shotsContainer.transform.GetChild(i).gameObject);
-            }
-        }
+        Destroy(shotsContainer);
     }
 }
