@@ -1,8 +1,17 @@
 ﻿using TMPro;
 using UnityEngine;
 
+public enum ExerciseProgress
+{
+    NotStarted,
+    Started,
+    Succeeded,
+    Failed
+}
+
 public abstract class ExcersiseState : MonoBehaviour
 {
+    public ExerciseProgress Progress;
     public Gun leftGun, rightGun;
     [HideInInspector]
     public TextMeshPro text;
@@ -18,6 +27,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public virtual void OnStart()
     {
+        Progress = ExerciseProgress.NotStarted;
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
@@ -29,7 +39,14 @@ public abstract class ExcersiseState : MonoBehaviour
         rightGun?.Reload();
     }
 
-    public abstract void OnUpdate();
+    public virtual void OnUpdate()
+    {
+        if(!leftGun.HasAmmo() || !rightGun.HasAmmo())
+        {
+            Progress = ExerciseProgress.Succeeded;
+            UpdateGUI();
+        }
+    }
 
     public virtual void Restart()
     {     
@@ -57,14 +74,12 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     public void UpdateGUI()
     {
-        if (!leftGun.HasAmmo() || !rightGun.HasAmmo())
-        {
-            if (!HasSettedGUI)
-            {
-                DisplayStats();
-            }
-        }
-        else HasSettedGUI = false;
+      
+       if (!HasSettedGUI)
+       {
+            DisplayStats();
+       }
+       else HasSettedGUI = false;
     }
 
     /// <summary>

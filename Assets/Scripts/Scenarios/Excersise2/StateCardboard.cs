@@ -24,7 +24,7 @@ public class StateCardboard : ExcersiseState
 
     public override void OnUpdate()
     {
-        UpdateGUI();
+        base.OnUpdate();
     }
 
     public override void OnExit()
