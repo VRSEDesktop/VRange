@@ -4,10 +4,6 @@
 public class BulletLine : MonoBehaviour
 {
     /// <summary>
-    /// The GameObject that represents the line in 3D space.
-    /// </summary>
-    private GameObject Line;
-    /// <summary>
     /// A parent GameObject for hierarchy purposes and easily destroying all bullet lines.
     /// </summary>
     public static GameObject Parent { get; private set; }
@@ -15,11 +11,6 @@ public class BulletLine : MonoBehaviour
     /// How long the line should be visible before disappearing. If null it will not disappear.
     /// </summary>
     private float? Lifespan;
-
-    public void OnEnable()
-    {
-        Line = GetComponent<GameObject>();
-    }
 
     /// <summary>
     /// Creates the line
@@ -33,21 +24,20 @@ public class BulletLine : MonoBehaviour
         Parent = GameObject.Find("ShotsRays");
         if (Parent == null) Parent = new GameObject("ShotsRays");
 
-        GameObject.Instantiate(Line);
         const float thickness = 0.005f;
         float length = Vector3.Distance(start, end);
 
-        Line.transform.localScale = new Vector3(thickness, thickness, length);
-        Line.transform.position = start + ((end - start) / 2);
-        Line.transform.LookAt(end);
+        gameObject.transform.localScale = new Vector3(thickness, thickness, length);
+        gameObject.transform.position = start + ((end - start) / 2);
+        gameObject.transform.LookAt(end);
 
-        Line.GetComponent<MeshRenderer>().material.color = color;
-        Line.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        Line.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().material.color = color;
+        gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        gameObject.GetComponent<Collider>().enabled = false;
 
         Lifespan = lifespan;
 
-        Line.SetActive(true);
+        gameObject.SetActive(true);
 
         Scenario.lines.Add(this);
     }
@@ -60,7 +50,7 @@ public class BulletLine : MonoBehaviour
         if(Lifespan != null)
         {
             Lifespan -= Time.deltaTime;
-            if (Lifespan <= 0) Line.SetActive(false);
+            if (Lifespan <= 0) gameObject.SetActive(false);
         }
     }
 }
