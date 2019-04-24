@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour, IHitable
 {
     public Hitbox[] hitboxes;
-    public GameObject gun, phone;
+    public GameObject gun, phone, BaseballBat;
     public bool isAgressive;
 
     private Animator animator;
