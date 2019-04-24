@@ -79,12 +79,14 @@ public class Exercise : MonoBehaviour
         {
             Scenario.Clear();
             NextStep();
+            UI.DeactivateButton("Next Scenario");
         }
 
         if (UI.GetButtonActivated("Previous Scenario"))
         {
             Scenario.Clear();
             PreviousStep();
+            UI.DeactivateButton("Previous Scenario");
         }
     }
 

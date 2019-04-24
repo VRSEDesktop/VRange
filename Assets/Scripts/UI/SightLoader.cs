@@ -43,7 +43,7 @@ public class SightLoader : MonoBehaviour
                     {
                         uiElement.Activate();
                         activated = true;
-                        loadingCircle.GetComponent<Animator>().SetBool("Loading", true);
+                        loadingCircle.GetComponent<Animator>().SetBool("Loading", false);
                         uiElement.OnHoverEnd();
                     }
                 }
