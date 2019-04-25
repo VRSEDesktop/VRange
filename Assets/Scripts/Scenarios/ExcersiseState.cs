@@ -31,9 +31,6 @@ public abstract class ExcersiseState : MonoBehaviour
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
-        text = GameObject.FindWithTag("Shootingstats").GetComponentInChildren<TextMeshPro>();
-        text2 = GameObject.FindGameObjectWithTag("Shootingstats2").GetComponentInChildren<TextMeshPro>();
-
         StartTime = Time.realtimeSinceStartup;
         leftGun?.Reload();
         rightGun?.Reload();
