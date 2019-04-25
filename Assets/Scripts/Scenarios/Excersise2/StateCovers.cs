@@ -46,7 +46,7 @@ public class StateCovers : ExcersiseState
 
         anim.SetBool("Equip Pistol", true);
         yield return new WaitForSeconds(0.8f);
-        anim.GetComponent<Enemy>().gun.gameObject.SetActive(true);
+        anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
         anim.GetComponent<Enemy>().isAgressive = true;
     }
 
