@@ -52,13 +52,13 @@ public class StateModel : ExcersiseState
             case 0:
 		        anim.SetBool("Equip Pistol", true);
                 yield return new WaitForSeconds(0.8f);
-                anim.GetComponent<Enemy>().gun.gameObject.SetActive(true);
+                anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
                 anim.GetComponent<Enemy>().isAgressive = true;
             break; 
             case 1:
 		        anim.SetBool("Equip Phone", true);
                 yield return new WaitForSeconds(0.8f);
-                anim.GetComponent<Enemy>().phone.gameObject.SetActive(true);
+                anim.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
                 anim.GetComponent<Enemy>().isAgressive = false;
                 break;
             case 2:
