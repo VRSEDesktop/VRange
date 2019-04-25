@@ -49,7 +49,7 @@ public abstract class ExcersiseState : MonoBehaviour
     }
 
     public virtual void Restart()
-    {     
+    {
         Scenario.Clear();
 
         leftGun?.Reload();
@@ -74,10 +74,11 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     public void UpdateGUI()
     {
-      
+
        if (!HasSetGUI)
        {
             DisplayStats();
+            BulletLine.EnableAll();
        }
        else HasSetGUI = false;
     }
