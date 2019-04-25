@@ -11,10 +11,10 @@ public class BulletLine : MonoBehaviour
     /// How long the line should be visible before disappearing. If null it will not disappear.
     /// </summary>
     private float? Lifespan;
-    /// <summary>
-    /// Bool that makes sure lines aren't disabled again.
-    /// </summary>
-    private static bool forceActive = false;
+	/// <summary>
+	/// Bool that makes sure lines aren't disabled again.
+	/// </summary>
+	public static bool ForceActive { get; private set; } = false;
 
     /// <summary>
     /// Creates the line
@@ -49,12 +49,7 @@ public class BulletLine : MonoBehaviour
 
     public static void EnableAll()
     {
-        forceActive = true;
-        BulletLine[] lines = Parent.GetComponents<BulletLine>();
-        for(int i = 0; i < lines.Length; ++i)
-        {
-            lines[i].gameObject.SetActive(true);
-        }
+        ForceActive = true;
         Parent.gameObject.SetActive(true);
     }
 
@@ -63,16 +58,20 @@ public class BulletLine : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        if(Lifespan != null && !forceActive)
+        if(Lifespan != null && !ForceActive)
         {
             Lifespan -= Time.deltaTime;
             if (Lifespan <= 0) gameObject.SetActive(false);
         }
+		else
+		{
+			gameObject.SetActive(true);
+		}
     }
 
     public static void Destroy()
     {
         Destroy(Parent);
-        forceActive = false;
+        ForceActive = false;
     }
 }
