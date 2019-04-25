@@ -11,6 +11,7 @@ public class BulletLine : MonoBehaviour
 	/// Bool that makes sure lines aren't disabled again.
 	/// </summary>
 	public static bool ForceActive { get; private set; } = false;
+	public static bool Enabled { private get; set; }
 
     /// <summary>
     /// Creates the line
@@ -71,5 +72,6 @@ public class BulletLine : MonoBehaviour
     public static void Destroy()
     {
         ForceActive = false;
+		Destroy(GameObject.Find("ShotRays"));
     }
 }
