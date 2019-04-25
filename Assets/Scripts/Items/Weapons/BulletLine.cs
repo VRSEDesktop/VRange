@@ -4,10 +4,6 @@
 public class BulletLine : MonoBehaviour
 {
     /// <summary>
-    /// A parent GameObject for hierarchy purposes and easily destroying all bullet lines.
-    /// </summary>
-    public static GameObject Parent { get; private set; }
-    /// <summary>
     /// How long the line should be visible before disappearing. If null it will not disappear.
     /// </summary>
     private float? Lifespan;
@@ -25,12 +21,13 @@ public class BulletLine : MonoBehaviour
     /// <param name="lifespan">The time before the line should disappear. If null it will not disappear.</param>
     public void Create(Vector3 start, Vector3 end, Color color, float? lifespan = 5f)
     {
-        if (Parent == null) Parent = new GameObject("ShotsRays");
+		GameObject parent = GameObject.Find("ShotRays");
+        if (parent == null) parent = new GameObject("ShotRays");
 
         const float thickness = 0.005f;
         float length = Vector3.Distance(start, end);
 
-        gameObject.transform.parent = Parent.transform;
+        gameObject.transform.parent = parent.transform;
         gameObject.transform.localScale = new Vector3(thickness, thickness, length);
         gameObject.transform.position = start + ((end - start) / 2);
         gameObject.transform.LookAt(end);
@@ -50,7 +47,6 @@ public class BulletLine : MonoBehaviour
     public static void EnableAll()
     {
         ForceActive = true;
-        Parent.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -58,12 +54,15 @@ public class BulletLine : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        if(Lifespan != null && !ForceActive)
-        {
-            Lifespan -= Time.deltaTime;
-            if (Lifespan <= 0) gameObject.SetActive(false);
-        }
-		else
+		if(!ForceActive)
+		{
+			if(Lifespan != null || Lifespan > 0)
+			{
+				Lifespan -= Time.deltaTime;
+				if (Lifespan <= 0) gameObject.SetActive(false);
+			}
+		}
+        else
 		{
 			gameObject.SetActive(true);
 		}
@@ -71,7 +70,6 @@ public class BulletLine : MonoBehaviour
 
     public static void Destroy()
     {
-        Destroy(Parent);
         ForceActive = false;
     }
 }
