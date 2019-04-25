@@ -71,13 +71,13 @@ public class Gun : Weapon, IReloadable
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if (target == null)
             {
-                if (ShouldDrawLine()) Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                if (drawLines) Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
                 return;
             }
 
             HitType type = target.OnHit(this, hit);
 
-            if (ShouldDrawLine())
+            if (drawLines)
             {
                 Color linecolor = Color.red;
                 switch (type)
@@ -98,7 +98,7 @@ public class Gun : Weapon, IReloadable
         }
         else
         {
-            if (ShouldDrawLine()) Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+            if (drawLines) Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
         }
     }
 
@@ -115,16 +115,6 @@ public class Gun : Weapon, IReloadable
         hole.transform.rotation = Quaternion.LookRotation(hit.normal);
         hole.transform.position = position;
         hole.transform.localScale = new Vector3(0.7f / hole.transform.lossyScale.x, 0.7f / hole.transform.lossyScale.y, 0.7f / hole.transform.lossyScale.z);
-    }
-
-    private bool ShouldDrawLine()
-    {
-        GameObject exercise = GameObject.FindGameObjectWithTag("Exercise");
-        if (exercise && exercise.GetComponent<Exercise>())
-        {
-            return (drawLines && exercise.GetComponent<Exercise>().Settings.drawLines);
-        }
-        else return drawLines;
     }
 
     /// <summary>
