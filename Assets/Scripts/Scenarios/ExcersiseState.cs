@@ -78,8 +78,8 @@ public abstract class ExcersiseState : MonoBehaviour
        if (!HasSettedGUI)
        {
             DisplayStats();
+            BulletLine.EnableAll();
        }
-       else HasSettedGUI = false;
     }
 
     /// <summary>

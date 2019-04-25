@@ -56,6 +56,7 @@ public class BulletLine : MonoBehaviour
         {
             lines[i].gameObject.SetActive(true);
         }
+        Parent.gameObject.SetActive(true);
     }
 
     /// <summary>
