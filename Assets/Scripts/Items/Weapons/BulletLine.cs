@@ -26,7 +26,10 @@ public class BulletLine : MonoBehaviour
     public void Create(Vector3 start, Vector3 end, Color color, float? lifespan = 5f)
     {
         Parent = GameObject.Find("ShotsRays");
-        if (Parent == null) Parent = new GameObject("ShotsRays");
+        if (Parent == null)
+        {
+            Parent = new GameObject("ShotsRays");
+        }
 
         const float thickness = 0.005f;
         float length = Vector3.Distance(start, end);

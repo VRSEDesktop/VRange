@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum ExerciseProgress
 {
@@ -13,9 +14,8 @@ public abstract class ExcersiseState : MonoBehaviour
 {
     public ExerciseProgress Progress;
     public Gun leftGun, rightGun;
-    [HideInInspector]
-    public TextMeshPro text;
-    public TextMeshPro text2;
+
+    public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg;
 
     private int head, torso, leftarm, rightarm, leftleg, rightleg, mis;
     private int AlignDistance = 20;
@@ -30,7 +30,7 @@ public abstract class ExcersiseState : MonoBehaviour
         Progress = ExerciseProgress.NotStarted;
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
-
+        InitializeWhiteboard();
         StartTime = Time.realtimeSinceStartup;
         leftGun?.Reload();
         rightGun?.Reload();
@@ -49,20 +49,20 @@ public abstract class ExcersiseState : MonoBehaviour
     {
         Scenario.Clear();
 
+       
         leftGun?.Reload();
         rightGun?.Reload();
         StartTime = Time.realtimeSinceStartup;
-        text.text = "";
-        text2.text = "";
+
         HasSetGUI = false;
     }
 
     public virtual void OnExit()
     {
-        if(text) text.text = "";
         GetComponent<Transform>().gameObject.SetActive(false);
 
         Scenario.Clear();
+
         HasSetGUI = false;
     }
 
@@ -71,7 +71,6 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     public void UpdateGUI()
     {
-
        if (!HasSetGUI)
        {
             DisplayStats();
@@ -91,17 +90,16 @@ public abstract class ExcersiseState : MonoBehaviour
         ConvertingHits();
 
         // Header
-        AddLine("Tijd:", time.ToString("0.00") + " s");
-        AddLine("Schoten", "Aantal");
+        //AddLine("Tijd:", time.ToString("0.00") + " s");
+        //AddLine("Schoten", "Aantal");
 
         // The stats
-        AddLine("Mis", mis.ToString());
-        AddLine("Hoofd", head.ToString());
-        AddLine("Torso", torso.ToString());
-        AddLine("Linkerarm", leftarm.ToString());
-        AddLine("Rechterarm", rightarm.ToString());
-        AddLine("Linkerbeen", leftleg.ToString());
-        AddLine("Rechterbeen", rightleg.ToString());
+        if(gHead != null)AddLine(gHead, head);
+        if(gTorso != null)AddLine(gTorso, torso);
+        if(gLeftarm != null)AddLine(gLeftarm, leftarm);
+        if (gRightarm != null) AddLine(gRightarm, rightarm);
+        if (gLeftleg != null) AddLine(gLeftleg, leftleg);
+        if (gRightarm != null) AddLine(gRightleg, rightleg);
 
         HasSetGUI = true;
     }
@@ -115,9 +113,6 @@ public abstract class ExcersiseState : MonoBehaviour
         leftleg = 0;
         rightleg = 0;
         mis = 0;
-
-        text.text = "";
-        text2.text = "";
     }
 
     private void ConvertingHits()
@@ -155,25 +150,62 @@ public abstract class ExcersiseState : MonoBehaviour
         }
     }
 
-    private bool AddLine(string Text, string Text2)
+    private bool AddLine(GameObject g, int amount)
     {
-        if(Text2 == "0")
+        if(amount == 0)
         {
-            return false;
-        }
-        else if (Text2 == "-1")
-        {
-            text.text += Text;
-            text2.text += Text2;
+            g.SetActive(false);
         }
         else
         {
-            text.text += Text;
-            text2.text += Text2;
+            g.SetActive(true);
+            RetrieveTextMesh(g).text = amount.ToString();
         }
-
-        text.text += "\n";
-        text2.text += "\n";
         return true;
+    }
+
+    public void InitializeWhiteboard()
+    {
+        List<GameObject> whiteboardparts = new List<GameObject>();
+        whiteboardparts.AddRange(GameObject.FindGameObjectsWithTag("WhiteboardPart"));
+
+        foreach (var item in whiteboardparts)
+        {
+            string name = item.name;
+
+            if (name == "Head")
+            {
+                gHead = item;
+                gHead.SetActive(false);
+            } else if (name == "Neck")
+            {
+
+            } else if (name == "Torso")
+            {
+                gTorso = item;
+                gTorso.SetActive(false);
+            } else if (name == "Leftarm")
+            {
+                gLeftarm = item;
+                gLeftarm.SetActive(false);
+            } else if (name == "Rightarm")
+            {
+                gRightarm = item;
+                gRightarm.SetActive(false);
+            }else if(name == "Rightleg")
+            {
+                gRightleg = item;
+                gRightleg.SetActive(false);
+            }else if(name == "Leftleg")
+            {
+                gLeftleg = item;
+                gLeftleg.SetActive(false);
+            }
+        }
+    }
+
+    public TextMeshPro RetrieveTextMesh(GameObject item)
+    {
+        return item.GetComponentInChildren<TextMeshPro>();
     }
 }
