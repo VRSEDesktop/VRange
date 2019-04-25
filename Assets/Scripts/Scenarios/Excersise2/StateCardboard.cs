@@ -44,7 +44,9 @@ public class StateCardboard : ExcersiseState
             flipAnimation.SetBool("Visible", true);
             yield return new WaitForSeconds(timeToReact);
             flipAnimation.SetBool("Visible", false);
-        }     
+        }
+        
+
     }
 
     public override void Restart()

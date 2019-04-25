@@ -20,7 +20,7 @@ public abstract class ExcersiseState : MonoBehaviour
     private int head, torso, leftarm, rightarm, leftleg, rightleg, mis;
     private int AlignDistance = 20;
 
-    public bool HasSettedGUI { get; set; }
+    public bool HasSetGUI { get; set; }
 
     protected float StartTime;
     protected Exercise Exercise;
@@ -49,7 +49,7 @@ public abstract class ExcersiseState : MonoBehaviour
     }
 
     public virtual void Restart()
-    {     
+    {
         Scenario.Clear();
 
         leftGun?.Reload();
@@ -57,7 +57,7 @@ public abstract class ExcersiseState : MonoBehaviour
         StartTime = Time.realtimeSinceStartup;
         text.text = "";
         text2.text = "";
-        HasSettedGUI = false;
+        HasSetGUI = false;
     }
 
     public virtual void OnExit()
@@ -66,7 +66,7 @@ public abstract class ExcersiseState : MonoBehaviour
         GetComponent<Transform>().gameObject.SetActive(false);
 
         Scenario.Clear();
-        HasSettedGUI = false;
+        HasSetGUI = false;
     }
 
     /// <summary>
@@ -74,12 +74,13 @@ public abstract class ExcersiseState : MonoBehaviour
     /// </summary>
     public void UpdateGUI()
     {
-      
-       if (!HasSettedGUI)
+
+       if (!HasSetGUI)
        {
             DisplayStats();
             BulletLine.EnableAll();
        }
+       else HasSetGUI = false;
     }
 
     /// <summary>
@@ -105,7 +106,7 @@ public abstract class ExcersiseState : MonoBehaviour
         AddLine("Linkerbeen", leftleg.ToString());
         AddLine("Rechterbeen", rightleg.ToString());
 
-        HasSettedGUI = true;
+        HasSetGUI = true;
     }
 
     private void ResetGUI()
