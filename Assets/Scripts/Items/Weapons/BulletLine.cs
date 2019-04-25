@@ -51,11 +51,7 @@ public class BulletLine : MonoBehaviour
     public static void EnableAll()
     {
         forceActive = true;
-        BulletLine[] lines = Parent.GetComponents<BulletLine>();
-        for(int i = 0; i < lines.Length; ++i)
-        {
-            lines[i].gameObject.SetActive(true);
-        }
+        Parent.gameObject.SetActive(GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Settings.drawLines);
     }
 
     /// <summary>
