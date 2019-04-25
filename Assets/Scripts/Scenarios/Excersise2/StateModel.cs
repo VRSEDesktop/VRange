@@ -23,7 +23,7 @@ public class StateModel : ExcersiseState
 
     public override void OnUpdate()
     {
-        UpdateGUI();
+        base.OnUpdate();
     }
 
     public override void OnExit()
