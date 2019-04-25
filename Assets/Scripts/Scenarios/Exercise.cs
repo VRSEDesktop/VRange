@@ -6,9 +6,9 @@ public class Exercise : MonoBehaviour
     /// <summary>
     /// States of the excersises
     /// </summary>
-    public ExcersiseState[] states;
+    public ExcersiseState[] States;
     public Settings Settings;
-    public SteamVR_LoadLevel levelLoader;
+    public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
     public GameObject ShootingRange, City;
 
@@ -16,23 +16,23 @@ public class Exercise : MonoBehaviour
 
     public void Start()
     {
-        foreach(ExcersiseState state in states) state.OnExit();
+        foreach(ExcersiseState state in States) state.OnExit();
         currentState = 0;
-        states[currentState].OnStart();
+        States[currentState].OnStart();
     }
 
     public void Update()
     {      
-        states[currentState].OnUpdate();
+        States[currentState].OnUpdate();
         HandleButtons();
-        if(BulletLine.Parent) BulletLine.Parent.SetActive(Settings.drawLines);
+        if(BulletLine.Parent) BulletLine.Parent.SetActive(Settings.DrawLines);
     }
 
     public void PreviousStep()
     {
-        states[currentState].OnExit();
+        States[currentState].OnExit();
         currentState--;
-        states[currentState].OnStart();
+        States[currentState].OnStart();
 
         DeleteBulletHoles();
         DeleteLines();
@@ -40,9 +40,9 @@ public class Exercise : MonoBehaviour
 
     public void NextStep()
     {
-        states[currentState].OnExit();
+        States[currentState].OnExit();
         currentState++;
-        states[currentState].OnStart();
+        States[currentState].OnStart();
 
         DeleteBulletHoles();
         DeleteLines();
@@ -52,12 +52,12 @@ public class Exercise : MonoBehaviour
     {
         DeleteBulletHoles();
         DeleteLines();
-        states[currentState].Restart();
+        States[currentState].Restart();
     }
 
     private void HandleButtons()
     {
-        Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
+        Settings.DrawLines = UI.GetButtonActivated("Toggle Bulletlines");
 
         if (UI.GetButtonActivated("Restart Scenario"))
         {
@@ -69,8 +69,8 @@ public class Exercise : MonoBehaviour
         if (UI.GetButtonActivated("Mainmenu"))
         {
             Scenario.Clear();
-            levelLoader.levelName = "MainMenu";
-            levelLoader.Trigger();
+            LevelLoader.levelName = "MainMenu";
+            LevelLoader.Trigger();
         }
 
         if (UI.GetButtonActivated("Next Scenario"))

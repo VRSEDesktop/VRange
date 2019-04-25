@@ -76,8 +76,16 @@ public enum HitboxType
     TargetTorso,
 }
 
+/// <summary>
+/// Class where we can put all necessary methods for enums
+/// </summary>
 public static class EnumUtils
 {
+    /// <summary>
+    /// Retrieves string from enum description
+    /// </summary>
+    /// <param name="val"></param>
+    /// <returns></returns>
     public static string ToDescriptionString(this HitboxType val)
     {
         DescriptionAttribute[] attributes = (DescriptionAttribute[])val

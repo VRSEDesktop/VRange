@@ -1,22 +1,22 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+
 /// <summary>
 /// Script used for visualising the transition from the shooting range to the city
 /// </summary>
-public class Matrix_Effect : MonoBehaviour
+public class MatrixEffect : MonoBehaviour
 {
-    public Animator animator;
-    public AudioSource collapseSound;
-    public GameObject plane;
-    public GameObject cameraRig;
+    public Animator Animator;
+    public AudioSource CollapseSound;
+    public GameObject Plane, CameraRig;
 
     /// <summary>
     /// Start point of the excersises for the player
     /// </summary>
     public GameObject startPoint;
 
-    void Start()
+    public void Start()
     {
         StartCoroutine(Transition());
     }
@@ -24,8 +24,8 @@ public class Matrix_Effect : MonoBehaviour
     private IEnumerator Transition()
     {
         yield return new WaitForSeconds(5f);
-        animator.Play("Fall down");
-        collapseSound.Play();
+        Animator.Play("Fall down");
+        CollapseSound.Play();
         MoveShootingRange();
 
         Destroy(gameObject, 7f);
@@ -39,7 +39,7 @@ public class Matrix_Effect : MonoBehaviour
         Vector3 planePos = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y - 0.1f, startPoint.transform.position.z);
 
         DOTween.To(() => transform.position, pos => transform.position = pos, startPoint.transform.position, 5);
-        DOTween.To(() => plane.transform.position, pos => plane.transform.position = pos, planePos, 5);
-        DOTween.To(() => cameraRig.transform.position, pos => cameraRig.transform.position = pos, startPoint.transform.position, 5);
+        DOTween.To(() => Plane.transform.position, pos => Plane.transform.position = pos, planePos, 5);
+        DOTween.To(() => CameraRig.transform.position, pos => CameraRig.transform.position = pos, startPoint.transform.position, 5);
     }
 }
