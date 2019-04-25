@@ -5,10 +5,11 @@
 /// </summary>
 public class GunController : HandController
 {
+    private static readonly float DoubleClickDelay = 0.5f;
+
     public Gun gun;
     private bool triggerPushed, reloadPushed;
     private float LastTime;
-    private float DoubleClickDelay = 0.5f;
 
     public override void HandleInput()
     {
@@ -27,6 +28,7 @@ public class GunController : HandController
     private void PushTrigger()
     {
         if (triggerPushed && Time.realtimeSinceStartup - LastTime <= DoubleClickDelay) return;
+        Debug.Log(Time.realtimeSinceStartup);
         triggerPushed = true;
         LastTime = Time.realtimeSinceStartup;
         gun.SendMessage("Use");
