@@ -9,6 +9,5 @@ public class GazeButton : UIElement, IGazeable
     }
 
     public virtual void OnHoverStart() {}
-
     public virtual void OnHoverEnd() {}
 }

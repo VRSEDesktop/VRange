@@ -5,77 +5,85 @@
 /// </summary>
 public class SightLoader : MonoBehaviour
 {
-    private static readonly int maxRange = 50;
-    private static readonly float timeToLoad = 2f;
+    private static readonly int MaxRange = 50;
+    private static readonly float TimeToLoad = 2f;
 
     /// <summary>
     /// Object which was in sight line in the last frame
     /// </summary>
-    private GameObject lastObject;
-    private SpriteRenderer loadingCircle;
+    private IGazeable LastUIElement;
+    private SpriteRenderer LoadingCircle;
 
     /// <summary>
     /// Time player is looking at specific UI object
     /// </summary>
-    private float timer = 0;
-    private bool activated = false;
+    private float Timer = 0;
+    private bool Activated = false;
 
     public void Start()
     {
-        loadingCircle = GetComponentInChildren<SpriteRenderer>();
+        LoadingCircle = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Update()
     {
-        bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxRange);
+        bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, MaxRange);
 
-        if (hasHit)
+        if (hasHit && hit.collider.gameObject.GetComponentInChildren<IGazeable>() != null)
         {
-            if (hit.collider.gameObject.GetComponentInChildren<IGazeable>() != null)
-            {
-                IGazeable uiElement = hit.collider.gameObject.GetComponentInChildren<IGazeable>();
+            IGazeable currentUIElement = hit.collider.gameObject.GetComponentInChildren<IGazeable>();
 
-                if (hit.collider.gameObject.Equals(lastObject))
-                {
-                    timer += Time.deltaTime;
+			if (currentUIElement.Equals(LastUIElement))
+			{
+				Timer += Time.deltaTime;
 
-                    if (timer >= timeToLoad && !activated)
-                    {
-                        uiElement.Activate();
-                        activated = true;
-                        loadingCircle.GetComponent<Animator>().SetBool("Loading", false);
-                        uiElement.OnHoverEnd();
-                    }
-                }
-                else
-                {
-                    loadingCircle.GetComponent<Animator>().SetBool("Loading", true);
-                    timer = 0;
-                    if (lastObject && lastObject.GetComponentInChildren<IGazeable>() != null) lastObject.GetComponentInChildren<IGazeable>().OnHoverEnd();
-                    uiElement.OnHoverStart();
-                }
+				if (Timer >= TimeToLoad && !Activated) ActivateElement(currentUIElement);
+			}
+			else StartLoading(currentUIElement);
 
-                lastObject = hit.collider.gameObject;
-
-                Vector3 offset = hit.normal;
-                offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
-                Vector3 position = hit.point + offset;
-
-                loadingCircle.transform.position = position;
-                loadingCircle.transform.rotation = Quaternion.LookRotation(hit.normal);
-
-            }
-            else ResetLoader();
-        }
+			UpdateLoading(hit);
+		}
         else ResetLoader();
     }
 
+	private void UpdateLoading(RaycastHit hit)
+	{
+		LastUIElement = hit.collider.gameObject.GetComponentInChildren<IGazeable>();
+
+		Vector3 offset = hit.normal;
+		offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
+		Vector3 position = hit.point + offset;
+		LoadingCircle.transform.position = position;
+
+		LoadingCircle.transform.rotation = Quaternion.LookRotation(hit.normal);
+	}
+
+	/// <summary>
+	/// Finishes loading and activates the element
+	/// </summary>
+	/// <param name="currentUIElement"></param>
+	private void ActivateElement(IGazeable currentUIElement)
+	{
+		currentUIElement.Activate();
+		Activated = true;
+		LoadingCircle.GetComponent<Animator>().SetBool("Loading", false);
+		currentUIElement.OnHoverEnd();
+	}
+
+	private void StartLoading(IGazeable currentUIElement)
+	{
+		LoadingCircle.GetComponent<Animator>().SetBool("Loading", true);
+		Timer = 0;
+		if (LastUIElement != null) LastUIElement.OnHoverEnd();
+		currentUIElement.OnHoverStart();
+	}
+
     private void ResetLoader()
     {
-        if (lastObject != null && lastObject.GetComponentInChildren<IGazeable>() != null) lastObject.GetComponentInChildren<IGazeable>().OnHoverEnd();
-        lastObject = null;
-        timer = 0;
-        activated = false;
-        loadingCircle.GetComponent<Animator>().SetBool("Loading", false);
+        if (LastUIElement != null && LastUIElement != null) LastUIElement.OnHoverEnd();
+        LastUIElement = null;
+        Timer = 0;
+        Activated = false;
+        LoadingCircle.GetComponent<Animator>().SetBool("Loading", false);
     }
 }

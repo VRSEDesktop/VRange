@@ -3,13 +3,13 @@
 /// </summary>
 public class GazeButtonToggle : GazeButton
 {
-    private bool isActive;
+    private bool IsActive;
 
     public override void Activate()
     {
-        if (isActive) SetInactive();
+        if (IsActive) SetInactive();
         else          SetActive();
 
-        isActive = !isActive;
+        IsActive = !IsActive;
     }
 }
