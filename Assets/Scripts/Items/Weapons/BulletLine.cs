@@ -70,4 +70,10 @@ public class BulletLine : MonoBehaviour
             if (Lifespan <= 0) gameObject.SetActive(false);
         }
     }
+
+    public static void Destroy()
+    {
+        Destroy(Parent);
+        forceActive = false;
+    }
 }

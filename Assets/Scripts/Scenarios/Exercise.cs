@@ -96,7 +96,6 @@ public class Exercise : MonoBehaviour
 
     private void DeleteLines()
     {
-        GameObject shotsContainer = GameObject.Find("ShotsRays");
-        Destroy(shotsContainer);
+        BulletLine.Destroy();
     }
 }
