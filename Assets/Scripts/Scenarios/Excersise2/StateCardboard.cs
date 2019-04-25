@@ -24,7 +24,7 @@ public class StateCardboard : ExcersiseState
 
     public override void OnUpdate()
     {
-        UpdateGUI();
+        base.OnUpdate();
     }
 
     public override void OnExit()
@@ -44,7 +44,9 @@ public class StateCardboard : ExcersiseState
             flipAnimation.SetBool("Visible", true);
             yield return new WaitForSeconds(timeToReact);
             flipAnimation.SetBool("Visible", false);
-        }     
+        }
+        
+
     }
 
     public override void Restart()
