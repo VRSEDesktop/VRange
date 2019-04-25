@@ -25,7 +25,6 @@ public class BulletLine : MonoBehaviour
     /// <param name="lifespan">The time before the line should disappear. If null it will not disappear.</param>
     public void Create(Vector3 start, Vector3 end, Color color, float? lifespan = 5f)
     {
-        Parent = GameObject.Find("ShotsRays");
         if (Parent == null) Parent = new GameObject("ShotsRays");
 
         const float thickness = 0.005f;
