@@ -92,9 +92,13 @@ public class Exercise : MonoBehaviour
             UI.DeactivateButton("Previous Scenario");
         }
 
-		if (UI.GetButtonActivated("Toggle Controller")) Settings.NormalGun = !Settings.NormalGun;
-		ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
-		foreach (ApplyGunRotation gun in guns) gun.Switch();
+		if (UI.GetButtonActivated("Toggle Controller"))
+		{
+			Settings.NormalGun = !Settings.NormalGun;
+
+			ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
+			foreach (ApplyGunRotation gun in guns) gun.Apply();
+		}
 	}
 
     private void DeleteBulletHoles()

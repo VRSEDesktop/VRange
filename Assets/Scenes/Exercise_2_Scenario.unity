@@ -938,11 +938,11 @@ MonoBehaviour:
   gRightarm: {fileID: 0}
   gLeftleg: {fileID: 0}
   gRightleg: {fileID: 0}
-  womanPrefab: {fileID: 7972075036675211925, guid: 1cdeb3c055b1ec2458a15946f73c281a,
-    type: 3}
-  anim: {fileID: 699645903}
-  minWaitTime: 2
-  maxWaitTime: 5
+  WomanPrefab: {fileID: 0}
+  Anim: {fileID: 0}
+  MinWaitTime: 2
+  MaxWaitTime: 5
+  RespawnPoint: {fileID: 0}
 --- !u!1 &136734797
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,12 +3393,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 699645901}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &699645903 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7972075036667834599, guid: 1cdeb3c055b1ec2458a15946f73c281a,
-    type: 3}
-  m_PrefabInstance: {fileID: 699645901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &718218773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,11 +3448,11 @@ MonoBehaviour:
   gRightarm: {fileID: 0}
   gLeftleg: {fileID: 0}
   gRightleg: {fileID: 0}
-  womanPrefab: {fileID: 8062746389523552633, guid: fc80e481f241eff448fb8334f1a35518,
-    type: 3}
-  anim: {fileID: 1718541687}
-  minWaitTime: 2
-  maxWaitTime: 5
+  WomanPrefab: {fileID: 0}
+  Anim: {fileID: 0}
+  MinWaitTime: 2
+  MaxWaitTime: 5
+  RespawnPoint: {fileID: 0}
 --- !u!1001 &722404695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12441,11 +12435,31 @@ PrefabInstance:
       propertyPath: normalGun
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2585541234518277413, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
+        type: 3}
+      propertyPath: Gun
+      value: 
+      objectReference: {fileID: 1946369085}
     - target: {fileID: 4649690693716108009, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
         type: 3}
       propertyPath: normalGun
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4649690693716108009, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
+        type: 3}
+      propertyPath: Gun
+      value: 
+      objectReference: {fileID: 1833356711}
+    - target: {fileID: 329714829008645073, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
+        type: 3}
+      propertyPath: lefGun
+      value: 
+      objectReference: {fileID: 1946369085}
+    - target: {fileID: 329714829008645073, guid: 83dc7dc0dd1c9a24bb94996e2114c56c,
+        type: 3}
+      propertyPath: rightGun
+      value: 
+      objectReference: {fileID: 1833356711}
     m_RemovedComponents:
     - {fileID: 3671897323703829610, guid: 83dc7dc0dd1c9a24bb94996e2114c56c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 83dc7dc0dd1c9a24bb94996e2114c56c, type: 3}
@@ -15019,7 +15033,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438cb7aeebfe4514192ced9b869f452e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  States: []
+  States:
+  - {fileID: 1600786397}
+  - {fileID: 718218775}
+  - {fileID: 118193539}
+  - {fileID: 9787902}
   Settings: {fileID: 11400000, guid: 15910a12dbd271341b0a194d521ae338, type: 2}
   LevelLoader: {fileID: 2146935800}
   PreviousScenarioButton: {fileID: 1083132997}
@@ -15233,12 +15251,6 @@ PrefabInstance:
 --- !u!4 &1718541686 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8062746389523383449, guid: fc80e481f241eff448fb8334f1a35518,
-    type: 3}
-  m_PrefabInstance: {fileID: 1718541685}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1718541687 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8062746389514038027, guid: fc80e481f241eff448fb8334f1a35518,
     type: 3}
   m_PrefabInstance: {fileID: 1718541685}
   m_PrefabAsset: {fileID: 0}
