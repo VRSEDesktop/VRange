@@ -27,8 +27,8 @@ public class GunController : HandController
 
     private void PushTrigger()
     {
-        if (triggerPushed && Time.realtimeSinceStartup - LastTime <= DoubleClickDelay) return;
-        Debug.Log(Time.realtimeSinceStartup);
+		Debug.Log(triggerPushed + " " + Time.realtimeSinceStartup);
+		if (triggerPushed || Time.realtimeSinceStartup - LastTime <= DoubleClickDelay) return;
         triggerPushed = true;
         LastTime = Time.realtimeSinceStartup;
         gun.SendMessage("Use");
