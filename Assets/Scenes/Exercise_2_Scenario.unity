@@ -57,16 +57,17 @@ LightmapSettings:
     serializedVersion: 12
     m_Resolution: 2
     m_BakeResolution: 40
-    m_AtlasSize: 1024
+    m_AtlasSize: 2048
     m_AO: 1
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_ExtractAmbientOcclusion: 0
     m_Padding: 2
-    m_LightmapParameters: {fileID: 0}
+    m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000,
+      type: 0}
     m_LightmapsBakeMode: 1
-    m_TextureCompression: 1
+    m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
@@ -164,7 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138192e3f471f4240a42503cae81b16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Progress: 0
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 0}
   gHead: {fileID: 0}
@@ -960,7 +960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd4fa697d2e6243a9792d3a570282f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Progress: 0
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 1833356711}
   gHead: {fileID: 0}
@@ -3663,7 +3662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a0d8a20b79714baaf9e12b5be7d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Progress: 0
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 1833356711}
   gHead: {fileID: 0}
@@ -14988,7 +14986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76e4b700991ed240a902fbf3d702747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Progress: 0
   leftGun: {fileID: 1946369085}
   rightGun: {fileID: 1833356711}
   gHead: {fileID: 0}
@@ -15344,7 +15341,7 @@ MonoBehaviour:
   - {fileID: 718218775}
   - {fileID: 118193539}
   - {fileID: 9787902}
-  _settings: {fileID: 11400000, guid: 15910a12dbd271341b0a194d521ae338, type: 2}
+  Settings: {fileID: 11400000, guid: 15910a12dbd271341b0a194d521ae338, type: 2}
   LevelLoader: {fileID: 1507760909}
   PreviousScenarioButton: {fileID: 1083132997}
   NextScenarioButton: {fileID: 933506053}
