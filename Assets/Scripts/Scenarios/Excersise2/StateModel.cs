@@ -8,7 +8,7 @@ public class StateModel : ExcersiseState
     /// <summary>
     /// Minimum and maximum time in seconds after which the model will decide which item to take
     /// </summary>
-    public float MinWaitTime = 2f, MaxWaitTime = 5f;
+    public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
 
 	public GameObject RespawnPoint;
 
@@ -71,7 +71,10 @@ public class StateModel : ExcersiseState
                 Anim.GetComponent<Enemy>().Axe.gameObject.SetActive(true);
                 Anim.GetComponent<Enemy>().isAgressive = true;
                 break;
-        }      
+        }
+
+        yield return new WaitForSeconds(LoopTime);
+        RespawnWoman();
     }
 
     public override void Restart()
