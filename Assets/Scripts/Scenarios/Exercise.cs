@@ -10,29 +10,34 @@ public class Exercise : MonoBehaviour
     public Settings Settings;
     public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
-    public GameObject ShootingRange, City;
+	public GameObject ShootingRange, City;
 
-    private static int currentState = 0;
+	/// <summary>
+	/// Object with explanation of the exercise, reference used for turning it on/off
+	/// </summary>
+	public GameObject Explanation;
+
+    private static int CurrentState = 0;
 
     public void Start()
     {
         foreach(ExcersiseState state in States) state.OnExit();
-        currentState = 0;
-        States[currentState].OnStart();
+        CurrentState = 0;
+        States[CurrentState].OnStart();
     }
 
     public void Update()
     {      
-        States[currentState].OnUpdate();
+        States[CurrentState].OnUpdate();
         HandleButtons();
         if(BulletLine.Parent) BulletLine.Parent.SetActive(Settings.DrawLines);
     }
 
     public void PreviousStep()
     {
-        States[currentState].OnExit();
-        currentState--;
-        States[currentState].OnStart();
+        States[CurrentState].OnExit();
+        CurrentState--;
+        States[CurrentState].OnStart();
 
         DeleteBulletHoles();
         DeleteLines();
@@ -40,9 +45,9 @@ public class Exercise : MonoBehaviour
 
     public void NextStep()
     {
-        States[currentState].OnExit();
-        currentState++;
-        States[currentState].OnStart();
+        States[CurrentState].OnExit();
+        CurrentState++;
+        States[CurrentState].OnStart();
 
         DeleteBulletHoles();
         DeleteLines();
@@ -52,7 +57,7 @@ public class Exercise : MonoBehaviour
     {
         DeleteBulletHoles();
         DeleteLines();
-        States[currentState].Restart();
+        States[CurrentState].Restart();
     }
 
     private void HandleButtons()
@@ -86,7 +91,11 @@ public class Exercise : MonoBehaviour
             PreviousStep();
             UI.DeactivateButton("Previous Scenario");
         }
-    }
+
+		if (UI.GetButtonActivated("Toggle Controller")) Settings.NormalGun = !Settings.NormalGun;
+		ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
+		foreach (ApplyGunRotation gun in guns) gun.Switch();
+	}
 
     private void DeleteBulletHoles()
     {

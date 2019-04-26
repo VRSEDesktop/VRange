@@ -6,23 +6,30 @@
 public class ApplyGunRotation : MonoBehaviour
 {
     public Gun Gun;
-    public bool NormalGun = false;
+	private Settings Settings;
 
     public void Start()
     {
-        if (NormalGun)  ApplyRealGunRotation();
-        else            ApplyControllerRotation();
-    }
+		Settings = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Settings;
 
-    private void ApplyControllerRotation()
+		Switch();
+	}
+
+	public void Switch()
+	{
+		if (Settings.NormalGun) ApplyRealGunRotation();
+		else ApplyControllerRotation();
+	}
+
+    public void ApplyControllerRotation()
     {     
         Gun.transform.rotation = Quaternion.Euler(-45, -180, 0);
-        Gun.transform.position += new Vector3(0, -0.05f, -0.05f);
+        Gun.transform.position = new Vector3(0, -0.05f, -0.05f);
     }
 
-    private void ApplyRealGunRotation()
+	public void ApplyRealGunRotation()
     {
         Gun.transform.rotation = Quaternion.Euler(0, -88, 90);
-        Gun.transform.position += new Vector3(0.05f, 0, -0.1f);
+        Gun.transform.position = new Vector3(0.05f, 0, -0.1f);
     } 
 }
