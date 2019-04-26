@@ -92,13 +92,13 @@ public class Gun : Weapon, IReloadable
                         linecolor = Color.magenta;
                         break;
                 }
-                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, linecolor, null);
+                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, linecolor);
             }
 
         }
         else
         {
-            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red, null);
+            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
         }
     }
 

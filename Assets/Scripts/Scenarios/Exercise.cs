@@ -8,18 +8,7 @@ public class Exercise : MonoBehaviour
     /// States of the excersises
     /// </summary>
     public ExcersiseState[] States;
-	private Settings _settings;
-    public Settings Settings {
-		get {
-			return _settings;
-		}
-		set {
-			_settings = value;
-			OnSettingsChanged();
-		}
-	}
-
-	
+	public Settings Settings;
 
 	public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
@@ -29,14 +18,15 @@ public class Exercise : MonoBehaviour
 
     public void Start()
     {
-        foreach(ExcersiseState state in States) state.OnExit();
+		Settings.SettingsChanged += OnSettingsChanged;
+		foreach (ExcersiseState state in States) state.OnExit();
         currentState = 0;
         States[currentState].OnStart();
     }
 
     public void Update()
-    {      
-        States[currentState].OnUpdate();
+    {
+		States[currentState].OnUpdate();
         HandleButtons();
     }
 

@@ -4,27 +4,16 @@ using UnityEngine;
 
 public class FadeOut : MonoBehaviour
 {
-    public void StartFadeOut(float time)
+    public void StartFadeOut(float delay)
 	{
-		IEnumerator routine = DisableLine(time);
-		StartCoroutine(routine);
+		IEnumerator routine = DisableLine(delay);
+		if(gameObject.activeSelf)
+			StartCoroutine(routine);
 	}
 
-	private IEnumerator DisableLine(float delayinseconds)
+	private IEnumerator DisableLine(float delay)
 	{
-		Renderer renderer = gameObject.GetComponent<Renderer>();
-		for (float f = delayinseconds; f >= 0; f -= 0.1f)
-		{
-			Color newcolor = renderer.material.color;
-			newcolor.a = f;
-			renderer.material.color = newcolor;
-			yield return new WaitForSeconds(.1f);
-		}
+		yield return new WaitForSeconds(delay);
 		gameObject.SetActive(false);
-
-		//Reset the alpha, since material.color.a isn't accessible overwrite color with a new color object.
-		Color resetcolor = renderer.material.color;
-		resetcolor.a = 1;
-		renderer.material.color = resetcolor;
 	}
 }
