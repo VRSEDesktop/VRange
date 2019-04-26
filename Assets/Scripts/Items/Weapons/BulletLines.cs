@@ -49,18 +49,6 @@ public static class BulletLines
 		}
 	}
 
-	private static IEnumerator DisableLine(GameObject line, float delayinseconds)
-	{
-		for (float f = delayinseconds; f >= 0; f -= 0.1f)
-		{
-			Color c = line.GetComponent<Renderer>().material.color;
-			c.a = f;
-			line.GetComponent<Renderer>().material.color = c;
-			yield return new WaitForSeconds(.1f);
-		}
-		line.SetActive(false);
-	}
-
     public static void Destroy()
     {
 		GameObject.Destroy(Parent);
