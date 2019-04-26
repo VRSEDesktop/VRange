@@ -20,7 +20,7 @@ public class Gun : Weapon, IReloadable
     public Transform barrelExit;
     public GameObject bulletHole;
     /// <summary>
-    /// Prefab for the bulletline, should have the bulletline script.
+    /// Prefab for the bulletline, should just be a square.
     /// </summary>
     public GameObject BulletLine;
 
@@ -71,7 +71,7 @@ public class Gun : Weapon, IReloadable
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if (target == null)
             {
-                if (drawLines) Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
                 return;
             }
 
@@ -92,13 +92,13 @@ public class Gun : Weapon, IReloadable
                         linecolor = Color.magenta;
                         break;
                 }
-                Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, linecolor);
+                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, linecolor);
             }
 
         }
         else
         {
-            if (drawLines) Instantiate(BulletLine).GetComponent<BulletLine>().Create(barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
         }
     }
 

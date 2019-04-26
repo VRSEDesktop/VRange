@@ -12,7 +12,17 @@ public enum ExerciseProgress
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-    public ExerciseProgress Progress;
+	private ExerciseProgress _progress;
+    public ExerciseProgress Progress {
+		get { return _progress; }
+		set {
+			if(value != _progress)
+			{
+				_progress = value;
+				OnProgressChanged();
+			}
+		}
+	}
     public Gun leftGun, rightGun;
 
 	[HideInInspector]
@@ -75,7 +85,6 @@ public abstract class ExcersiseState : MonoBehaviour
        if (!HasSetGUI)
        {
             DisplayStats();
-            BulletLine.EnableAll();
        }
        else HasSetGUI = false;
     }
@@ -150,6 +159,15 @@ public abstract class ExcersiseState : MonoBehaviour
             }
         }
     }
+
+	private void OnProgressChanged()
+	{
+		Debug.Log(Progress.ToString());
+		if(Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
+		{
+			BulletLines.SetActive(true);
+		}
+	}
 
     private bool AddLine(GameObject g, int amount)
     {

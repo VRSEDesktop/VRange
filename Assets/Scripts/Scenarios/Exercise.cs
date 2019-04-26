@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Valve.VR;
 
 public class Exercise : MonoBehaviour
@@ -7,8 +8,9 @@ public class Exercise : MonoBehaviour
     /// States of the excersises
     /// </summary>
     public ExcersiseState[] States;
-    public Settings Settings;
-    public SteamVR_LoadLevel LevelLoader;
+	public Settings Settings;
+
+	public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
 	public GameObject ShootingRange, City;
 
@@ -21,6 +23,7 @@ public class Exercise : MonoBehaviour
 
     public void Start()
     {
+        Settings.SettingsChanged += OnSettingsChanged;
         foreach(ExcersiseState state in States) state.OnExit();
         CurrentState = 0;
         States[CurrentState].OnStart();
@@ -30,7 +33,6 @@ public class Exercise : MonoBehaviour
     {      
         States[CurrentState].OnUpdate();
         HandleButtons();
-        if(BulletLine.Parent) BulletLine.Parent.SetActive(Settings.DrawLines);
     }
 
     public void PreviousStep()
@@ -92,9 +94,18 @@ public class Exercise : MonoBehaviour
             UI.DeactivateButton("Previous Scenario");
         }
 
-		if (UI.GetButtonActivated("Toggle Controller")) Settings.NormalGun = !Settings.NormalGun;
-		ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
-		foreach (ApplyGunRotation gun in guns) gun.Switch();
+		if (UI.GetButtonActivated("Toggle Controller"))
+		{
+			Settings.NormalGun = !Settings.NormalGun;
+
+			ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
+			foreach (ApplyGunRotation gun in guns) gun.Apply();
+		}
+	}
+
+	private void OnSettingsChanged()
+	{
+		BulletLines.SetActive(Settings.DrawLines);
 	}
 
     private void DeleteBulletHoles()
@@ -105,7 +116,6 @@ public class Exercise : MonoBehaviour
 
     private void DeleteLines()
     {
-        GameObject shotsContainer = GameObject.Find("ShotsRays");
-        Destroy(shotsContainer);
+        BulletLines.Destroy();
     }
 }
