@@ -15,6 +15,7 @@ public abstract class ExcersiseState : MonoBehaviour
     public ExerciseProgress Progress;
     public Gun leftGun, rightGun;
 
+	[HideInInspector]
     public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg;
 
     private int head, torso, leftarm, rightarm, leftleg, rightleg, mis;
