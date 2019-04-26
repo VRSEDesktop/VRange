@@ -74,7 +74,7 @@ public abstract class ExcersiseState : MonoBehaviour
        if (!HasSetGUI)
        {
             DisplayStats();
-            BulletLine.EnableAll();
+            BulletLines.SetActive(true);
        }
        else HasSetGUI = false;
     }

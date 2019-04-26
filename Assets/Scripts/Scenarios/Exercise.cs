@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Valve.VR;
 
 public class Exercise : MonoBehaviour
@@ -7,8 +8,20 @@ public class Exercise : MonoBehaviour
     /// States of the excersises
     /// </summary>
     public ExcersiseState[] States;
-    public Settings Settings;
-    public SteamVR_LoadLevel LevelLoader;
+	private Settings _settings;
+    public Settings Settings {
+		get {
+			return _settings;
+		}
+		set {
+			_settings = value;
+			OnSettingsChanged();
+		}
+	}
+
+	
+
+	public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
     public GameObject ShootingRange, City;
 
@@ -25,7 +38,6 @@ public class Exercise : MonoBehaviour
     {      
         States[currentState].OnUpdate();
         HandleButtons();
-        if(!BulletLine.ForceActive) BulletLine.Enabled = Settings.DrawLines;
     }
 
     public void PreviousStep()
@@ -88,6 +100,11 @@ public class Exercise : MonoBehaviour
         }
     }
 
+	private void OnSettingsChanged()
+	{
+		BulletLines.SetActive(Settings.DrawLines);
+	}
+
     private void DeleteBulletHoles()
     {
         GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
@@ -96,6 +113,6 @@ public class Exercise : MonoBehaviour
 
     private void DeleteLines()
     {
-        BulletLine.Destroy();
+        BulletLines.Destroy();
     }
 }
