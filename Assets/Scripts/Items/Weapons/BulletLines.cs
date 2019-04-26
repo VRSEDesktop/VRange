@@ -24,7 +24,7 @@ public static class BulletLines
 		lineObject.transform.position = start + ((end - start) / 2);
 		lineObject.transform.LookAt(end);
 
-		lineObject.GetComponent<MeshRenderer>().material.color = color;
+		lineObject.GetComponent<MeshRenderer>().sharedMaterial.color = color;
 		lineObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 		lineObject.GetComponent<Collider>().enabled = false;
 		lineObject.GetComponent<Renderer>().sharedMaterial.SetColor("_BaseColor", color);
