@@ -74,7 +74,7 @@ public class StateModel : ExcersiseState
         }
 
         yield return new WaitForSeconds(LoopTime);
-        RespawnWoman();
+        Restart();
     }
 
     public override void Restart()
