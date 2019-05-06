@@ -59,9 +59,9 @@ public abstract class ExcersiseState : MonoBehaviour
     public virtual void Restart()
     {
         Scenario.Clear();
+		Progress = ExerciseProgress.NotStarted;
 
-       
-        leftGun?.Reload();
+		leftGun?.Reload();
         rightGun?.Reload();
         StartTime = Time.realtimeSinceStartup;
 
