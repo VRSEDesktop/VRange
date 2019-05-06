@@ -23,6 +23,7 @@ public class Exercise : MonoBehaviour
 
     public void Start()
     {
+		BulletLines.SetActive(Settings.DrawLines);
         Settings.SettingsChanged += OnSettingsChanged;
         foreach(ExcersiseState state in States) state.OnExit();
         CurrentState = 0;
@@ -57,7 +58,8 @@ public class Exercise : MonoBehaviour
 
     public void Restart()
     {
-        DeleteBulletHoles();
+		BulletLines.SetActive(Settings.DrawLines);
+		DeleteBulletHoles();
         DeleteLines();
         States[CurrentState].Restart();
     }
