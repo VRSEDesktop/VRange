@@ -51,14 +51,18 @@ public class FadeOut : MonoBehaviour
 			if (lerpProgress >= fadeoutduration)
 				break;
 
-			if(ForceEnable)
+			if(ForceEnable && Renderer != null)
 			{
 				Renderer.material.SetColor("_BaseColor", startingColor);
 				break;
 			}
 		}
-		//So we don't have to set the color back when reenabling.
-		Renderer.material.SetColor("_BaseColor", startingColor);
+		if (Renderer != null)
+		{
+			//So we don't have to set the color back when reenabling.
+			Renderer.material.SetColor("_BaseColor", startingColor);
+		}
+		
 		if(!ForceEnable)
 			gameObject.SetActive(false);
 	}
