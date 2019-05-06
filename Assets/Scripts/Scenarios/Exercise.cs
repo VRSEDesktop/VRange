@@ -58,7 +58,8 @@ public class Exercise : MonoBehaviour
 
     public void Restart()
     {
-        DeleteBulletHoles();
+		BulletLines.SetActive(Settings.DrawLines);
+		DeleteBulletHoles();
         DeleteLines();
         States[CurrentState].Restart();
     }
