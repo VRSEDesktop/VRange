@@ -96,6 +96,8 @@ public class Exercise : MonoBehaviour
 
 		if (UI.GetButtonActivated("Toggle Controller"))
 		{
+			UI.DeactivateButton("Toggle Controller");
+
 			Settings.NormalGun = !Settings.NormalGun;
 
 			ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();

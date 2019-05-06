@@ -9,7 +9,6 @@ public class ApplyGunRotation : MonoBehaviour
 	private static Quaternion GunRotation = Quaternion.Euler(0, -88, 90);
 	private static Vector3 ControllerOffset = new Vector3(0, -0.05f, -0.05f);
 	private static Vector3 GunOffset = new Vector3(0.05f, 0, -0.1f);
-	private Vector3 CurrentOffset;
 
 	public Gun Gun;
 	private Settings Settings;
@@ -23,7 +22,7 @@ public class ApplyGunRotation : MonoBehaviour
 
 	public void Apply()
 	{
-		if (CurrentOffset != null) Gun.transform.position -= CurrentOffset;
+		Debug.Log("ApplyRotation()");
 
 		if (Settings.NormalGun) ApplyRealGunRotation();
 		else ApplyControllerRotation();
@@ -31,15 +30,13 @@ public class ApplyGunRotation : MonoBehaviour
 
 	public void ApplyControllerRotation()
     {     
-        Gun.transform.rotation = ControllerRotation;
-		Gun.transform.position += ControllerOffset;
-		CurrentOffset = ControllerOffset;
+        Gun.transform.localRotation = ControllerRotation;
+		Gun.transform.localPosition = ControllerOffset;
 	}
 
 	public void ApplyRealGunRotation()
     {
-		Gun.transform.rotation = GunRotation;
-		Gun.transform.position += GunOffset;
-		CurrentOffset = GunOffset;
+		Gun.transform.localRotation = GunRotation;
+		Gun.transform.localPosition = GunOffset;
 	} 
 }
