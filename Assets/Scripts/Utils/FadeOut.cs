@@ -38,6 +38,12 @@ public class FadeOut : MonoBehaviour
 		while(true)
 		{
 			yield return new WaitForEndOfFrame();
+			if (ForceEnable && Renderer != null)
+			{
+				Renderer.material.SetColor("_BaseColor", startingColor);
+				break;
+			}
+
 			lerpProgress = Time.time - lerpStarttime;
 			if(Renderer != null)
 			{
@@ -51,11 +57,6 @@ public class FadeOut : MonoBehaviour
 			if (lerpProgress >= fadeoutduration)
 				break;
 
-			if(ForceEnable && Renderer != null)
-			{
-				Renderer.material.SetColor("_BaseColor", startingColor);
-				break;
-			}
 		}
 		if (Renderer != null)
 		{
