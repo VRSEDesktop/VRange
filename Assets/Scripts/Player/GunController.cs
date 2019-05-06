@@ -5,7 +5,7 @@
 /// </summary>
 public class GunController : HandController
 {
-    private static readonly float DoubleClickDelay = 0.5f;
+    private static readonly float DoubleClickDelay = 0.25f;
 
     public Gun gun;
     private bool triggerPushed, reloadPushed;
