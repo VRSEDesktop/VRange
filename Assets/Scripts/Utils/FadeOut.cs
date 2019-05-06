@@ -59,6 +59,7 @@ public class FadeOut : MonoBehaviour
 		}
 		//So we don't have to set the color back when reenabling.
 		Renderer.material.SetColor("_BaseColor", startingColor);
-		gameObject.SetActive(false);
+		if(!ForceEnable)
+			gameObject.SetActive(false);
 	}
 }
