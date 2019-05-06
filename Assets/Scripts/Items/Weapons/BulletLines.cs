@@ -4,6 +4,7 @@ using UnityEngine;
 public static class BulletLines
 {
 	private static GameObject Parent;
+	public static bool Active;
 
     /// <summary>
     /// Creates a line.
@@ -35,12 +36,13 @@ public static class BulletLines
 			lineObject.GetComponent<FadeOut>().StartFadeOut((float)lifespan);
 		}
 
-        lineObject.SetActive(true);
+        lineObject.SetActive(Active);
 		Scenario.lines.Add(lineObject);
     }
 
     public static void SetActive(bool active)
     {
+		Active = active;
 		if(Parent != null)
 		{
 			if (Scenario.lines.Count > 0)
