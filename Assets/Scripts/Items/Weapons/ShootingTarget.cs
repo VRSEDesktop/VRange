@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class ShootingTarget : MonoBehaviour, IHitable
+public class ShootingTarget : ExcersiseState, IHitable
 {
     public Hitbox[] hitboxes;
     public HitboxType Goal;
 
-    public HitType OnHit(Gun gun, RaycastHit raycastHit)
-    {
-        HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
+	public GameObject step;
 
-        Debug.Log("ShootingTarrget::OnHit() " + partHit.ToString());
+	public HitType OnHit(Gun gun, RaycastHit raycastHit)
+    {
+
+        HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
+		step.SendMessage("Hit", SendMessageOptions.DontRequireReceiver);
+
+		Debug.Log("ShootingTarrget::OnHit() " + partHit.ToString());
         Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         if(partHit == Goal)
         {
@@ -26,6 +31,7 @@ public class ShootingTarget : MonoBehaviour, IHitable
             case HitboxType.TargetHandRight:
             case HitboxType.TargetTorso: return HitType.UNWANTED;
         }
+		
 
         return HitType.MISS;
     }
@@ -44,4 +50,5 @@ public class ShootingTarget : MonoBehaviour, IHitable
 
         return HitboxType.None;
     }
+
 }
