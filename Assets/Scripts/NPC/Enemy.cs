@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour, IHitable
 		{
 			case HitboxType.HumanHead:
                 if (!isDead) Die();
-                else Revive();
+                //else Revive();
             break;
             case HitboxType.HumanNeck:    break;
             case HitboxType.HumanPelvis:  break;

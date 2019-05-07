@@ -8,18 +8,21 @@ public class StateCardboard : ExcersiseState
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
     public float TimeToStart = 5f;
-
-    private static readonly float TimeToReact = 2.5f;
+	private int timesTurned;
+	private static readonly float TimeToReact = 2.5f;
 
 	public override void OnStart()
     {
         base.OnStart();
-        StartCoroutine(TurningCardBoard());
+        StartCoroutine(TurningCardBoard(5f));
 
         Exercise.City.gameObject.SetActive(false);
 
         Exercise.PreviousScenarioButton.gameObject.SetActive(false);
         Exercise.NextScenarioButton.gameObject.SetActive(true);
+
+		FlipAnimation.gameObject.SetActive(true);
+		timesTurned = 0;
     }
 
     public override void OnUpdate()
@@ -32,25 +35,32 @@ public class StateCardboard : ExcersiseState
         base.OnExit();
 
         FlipAnimation.SetBool("Visible", false);
+		timesTurned = 0;
+		FlipAnimation.gameObject.SetActive(false);
     }
 
-    private IEnumerator TurningCardBoard()
+    private IEnumerator TurningCardBoard(float _time)
     {
-        StartTime = Time.realtimeSinceStartup;
-
-		for (int i = 0; i < 7; i++)
+		if (timesTurned <= 7)
 		{
-			yield return new WaitForSeconds(TimeToStart);
+			yield return new WaitForSeconds(_time);
 			FlipAnimation.SetBool("Visible", true);
-			yield return new WaitForSeconds(TimeToReact);
-			FlipAnimation.SetBool("Visible", false);
-		}      
-    }
+
+			timesTurned += 1;
+		}
+	}
 
     public override void Restart()
     {
         base.Restart();
         FlipAnimation.SetBool("Visible", false);
-        StartCoroutine(TurningCardBoard());
+        StartCoroutine(TurningCardBoard(5f));
+		timesTurned = 0;
     }
+
+	public void Hit()
+	{
+		FlipAnimation.SetBool("Visible", false);
+		StartCoroutine(TurningCardBoard(1.5f));
+	}
 }

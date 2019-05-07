@@ -35,7 +35,7 @@ public class StateModel : ExcersiseState
     private void Randomizer()
     {
         float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
-        StartCoroutine(PullItem(waitTime, Random.Range(0, 4)));    
+        StartCoroutine(PullItem(waitTime, Random.Range(0, 2)));    
     }
 
     /// <summary>
@@ -59,18 +59,18 @@ public class StateModel : ExcersiseState
                 Anim.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
                 Anim.GetComponent<Enemy>().isAgressive = false;
                 break;
-            case 2:
-                Anim.SetBool("Equip Pistol", true);
-                yield return new WaitForSeconds(0.8f);
-                Anim.GetComponent<Enemy>().BaseballBat.gameObject.SetActive(true);
-                Anim.GetComponent<Enemy>().isAgressive = true;
-                break;
-            case 3:
-                Anim.SetBool("Equip Pistol", true);
-                yield return new WaitForSeconds(0.8f);
-                Anim.GetComponent<Enemy>().Axe.gameObject.SetActive(true);
-                Anim.GetComponent<Enemy>().isAgressive = true;
-                break;
+            //case 2:
+            //    Anim.SetBool("Equip Pistol", true);
+            //    yield return new WaitForSeconds(0.8f);
+            //    Anim.GetComponent<Enemy>().BaseballBat.gameObject.SetActive(true);
+            //    Anim.GetComponent<Enemy>().isAgressive = true;
+            //    break;
+            //case 3:
+            //    Anim.SetBool("Equip Pistol", true);
+            //    yield return new WaitForSeconds(0.8f);
+            //    Anim.GetComponent<Enemy>().Axe.gameObject.SetActive(true);
+            //    Anim.GetComponent<Enemy>().isAgressive = true;
+            //    break;
         }
 
         yield return new WaitForSeconds(LoopTime);
