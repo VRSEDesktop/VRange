@@ -5,9 +5,9 @@
 public class GazeButton : UIElement, IGazeable
 {
 	public Color HoverColor;
-	private Color DefaultColor;
+	[HideInInspector] public Color DefaultColor;
 
-	public virtual void OnEnable()
+	public void OnEnable()
 	{
 		DefaultColor = gameObject.GetComponent<Renderer>().material.GetColor("_BaseColor");
 	}
@@ -19,11 +19,11 @@ public class GazeButton : UIElement, IGazeable
 
     public virtual void OnHoverStart()
 	{
-		StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), HoverColor, 0.25f));
+		StartCoroutine(ChangeColor(HoverColor, 1f));
 	}
 
     public virtual void OnHoverEnd()
 	{
-		StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), DefaultColor, 0.25f));
+		StartCoroutine(ChangeColor(DefaultColor, 1f));
 	}
 }

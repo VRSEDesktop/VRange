@@ -41,7 +41,7 @@ public class FadeOut : MonoBehaviour
 		Color endingColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
 		while(true)
 		{
-			yield return new WaitForEndOfFrame();
+			yield return null;
 
 			if (ForceEnable && Renderer != null)
 			{
