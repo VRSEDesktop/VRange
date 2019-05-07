@@ -48,12 +48,18 @@ public class Exercise : MonoBehaviour
 
     public void NextStep()
     {
-        States[CurrentState].OnExit();
-        CurrentState++;
-        States[CurrentState].OnStart();
+        
+		if(CurrentState != 2)
+		{
+			States[CurrentState].OnExit();
+			CurrentState++;
+			States[CurrentState].OnStart();
+			DeleteBulletHoles();
+			DeleteLines();
+		}
+        
 
-        DeleteBulletHoles();
-        DeleteLines();
+        
     }
 
     public void Restart()

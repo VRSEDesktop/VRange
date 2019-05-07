@@ -14,7 +14,7 @@ public class GazeButton : UIElement, IGazeable
 
     public virtual void Activate()
     {
-        SetActive();
+        base.SetActive();
     }
 
     public virtual void OnHoverStart()
