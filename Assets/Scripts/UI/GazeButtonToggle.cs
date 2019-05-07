@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class GazeButtonToggle : GazeButton
 {
-    private bool IsActive;
+    private bool IsActive = false;
 	[SerializeField] private Color ActiveColor;
 	private Color DefaultColor;
 
