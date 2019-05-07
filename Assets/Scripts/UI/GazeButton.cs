@@ -4,7 +4,7 @@
 /// </summary>
 public class GazeButton : UIElement, IGazeable
 {
-	[SerializeField] private Color HoverColor;
+	public Color HoverColor;
 	private Color DefaultColor;
 
 	public virtual void OnEnable()
@@ -19,11 +19,11 @@ public class GazeButton : UIElement, IGazeable
 
     public virtual void OnHoverStart()
 	{
-		UI.ChangeColor(gameObject.GetComponent<Renderer>(), HoverColor, 0.25f);
+		StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), HoverColor, 0.25f));
 	}
 
     public virtual void OnHoverEnd()
 	{
-		UI.ChangeColor(gameObject.GetComponent<Renderer>(), DefaultColor, 0.25f);
+		StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), DefaultColor, 0.25f));
 	}
 }

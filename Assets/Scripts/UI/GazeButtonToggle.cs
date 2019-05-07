@@ -19,13 +19,23 @@ public class GazeButtonToggle : GazeButton
 		if (IsActive)
 		{
 			SetInactive();
-			UI.ChangeColor(gameObject.GetComponent<Renderer>(), DefaultColor, 0.25f);
+			StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), DefaultColor, 0.25f));
 		}
 		else
 		{
 			SetActive();
-			UI.ChangeColor(gameObject.GetComponent<Renderer>(), ActiveColor, 0.25f);
+			StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), ActiveColor, 0.25f));
 		}
         IsActive = !IsActive;
     }
+
+	public override void OnHoverStart()
+	{
+		StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), HoverColor, 0.25f));
+	}
+
+	public override void OnHoverEnd()
+	{
+		StartCoroutine(UI.ChangeColor(gameObject.GetComponent<Renderer>(), IsActive ? ActiveColor : HoverColor, 0.25f));
+	}
 }

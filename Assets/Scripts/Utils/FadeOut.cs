@@ -5,7 +5,6 @@ using UnityEngine;
 public class FadeOut : MonoBehaviour
 {
 	public bool ForceEnable = false;
-
 	private Renderer Renderer;
 	private IEnumerator Coroutine;
 
@@ -38,6 +37,7 @@ public class FadeOut : MonoBehaviour
 		while(true)
 		{
 			yield return new WaitForEndOfFrame();
+
 			if (ForceEnable && Renderer != null)
 			{
 				Renderer.material.SetColor("_BaseColor", startingColor);
