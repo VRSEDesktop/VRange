@@ -36,7 +36,9 @@ public static class BulletLines
 			lineObject.GetComponent<FadeOut>().StartFadeOut((float)lifespan);
 		}
 
-        lineObject.SetActive(Active);
+		if (!Active)
+			lineObject.GetComponent<FadeOut>().Disable();
+
 		Scenario.lines.Add(lineObject);
     }
 
