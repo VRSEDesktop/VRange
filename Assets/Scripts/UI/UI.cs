@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public static class UI
 {
@@ -18,4 +20,21 @@ public static class UI
     {
         ActiveButtons.Remove(name);
     }
+
+	public static IEnumerator ChangeColor(Renderer renderer, Color endingColor, float duration)
+	{
+		float lerpStarttime = Time.time;
+		float lerpProgress;
+		Color startingColor = renderer.material.GetColor("_BaseColor");
+		while (true)
+		{
+			yield return new WaitForEndOfFrame();
+
+			lerpProgress = Time.time - lerpStarttime;
+			if (renderer != null)
+			{
+				renderer.material.SetColor("_BaseColor", Color.Lerp(startingColor, endingColor, lerpProgress / duration));
+			}
+		}
+	}
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public delegate void PropertryChanged();
+public delegate void PropertyChanged();
 
 [CreateAssetMenu(menuName = "Exercise/Settings")]
 public class Settings : ScriptableObject
@@ -10,7 +10,7 @@ public class Settings : ScriptableObject
 	/// </summary>
 	public bool NormalGun = false;
     [SerializeField] private bool _drawLines = true;
-	public event PropertryChanged SettingsChanged;
+	public event PropertyChanged SettingsChanged;
 
 	public bool DrawLines
 	{
