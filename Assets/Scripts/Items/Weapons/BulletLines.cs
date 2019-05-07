@@ -51,8 +51,7 @@ public static class BulletLines
 			{
 				for (int i = 0; i < Scenario.lines.Count; ++i)
 				{
-					Scenario.lines[i].SetActive(active);
-					Scenario.lines[i].GetComponent<FadeOut>().ForceEnable = true;
+					Scenario.lines[i].GetComponent<FadeOut>().ForceEnable = active;
 				}
 			}
 		}
