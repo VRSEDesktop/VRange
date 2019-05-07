@@ -5,19 +5,23 @@ using UnityEngine;
 public class FadeOut : MonoBehaviour
 {
 	public bool ForceEnable = false;
-
 	private Renderer Renderer;
 	private IEnumerator Coroutine;
+	private float DefaultAlpha;
 
 	public void OnEnable()
 	{
 		Renderer = gameObject.GetComponent<Renderer>();
+		DefaultAlpha = Renderer.material.GetColor("_BaseColor").a;
 	}
 
 	public void Update()
 	{
 		if (ForceEnable && Coroutine != null)
+		{
 			StopCoroutine(Coroutine);
+			Enable();
+		}
 	}
 
     public void StartFadeOut(float delay)
@@ -37,7 +41,8 @@ public class FadeOut : MonoBehaviour
 		Color endingColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
 		while(true)
 		{
-			yield return new WaitForEndOfFrame();
+			yield return null;
+
 			if (ForceEnable && Renderer != null)
 			{
 				Renderer.material.SetColor("_BaseColor", startingColor);
@@ -58,13 +63,17 @@ public class FadeOut : MonoBehaviour
 				break;
 
 		}
-		if (Renderer != null)
-		{
-			//So we don't have to set the color back when reenabling.
-			Renderer.material.SetColor("_BaseColor", startingColor);
-		}
-		
-		if(!ForceEnable)
-			gameObject.SetActive(false);
+	}
+
+	public void Enable()
+	{
+		Color currentColor = Renderer.material.GetColor("_BaseColor");
+		Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, DefaultAlpha));
+	}
+
+	public void Disable()
+	{
+		Color currentColor = Renderer.material.GetColor("_BaseColor");
+		Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, 0));
 	}
 }
