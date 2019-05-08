@@ -37,7 +37,6 @@ public abstract class ExcersiseState : MonoBehaviour
     protected Exercise Exercise;
 
 	public GameObject ExplanationUI;
-	public GameObject FeedbackUI;
 
     public virtual void OnStart()
     {
@@ -45,7 +44,6 @@ public abstract class ExcersiseState : MonoBehaviour
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 		ExplanationUI.SetActive(true);
-		FeedbackUI.SetActive(false);
         InitializeWhiteboard();
         StartTime = Time.realtimeSinceStartup;
         leftGun?.Reload();
@@ -172,12 +170,10 @@ public abstract class ExcersiseState : MonoBehaviour
 		{
 			BulletLines.ForceActive();
 			ExplanationUI.SetActive(false);
-			FeedbackUI.SetActive(true);
 		}
 		else
 		{
 			ExplanationUI.SetActive(true);
-			FeedbackUI.SetActive(false);
 		}
 	}
 
