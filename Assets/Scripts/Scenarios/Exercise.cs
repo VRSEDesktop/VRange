@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Valve.VR;
 
 public class Exercise : MonoBehaviour
@@ -6,60 +7,68 @@ public class Exercise : MonoBehaviour
     /// <summary>
     /// States of the excersises
     /// </summary>
-    public ExcersiseState[] states;
-    public Settings Settings;
-    public SteamVR_LoadLevel levelLoader;
-    public GazeButton PreviousScenarioButton, NextScenarioButton;
-    public GameObject ShootingRange;
+    public ExcersiseState[] States;
+	public Settings Settings;
 
-    private static int currentState = 0;
+	public SteamVR_LoadLevel LevelLoader;
+    public GazeButton PreviousScenarioButton, NextScenarioButton;
+	public GameObject ShootingRange, City;
+
+	/// <summary>
+	/// Object with explanation of the exercise, reference used for turning it on/off
+	/// </summary>
+	public GameObject Explanation;
+
+    private static int CurrentState = 0;
 
     public void Start()
     {
-        foreach(ExcersiseState state in states) state.OnExit();
-        currentState = 0;
-        states[currentState].OnStart();
-
-        PreviousScenarioButton.gameObject.SetActive(currentState != 0);
+		BulletLines.SetActive(Settings.DrawLines);
+        Settings.SettingsChanged += OnSettingsChanged;
+        foreach(ExcersiseState state in States) state.OnExit();
+        CurrentState = 0;
+        States[CurrentState].OnStart();
     }
 
     public void Update()
     {      
-        states[currentState].OnUpdate();
+        States[CurrentState].OnUpdate();
         HandleButtons();
     }
 
     public void PreviousStep()
     {
-        states[currentState].OnExit();
-        currentState--;
-        states[currentState].OnStart();
-
-        PreviousScenarioButton.gameObject.SetActive(currentState != 0);
+        States[CurrentState].OnExit();
+        CurrentState--;
+        States[CurrentState].OnStart();
 
         DeleteBulletHoles();
+        DeleteLines();
     }
 
     public void NextStep()
-    {
-        states[currentState].OnExit();
-        currentState++;
-        states[currentState].OnStart();
-
-        NextScenarioButton.gameObject.SetActive(currentState != (states.Length-1));
-
-        DeleteBulletHoles();
+    {  
+		if(CurrentState != 2)
+		{
+			States[CurrentState].OnExit();
+			CurrentState++;
+			States[CurrentState].OnStart();
+			DeleteBulletHoles();
+			DeleteLines();
+		}
     }
 
     public void Restart()
     {
-        DeleteBulletHoles();
-        states[currentState].Restart();
+		BulletLines.SetActive(Settings.DrawLines);
+		DeleteBulletHoles();
+        DeleteLines();
+        States[CurrentState].Restart();
     }
 
     private void HandleButtons()
     {
-        Settings.drawLines = UI.GetButtonActivated("Toggle Bulletlines");
+        Settings.DrawLines = UI.GetButtonActivated("Toggle Bulletlines");
 
         if (UI.GetButtonActivated("Restart Scenario"))
         {
@@ -71,8 +80,8 @@ public class Exercise : MonoBehaviour
         if (UI.GetButtonActivated("Mainmenu"))
         {
             Scenario.Clear();
-            levelLoader.levelName = "MainMenu";
-            levelLoader.Trigger();
+            LevelLoader.levelName = "MainMenu";
+            LevelLoader.Trigger();
         }
 
         if (UI.GetButtonActivated("Next Scenario"))
@@ -88,11 +97,21 @@ public class Exercise : MonoBehaviour
             PreviousStep();
             UI.DeactivateButton("Previous Scenario");
         }
-    }
+	}
+
+	private void OnSettingsChanged()
+	{
+		BulletLines.SetActive(Settings.DrawLines);
+	}
 
     private void DeleteBulletHoles()
     {
         GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
         foreach (GameObject obj in bulletHoles) Destroy(obj);
+    }
+
+    private void DeleteLines()
+    {
+        BulletLines.Destroy();
     }
 }

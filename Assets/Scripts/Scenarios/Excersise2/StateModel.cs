@@ -3,24 +3,27 @@ using UnityEngine;
 
 public class StateModel : ExcersiseState
 {
-    public GameObject womanPrefab;
-    public Animator anim;
+    public GameObject WomanPrefab;
+    public Animator Anim;
     /// <summary>
     /// Minimum and maximum time in seconds after which the model will decide which item to take
     /// </summary>
-    public float minWaitTime = 2f, maxWaitTime = 5f;
+    public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
 
-    private int currentAnimation = -1;
+	public GameObject RespawnPoint;
 
     public override void OnStart()
     {
         base.OnStart();
         Randomizer();
+
+        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
+        Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
     public override void OnUpdate()
     {
-        UpdateGUI();
+        base.OnUpdate();
     }
 
     public override void OnExit()
@@ -31,7 +34,7 @@ public class StateModel : ExcersiseState
 
     private void Randomizer()
     {
-        float waitTime = Random.Range(minWaitTime, maxWaitTime);
+        float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
         StartCoroutine(PullItem(waitTime, Random.Range(0, 2)));    
     }
 
@@ -41,24 +44,37 @@ public class StateModel : ExcersiseState
     /// <returns></returns>
     private IEnumerator PullItem(float waitTime, int num)
     {
-        currentAnimation = num;
-
         yield return new WaitForSeconds(waitTime);      
         switch (num)
         {
             case 0:
-		        anim.SetBool("Equip Pistol", true);
+		        Anim.SetBool("Equip Pistol", true);
                 yield return new WaitForSeconds(0.8f);
-                anim.GetComponent<Enemy>().gun.gameObject.SetActive(true);
-                anim.GetComponent<Enemy>().isAgressive = true;
+                Anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
+                Anim.GetComponent<Enemy>().isAgressive = true;
             break; 
             case 1:
-		        anim.SetBool("Equip Phone", true);
+		        Anim.SetBool("Equip Phone", true);
                 yield return new WaitForSeconds(0.8f);
-                anim.GetComponent<Enemy>().phone.gameObject.SetActive(true);
-                anim.GetComponent<Enemy>().isAgressive = false;
+                Anim.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
+                Anim.GetComponent<Enemy>().isAgressive = false;
                 break;
-        }      
+            //case 2:
+            //    Anim.SetBool("Equip Pistol", true);
+            //    yield return new WaitForSeconds(0.8f);
+            //    Anim.GetComponent<Enemy>().BaseballBat.gameObject.SetActive(true);
+            //    Anim.GetComponent<Enemy>().isAgressive = true;
+            //    break;
+            //case 3:
+            //    Anim.SetBool("Equip Pistol", true);
+            //    yield return new WaitForSeconds(0.8f);
+            //    Anim.GetComponent<Enemy>().Axe.gameObject.SetActive(true);
+            //    Anim.GetComponent<Enemy>().isAgressive = true;
+            //    break;
+        }
+
+        yield return new WaitForSeconds(LoopTime);
+        Restart();
     }
 
     public override void Restart()
@@ -72,9 +88,9 @@ public class StateModel : ExcersiseState
     private void RespawnWoman()
     {
         Enemy woman = GetComponentInChildren<Enemy>();
-        GameObject newWoman = Instantiate(womanPrefab, woman.transform.position, woman.transform.rotation);
+        GameObject newWoman = Instantiate(WomanPrefab, RespawnPoint.transform.position, RespawnPoint.transform.rotation);
         newWoman.transform.parent = transform;
         Destroy(woman.gameObject);
-        anim = newWoman.GetComponent<Animator>();
+        Anim = newWoman.GetComponent<Animator>();
     }
 }

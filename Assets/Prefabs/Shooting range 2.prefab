@@ -5739,7 +5739,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6466754012794560415}
   - component: {fileID: 6579259623474604687}
-  - component: {fileID: 854378984665167556}
   - component: {fileID: 1434241394262289495}
   m_Layer: 0
   m_Name: Shooting range 2
@@ -5787,20 +5786,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &854378984665167556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6466754012794586047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d750eea1bd4c2f44a67f2b9025768e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6579259623474604687}
-  collapseSound: {fileID: 1434241394262289495}
 --- !u!82 &1434241394262289495
 AudioSource:
   m_ObjectHideFlags: 0

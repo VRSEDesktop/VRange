@@ -18,12 +18,5 @@ public class MainMenu : MonoBehaviour
             levelLoader.levelName = "Exercise_2_Scenario";
             levelLoader.Trigger();
         }
-
-        if (UI.GetButtonActivated("Shooting-range"))
-        {
-            Scenario.Clear();
-            levelLoader.levelName = "ShootingRange";
-            levelLoader.Trigger();
-        }
     }
 }

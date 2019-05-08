@@ -33,12 +33,6 @@ public class Scenario : MonoBehaviour
         logs.Clear();
 
         GameObject shotsContainer = GameObject.Find("ShotsRays");
-        if (shotsContainer)
-        {
-            for(int i = 0; i < shotsContainer.transform.childCount; i++)
-            {
-                Destroy(shotsContainer.transform.GetChild(i).gameObject);
-            }
-        }
+        Destroy(shotsContainer);
     }
 }

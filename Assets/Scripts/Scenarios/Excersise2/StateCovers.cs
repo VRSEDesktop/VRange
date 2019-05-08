@@ -3,22 +3,27 @@ using UnityEngine;
 
 public class StateCovers : ExcersiseState
 {
-    public GameObject womanPrefab;
-    public Animator anim;
+    public GameObject WomanPrefab;
+    public Animator Anim;
     /// <summary>
     /// Minimum and maximum time in seconds after which the model will decide which item to take
     /// </summary>
-    public float minWaitTime = 2f, maxWaitTime = 5f;
+    public float MinWaitTime = 2f, MaxWaitTime = 5f;
 
-    public override void OnStart()
+	public GameObject RespawnPoint;
+
+	public override void OnStart()
     {
         base.OnStart();
         Randomizer();
+
+        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
+        Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
     public override void OnUpdate()
     {
-        UpdateGUI();
+        base.OnUpdate();
     }
 
     public override void OnExit()
@@ -29,7 +34,7 @@ public class StateCovers : ExcersiseState
 
     private void Randomizer()
     {
-        float waitTime = Random.Range(minWaitTime, maxWaitTime);
+        float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
         StartCoroutine(PullItem(waitTime));
     }
 
@@ -41,10 +46,10 @@ public class StateCovers : ExcersiseState
     {
         yield return new WaitForSeconds(waitTime);
 
-        anim.SetBool("Equip Pistol", true);
+        Anim.SetBool("Equip Pistol", true);
         yield return new WaitForSeconds(0.8f);
-        anim.GetComponent<Enemy>().gun.gameObject.SetActive(true);
-        anim.GetComponent<Enemy>().isAgressive = true;
+        Anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
+        Anim.GetComponent<Enemy>().isAgressive = true;
     }
 
     public override void Restart()
@@ -58,9 +63,9 @@ public class StateCovers : ExcersiseState
     private void RespawnWoman()
     {
         Enemy woman = GetComponentInChildren<Enemy>();
-        GameObject newWoman = Instantiate(womanPrefab, woman.transform.position, woman.transform.rotation);
+        GameObject newWoman = Instantiate(WomanPrefab, RespawnPoint.transform.position, RespawnPoint.transform.rotation);
         newWoman.transform.parent = transform;
         Destroy(woman.gameObject);
-        anim = newWoman.GetComponent<Animator>();
+        Anim = newWoman.GetComponent<Animator>();
     }
 }
