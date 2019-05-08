@@ -27,7 +27,14 @@ public class GazeButton : UIElement, IGazeable
 
 	public virtual void OnHoverEnd()
 	{
-		StartCoroutine(ChangeColor(DefaultColor, 1f));
+		try
+		{
+			StartCoroutine(ChangeColor(DefaultColor, 1f));
+		}
+		catch
+		{
+
+		}
 	}
 
 	/// <summary>
@@ -36,8 +43,12 @@ public class GazeButton : UIElement, IGazeable
 	/// <returns>The IEnumerator used in MonoBehaviour::StartCoroutine</returns>
 	private IEnumerator DeactivateAfterFrame()
 	{
-		//Waits one frame
+		//Waits one frame. For some reason WaitForEndOfFrame seems stable in the editor, while null seems stable in build.
+#if UNITY_EDITOR
 		yield return new WaitForEndOfFrame();
+#else
+		yield return null;
+#endif
 		SetInactive();
 	}
 }

@@ -260,8 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35019de8bd9e41749823b61b9f6818a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 4278016892390238743}
-  normalGun: 0
+  Gun: {fileID: 0}
 --- !u!114 &4031317434851601688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,8 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35019de8bd9e41749823b61b9f6818a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 3350520233452585610}
-  normalGun: 0
+  Gun: {fileID: 0}
 --- !u!114 &4063026890976845015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,7 +470,6 @@ GameObject:
   - component: {fileID: 1431189617}
   - component: {fileID: 1431189621}
   - component: {fileID: 329714829008645073}
-  - component: {fileID: 3671897323703829610}
   - component: {fileID: 9218687673746795147}
   m_Layer: 0
   m_Name: Camera
@@ -509,9 +506,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -623,37 +621,6 @@ MonoBehaviour:
   hitbox:
     mesh: {fileID: 0}
     type: 0
---- !u!114 &3671897323703829610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8998585770778958936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c5acf727c4d5d43bc69e892a516630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_valveShadowTextureWidth: 4096
-  m_valveShadowTextureHeight: 4096
-  EnableCookies: 1
-  m_renderShadowsInLateUpdate: 0
-  ShadowType: 1
-  PenumbraSize: 1.5
-  ShadowBias: 0.001
-  ShadowSamples: 25
-  m_aoEnabled: 1
-  m_indirectLightmapsOnly: 0
-  m_adaptiveQualityEnabled: 1
-  m_adaptiveQualityDebugVis: 0
-  m_MSAALevel: 4
-  m_minRenderTargetScale: 0.65
-  m_maVRenderTargetScale: 2
-  m_maVRenderTargetDimension: 4096
-  m_cullLightsInSceneEditor: 0
-  m_cullLightsFromEditorCamera: 0
-  m_hideAllValveMaterials: 0
 --- !u!114 &9218687673746795147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,6 +782,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
+--- !u!4 &6291877144258139372 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4226328758674568113, guid: 906e0b8fdce42b941b51d3f9090bd648,
+    type: 3}
+  m_PrefabInstance: {fileID: 7924034549069604701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4278016892390238743 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
@@ -827,12 +800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c8a112d13248b4cbb57dd342836eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &6291877144258139372 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4226328758674568113, guid: 906e0b8fdce42b941b51d3f9090bd648,
-    type: 3}
-  m_PrefabInstance: {fileID: 7924034549069604701}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8707202611613159360
 PrefabInstance:
   m_ObjectHideFlags: 0
