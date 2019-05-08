@@ -53,9 +53,24 @@ public static class BulletLines
 			{
 				for (int i = 0; i < Lines.Count; ++i)
 				{
-					Lines[i].GetComponent<FadeOut>().ForceEnable = active;
+					Lines[i].GetComponent<FadeOut>().Enable();
 					if (!active)
 						Lines[i].GetComponent<FadeOut>().Disable();
+				}
+			}
+		}
+	}
+
+	public static void ForceActive()
+	{
+		Active = true;
+		if (Parent != null)
+		{
+			if (Lines.Count > 0)
+			{
+				for (int i = 0; i < Lines.Count; ++i)
+				{
+					Lines[i].GetComponent<FadeOut>().ForceEnable = true;
 				}
 			}
 		}

@@ -8,6 +8,7 @@ public class FadeOut : MonoBehaviour
 	private Renderer Renderer;
 	private IEnumerator Coroutine;
 	private float DefaultAlpha;
+	private bool ShouldDisappear = false;
 
 	public void OnEnable()
 	{
@@ -34,6 +35,7 @@ public class FadeOut : MonoBehaviour
 	private IEnumerator DisableLine(float delay, float fadeoutduration)
 	{
 		yield return new WaitForSeconds(delay);
+		ShouldDisappear = true;
 
 		float lerpStarttime = Time.time;
 		float lerpProgress;
@@ -45,7 +47,7 @@ public class FadeOut : MonoBehaviour
 
 			if (ForceEnable && Renderer != null)
 			{
-				Renderer.material.SetColor("_BaseColor", startingColor);
+				Enable();
 				break;
 			}
 
@@ -66,13 +68,22 @@ public class FadeOut : MonoBehaviour
 
 	public void Enable()
 	{
-		Color currentColor = Renderer.material.GetColor("_BaseColor");
-		Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, DefaultAlpha));
+		if(Renderer != null)
+		{
+			if (!ShouldDisappear || ForceEnable)
+			{
+				Color currentColor = Renderer.material.GetColor("_BaseColor");
+				Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, DefaultAlpha));
+			}
+		}
 	}
 
 	public void Disable()
 	{
-		Color currentColor = Renderer.material.GetColor("_BaseColor");
-		Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, 0));
+		if(Renderer != null)
+		{
+			Color currentColor = Renderer.material.GetColor("_BaseColor");
+			Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, 0));
+		}
 	}
 }

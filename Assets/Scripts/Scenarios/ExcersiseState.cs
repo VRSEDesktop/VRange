@@ -165,7 +165,7 @@ public abstract class ExcersiseState : MonoBehaviour
 		Debug.Log(Progress.ToString());
 		if(Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
 		{
-			BulletLines.SetActive(true);
+			BulletLines.ForceActive();
 		}
 	}
 
