@@ -44,9 +44,13 @@ public abstract class ExcersiseState : MonoBehaviour
         Progress = ExerciseProgress.NotStarted;
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
-		ExplanationUI.SetActive(true);
-		FeedbackUI.SetActive(false);
-        InitializeWhiteboard();
+
+		if (ExplanationUI != null)
+			ExplanationUI.SetActive(true);
+		if (FeedbackUI != null)
+			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+
+		InitializeWhiteboard();
         StartTime = Time.realtimeSinceStartup;
         leftGun?.Reload();
         rightGun?.Reload();
@@ -172,12 +176,17 @@ public abstract class ExcersiseState : MonoBehaviour
 		{
 			BulletLines.ForceActive();
 			ExplanationUI.SetActive(false);
-			FeedbackUI.SetActive(true);
+			if (ExplanationUI != null)
+				ExplanationUI.SetActive(false);
+			if (FeedbackUI != null)
+				FeedbackUI.GetComponent<MeshRenderer>().enabled = true;
 		}
 		else
 		{
-			ExplanationUI.SetActive(true);
-			FeedbackUI.SetActive(false);
+			if(ExplanationUI != null)
+				ExplanationUI.SetActive(true);
+			if (FeedbackUI != null)
+				FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
 		}
 	}
 
