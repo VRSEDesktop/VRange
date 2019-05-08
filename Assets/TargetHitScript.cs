@@ -8,7 +8,6 @@ public class TargetHitScript : MonoBehaviour, IHitable
 
 	public HitType OnHit(Gun gun, RaycastHit raycastHit)
 	{
-		Debug.Log("WOLLA");
 		throw new System.NotImplementedException();
 	}
 

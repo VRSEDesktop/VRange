@@ -5,10 +5,6 @@ public delegate void PropertyChanged();
 [CreateAssetMenu(menuName = "Exercise/Settings")]
 public class Settings : ScriptableObject
 {
-	/// <summary>
-	/// Is a normal gun used or a Vive controller
-	/// </summary>
-	public bool NormalGun = false;
     [SerializeField] private bool _drawLines = true;
 	public event PropertyChanged SettingsChanged;
 

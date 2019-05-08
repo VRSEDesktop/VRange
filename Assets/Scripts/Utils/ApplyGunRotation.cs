@@ -5,27 +5,33 @@
 /// </summary>
 public class ApplyGunRotation : MonoBehaviour
 {
-	private static Quaternion ControllerRotation = Quaternion.Euler(-45, -180, 0);
-	private static Quaternion GunRotation = Quaternion.Euler(0, -88, 90);
-	private static Vector3 ControllerOffset = new Vector3(0, -0.05f, -0.05f);
-	private static Vector3 GunOffset = new Vector3(0.05f, 0, -0.1f);
+	private readonly Quaternion ControllerRotation = Quaternion.Euler(-45, -180, 0);
+	private readonly Quaternion GunRotation = Quaternion.Euler(0, -88, 90);
+	private readonly Vector3 ControllerOffset = new Vector3(0, -0.05f, -0.05f);
+	private readonly Vector3 GunOffset = new Vector3(0.05f, 0, -0.1f);
 
 	public Gun Gun;
-	private Settings Settings;
+	private bool NormalGun = false;
 
 	public void Start()
     {
-		Settings = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Settings;
-
-		Apply();
+		if (NormalGun) ApplyRealGunRotation();
+		else ApplyControllerRotation();
 	}
 
-	public void Apply()
+	public void Update()
+	{
+		if (UI.GetButtonActivated("Toggle Controller"))
+			Toggle();
+	}
+
+	public void Toggle()
 	{
 		Debug.Log("ApplyRotation()");
 
-		if (Settings.NormalGun) ApplyRealGunRotation();
+		if (!NormalGun) ApplyRealGunRotation();
 		else ApplyControllerRotation();
+		NormalGun = !NormalGun;
 	}
 
 	public void ApplyControllerRotation()

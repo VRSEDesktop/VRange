@@ -37,7 +37,7 @@ public class GazeButton : UIElement, IGazeable
 	private IEnumerator DeactivateAfterFrame()
 	{
 		//Waits one frame
-		yield return null;
+		yield return new WaitForEndOfFrame();
 		SetInactive();
 	}
 }
