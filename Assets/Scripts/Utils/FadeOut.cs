@@ -61,7 +61,6 @@ public class FadeOut : MonoBehaviour
 
 			if (lerpProgress >= fadeoutduration)
 				break;
-
 		}
 	}
 

@@ -1,19 +1,21 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class BulletLines
 {
-	private static GameObject Parent;
 	public static bool Active;
+	private static GameObject Parent;
+	private static IList<GameObject> Lines = new List<GameObject>();
 
-    /// <summary>
-    /// Creates a line.
-    /// </summary>
-    /// <param name="start">Starting position.</param>
-    /// <param name="end">Ending position.</param>
-    /// <param name="color">The color of the line.</param>
-    /// <param name="lifespan">The time before the line should disappear. If null it will not disappear.</param>
-    public static void SpawnLine(GameObject linePrefab, Vector3 start, Vector3 end, Color color, float? lifespan = 5f)
+	/// <summary>
+	/// Creates a line.
+	/// </summary>
+	/// <param name="start">Starting position.</param>
+	/// <param name="end">Ending position.</param>
+	/// <param name="color">The color of the line.</param>
+	/// <param name="lifespan">The time before the line should disappear. If null it will not disappear.</param>
+	public static void SpawnLine(GameObject linePrefab, Vector3 start, Vector3 end, Color color, float? lifespan = 5f)
     {
         if (Parent == null) Parent = new GameObject("ShotRays");
 
@@ -39,7 +41,7 @@ public static class BulletLines
 		if (!Active)
 			lineObject.GetComponent<FadeOut>().Disable();
 
-		Scenario.lines.Add(lineObject);
+		Lines.Add(lineObject);
     }
 
     public static void SetActive(bool active)
@@ -47,13 +49,13 @@ public static class BulletLines
 		Active = active;
 		if(Parent != null)
 		{
-			if (Scenario.lines.Count > 0)
+			if (Lines.Count > 0)
 			{
-				for (int i = 0; i < Scenario.lines.Count; ++i)
+				for (int i = 0; i < Lines.Count; ++i)
 				{
-					Scenario.lines[i].GetComponent<FadeOut>().ForceEnable = active;
+					Lines[i].GetComponent<FadeOut>().ForceEnable = active;
 					if (!active)
-						Scenario.lines[i].GetComponent<FadeOut>().Disable();
+						Lines[i].GetComponent<FadeOut>().Disable();
 				}
 			}
 		}
@@ -62,6 +64,6 @@ public static class BulletLines
     public static void Destroy()
     {
 		GameObject.Destroy(Parent);
-		Scenario.lines.Clear();
+		Lines.Clear();
     }
 }

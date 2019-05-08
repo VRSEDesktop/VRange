@@ -16,8 +16,8 @@ public class GunController : HandController
         if (!triggerPushed && input.GetTriggerState()) PushTrigger();
         else if(triggerPushed && !input.GetTriggerState()) ReleaseTrigger();
 
-        if (!reloadPushed && input.GetGripState()) PushReload();
-        else if (reloadPushed && !input.GetGripState()) ReleaseReload();
+        //if (!reloadPushed && input.GetGripState()) PushReload();
+        //else if (reloadPushed && !input.GetGripState()) ReleaseReload();
     }
 
     public void Update()

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+
 /// <summary>
 /// Gaze Button that toggles.
 /// </summary>

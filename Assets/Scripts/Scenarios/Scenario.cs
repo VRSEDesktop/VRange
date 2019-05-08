@@ -4,7 +4,6 @@ using UnityEngine;
 public class Scenario : MonoBehaviour
 {
     public static IList<ScenarioLog> logs = new List<ScenarioLog>();
-	public static IList<GameObject> lines = new List<GameObject>();
 
     public static IList<LoggedHit> GetHits()
     {
