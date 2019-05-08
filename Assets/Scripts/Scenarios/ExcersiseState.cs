@@ -12,17 +12,6 @@ public enum ExerciseProgress
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-	private ExerciseProgress _progress;
-    public ExerciseProgress Progress {
-		get { return _progress; }
-		set {
-			if(value != _progress)
-			{
-				_progress = value;
-				OnProgressChanged();
-			}
-		}
-	}
     public Gun leftGun, rightGun;
 
 	[HideInInspector]
@@ -41,7 +30,6 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public virtual void OnStart()
     {
-        Progress = ExerciseProgress.NotStarted;
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
@@ -51,16 +39,14 @@ public abstract class ExcersiseState : MonoBehaviour
 			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
 
 		InitializeWhiteboard();
-        StartTime = Time.realtimeSinceStartup;
-        leftGun?.Reload();
-        rightGun?.Reload();
+        
     }
 
     public virtual void OnUpdate()
     {
         if(!leftGun.HasAmmo() || !rightGun.HasAmmo())
         {
-            Progress = ExerciseProgress.Succeeded;
+            Exercise.Progress = ExerciseProgress.Succeeded;
             UpdateGUI();
         }
     }
@@ -68,7 +54,6 @@ public abstract class ExcersiseState : MonoBehaviour
     public virtual void Restart()
     {
         Scenario.Clear();
-		Progress = ExerciseProgress.NotStarted;
 
 		leftGun?.Reload();
         rightGun?.Reload();
@@ -169,10 +154,9 @@ public abstract class ExcersiseState : MonoBehaviour
         }
     }
 
-	private void OnProgressChanged()
+	public void OnProgressChanged()
 	{
-		Debug.Log(Progress.ToString());
-		if(Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
+		if (Exercise.Progress == ExerciseProgress.Succeeded || Exercise.Progress == ExerciseProgress.Failed)
 		{
 			BulletLines.ForceActive();
 			ExplanationUI.SetActive(false);
@@ -181,12 +165,19 @@ public abstract class ExcersiseState : MonoBehaviour
 			if (FeedbackUI != null)
 				FeedbackUI.GetComponent<MeshRenderer>().enabled = true;
 		}
-		else
+		if (Exercise.Progress == ExerciseProgress.NotStarted || Exercise.Progress == ExerciseProgress.Started)
 		{
-			if(ExplanationUI != null)
+			if (ExplanationUI != null)
 				ExplanationUI.SetActive(true);
 			if (FeedbackUI != null)
 				FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+		}
+		if (Exercise.Progress == ExerciseProgress.Started)
+		{
+			OnStart();
+			StartTime = Time.time;
+			leftGun?.Reload();
+			rightGun?.Reload();
 		}
 	}
 
