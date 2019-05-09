@@ -39,7 +39,7 @@ public class Gun : Weapon, IReloadable
 
         if (!CanShoot())
         {
-            Scenario.logs.Add(new LoggedShot(this, true));
+            ScenarioLogs.logs.Add(new LoggedShot(this, true));
             return false;
         }
 
@@ -51,7 +51,7 @@ public class Gun : Weapon, IReloadable
         GetComponentInChildren<ParticleSystem>().Play();
         anim.Play("Fire");
 
-        Scenario.logs.Add(new LoggedShot(this, true));
+        ScenarioLogs.logs.Add(new LoggedShot(this, true));
         return true;
     }
 

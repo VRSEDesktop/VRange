@@ -67,7 +67,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
     public virtual void Restart()
     {
-        Scenario.Clear();
+        ScenarioLogs.Clear();
 		Progress = ExerciseProgress.NotStarted;
 
 		leftGun?.Reload();
@@ -81,7 +81,7 @@ public abstract class ExcersiseState : MonoBehaviour
     {
         GetComponent<Transform>().gameObject.SetActive(false);
 
-        Scenario.Clear();
+        ScenarioLogs.Clear();
 
         HasSetGUI = false;
     }
@@ -136,36 +136,15 @@ public abstract class ExcersiseState : MonoBehaviour
 
     private void ConvertingHits()
     {
-        foreach (var hit in Scenario.GetHits())
+        foreach (var hit in ScenarioLogs.GetHits())
         {
-            if (hit.part.ToDescriptionString() == "Hoofd")
-            {
-                head += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Torso")
-            {
-                torso += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Linkerarm")
-            {
-                leftarm += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Rechterarm")
-            {
-                rightarm += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Linkerbeen")
-            {
-                leftleg += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Rechterbeen")
-            {
-                rightleg += 1;
-            }
-            else
-            {
-                mis += 1;
-            }
+            if (hit.part.ToDescriptionString() == "Hoofd") head++;
+            else if (hit.part.ToDescriptionString() == "Torso") torso++;
+            else if (hit.part.ToDescriptionString() == "Linkerarm") leftarm ++;
+            else if (hit.part.ToDescriptionString() == "Rechterarm") rightarm++;
+            else if (hit.part.ToDescriptionString() == "Linkerbeen") leftleg++;
+            else if (hit.part.ToDescriptionString() == "Rechterbeen") rightleg++;
+            else mis++;
         }
     }
 
