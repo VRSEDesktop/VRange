@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetHitScript : MonoBehaviour, IHitable
 {
-	public Animator anim;
+
 
 	public HitType OnHit(Gun gun, RaycastHit raycastHit)
 	{

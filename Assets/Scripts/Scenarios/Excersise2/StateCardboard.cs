@@ -52,4 +52,12 @@ public class StateCardboard : ExcersiseState
         StartCoroutine(TurningCardBoard(TimeToStart));
 		Iteration = 0;
     }
+
+	public void Hit()
+	{
+		FlipAnimation.SetBool("Visible", false);
+		StartCoroutine(TurningCardBoard(1.5f));
+	}
+
+
 }

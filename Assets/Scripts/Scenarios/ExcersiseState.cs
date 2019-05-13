@@ -13,6 +13,7 @@ public enum ExerciseProgress
 public abstract class ExcersiseState : MonoBehaviour
 {
 	private ExerciseProgress _progress;
+	public IList<LoggedHit> hits;
     public ExerciseProgress Progress {
 		get { return _progress; }
 		set {
@@ -45,22 +46,24 @@ public abstract class ExcersiseState : MonoBehaviour
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
+		InitializeWhiteboard();
+
+		StartTime = Time.realtimeSinceStartup;
+		leftGun?.Reload();
+		rightGun?.Reload();
+
 		if (ExplanationUI != null)
 			ExplanationUI.SetActive(true);
 		if (FeedbackUI != null)
 			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
-
-		InitializeWhiteboard();
-        StartTime = Time.realtimeSinceStartup;
-        leftGun?.Reload();
-        rightGun?.Reload();
     }
 
     public virtual void OnUpdate()
     {
-        if(!leftGun.HasAmmo() || !rightGun.HasAmmo())
+        if(!rightGun.HasAmmo())
         {
             Progress = ExerciseProgress.Succeeded;
+			Debug.Log(ScenarioLogs.GetHits().Count);
             UpdateGUI();
         }
     }
@@ -69,6 +72,9 @@ public abstract class ExcersiseState : MonoBehaviour
     {
         ScenarioLogs.Clear();
 		Progress = ExerciseProgress.NotStarted;
+
+		ClearBoard();
+		ResetGUI();
 
 		leftGun?.Reload();
         rightGun?.Reload();
@@ -98,12 +104,22 @@ public abstract class ExcersiseState : MonoBehaviour
        else HasSetGUI = false;
     }
 
+	public void ClearBoard()
+	{
+		gHead.SetActive(false);
+		gNeck.SetActive(false);
+		gLeftarm.SetActive(false);
+		gLeftleg.SetActive(false);
+		gRightarm.SetActive(false);
+		gRightleg.SetActive(false);
+	}
+
     /// <summary>
     /// Sets the gui
     /// </summary>
     private void DisplayStats()
     {
-        float time = Time.realtimeSinceStartup - StartTime;
+        //float time = Time.realtimeSinceStartup - StartTime;
 
         ResetGUI();
         ConvertingHits();
