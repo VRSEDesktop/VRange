@@ -104,7 +104,6 @@ public class Gun : Weapon, IReloadable
 
     private void SpawnBulletHole(RaycastHit hit)
     {
-        //tmp TODO FIX IT
         if (hit.collider.GetComponentInParent<Enemy>()) return;
 
         Vector3 offset = transform.rotation * -Vector3.forward;
@@ -133,7 +132,6 @@ public class Gun : Weapon, IReloadable
     public void Reload()
     {
         currentAmmo = magCapacity;
-        //FindObjectOfType<Exercise>()?.Restart();
     }
 
     /// <summary>

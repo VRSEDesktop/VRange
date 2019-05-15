@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, IHitable
     public static Player Instance { get; private set; }
 
     public VR_Controller leftHand, rightHand;
-    public Gun lefGun, rightGun;
+    public Gun leftGun, rightGun;
 
     public Hitbox hitbox;
 
@@ -34,8 +34,6 @@ public class Player : MonoBehaviour, IHitable
     void OnGUI()
     {
         IList<LoggedHit> hits = ScenarioLogs.GetHits();
-
-        //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (Scenario.GetShotsFromGun(leftGun).Count + Scenario.GetShotsFromGun(rightGun).Count));
 
         for (int i = 0; i < hits.Count; i++)
         {

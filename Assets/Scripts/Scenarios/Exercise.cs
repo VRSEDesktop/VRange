@@ -59,6 +59,7 @@ public class Exercise : MonoBehaviour
 
     public void Restart()
     {
+		Debug.Log("Exercise:Restart()");
 		BulletLines.SetActive(Settings.DrawLines);
 		DeleteBulletHoles();
         DeleteLines();
@@ -73,7 +74,6 @@ public class Exercise : MonoBehaviour
         {
             ScenarioLogs.Clear();
             Restart();
-            UI.DeactivateButton("Restart Scenario");
         }
 
         if (UI.GetButtonActivated("Mainmenu"))
@@ -87,15 +87,20 @@ public class Exercise : MonoBehaviour
         {
             ScenarioLogs.Clear();
             NextStep();
-            UI.DeactivateButton("Next Scenario");
         }
 
         if (UI.GetButtonActivated("Previous Scenario"))
         {
             ScenarioLogs.Clear();
             PreviousStep();
-            UI.DeactivateButton("Previous Scenario");
         }
+
+		if (UI.GetButtonActivated("Toggle Controller"))
+		{
+			ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
+			foreach (ApplyGunRotation gun in guns) gun.Toggle();
+			Settings.NormalGun = !Settings.NormalGun;
+		}
 	}
 
 	private void OnSettingsChanged()

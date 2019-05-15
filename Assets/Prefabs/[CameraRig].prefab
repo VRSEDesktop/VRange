@@ -260,7 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35019de8bd9e41749823b61b9f6818a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gun: {fileID: 0}
+  Gun: {fileID: 4278016892390238743}
+  Settings: {fileID: 11400000, guid: 15910a12dbd271341b0a194d521ae338, type: 2}
 --- !u!114 &4031317434851601688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35019de8bd9e41749823b61b9f6818a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gun: {fileID: 0}
+  Gun: {fileID: 3350520233452585610}
+  Settings: {fileID: 11400000, guid: 15910a12dbd271341b0a194d521ae338, type: 2}
 --- !u!114 &4063026890976845015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +591,7 @@ MonoBehaviour:
   inTransitionTime: 0.5
   outTransitionTime: 0.1
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  BlindingObject: {fileID: 0}
 --- !u!114 &1431189621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,8 +619,8 @@ MonoBehaviour:
   playerHeight: 1.8
   leftHand: {fileID: 6658489301664320898}
   rightHand: {fileID: 6733100916155965107}
-  lefGun: {fileID: 0}
-  rightGun: {fileID: 0}
+  leftGun: {fileID: 4278016892390238743}
+  rightGun: {fileID: 3350520233452585610}
   hitbox:
     mesh: {fileID: 0}
     type: 0
@@ -720,6 +723,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P99
       objectReference: {fileID: 0}
+    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
+        type: 3}
+      propertyPath: drawLines
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4226328758674568113, guid: 906e0b8fdce42b941b51d3f9090bd648,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -774,11 +782,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
-        type: 3}
-      propertyPath: drawLines
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
@@ -812,6 +815,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P99
       objectReference: {fileID: 0}
+    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
+        type: 3}
+      propertyPath: drawLines
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4226328758674568113, guid: 906e0b8fdce42b941b51d3f9090bd648,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -866,11 +874,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244595763532074314, guid: 906e0b8fdce42b941b51d3f9090bd648,
-        type: 3}
-      propertyPath: drawLines
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906e0b8fdce42b941b51d3f9090bd648, type: 3}
