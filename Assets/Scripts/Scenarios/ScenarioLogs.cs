@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Scenario : MonoBehaviour
+public class ScenarioLogs : MonoBehaviour
 {
     public static IList<ScenarioLog> logs = new List<ScenarioLog>();
 

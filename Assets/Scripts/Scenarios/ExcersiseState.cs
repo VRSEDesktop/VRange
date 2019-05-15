@@ -12,6 +12,8 @@ public enum ExerciseProgress
 
 public abstract class ExcersiseState : MonoBehaviour
 {
+	private ExerciseProgress _progress;
+	public IList<LoggedHit> hits;
     public Gun leftGun, rightGun;
 
 	[HideInInspector]
@@ -33,27 +35,35 @@ public abstract class ExcersiseState : MonoBehaviour
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
 
+		InitializeWhiteboard();
+
+		StartTime = Time.realtimeSinceStartup;
+		leftGun?.Reload();
+		rightGun?.Reload();
+
 		if (ExplanationUI != null)
 			ExplanationUI.SetActive(true);
 		if (FeedbackUI != null)
 			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
-
-		InitializeWhiteboard();
-        
     }
 
     public virtual void OnUpdate()
     {
-        if(!leftGun.HasAmmo() || !rightGun.HasAmmo())
+        if(!rightGun.HasAmmo())
         {
-            Exercise.Progress = ExerciseProgress.Succeeded;
+            Progress = ExerciseProgress.Succeeded;
+			Debug.Log(ScenarioLogs.GetHits().Count);
             UpdateGUI();
         }
     }
 
     public virtual void Restart()
     {
-        Scenario.Clear();
+        ScenarioLogs.Clear();
+		Progress = ExerciseProgress.NotStarted;
+
+		ClearBoard();
+		ResetGUI();
 
 		leftGun?.Reload();
         rightGun?.Reload();
@@ -66,7 +76,7 @@ public abstract class ExcersiseState : MonoBehaviour
     {
         GetComponent<Transform>().gameObject.SetActive(false);
 
-        Scenario.Clear();
+        ScenarioLogs.Clear();
 
         HasSetGUI = false;
     }
@@ -83,12 +93,22 @@ public abstract class ExcersiseState : MonoBehaviour
        else HasSetGUI = false;
     }
 
+	public void ClearBoard()
+	{
+		gHead.SetActive(false);
+		gNeck.SetActive(false);
+		gLeftarm.SetActive(false);
+		gLeftleg.SetActive(false);
+		gRightarm.SetActive(false);
+		gRightleg.SetActive(false);
+	}
+
     /// <summary>
     /// Sets the gui
     /// </summary>
     private void DisplayStats()
     {
-        float time = Time.realtimeSinceStartup - StartTime;
+        //float time = Time.realtimeSinceStartup - StartTime;
 
         ResetGUI();
         ConvertingHits();
@@ -121,36 +141,15 @@ public abstract class ExcersiseState : MonoBehaviour
 
     private void ConvertingHits()
     {
-        foreach (var hit in Scenario.GetHits())
+        foreach (var hit in ScenarioLogs.GetHits())
         {
-            if (hit.part.ToDescriptionString() == "Hoofd")
-            {
-                head += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Torso")
-            {
-                torso += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Linkerarm")
-            {
-                leftarm += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Rechterarm")
-            {
-                rightarm += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Linkerbeen")
-            {
-                leftleg += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Rechterbeen")
-            {
-                rightleg += 1;
-            }
-            else
-            {
-                mis += 1;
-            }
+            if (hit.part.ToDescriptionString() == "Hoofd") head++;
+            else if (hit.part.ToDescriptionString() == "Torso") torso++;
+            else if (hit.part.ToDescriptionString() == "Linkerarm") leftarm ++;
+            else if (hit.part.ToDescriptionString() == "Rechterarm") rightarm++;
+            else if (hit.part.ToDescriptionString() == "Linkerbeen") leftleg++;
+            else if (hit.part.ToDescriptionString() == "Rechterbeen") rightleg++;
+            else mis++;
         }
     }
 

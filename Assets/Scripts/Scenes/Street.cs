@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using Valve.VR;
 
-public class ShootingRange : MonoBehaviour
+public class Street : MonoBehaviour
 {
     public SteamVR_LoadLevel levelLoader;
 
-    void Update()
+	public void Update()
     {
         HandleButtons();
     }
@@ -14,7 +14,7 @@ public class ShootingRange : MonoBehaviour
     {
         if (UI.GetButtonActivated("MainMenu"))
         {
-            Scenario.Clear();
+            ScenarioLogs.Clear();
             levelLoader.levelName = "MainMenu";
             levelLoader.Trigger();
         }

@@ -14,8 +14,8 @@ public class ShootingTarget : ExcersiseState, IHitable
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
 		step.SendMessage("Hit", SendMessageOptions.DontRequireReceiver);
 
-		Debug.Log("ShootingTarrget::OnHit() " + partHit.ToString());
-        Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
+		Debug.Log("ShootingTarrget::OnHit() " + partHit);
+        ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         if(partHit == Goal)
         {
             return HitType.RIGHT;

@@ -25,11 +25,6 @@ public class StateStreet : ExcersiseState
 		Randomizer();
 	}
 
-	public override void OnUpdate()
-	{
-		base.OnUpdate();
-	}
-
 	public override void OnExit()
 	{
 		base.OnExit();

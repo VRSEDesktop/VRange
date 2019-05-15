@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour, IHitable
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
-        Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
+        ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         return isAgressive ? HitType.RIGHT : HitType.UNWANTED;
     }
 

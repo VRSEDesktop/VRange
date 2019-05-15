@@ -87,28 +87,28 @@ public class Exercise : MonoBehaviour
 
         if (UI.GetButtonActivated("Restart Scenario"))
         {
-            Scenario.Clear();
+            ScenarioLogs.Clear();
             Restart();
             UI.DeactivateButton("Restart Scenario");
         }
 
         if (UI.GetButtonActivated("Mainmenu"))
         {
-            Scenario.Clear();
+            ScenarioLogs.Clear();
             LevelLoader.levelName = "MainMenu";
             LevelLoader.Trigger();
         }
 
         if (UI.GetButtonActivated("Next Scenario"))
         {
-            Scenario.Clear();
+            ScenarioLogs.Clear();
             NextStep();
             UI.DeactivateButton("Next Scenario");
         }
 
         if (UI.GetButtonActivated("Previous Scenario"))
         {
-            Scenario.Clear();
+            ScenarioLogs.Clear();
             PreviousStep();
             UI.DeactivateButton("Previous Scenario");
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FadeOut : MonoBehaviour
@@ -32,6 +31,13 @@ public class FadeOut : MonoBehaviour
 			StartCoroutine(Coroutine);
 	}
 
+	public void StartFadeIn(float delay)
+	{
+		Coroutine = EnableLine(delay, 2);
+		if (gameObject.activeSelf)
+			StartCoroutine(Coroutine);
+	}
+
 	private IEnumerator DisableLine(float delay, float fadeoutduration)
 	{
 		yield return new WaitForSeconds(delay);
@@ -53,6 +59,40 @@ public class FadeOut : MonoBehaviour
 
 			lerpProgress = Time.time - lerpStarttime;
 			if(Renderer != null)
+			{
+				Renderer.material.SetColor("_BaseColor", Color.Lerp(startingColor, endingColor, lerpProgress / fadeoutduration));
+			}
+			else
+			{
+				break;
+			}
+
+			if (lerpProgress >= fadeoutduration)
+				break;
+		}
+	}
+
+	private IEnumerator EnableLine(float delay, float fadeoutduration)
+	{
+		yield return new WaitForSeconds(delay);
+		ShouldDisappear = true;
+
+		float lerpStarttime = Time.time;
+		float lerpProgress;
+		Color startingColor = Renderer.material.GetColor("_BaseColor");
+		Color endingColor = new Color(startingColor.r, startingColor.g, startingColor.b, 255);
+		while (true)
+		{
+			yield return null;
+
+			if (ForceEnable && Renderer != null)
+			{
+				Enable();
+				break;
+			}
+
+			lerpProgress = Time.time - lerpStarttime;
+			if (Renderer != null)
 			{
 				Renderer.material.SetColor("_BaseColor", Color.Lerp(startingColor, endingColor, lerpProgress / fadeoutduration));
 			}
