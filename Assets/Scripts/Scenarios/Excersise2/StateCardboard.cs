@@ -7,12 +7,12 @@ public class StateCardboard : ExcersiseState
     /// <summary>
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
-    public float TimeToStart = 5f;
+    public float TimeToStart = 5f, ReapearTime = 2f, TimeToReact = 3f;
 	private int Iteration;
+	private bool WasHit = false;
 
 	public override void OnStart()
     {
-		Debug.Log("StateCardboard::OnStart()");
 		base.OnStart();
         StartCoroutine(TurningCardBoard(TimeToStart));
 
@@ -20,9 +20,6 @@ public class StateCardboard : ExcersiseState
 
         Exercise.PreviousScenarioButton.gameObject.SetActive(false);
         Exercise.NextScenarioButton.gameObject.SetActive(true);
-
-		//FlipAnimation.gameObject.SetActive(true);
-		Iteration = 0;
     }
 
     public override void OnExit()
@@ -31,17 +28,30 @@ public class StateCardboard : ExcersiseState
 
         FlipAnimation.SetBool("Visible", false);
 		Iteration = 0;
-		//FlipAnimation.gameObject.SetActive(false);
     }
 
     private IEnumerator TurningCardBoard(float _time)
     {
-		if (Iteration <= 7)
+		if (Iteration < 7)
 		{
 			yield return new WaitForSeconds(_time);
 			FlipAnimation.SetBool("Visible", true);
 
-			Iteration += 1;
+			Iteration++;
+
+			yield return new WaitForSeconds(TimeToReact);
+
+			if (!WasHit)
+			{				
+				FlipAnimation.SetBool("Visible", false);
+				StartCoroutine(TurningCardBoard(ReapearTime));
+			}
+		}
+
+		if (Iteration == 7)
+		{
+			yield return new WaitForSeconds(TimeToReact);
+			Progress = ExerciseProgress.Succeeded;
 		}
 	}
 
@@ -50,13 +60,15 @@ public class StateCardboard : ExcersiseState
         base.Restart();
 
         FlipAnimation.SetBool("Visible", false);
-        StartCoroutine(TurningCardBoard(TimeToStart));
 		Iteration = 0;
-    }
+		WasHit = false;
+		StartCoroutine(TurningCardBoard(TimeToStart));
+	}
 
 	public void Hit()
 	{
-		FlipAnimation.SetBool("Visible", false);
-		StartCoroutine(TurningCardBoard(1.5f));
+		if(Iteration == 6) FlipAnimation.SetBool("Visible", false);
+		WasHit = true;
+		StartCoroutine(TurningCardBoard(ReapearTime));
 	}
 }
