@@ -21,11 +21,6 @@ public class StateModel : ExcersiseState
         Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
-    public override void OnUpdate()
-    {
-        base.OnUpdate();
-    }
-
     public override void OnExit()
     {
         base.OnExit();
@@ -60,7 +55,7 @@ public class StateModel : ExcersiseState
                 WomanAnimator.GetComponent<Enemy>().isAgressive = false;
                 break;
             //case 2:
-            //    Anim.SetBool("Equip Pistol", true);
+            //  Anim.SetBool("Equip Pistol", true);
             //    yield return new WaitForSeconds(0.8f);
             //    Anim.GetComponent<Enemy>().BaseballBat.gameObject.SetActive(true);
             //    Anim.GetComponent<Enemy>().isAgressive = true;
@@ -73,12 +68,13 @@ public class StateModel : ExcersiseState
             //    break;
         }
 
-        yield return new WaitForSeconds(LoopTime);
-        Restart();
+        //yield return new WaitForSeconds(LoopTime);
+        //Restart();
     }
 
     public override void Restart()
     {
+		Debug.Log(ScenarioLogs.GetHits().Count);
         base.Restart();
 
         RespawnWoman();

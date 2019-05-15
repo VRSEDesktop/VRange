@@ -12,7 +12,8 @@ public class StateCardboard : ExcersiseState
 
 	public override void OnStart()
     {
-        base.OnStart();
+		Debug.Log("StateCardboard::OnStart()");
+		base.OnStart();
         StartCoroutine(TurningCardBoard(TimeToStart));
 
         Exercise.City.gameObject.SetActive(false);
@@ -58,6 +59,4 @@ public class StateCardboard : ExcersiseState
 		FlipAnimation.SetBool("Visible", false);
 		StartCoroutine(TurningCardBoard(1.5f));
 	}
-
-
 }
