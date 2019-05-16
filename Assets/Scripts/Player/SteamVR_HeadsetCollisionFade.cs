@@ -31,13 +31,13 @@ public class SteamVR_HeadsetCollisionFade : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-		BlindingObject.GetComponent<FadeOut>().StartFadeIn(inTransitionTime);
+		//BlindingObject.GetComponent<FadeOut>().StartFadeIn(inTransitionTime);
 		//SteamVR_Fade.Start(fadeColor, inTransitionTime);
     }
 
     public void OnTriggerExit(Collider other)
     {
-		BlindingObject.GetComponent<FadeOut>().StartFadeOut(inTransitionTime);
+		//BlindingObject.GetComponent<FadeOut>().StartFadeOut(inTransitionTime);
 		//SteamVR_Fade.Start(Color.clear, outTransitionTime);
     }
 }

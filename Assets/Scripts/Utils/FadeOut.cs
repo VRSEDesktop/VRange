@@ -47,6 +47,7 @@ public class FadeOut : MonoBehaviour
 		float lerpProgress;
 		Color startingColor = Renderer.material.GetColor("_BaseColor");
 		Color endingColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
+
 		while(true)
 		{
 			yield return null;

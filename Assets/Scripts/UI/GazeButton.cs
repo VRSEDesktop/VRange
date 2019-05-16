@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Button that activates when gazed at.
@@ -7,6 +6,8 @@ using UnityEngine;
 public class GazeButton : UIElement, IGazeable
 {
 	public Color HoverColor;
+	private bool activated;
+	private int framesSinceActive = 0;
 	[HideInInspector] public Color DefaultColor;
 
 	public void OnEnable()
@@ -17,7 +18,17 @@ public class GazeButton : UIElement, IGazeable
 	public virtual void Activate()
 	{
 		SetActive();
-		StartCoroutine(DeactivateAfterFrame());
+		activated = true;
+		framesSinceActive = Time.frameCount;
+	}
+
+	public void Update()
+	{
+		if (activated && framesSinceActive < Time.frameCount)
+		{
+			activated = false;
+			SetInactive();
+		}
 	}
 
 	public virtual void OnHoverStart()
@@ -31,24 +42,6 @@ public class GazeButton : UIElement, IGazeable
 		{
 			StartCoroutine(ChangeColor(DefaultColor, 1f));
 		}
-		catch
-		{
-
-		}
-	}
-
-	/// <summary>
-	/// Waits one frame until deactivating.
-	/// </summary>
-	/// <returns>The IEnumerator used in MonoBehaviour::StartCoroutine</returns>
-	private IEnumerator DeactivateAfterFrame()
-	{
-		//Waits one frame. For some reason WaitForEndOfFrame seems stable in the editor, while null seems stable in build.
-#if UNITY_EDITOR
-		yield return new WaitForEndOfFrame();
-#else
-		yield return null;
-#endif
-		SetInactive();
+		catch {} // Scene might be changed and references removed, while coroutine is still working
 	}
 }

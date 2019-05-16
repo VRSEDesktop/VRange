@@ -11,27 +11,18 @@ public class ApplyGunRotation : MonoBehaviour
 	private readonly Vector3 GunOffset = new Vector3(0.05f, 0, -0.1f);
 
 	public Gun Gun;
-	private bool NormalGun = false;
+	public Settings Settings;
 
 	public void Start()
     {
-		if (NormalGun) ApplyRealGunRotation();
+		if (Settings.NormalGun) ApplyRealGunRotation();
 		else ApplyControllerRotation();
-	}
-
-	public void Update()
-	{
-		if (UI.GetButtonActivated("Toggle Controller"))
-			Toggle();
 	}
 
 	public void Toggle()
 	{
-		Debug.Log("ApplyRotation()");
-
-		if (!NormalGun) ApplyRealGunRotation();
+		if (!Settings.NormalGun) ApplyRealGunRotation();
 		else ApplyControllerRotation();
-		NormalGun = !NormalGun;
 	}
 
 	public void ApplyControllerRotation()

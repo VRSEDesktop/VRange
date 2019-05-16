@@ -14,16 +14,24 @@ public class Enemy : MonoBehaviour, IHitable
     private bool isDead;
     private NavMeshAgent navMeshAgent;
 
-    public void Start()
+	private int hits = 0;
+	public int maxHits = 0;
+
+	[System.Obsolete]
+	public void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+		maxHits = Random.RandomRange(0, 4);
     }
 
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
-
+		if(hits == maxHits)
+		{
+			Die();
+		}
         switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HumanHead:
@@ -33,41 +41,48 @@ public class Enemy : MonoBehaviour, IHitable
             case HitboxType.HumanNeck:    break;
             case HitboxType.HumanPelvis:  break;
 
-            case HitboxType.HumanSpine1: break;
-            case HitboxType.HumanSpine2: break;
-            case HitboxType.HumanSpine3: break;
+            case HitboxType.HumanSpine1: animator.Play("ShoulderHit"); hits += 1; break;
+            case HitboxType.HumanSpine2: animator.Play("ShoulderHit"); hits += 1; break;
+            case HitboxType.HumanSpine3: animator.Play("ShoulderHit"); hits += 1; break;
 
             case HitboxType.HumanThighLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
-            break;
+				hits += 1;
+				break;
             case HitboxType.HumanThighRight:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
-            break;
+				hits += 1;
+				break;
 
             case HitboxType.HumanCalfLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
-                animator.SetBool("Limbing", true); break;
+                animator.SetBool("Limbing", true);
+				hits += 1;
+				break;
+
             case HitboxType.HumanCalfRight:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
-                animator.SetBool("Limbing", true); break;
+                animator.SetBool("Limbing", true);
+				hits += 1;
+				break;
 
             case HitboxType.HumanFootLeft: break;
             case HitboxType.HumanFootRight: break;
 
-            case HitboxType.HumanUpperArmLeft: break;
+            case HitboxType.HumanUpperArmLeft: animator.Play("ShoulderHit"); break;
             case HitboxType.HumanUpperArmRight:
-                animator.SetBool("Shoulder", true);
+				animator.Play("ShoulderHit");
                     break;
 
-            case HitboxType.HumanLowerArmLeft: break;
+            case HitboxType.HumanLowerArmLeft: animator.Play("ShoulderHit"); break;
             case HitboxType.HumanLowerArmRight:
-                animator.SetBool("Shoulder", true);
+				animator.Play("ShoulderHit");
                 break;
 
-            case HitboxType.HumanHandLeft: break;
-            case HitboxType.HumanHandRight: break;
+            case HitboxType.HumanHandLeft: animator.Play("ShoulderHit"); break;
+            case HitboxType.HumanHandRight: animator.Play("ShoulderHit"); break;
         }
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
