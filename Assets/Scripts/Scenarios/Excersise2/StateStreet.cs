@@ -21,7 +21,7 @@ public class StateStreet : ExcersiseState
         base.OnStart();
 
 		transitionProgress = TransitionProgress.ShootingRange;
-		StartCoroutine(Transition());
+		StartCoroutine(Transition(2f, 2f, 2f));
         Exercise.ShootingRange.gameObject.SetActive(false);
         Exercise.City.gameObject.SetActive(true);
 
@@ -31,7 +31,7 @@ public class StateStreet : ExcersiseState
 		Randomizer();
 	}
 
-	public IEnumerator Transition(float appearTime, float dissappearTime, float transitionDelay)
+	public IEnumerator Transition(float dissapearTime, float appearTime, float transitionDelay)
 	{
 		yield return null;
 	}
