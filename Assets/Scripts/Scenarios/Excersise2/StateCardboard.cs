@@ -51,7 +51,7 @@ public class StateCardboard : ExcersiseState
 		if (Iteration == 7)
 		{
 			yield return new WaitForSeconds(TimeToReact);
-			Progress = ExerciseProgress.Succeeded;
+			Exercise.Progress = ExerciseProgress.Succeeded;
 		}
 	}
 
