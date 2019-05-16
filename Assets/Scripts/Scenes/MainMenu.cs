@@ -26,5 +26,10 @@ public class MainMenu : MonoBehaviour
 			foreach(ApplyGunRotation gun in guns) gun.Toggle();
 			Settings.NormalGun = !Settings.NormalGun;
 		}
-	}
+
+        if (UI.GetButtonActivated("Exit Game"))
+        {
+            Application.Quit();
+        }
+    }
 }
