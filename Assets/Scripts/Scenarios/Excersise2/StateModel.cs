@@ -12,13 +12,17 @@ public class StateModel : ExcersiseState
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
 
-	public override void OnStart()
+    public override void OnInitialize()
+    {
+        base.OnInitialize();
+        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
+        Exercise.NextScenarioButton.gameObject.SetActive(true);
+    }
+
+    public override void OnStart()
     {
         base.OnStart();
         Randomizer();
-
-        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
-        Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
     public override void OnExit()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Valve.VR;
 
@@ -38,18 +37,15 @@ public class Exercise : MonoBehaviour
     public void Start()
     {
 		Progress = ExerciseProgress.NotStarted;
-		if (Settings.DrawLines)
-		{
-			BulletLines.SetActive(true);
-			UI.GetUIItem("Toggle Bulletlines").SetActive();
-		}
-		else
-		{
-			BulletLines.SetActive(false);
-		}
+
+        BulletLines.SetActive(Settings.DrawLines);
+        if (Settings.DrawLines) UI.GetUIItem("Toggle Bulletlines").SetActive();
+
         Settings.SettingsChanged += OnSettingsChanged;
         foreach(ExcersiseState state in States) state.OnExit();
         CurrentState = 0;
+
+        States[CurrentState].OnInitialize();
     }
 
     public void Update()
@@ -58,26 +54,30 @@ public class Exercise : MonoBehaviour
         HandleButtons();
     }
 
+    /// <summary>
+    /// Cleares the scene and switches the scenario to the previous one from the list
+    /// </summary>
     public void PreviousStep()
     {
         States[CurrentState].OnExit();
         CurrentState--;
-        States[CurrentState].OnStart();
+        States[CurrentState].OnInitialize();
 
         DeleteBulletHoles();
         DeleteLines();
     }
 
+    /// <summary>
+    /// Cleares the scene and switches the scenario to the next one from the list
+    /// </summary>
     public void NextStep()
     {  
-		if(CurrentState != 2)
-		{
-			States[CurrentState].OnExit();
-			CurrentState++;
-			States[CurrentState].OnStart();
-			DeleteBulletHoles();
-			DeleteLines();
-		}
+		States[CurrentState].OnExit();
+		CurrentState++;
+		States[CurrentState].OnInitialize();
+
+		DeleteBulletHoles();
+		DeleteLines();
     }
 
     public void Restart()
@@ -125,7 +125,12 @@ public class Exercise : MonoBehaviour
 			foreach (ApplyGunRotation gun in guns) gun.Toggle();
 			Settings.NormalGun = !Settings.NormalGun;
 		}
-	}
+
+        if (UI.GetButtonActivated("Start Exercise"))
+        {
+            States[CurrentState].OnStart();
+        }
+    }
 
 	private void OnSettingsChanged()
 	{

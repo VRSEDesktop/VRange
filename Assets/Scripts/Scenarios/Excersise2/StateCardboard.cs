@@ -11,15 +11,20 @@ public class StateCardboard : ExcersiseState
 	private int Iteration;
 	private bool WasHit = false;
 
-	public override void OnStart()
+    public override void OnInitialize()
     {
-		base.OnStart();
-        StartCoroutine(TurningCardBoard(TimeToStart));
+        base.OnInitialize();
 
         Exercise.City.gameObject.SetActive(false);
 
         Exercise.PreviousScenarioButton.gameObject.SetActive(false);
         Exercise.NextScenarioButton.gameObject.SetActive(true);
+    }
+
+    public override void OnStart()
+    {
+		base.OnStart();
+        StartCoroutine(TurningCardBoard(TimeToStart));
     }
 
     public override void OnExit()

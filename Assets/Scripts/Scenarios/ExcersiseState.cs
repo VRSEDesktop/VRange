@@ -26,23 +26,27 @@ public abstract class ExcersiseState : MonoBehaviour
 	public GameObject ExplanationUI;
 	public GameObject FeedbackUI;
 
-    public virtual void OnStart()
+    public virtual  void OnInitialize()
     {
-		leftGun?.Reload();
-		rightGun?.Reload();
-
-		Progress = ExerciseProgress.NotStarted;
+        leftGun?.Reload();
+        rightGun?.Reload();
+    
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
+        Exercise.Progress = ExerciseProgress.NotStarted;
         GetComponent<Transform>().gameObject.SetActive(true);
 
-		InitializeWhiteboard();
+        InitializeWhiteboard();
 
-		StartTime = Time.realtimeSinceStartup;
+        if (ExplanationUI != null)
+            ExplanationUI.SetActive(true);
+        if (FeedbackUI != null)
+            FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+    }
 
-		if (ExplanationUI != null)
-			ExplanationUI.SetActive(true);
-		if (FeedbackUI != null)
-			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+    public virtual void OnStart()
+    {
+        StartTime = Time.realtimeSinceStartup;
+        Exercise.Progress = ExerciseProgress.Started;
     }
 
     public virtual void OnUpdate()
@@ -159,7 +163,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
 	public void OnProgressChanged()
 	{
-		Debug.Log("ExersiseState::OnProgressChanged" + Progress.ToString());
+		Debug.Log("ExersiseState::OnProgressChanged" + Exercise.Progress.ToString());
 		if(Exercise.Progress == ExerciseProgress.Succeeded || Exercise.Progress == ExerciseProgress.Failed)
 		{
 			BulletLines.ForceActive();
@@ -175,13 +179,6 @@ public abstract class ExcersiseState : MonoBehaviour
 				ExplanationUI.SetActive(true);
 			if (FeedbackUI != null)
 				FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
-		}
-		if (Exercise.Progress == ExerciseProgress.Started)
-		{
-			OnStart();
-			StartTime = Time.time;
-			leftGun?.Reload();
-			rightGun?.Reload();
 		}
 	}
 

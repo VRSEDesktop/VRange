@@ -15,21 +15,22 @@ public class StateStreet : ExcersiseState
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
 	private TransitionProgress transitionProgress;
 
-
-	public override void OnStart()
+    public override void OnInitialize()
     {
-        base.OnStart();
+        base.OnInitialize();
 
-		transitionProgress = TransitionProgress.ShootingRange;
-		StartCoroutine(Transition(2f, 2f, 2f));
+        transitionProgress = TransitionProgress.ShootingRange;
+        StartCoroutine(Transition(2f, 2f, 2f));
         Exercise.ShootingRange.gameObject.SetActive(false);
         Exercise.City.gameObject.SetActive(true);
 
         GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
         foreach (GameObject button in buttons) button.SetActive(false);
 
-		Randomizer();
-	}
+        Randomizer();
+
+        base.OnStart(); //TODO do we need this code? it sets only the start time
+    }
 
 	public IEnumerator Transition(float dissapearTime, float appearTime, float transitionDelay)
 	{

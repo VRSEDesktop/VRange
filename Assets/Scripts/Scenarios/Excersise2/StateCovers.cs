@@ -12,18 +12,17 @@ public class StateCovers : ExcersiseState
 
 	public GameObject RespawnPoint;
 
-	public override void OnStart()
+    public override void OnInitialize()
     {
-        base.OnStart();
-        Randomizer();
-
+        base.OnInitialize();
         Exercise.PreviousScenarioButton.gameObject.SetActive(true);
         Exercise.NextScenarioButton.gameObject.SetActive(true);
     }
 
-    public override void OnUpdate()
+    public override void OnStart()
     {
-        base.OnUpdate();
+        base.OnStart();
+        Randomizer();
     }
 
     public override void OnExit()
@@ -55,7 +54,6 @@ public class StateCovers : ExcersiseState
     public override void Restart()
     {
         base.Restart();
-
         RespawnWoman();
         Randomizer();
     }
