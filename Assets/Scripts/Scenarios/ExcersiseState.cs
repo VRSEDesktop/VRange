@@ -12,7 +12,6 @@ public enum ExerciseProgress
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-	private ExerciseProgress _progress;
 	public IList<LoggedHit> hits;
     public Gun leftGun, rightGun;
 
@@ -51,7 +50,7 @@ public abstract class ExcersiseState : MonoBehaviour
     {
         if(!rightGun.HasAmmo())
         {
-            Progress = ExerciseProgress.Succeeded;
+            Exercise.Progress = ExerciseProgress.Succeeded;
 			Debug.Log(ScenarioLogs.GetHits().Count);
             UpdateGUI();
         }
@@ -60,7 +59,7 @@ public abstract class ExcersiseState : MonoBehaviour
     public virtual void Restart()
     {
         ScenarioLogs.Clear();
-		Progress = ExerciseProgress.NotStarted;
+		Exercise.Progress = ExerciseProgress.NotStarted;
 
 		ClearBoard();
 		ResetGUI();

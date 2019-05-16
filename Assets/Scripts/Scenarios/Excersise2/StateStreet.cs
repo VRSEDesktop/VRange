@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class StateStreet : ExcersiseState
 {
+	private enum TransitionProgress { ShootingRange, Transitioning, City };
+
 	public GameObject WomanPrefab;
 	public Animator WomanAnimator;
 	public GameObject RespawnPoint;
@@ -11,11 +13,15 @@ public class StateStreet : ExcersiseState
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
+	private TransitionProgress transitionProgress;
+
 
 	public override void OnStart()
     {
         base.OnStart();
 
+		transitionProgress = TransitionProgress.ShootingRange;
+		StartCoroutine(Transition());
         Exercise.ShootingRange.gameObject.SetActive(false);
         Exercise.City.gameObject.SetActive(true);
 
@@ -23,6 +29,11 @@ public class StateStreet : ExcersiseState
         foreach (GameObject button in buttons) button.SetActive(false);
 
 		Randomizer();
+	}
+
+	public IEnumerator Transition(float appearTime, float dissappearTime, float transitionDelay)
+	{
+		yield return null;
 	}
 
 	public override void OnExit()

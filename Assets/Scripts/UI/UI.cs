@@ -20,4 +20,13 @@ public static class UI
     {
         ActiveButtons.Remove(name);
     }
+
+	public static UIElement GetUIItem(string name)
+	{
+		foreach(UIElement element in GameObject.FindObjectsOfType<UIElement>())
+		{
+			if (element.Name == name) return element;
+		}
+		return null;
+	}
 }

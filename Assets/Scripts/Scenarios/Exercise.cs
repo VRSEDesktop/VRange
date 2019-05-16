@@ -38,7 +38,15 @@ public class Exercise : MonoBehaviour
     public void Start()
     {
 		Progress = ExerciseProgress.NotStarted;
-		BulletLines.SetActive(Settings.DrawLines);
+		if (Settings.DrawLines)
+		{
+			BulletLines.SetActive(true);
+			UI.GetUIItem("Toggle Bulletlines").SetActive();
+		}
+		else
+		{
+			BulletLines.SetActive(false);
+		}
         Settings.SettingsChanged += OnSettingsChanged;
         foreach(ExcersiseState state in States) state.OnExit();
         CurrentState = 0;
