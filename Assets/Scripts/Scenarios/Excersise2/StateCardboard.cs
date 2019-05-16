@@ -34,7 +34,7 @@ public class StateCardboard : ExcersiseState
 
     private IEnumerator TurningCardBoard(float _time)
     {
-		if (Iteration < 7)
+		if (Iteration < Repetitions)
 		{
 			yield return new WaitForSecondsRealtime(_time);
 			FlipAnimation.SetBool("Visible", true);
@@ -45,12 +45,12 @@ public class StateCardboard : ExcersiseState
 
 			if (!WasHit)
 			{				
-				FlipAnimation.SetBool("Visible", false);
+				if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
 				StartCoroutine(TurningCardBoard(ReapearTime));
 			}
 		}
 
-		if (Iteration == 7)
+		if (Iteration == Repetitions)
 		{
 			yield return new WaitForSecondsRealtime(TimeToReact);
 			Progress = ExerciseProgress.Succeeded;
@@ -69,7 +69,7 @@ public class StateCardboard : ExcersiseState
 
 	public void Hit()
 	{
-		if(Iteration != 8) FlipAnimation.SetBool("Visible", false);
+		if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
 		WasHit = true;
 		StartCoroutine(TurningCardBoard(ReapearTime));
 	}

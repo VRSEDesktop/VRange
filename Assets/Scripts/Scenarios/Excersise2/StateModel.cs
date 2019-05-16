@@ -61,18 +61,6 @@ public class StateModel : ExcersiseState
                 WomanAnimator.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = false;
                 break;
-            //case 2:
-            //  Anim.SetBool("Equip Pistol", true);
-            //    yield return new WaitForSeconds(0.8f);
-            //    Anim.GetComponent<Enemy>().BaseballBat.gameObject.SetActive(true);
-            //    Anim.GetComponent<Enemy>().isAgressive = true;
-            //    break;
-            //case 3:
-            //    Anim.SetBool("Equip Pistol", true);
-            //    yield return new WaitForSeconds(0.8f);
-            //    Anim.GetComponent<Enemy>().Axe.gameObject.SetActive(true);
-            //    Anim.GetComponent<Enemy>().isAgressive = true;
-            //    break;
         }
 
         yield return new WaitForSecondsRealtime(LoopTime);
