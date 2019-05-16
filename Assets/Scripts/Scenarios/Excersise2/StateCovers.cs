@@ -17,8 +17,8 @@ public class StateCovers : ExcersiseState
         base.OnStart();
         Randomizer();
 
-        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
-        Exercise.NextScenarioButton.gameObject.SetActive(true);
+        Exercise.PreviousScenarioButton.SetState(true);
+        Exercise.NextScenarioButton.SetState(true);
     }
 
     public override void OnUpdate()
@@ -44,10 +44,10 @@ public class StateCovers : ExcersiseState
     /// <returns></returns>
     private IEnumerator PullItem(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSecondsRealtime(waitTime);
 
         Anim.SetBool("Equip Pistol", true);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSecondsRealtime(0.8f);
         Anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
         Anim.GetComponent<Enemy>().isAgressive = true;
     }

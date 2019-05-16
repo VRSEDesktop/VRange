@@ -17,8 +17,8 @@ public class StateModel : ExcersiseState
         base.OnStart();
         Randomizer();
 
-        Exercise.PreviousScenarioButton.gameObject.SetActive(true);
-        Exercise.NextScenarioButton.gameObject.SetActive(true);
+        Exercise.PreviousScenarioButton.SetState(true);
+        Exercise.NextScenarioButton.SetState(true);
     }
 
     public override void OnExit()
@@ -33,48 +33,42 @@ public class StateModel : ExcersiseState
         StartCoroutine(PullItem(waitTime, Random.Range(0, 2)));    
     }
 
+	public override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		if(WomanAnimator.GetComponent<Enemy>().IsDead) Progress = ExerciseProgress.Succeeded;
+	}
+
     /// <summary>
     /// Triggers the pullgun animation
     /// </summary>
     /// <returns></returns>
     private IEnumerator PullItem(float waitTime, int num)
     {
-        yield return new WaitForSeconds(waitTime);      
+        yield return new WaitForSecondsRealtime(waitTime);      
         switch (num)
         {
             case 0:
 		        WomanAnimator.SetBool("Equip Pistol", true);
-                yield return new WaitForSeconds(0.8f);
+                yield return new WaitForSecondsRealtime(0.8f);
                 WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = true;
             break; 
             case 1:
 		        WomanAnimator.SetBool("Equip Phone", true);
-                yield return new WaitForSeconds(0.8f);
+                yield return new WaitForSecondsRealtime(0.8f);
                 WomanAnimator.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = false;
                 break;
-            //case 2:
-            //  Anim.SetBool("Equip Pistol", true);
-            //    yield return new WaitForSeconds(0.8f);
-            //    Anim.GetComponent<Enemy>().BaseballBat.gameObject.SetActive(true);
-            //    Anim.GetComponent<Enemy>().isAgressive = true;
-            //    break;
-            //case 3:
-            //    Anim.SetBool("Equip Pistol", true);
-            //    yield return new WaitForSeconds(0.8f);
-            //    Anim.GetComponent<Enemy>().Axe.gameObject.SetActive(true);
-            //    Anim.GetComponent<Enemy>().isAgressive = true;
-            //    break;
         }
 
-        //yield return new WaitForSeconds(LoopTime);
-        //Restart();
+        yield return new WaitForSecondsRealtime(LoopTime);
+        Restart();
     }
 
     public override void Restart()
     {
-		Debug.Log(ScenarioLogs.GetHits().Count);
         base.Restart();
 
         RespawnWoman();

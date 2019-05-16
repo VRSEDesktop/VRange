@@ -11,6 +11,8 @@ public class StateCardboard : ExcersiseState
 	private int Iteration;
 	private bool WasHit = false;
 
+	private const int Repetitions = 7;
+
 	public override void OnStart()
     {
 		base.OnStart();
@@ -18,8 +20,8 @@ public class StateCardboard : ExcersiseState
 
         Exercise.City.gameObject.SetActive(false);
 
-        Exercise.PreviousScenarioButton.gameObject.SetActive(false);
-        Exercise.NextScenarioButton.gameObject.SetActive(true);
+		Exercise.PreviousScenarioButton.SetState(false);
+        Exercise.NextScenarioButton.SetState(true);
     }
 
     public override void OnExit()
@@ -32,25 +34,25 @@ public class StateCardboard : ExcersiseState
 
     private IEnumerator TurningCardBoard(float _time)
     {
-		if (Iteration < 7)
+		if (Iteration < Repetitions)
 		{
-			yield return new WaitForSeconds(_time);
+			yield return new WaitForSecondsRealtime(_time);
 			FlipAnimation.SetBool("Visible", true);
 
 			Iteration++;
 
-			yield return new WaitForSeconds(TimeToReact);
+			yield return new WaitForSecondsRealtime(TimeToReact);
 
 			if (!WasHit)
 			{				
-				FlipAnimation.SetBool("Visible", false);
+				if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
 				StartCoroutine(TurningCardBoard(ReapearTime));
 			}
 		}
 
-		if (Iteration == 7)
+		if (Iteration == Repetitions)
 		{
-			yield return new WaitForSeconds(TimeToReact);
+			yield return new WaitForSecondsRealtime(TimeToReact);
 			Progress = ExerciseProgress.Succeeded;
 		}
 	}
@@ -67,7 +69,7 @@ public class StateCardboard : ExcersiseState
 
 	public void Hit()
 	{
-		if(Iteration != 8) FlipAnimation.SetBool("Visible", false);
+		if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
 		WasHit = true;
 		StartCoroutine(TurningCardBoard(ReapearTime));
 	}
