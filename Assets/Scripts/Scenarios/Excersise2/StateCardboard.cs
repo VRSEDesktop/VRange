@@ -67,7 +67,7 @@ public class StateCardboard : ExcersiseState
 
 	public void Hit()
 	{
-		if(Iteration == 6) FlipAnimation.SetBool("Visible", false);
+		if(Iteration != 8) FlipAnimation.SetBool("Visible", false);
 		WasHit = true;
 		StartCoroutine(TurningCardBoard(ReapearTime));
 	}

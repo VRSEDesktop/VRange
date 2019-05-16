@@ -15,17 +15,20 @@ public class Enemy : MonoBehaviour, IHitable
     private NavMeshAgent navMeshAgent;
 
 	private int hits = 0;
+	public int maxHits = 0;
 
-    public void Start()
+	[System.Obsolete]
+	public void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+		maxHits = Random.RandomRange(0, 4);
     }
 
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
-		if(hits == 3)
+		if(hits == maxHits)
 		{
 			Die();
 		}
