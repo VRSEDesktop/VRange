@@ -20,7 +20,7 @@ public class StateStreet : ExcersiseState
         Exercise.City.gameObject.SetActive(true);
 
         GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-        foreach (GameObject button in buttons) button.SetActive(false);
+        foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
 		Randomizer();
 	}

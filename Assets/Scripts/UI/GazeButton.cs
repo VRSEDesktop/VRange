@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 /// <summary>
 /// Button that activates when gazed at.
@@ -38,10 +39,14 @@ public class GazeButton : UIElement, IGazeable
 
 	public virtual void OnHoverEnd()
 	{
-		try
-		{
-			StartCoroutine(ChangeColor(DefaultColor, 1f));
-		}
-		catch {} // Scene might be changed and references removed, while coroutine is still working
+		StartCoroutine(ChangeColor(DefaultColor, 1f));
+	}
+
+	public void SetState(bool _isVisible)
+	{
+		activated = !_isVisible;
+		GetComponent<MeshRenderer>().enabled = _isVisible;
+		GetComponentInChildren<TextMeshPro>().enabled = _isVisible;
+		GetComponent<Collider>().enabled = _isVisible;
 	}
 }

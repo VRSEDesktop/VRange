@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, IHitable
     public bool isAgressive;
 
     private Animator animator;
-    private bool isDead;
+    public bool IsDead { private set; get;}
     private NavMeshAgent navMeshAgent;
 
 	private int hits = 0;
@@ -35,15 +35,14 @@ public class Enemy : MonoBehaviour, IHitable
         switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HumanHead:
-                if (!isDead) Die();
-                //else Revive();
+                if (!IsDead) Die();
             break;
             case HitboxType.HumanNeck:    break;
             case HitboxType.HumanPelvis:  break;
 
-            case HitboxType.HumanSpine1: animator.Play("ShoulderHit"); hits += 1; break;
-            case HitboxType.HumanSpine2: animator.Play("ShoulderHit"); hits += 1; break;
-            case HitboxType.HumanSpine3: animator.Play("ShoulderHit"); hits += 1; break;
+            case HitboxType.HumanSpine1: animator.Play("ShoulderHit"); hits++; break;
+            case HitboxType.HumanSpine2: animator.Play("ShoulderHit"); hits++; break;
+            case HitboxType.HumanSpine3: animator.Play("ShoulderHit"); hits++; break;
 
             case HitboxType.HumanThighLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
@@ -108,18 +107,8 @@ public class Enemy : MonoBehaviour, IHitable
 
     private void Die()
     {
-        isDead = true;
+        IsDead = true;
         animator.enabled = false;
         if (navMeshAgent) navMeshAgent.speed = 0f;
-    }
-
-    //  tmp remove it
-    private void Revive()
-    {
-        isDead = false;
-        animator.enabled = true;
-        //animator.SetBool("Death2", false);
-        animator.SetBool("GetUp", true);
-        if(navMeshAgent) navMeshAgent.speed = 1.5f;
     }
 }
