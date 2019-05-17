@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Whiteboard : MonoBehaviour
 {
-	public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg;
+	public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg, gMis;
 	public GameObject ExplanationUI;
 	public GameObject FeedbackUI;
 
@@ -44,6 +44,7 @@ public class Whiteboard : MonoBehaviour
 			if (!HasSetGUI)
 			{
 				DisplayStats();
+				HasSetGUI = true;
 			}
 		}
 		else
@@ -52,6 +53,8 @@ public class Whiteboard : MonoBehaviour
 				ExplanationUI.SetActive(true);
 			if (FeedbackUI != null)
 				FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+
+			HasSetGUI = false;
 		}
 	}
 
@@ -72,8 +75,7 @@ public class Whiteboard : MonoBehaviour
 		if (gRightarm != null) AddLine(gRightarm, rightarm);
 		if (gLeftleg != null) AddLine(gLeftleg, leftleg);
 		if (gRightarm != null) AddLine(gRightleg, rightleg);
-
-		HasSetGUI = false;
+		if (gMis != null) AddLine(gMis, mis);
 	}
 
 	private void ResetGUI()
@@ -97,7 +99,20 @@ public class Whiteboard : MonoBehaviour
 			else if (hit.part.ToDescriptionString() == "Rechterarm") rightarm++;
 			else if (hit.part.ToDescriptionString() == "Linkerbeen") leftleg++;
 			else if (hit.part.ToDescriptionString() == "Rechterbeen") rightleg++;
-			else mis++;
+		}
+		
+		mis = ScenarioLogs.GetShotsFromGun(CorrectGun()).Count - ScenarioLogs.GetHits().Count;
+	}
+
+	private Gun CorrectGun()
+	{
+		if(rightGun.currentAmmo != rightGun.magCapacity)
+		{
+			return rightGun;
+		}
+		else
+		{
+			return leftGun;
 		}
 	}
 
@@ -127,6 +142,7 @@ public class Whiteboard : MonoBehaviour
 		if (gLeftleg) gLeftleg.SetActive(true);
 		if (gRightarm) gRightarm.SetActive(true);
 		if (gRightleg) gRightleg.SetActive(true);
+		if (gMis) gMis.SetActive(true);
 	}
 
 	public void ClearBoard()
@@ -137,7 +153,8 @@ public class Whiteboard : MonoBehaviour
 		if (gRightarm) gRightarm.SetActive(false);
 		if (gRightleg) gRightleg.SetActive(false);
 		if (gTorso) gTorso.SetActive(false);
-		
+		if (gMis) gMis.SetActive(false);
+
 		ResetGUI();
 
 		HasSetGUI = false;

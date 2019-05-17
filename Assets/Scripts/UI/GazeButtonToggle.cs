@@ -8,11 +8,6 @@ public class GazeButtonToggle : GazeButton
     private bool IsActive = false;
 	[SerializeField] private Color ActiveColor;
 
-    public void Start()
-    {
-        if(GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>().Settings.DrawLines) StartCoroutine(ChangeColor(ActiveColor, 0));
-    }
-
     public override void Activate()
     {
 		if (IsActive)

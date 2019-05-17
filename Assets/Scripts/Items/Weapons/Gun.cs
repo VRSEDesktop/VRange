@@ -8,7 +8,7 @@ public class Gun : Weapon, IReloadable
     public bool drawLines;
 
     public int magCapacity;
-    private int currentAmmo;
+    public int currentAmmo;
 
     public AudioSource shotSound;
     public AudioSource triggerSound;

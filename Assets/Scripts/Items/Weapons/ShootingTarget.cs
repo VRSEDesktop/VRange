@@ -9,9 +9,8 @@ public class ShootingTarget : ExcersiseState, IHitable
 
 	public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
-
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
-		step.SendMessage("Hit", SendMessageOptions.DontRequireReceiver);
+		step.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
 
 		Debug.Log("ShootingTarrget::OnHit() " + partHit);
         ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));

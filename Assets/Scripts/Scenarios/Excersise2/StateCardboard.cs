@@ -8,19 +8,20 @@ public class StateCardboard : ExcersiseState
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
     public float TimeToStart = 5f, ReapearTime = 2f, TimeToReact = 3f;
-	private int Iteration;
-	private bool WasHit = false;
+	private int Iteration = 1;
 
 	private const int Repetitions = 7;
+
+    private IEnumerator CurrentCoroutine;
 
 	public override void OnStart()
     {
 		base.OnStart();
-        StartCoroutine(TurningCardBoard(TimeToStart));
+        RestartCourutine(TimeToStart);
 
         Exercise.City.gameObject.SetActive(false);
 
-		Exercise.PreviousScenarioButton.SetState(false);
+		if(Exercise.PreviousScenarioButton != null)Exercise.PreviousScenarioButton.SetState(false);
         Exercise.NextScenarioButton.SetState(true);
     }
 
@@ -29,48 +30,68 @@ public class StateCardboard : ExcersiseState
         base.OnExit();
 
         FlipAnimation.SetBool("Visible", false);
-		Iteration = 0;
+		Iteration = 1;
     }
-
-    private IEnumerator TurningCardBoard(float _time)
-    {
-		if (Iteration < Repetitions)
-		{
-			yield return new WaitForSecondsRealtime(_time);
-			FlipAnimation.SetBool("Visible", true);
-
-			Iteration++;
-
-			yield return new WaitForSecondsRealtime(TimeToReact);
-
-			if (!WasHit)
-			{				
-				if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
-				StartCoroutine(TurningCardBoard(ReapearTime));
-			}
-		}
-
-		if (Iteration == Repetitions)
-		{
-			yield return new WaitForSecondsRealtime(TimeToReact);
-			Progress = ExerciseProgress.Succeeded;
-		}
-	}
 
     public override void Restart()
     {
         base.Restart();
 
         FlipAnimation.SetBool("Visible", false);
-		Iteration = 0;
-		WasHit = false;
-		StartCoroutine(TurningCardBoard(TimeToStart));
+		Iteration = 1;
+
+        RestartCourutine(TimeToStart);
+    }
+	public override void OnFinish()
+	{
+		base.OnFinish();
+
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		StartCoroutine(ShowResults());
 	}
 
-	public void Hit()
+	private IEnumerator ShowResults()
 	{
-		if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
-		WasHit = true;
-		StartCoroutine(TurningCardBoard(ReapearTime));
+		yield return new WaitForSecondsRealtime(1f);
+		FlipAnimation.SetBool("Visible", true);
 	}
+
+	private IEnumerator TurningCardBoard(float _time)
+    {
+		yield return new WaitForSecondsRealtime(_time);
+		FlipAnimation.SetBool("Visible", true);
+		yield return new WaitForSecondsRealtime(TimeToReact);
+
+		if (Iteration < Repetitions)
+        {          
+            FlipAnimation.SetBool("Visible", false);
+			Iteration++;
+
+			RestartCourutine(ReapearTime);
+        }
+        else if (Iteration == Repetitions) // On last repetition dont restart and finish step
+        {
+            Progress = ExerciseProgress.Succeeded;
+        }
+    }
+
+    /// <summary>
+    /// Called when the cardboard was hit
+    /// </summary>
+	public void OnHit()
+	{
+		FlipAnimation.SetBool("Visible", false);
+		RestartCourutine(ReapearTime);
+	}
+
+    /// <summary>
+    /// Stops the current coroutine, if it's running, and starts the new one
+    /// </summary>
+    /// <param name="_time"></param>
+    private void RestartCourutine(float _time)
+    {
+        if(CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+        CurrentCoroutine = TurningCardBoard(_time);
+        StartCoroutine(CurrentCoroutine);
+    }
 }
