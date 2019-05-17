@@ -21,7 +21,7 @@ public class StateCardboard : ExcersiseState
 
         Exercise.City.gameObject.SetActive(false);
 
-		Exercise.PreviousScenarioButton.SetState(false);
+		if(Exercise.PreviousScenarioButton != null)Exercise.PreviousScenarioButton.SetState(false);
         Exercise.NextScenarioButton.SetState(true);
     }
 
