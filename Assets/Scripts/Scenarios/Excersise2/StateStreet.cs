@@ -29,9 +29,9 @@ public class StateStreet : ExcersiseState
 	public override void OnExit()
 	{
 		base.OnExit();
-		Exercise.City.gameObject.GetComponent<Transition>().Disable();
-		Exercise.ShootingRange.gameObject.SetActive(true);
-		Exercise.ShootingRange.gameObject.GetComponent<Transition>().Enable();
+		Exercise?.City.gameObject.GetComponent<Transition>().Disable();
+		Exercise?.ShootingRange.gameObject.SetActive(true);
+		Exercise?.ShootingRange.gameObject.GetComponent<Transition>().Enable();
 		RespawnWoman();
 	}
 
