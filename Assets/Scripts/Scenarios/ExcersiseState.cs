@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public enum ExerciseProgress
@@ -21,7 +20,6 @@ public abstract class ExcersiseState : MonoBehaviour
 			{
 				_progress = value;
 				OnProgressChanged();
-				Exercise.whiteboard.CheckProgress();
 			}
 		}
 	}
@@ -55,7 +53,6 @@ public abstract class ExcersiseState : MonoBehaviour
 		}
     }
 
-
 	public virtual void Restart()
     {
         ScenarioLogs.Clear();
@@ -70,6 +67,8 @@ public abstract class ExcersiseState : MonoBehaviour
 		StartTime = Time.realtimeSinceStartup;
 		Exercise.whiteboard.ClearBoard();
 	}
+
+	public virtual void OnFinish() {}
 
 	public virtual void OnExit()
     {
@@ -88,16 +87,12 @@ public abstract class ExcersiseState : MonoBehaviour
 
 	private void OnProgressChanged()
 	{
-		Debug.Log("ExersiseState::OnProgressChanged" + Progress.ToString());
-		if(Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
+		Exercise.whiteboard.CheckProgress();
+
+		if (Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
 		{
 			BulletLines.ForceActive();
+			OnFinish();
 		}
 	}
-
-    
-
-    
-
-
 }

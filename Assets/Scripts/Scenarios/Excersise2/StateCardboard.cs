@@ -8,7 +8,7 @@ public class StateCardboard : ExcersiseState
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
     public float TimeToStart = 5f, ReapearTime = 2f, TimeToReact = 3f;
-	private int Iteration;
+	private int Iteration = 1;
 
 	private const int Repetitions = 7;
 
@@ -30,7 +30,7 @@ public class StateCardboard : ExcersiseState
         base.OnExit();
 
         FlipAnimation.SetBool("Visible", false);
-		Iteration = 0;
+		Iteration = 1;
     }
 
     public override void Restart()
@@ -38,29 +38,39 @@ public class StateCardboard : ExcersiseState
         base.Restart();
 
         FlipAnimation.SetBool("Visible", false);
-		Iteration = 0;
+		Iteration = 1;
 
         RestartCourutine(TimeToStart);
     }
+	public override void OnFinish()
+	{
+		base.OnFinish();
 
-    private IEnumerator TurningCardBoard(float _time)
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		StartCoroutine(ShowResults());
+	}
+
+	private IEnumerator ShowResults()
+	{
+		yield return new WaitForSecondsRealtime(1f);
+		FlipAnimation.SetBool("Visible", true);
+	}
+
+	private IEnumerator TurningCardBoard(float _time)
     {
-        if (Iteration < Repetitions)
-        {
-            yield return new WaitForSecondsRealtime(_time);
-            FlipAnimation.SetBool("Visible", true);
+		yield return new WaitForSecondsRealtime(_time);
+		FlipAnimation.SetBool("Visible", true);
+		yield return new WaitForSecondsRealtime(TimeToReact);
 
-            Iteration++;
-
-            yield return new WaitForSecondsRealtime(TimeToReact);
-
+		if (Iteration < Repetitions)
+        {          
             FlipAnimation.SetBool("Visible", false);
+			Iteration++;
 
 			RestartCourutine(ReapearTime);
         }
-        else if (Iteration == Repetitions)
+        else if (Iteration == Repetitions) // On last repetition dont restart and finish step
         {
-            yield return new WaitForSecondsRealtime(TimeToReact);
             Progress = ExerciseProgress.Succeeded;
         }
     }
@@ -70,8 +80,8 @@ public class StateCardboard : ExcersiseState
     /// </summary>
 	public void OnHit()
 	{
-		if(Iteration != Repetitions) FlipAnimation.SetBool("Visible", false);
-        RestartCourutine(ReapearTime);
+		FlipAnimation.SetBool("Visible", false);
+		RestartCourutine(ReapearTime);
 	}
 
     /// <summary>
