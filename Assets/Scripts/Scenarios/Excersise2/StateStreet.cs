@@ -16,10 +16,11 @@ public class StateStreet : ExcersiseState
     {
         base.OnStart();
 
-        Exercise.ShootingRange.gameObject.SetActive(false);
-        Exercise.City.gameObject.SetActive(true);
+		Exercise.ShootingRange.gameObject.GetComponent<Transition>().Disable();
+		Exercise.City.gameObject.SetActive(true);
+		Exercise.City.gameObject.GetComponent<Transition>().Enable();
 
-        GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
         foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
 		Randomizer();
@@ -28,6 +29,9 @@ public class StateStreet : ExcersiseState
 	public override void OnExit()
 	{
 		base.OnExit();
+		Exercise.City.gameObject.GetComponent<Transition>().Disable();
+		Exercise.ShootingRange.gameObject.SetActive(true);
+		Exercise.ShootingRange.gameObject.GetComponent<Transition>().Enable();
 		RespawnWoman();
 	}
 
