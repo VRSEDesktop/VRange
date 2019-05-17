@@ -39,7 +39,7 @@ public class StateModel : ExcersiseState
 	{
 		base.OnUpdate();
 
-		if(WomanAnimator.GetComponent<Enemy>().IsDead) Progress = ExerciseProgress.Succeeded;
+		if(WomanAnimator.GetComponent<Enemy>().IsDead) Exercise.Progress = ExerciseProgress.Succeeded;
 	}
 
     /// <summary>

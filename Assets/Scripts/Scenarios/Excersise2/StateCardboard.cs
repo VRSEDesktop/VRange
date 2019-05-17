@@ -71,7 +71,7 @@ public class StateCardboard : ExcersiseState
         }
         else if (Iteration == Repetitions) // On last repetition dont restart and finish step
         {
-            Progress = ExerciseProgress.Succeeded;
+			Exercise.Progress = ExerciseProgress.Succeeded;
         }
     }
 

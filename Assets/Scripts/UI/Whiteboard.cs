@@ -34,7 +34,7 @@ public class Whiteboard : MonoBehaviour
 
 	public void CheckProgress()
 	{
-		if (exercise.States[Exercise.CurrentState].Progress == ExerciseProgress.Succeeded || exercise.States[Exercise.CurrentState].Progress == ExerciseProgress.Failed)
+		if (exercise.Progress == ExerciseProgress.Succeeded || exercise.Progress == ExerciseProgress.Failed)
 		{
 			if (ExplanationUI != null)
 				ExplanationUI.SetActive(false);
