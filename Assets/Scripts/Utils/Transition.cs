@@ -13,7 +13,7 @@ public class Transition : MonoBehaviour
 			{
 				if(childRenderer.material.shader.name == "dissolve")
 				{
-					Dissolve(childRenderer, 2);
+					StartCoroutine(Dissolve(childRenderer, 2));
 				}
 				else
 				{
@@ -36,7 +36,7 @@ public class Transition : MonoBehaviour
 			{
 				if (childRenderer.material.shader.name == "dissolve")
 				{
-					UnDissolve(childRenderer, 2);
+					StartCoroutine(UnDissolve(childRenderer, 2));
 				}
 				else
 				{
