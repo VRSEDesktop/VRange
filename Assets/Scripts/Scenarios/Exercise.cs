@@ -51,16 +51,18 @@ public class Exercise : MonoBehaviour
         DeleteLines();
     }
 
+	public void OnStart()
+	{
+		BulletLines.SetActive(Settings.DrawLines);
+	}
+
 	public void NextStep()
     {  
-		if(CurrentState != 2)
-		{
-			States[CurrentState].OnExit();
-			CurrentState++;
-			States[CurrentState].OnStart();
-			DeleteBulletHoles();
-			DeleteLines();
-		}
+		States[CurrentState].OnExit();
+		CurrentState++;
+		States[CurrentState].OnStart();
+		DeleteBulletHoles();
+		DeleteLines();
     }
 
 
@@ -79,6 +81,7 @@ public class Exercise : MonoBehaviour
 
         if (UI.GetButtonActivated("Restart Scenario"))
         {
+			Debug.Log("Restart Scenario");
             ScenarioLogs.Clear();
             Restart();
         }

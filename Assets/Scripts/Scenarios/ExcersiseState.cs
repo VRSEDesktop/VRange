@@ -44,6 +44,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
 		Exercise.whiteboard.ClearBoard();
 		StartTime = Time.realtimeSinceStartup;
+		Exercise.OnStart();
     }
 
 	public virtual void OnUpdate()

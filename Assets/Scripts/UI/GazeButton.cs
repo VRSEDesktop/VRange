@@ -21,6 +21,7 @@ public class GazeButton : UIElement, IGazeable
 		SetActive();
 		activated = true;
 		framesSinceActive = Time.frameCount;
+		Debug.Log("GazeButton::Activate() " + Name);
 	}
 
 	public void Update()
