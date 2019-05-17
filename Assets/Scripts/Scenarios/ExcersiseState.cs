@@ -11,18 +11,7 @@ public enum ExerciseProgress
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-	private ExerciseProgress _progress;
 	public IList<LoggedHit> hits;
-    public ExerciseProgress Progress {
-		get { return _progress; }
-		set {
-			if(value != _progress)
-			{
-				_progress = value;
-				OnProgressChanged();
-			}
-		}
-	}
 
     public Gun leftGun, rightGun;
 
@@ -38,7 +27,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
         Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
         GetComponent<Transform>().gameObject.SetActive(true);
-		Progress = ExerciseProgress.NotStarted;
+		Exercise.Progress = ExerciseProgress.NotStarted;
 
 		Exercise.whiteboard.ClearBoard();
 		StartTime = Time.realtimeSinceStartup;
@@ -49,7 +38,7 @@ public abstract class ExcersiseState : MonoBehaviour
 	{
 		if ((leftGun != null && !leftGun.HasAmmo()) || (rightGun != null && !rightGun.HasAmmo()))
 		{
-			Progress = ExerciseProgress.Succeeded;
+			Exercise.Progress = ExerciseProgress.Succeeded;
 		}
     }
 
@@ -59,7 +48,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
 		Exercise.DeleteBulletHoles();
 		Exercise.DeleteLines();
-		Progress = ExerciseProgress.NotStarted;
+		Exercise.Progress = ExerciseProgress.NotStarted;
 
 		if(leftGun) leftGun.Reload();
 		if (rightGun) rightGun.Reload();
@@ -85,11 +74,11 @@ public abstract class ExcersiseState : MonoBehaviour
 		Debug.Log("updategui()");
     }
 
-	private void OnProgressChanged()
+	public void OnProgressChanged()
 	{
 		Exercise.whiteboard.CheckProgress();
 
-		if (Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
+		if (Exercise.Progress == ExerciseProgress.Succeeded || Exercise.Progress == ExerciseProgress.Failed)
 		{
 			BulletLines.ForceActive();
 			OnFinish();

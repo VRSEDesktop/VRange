@@ -24,7 +24,7 @@ public class StateCovers : ExcersiseState
     public override void OnUpdate()
     {
         base.OnUpdate();
-		if (Anim.GetComponent<Enemy>().IsDead) Progress = ExerciseProgress.Succeeded;
+		if (Anim.GetComponent<Enemy>().IsDead) Exercise.Progress = ExerciseProgress.Succeeded;
 	}
 
     public override void OnExit()

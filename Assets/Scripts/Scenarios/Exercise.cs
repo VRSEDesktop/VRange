@@ -25,6 +25,19 @@ public class Exercise : MonoBehaviour
 
 	private bool Active = true;
 
+	private ExerciseProgress _progress;
+	public ExerciseProgress Progress
+	{
+		get { return _progress; }
+		set
+		{
+			if (value != _progress)
+			{
+				_progress = value;
+				States[CurrentState].OnProgressChanged();
+			}
+		}
+	}
 
 	public void Start()
     {
@@ -105,7 +118,7 @@ public class Exercise : MonoBehaviour
 			PreviousStep();
         }
 
-		if (UI.GetButtonActivated("Toggle Controller"))
+		if (Settings.NormalGun != UI.GetButtonActivated("Toggle Controller"))
 		{
 			ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
 			foreach (ApplyGunRotation gun in guns) gun.Toggle();
