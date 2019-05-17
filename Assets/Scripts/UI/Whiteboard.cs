@@ -44,6 +44,7 @@ public class Whiteboard : MonoBehaviour
 			if (!HasSetGUI)
 			{
 				DisplayStats();
+				HasSetGUI = true;
 			}
 		}
 		else
@@ -52,6 +53,8 @@ public class Whiteboard : MonoBehaviour
 				ExplanationUI.SetActive(true);
 			if (FeedbackUI != null)
 				FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+
+			HasSetGUI = false;
 		}
 	}
 
@@ -73,8 +76,6 @@ public class Whiteboard : MonoBehaviour
 		if (gLeftleg != null) AddLine(gLeftleg, leftleg);
 		if (gRightarm != null) AddLine(gRightleg, rightleg);
 		if (gMis != null) AddLine(gMis, mis);
-
-		HasSetGUI = false;
 	}
 
 	private void ResetGUI()
