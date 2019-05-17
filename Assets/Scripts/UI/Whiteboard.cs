@@ -98,9 +98,21 @@ public class Whiteboard : MonoBehaviour
 			else if (hit.part.ToDescriptionString() == "Rechterarm") rightarm++;
 			else if (hit.part.ToDescriptionString() == "Linkerbeen") leftleg++;
 			else if (hit.part.ToDescriptionString() == "Rechterbeen") rightleg++;
-			else mis++;
 		}
-		Debug.Log("ConvertingHits:: Misses_____" + mis);
+		
+		mis = ScenarioLogs.GetShotsFromGun(CorrectGun()).Count - ScenarioLogs.GetHits().Count;
+	}
+
+	private Gun CorrectGun()
+	{
+		if(rightGun.currentAmmo != rightGun.magCapacity)
+		{
+			return rightGun;
+		}
+		else
+		{
+			return leftGun;
+		}
 	}
 
 	private bool AddLine(GameObject g, int amount)
