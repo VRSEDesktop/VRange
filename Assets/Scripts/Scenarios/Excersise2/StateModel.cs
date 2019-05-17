@@ -19,6 +19,8 @@ public class StateModel : ExcersiseState
 
         Exercise.PreviousScenarioButton.SetState(true);
         Exercise.NextScenarioButton.SetState(true);
+
+		Exercise.OnStart();
     }
 
     public override void OnExit()
@@ -98,6 +100,8 @@ public class StateModel : ExcersiseState
 
         RespawnWoman();
         Randomizer();
+
+		Exercise.OnStart();
     }
 
     private void RespawnWoman()

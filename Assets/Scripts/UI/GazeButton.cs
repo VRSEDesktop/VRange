@@ -47,7 +47,7 @@ public class GazeButton : UIElement, IGazeable
 	{
 		activated = !_isVisible;
 		GetComponent<MeshRenderer>().enabled = _isVisible;
-		GetComponentInChildren<TextMeshPro>().enabled = _isVisible;
+		if(GetComponentInChildren<TextMeshPro>()) GetComponentInChildren<TextMeshPro>().enabled = _isVisible;
 		GetComponent<Collider>().enabled = _isVisible;
 	}
 }
