@@ -49,7 +49,7 @@ public class Gun : Weapon, IReloadable
         currentAmmo--;
 
         GetComponentInChildren<ParticleSystem>().Play();
-        anim.Play("Fire");
+		anim.Play("Fire");
 
         ScenarioLogs.logs.Add(new LoggedShot(this, true));
         return true;
@@ -60,7 +60,7 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     private void DetectHit()
     {
-        bool hasHit = Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit);
+        bool hasHit = Physics.Raycast(barrelExit.transform.position, transform.rotation * Vector3.forward, out RaycastHit hit);
 
         if (hasHit)
         {
@@ -71,7 +71,7 @@ public class Gun : Weapon, IReloadable
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if (target == null)
             {
-                if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * Vector3.forward * 10, Color.red);
                 return;
             }
 
@@ -92,13 +92,13 @@ public class Gun : Weapon, IReloadable
                         linecolor = Color.magenta;
                         break;
                 }
-                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, linecolor);
+                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * Vector3.forward * 10, linecolor);
             }
 
         }
         else
         {
-            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * Vector3.forward * 10, Color.red);
         }
     }
 
@@ -106,7 +106,7 @@ public class Gun : Weapon, IReloadable
     {
         if (hit.collider.GetComponentInParent<Enemy>()) return;
 
-        Vector3 offset = transform.rotation * -Vector3.forward;
+        Vector3 offset = transform.rotation * Vector3.forward;
         offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
         Vector3 position = hit.point - offset;
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 231108792539197211}
   - component: {fileID: 9110243869538882861}
   - component: {fileID: 3265848518740306388}
+  - component: {fileID: 1422984034779254104}
   m_Layer: 0
   m_Name: computer
   m_TagString: Untagged
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1422984034779254104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850095957942361352}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03510876, y: 0.06799848, z: 0.069148414}
+  m_Center: {x: 0, y: 0.03399924, z: -0.0004438311}
 --- !u!1 &4573138596956863745
 GameObject:
   m_ObjectHideFlags: 0
