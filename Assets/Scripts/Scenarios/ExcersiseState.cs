@@ -19,6 +19,8 @@ public abstract class ExcersiseState : MonoBehaviour
 		Exercise.Progress = ExerciseProgress.NotStarted;
 
 		Exercise.whiteboard.ClearBoard();
+		Exercise.StartButton.SetState(true);
+		Exercise.RestartButton.SetState(false);
 	}
 
 	public virtual void OnStart()
@@ -29,6 +31,8 @@ public abstract class ExcersiseState : MonoBehaviour
 		StartTime = Time.realtimeSinceStartup;
 		BulletLines.SetActive(Exercise.Settings.DrawLines);
 		Exercise.Progress = ExerciseProgress.Started;
+		Exercise.StartButton.SetState(false);
+		Exercise.RestartButton.SetState(true);
 	}
 
 	public virtual void OnUpdate()
