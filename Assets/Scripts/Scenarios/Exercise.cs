@@ -127,7 +127,7 @@ public class Exercise : MonoBehaviour
 			Settings.NormalGun = !Settings.NormalGun;
 		}
 
-		if (UI.GetButtonActivated("Start Scenario")) States[CurrentState].OnStart();
+		if (UI.GetButtonActivatedAndTurnOff("Start_Scenario"))  States[CurrentState].OnStart();
 	}
 
 	private void OnSettingsChanged()
