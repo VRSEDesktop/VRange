@@ -6,12 +6,8 @@ public class Gun : Weapon, IReloadable
     /// Used for drawing bullet's path
     /// </summary>
     public bool drawLines;
-
-    public int magCapacity;
-    public int currentAmmo;
-
-    public AudioSource shotSound;
-    public AudioSource triggerSound;
+    public int magCapacity, currentAmmo;
+    public AudioSource ShotSound, TriggerSound, ReloadSound;
 
     public Animator anim;
     /// <summary>
@@ -35,7 +31,7 @@ public class Gun : Weapon, IReloadable
     /// <returns></returns>
     public override bool Use()
     {
-        triggerSound.Play();
+        TriggerSound.Play();
 
         if (!CanShoot())
         {
@@ -43,7 +39,7 @@ public class Gun : Weapon, IReloadable
             return false;
         }
 
-        shotSound.Play();
+        ShotSound.Play();
         DetectHit();
 
         currentAmmo--;
@@ -132,6 +128,7 @@ public class Gun : Weapon, IReloadable
     public void Reload()
     {
         currentAmmo = magCapacity;
+		ReloadSound.Play();
     }
 
     /// <summary>

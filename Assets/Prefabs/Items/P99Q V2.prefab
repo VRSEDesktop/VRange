@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 820348237}
   - component: {fileID: 820348236}
   - component: {fileID: 3979304058291887644}
+  - component: {fileID: 5981456611876758391}
   m_Layer: 0
   m_Name: P99Q V2
   m_TagString: Untagged
@@ -528,8 +529,9 @@ MonoBehaviour:
   drawLines: 1
   magCapacity: 7
   currentAmmo: 0
-  shotSound: {fileID: 820348237}
-  triggerSound: {fileID: 820348238}
+  ShotSound: {fileID: 820348237}
+  TriggerSound: {fileID: 820348238}
+  ReloadSound: {fileID: 5981456611876758391}
   anim: {fileID: 5080882892478897663}
   barrelExit: {fileID: 7325429671316518414}
   bulletHole: {fileID: 7538701054403910283, guid: 3985f3f9a2ad914448c53471afec37db,
@@ -550,6 +552,103 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 3395854897396022967, guid: e1a75105ddd2670488b21b01426a8182, type: 3}
+--- !u!82 &5981456611876758391
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310187241725009187}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243078391499754788, guid: ec12f7772c03e4c4c9e4c2f1643595ad,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 81b8182bbe1116642ae95319a9fe7299, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9147603855327574146
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +734,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4974488144622022448}
     m_Modifications:
+    - target: {fileID: 4878110358739580065, guid: af28dee66819b6b45b93d0b8acf08d10,
+        type: 3}
+      propertyPath: m_Name
+      value: MuzzleFlash
+      objectReference: {fileID: 0}
     - target: {fileID: 4880471644851061693, guid: af28dee66819b6b45b93d0b8acf08d10,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -704,11 +808,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878110358739580065, guid: af28dee66819b6b45b93d0b8acf08d10,
-        type: 3}
-      propertyPath: m_Name
-      value: MuzzleFlash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af28dee66819b6b45b93d0b8acf08d10, type: 3}
