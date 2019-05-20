@@ -12,13 +12,19 @@ public class StateCovers : ExcersiseState
 
 	public GameObject RespawnPoint;
 
+	public override void OnInitialize()
+	{
+		base.OnInitialize();
+
+		Exercise.PreviousScenarioButton.SetState(true);
+		Exercise.NextScenarioButton.SetState(true);
+	}
+
 	public override void OnStart()
     {
         base.OnStart();
-        Randomizer();
 
-        Exercise.PreviousScenarioButton.SetState(true);
-        Exercise.NextScenarioButton.SetState(true);
+        Randomizer();
     }
 
     public override void OnUpdate()

@@ -14,15 +14,21 @@ public class StateCardboard : ExcersiseState
 
     private IEnumerator CurrentCoroutine;
 
+	public override void OnInitialize()
+	{
+		base.OnInitialize();
+
+		Exercise.City.gameObject.SetActive(false);
+
+		if (Exercise.PreviousScenarioButton != null) Exercise.PreviousScenarioButton.SetState(false);
+		Exercise.NextScenarioButton.SetState(true);
+	}
+
 	public override void OnStart()
     {
 		base.OnStart();
+
         RestartCourutine(TimeToStart);
-
-        Exercise.City.gameObject.SetActive(false);
-
-		if(Exercise.PreviousScenarioButton != null)Exercise.PreviousScenarioButton.SetState(false);
-        Exercise.NextScenarioButton.SetState(true);
     }
 
     public override void OnExit()
@@ -76,10 +82,12 @@ public class StateCardboard : ExcersiseState
     }
 
     /// <summary>
-    /// Called when the cardboard was hit
+    /// Called when the cardboard was hit. Called using method call by name from whiteboard
     /// </summary>
 	public void OnHit()
 	{
+		if (Exercise.Progress == ExerciseProgress.NotStarted) return;
+
 		FlipAnimation.SetBool("Visible", false);
 		RestartCourutine(ReapearTime);
 	}
