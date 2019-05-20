@@ -19,8 +19,8 @@ public class Transition : MonoBehaviour
 					FadeOut fade = childRenderer.gameObject.GetComponent<FadeOut>();
 					if (!fade)
 						fade = childRenderer.gameObject.AddComponent<FadeOut>();
-					//fade.StartFadeOut(0);
-					fade.Disable();
+					fade.StartFadeOut(0);
+					//fade.Disable();
 				}
 			}
 		}
@@ -32,32 +32,49 @@ public class Transition : MonoBehaviour
 		{
 			if (childRenderer != null)
 			{
-				if (childRenderer.material.shader.name == "dissolve")
+				foreach (Material mat in childRenderer.materials)
 				{
-					StartCoroutine(UnDissolve(childRenderer, 2));
-				}
-				else
-				{
-					//Any other lwrp shader
-					Color currentcolor;
-					if(childRenderer.material.shader.name == "GUI/3D Text Shader")
+					if (mat.shader.name == "dissolve")
 					{
-						currentcolor = childRenderer.material.GetColor("_Color");
-						currentcolor.a = 0;
-						childRenderer.material.SetColor("_Color", currentcolor);
-					}	
+						StartCoroutine(UnDissolve(childRenderer, 2));
+					}
 					else
 					{
-						currentcolor = childRenderer.material.GetColor("_BaseColor");
-						currentcolor.a = 0;
-						childRenderer.material.SetColor("_BaseColor", currentcolor);
-					}
+						//Any other lwrp shader
+						Color currentcolor;
+						if (mat.shader.name == "GUI/3D Text Shader")
+						{
+							currentcolor = mat.GetColor("_Color");
+							currentcolor.a = 0;
 
-					FadeOut fade = childRenderer.gameObject.GetComponent<FadeOut>();
-					if (!fade)
-						fade = childRenderer.gameObject.AddComponent<FadeOut>();
-					//fade.StartFadeIn(0, 2);
-					fade.Enable();
+							mat.SetColor("_Color", currentcolor);
+							mat.SetFloat("_Surface", 1);
+
+							mat.renderQueue = 3000;
+							mat.SetFloat("_ZWrite", 0);
+							mat.SetFloat("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+							mat.SetFloat("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+						}
+						else
+						{
+							currentcolor = mat.GetColor("_BaseColor");
+							currentcolor.a = 0;
+
+							mat.SetFloat("_Surface", 1);
+							mat.SetColor("_BaseColor", currentcolor);
+
+							mat.renderQueue = 3000;
+							mat.SetFloat("_ZWrite", 0);
+							mat.SetFloat("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+							mat.SetFloat("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+						}
+
+						FadeOut fade = childRenderer.gameObject.GetComponent<FadeOut>();
+						if (!fade)
+							fade = childRenderer.gameObject.AddComponent<FadeOut>();
+						fade.StartFadeIn(0, 2);
+						//fade.Enable();
+					}
 				}
 			}
 		}
