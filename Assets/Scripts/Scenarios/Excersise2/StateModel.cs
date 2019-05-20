@@ -12,15 +12,19 @@ public class StateModel : ExcersiseState
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 6f;
 
+	public override void OnInitialize()
+	{
+		base.OnInitialize();
+
+		Exercise.PreviousScenarioButton.SetState(true);
+		Exercise.NextScenarioButton.SetState(true);
+	}
+
 	public override void OnStart()
     {
         base.OnStart();
+
         Randomizer();
-
-        Exercise.PreviousScenarioButton.SetState(true);
-        Exercise.NextScenarioButton.SetState(true);
-
-		Exercise.OnStart();
     }
 
     public override void OnExit()
@@ -101,8 +105,8 @@ public class StateModel : ExcersiseState
         RespawnWoman();
         Randomizer();
 
-		Exercise.OnStart();
-    }
+		BulletLines.SetActive(Exercise.Settings.DrawLines);
+	}
 
     private void RespawnWoman()
     {

@@ -15,7 +15,6 @@ public class Whiteboard : MonoBehaviour
 
 	private bool HasSetGUI;
 
-	// Start is called before the first frame update
 	public void Start()
 	{
 		if (ExplanationUI != null)
@@ -26,7 +25,6 @@ public class Whiteboard : MonoBehaviour
 		ClearBoard();
 	}
 
-	// Update is called once per frame
 	public void Update()
 	{
 		CheckProgress();

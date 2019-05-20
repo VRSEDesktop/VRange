@@ -30,7 +30,6 @@ public class ShootingTarget : ExcersiseState, IHitable
             case HitboxType.TargetTorso: return HitType.UNWANTED;
         }
 		
-
         return HitType.MISS;
     }
 

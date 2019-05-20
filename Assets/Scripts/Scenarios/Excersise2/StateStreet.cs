@@ -12,15 +12,20 @@ public class StateStreet : ExcersiseState
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
 
+	public override void OnInitialize()
+	{
+		base.OnInitialize();
+
+		Exercise.ShootingRange.gameObject.SetActive(false);
+		Exercise.City.gameObject.SetActive(true);
+
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
+	}
+
 	public override void OnStart()
     {
         base.OnStart();
-
-        Exercise.ShootingRange.gameObject.SetActive(false);
-        Exercise.City.gameObject.SetActive(true);
-
-        GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-        foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
 		Randomizer();
 	}
