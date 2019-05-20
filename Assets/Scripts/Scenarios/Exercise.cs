@@ -20,6 +20,7 @@ public class Exercise : MonoBehaviour
 
 	public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
+	public GazeButton StartButton, RestartButton;
 	public GameObject ShootingRange, City;
 
 	public Whiteboard whiteboard;
