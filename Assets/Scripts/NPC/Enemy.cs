@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour, IHitable
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
 		maxHits = Random.RandomRange(0, 4);
+
+		GetComponent<Transition>().Enable();
     }
 
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
@@ -110,5 +112,6 @@ public class Enemy : MonoBehaviour, IHitable
         IsDead = true;
         animator.enabled = false;
         if (navMeshAgent) navMeshAgent.speed = 0f;
+		GetComponent<Transition>().Disable();
     }
 }
