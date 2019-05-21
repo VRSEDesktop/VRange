@@ -127,8 +127,8 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     public void Reload()
     {
-        currentAmmo = magCapacity;
-		ReloadSound.Play();
+		if(currentAmmo != magCapacity) ReloadSound.Play();
+		currentAmmo = magCapacity;		
     }
 
     /// <summary>
