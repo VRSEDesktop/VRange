@@ -14,15 +14,18 @@ public class Enemy : MonoBehaviour, IHitable
     public bool IsDead { private set; get;}
     private NavMeshAgent navMeshAgent;
 
-	private int hits = 0;
-	public int maxHits = 0;
+	private int hits;
+	/// <summary>
+	/// Max number of hits in torso the enemy can withstand
+	/// </summary>
+	public int maxHits;
 
 	[System.Obsolete]
 	public void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-		maxHits = Random.RandomRange(0, 4);
+		maxHits = Random.RandomRange(1, 2);
     }
 
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
