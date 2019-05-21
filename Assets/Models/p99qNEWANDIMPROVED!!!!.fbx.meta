@@ -3,7 +3,27 @@ guid: e1a75105ddd2670488b21b01426a8182
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopPart
+    second: {fileID: 2100000, guid: 6c4c849275ea13d40aef56b2befb624b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barrelbulletthingy
+    second: {fileID: 2100000, guid: c963d134fcd0afb4fa6eb12d73df4b9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grip
+    second: {fileID: 2100000, guid: c963d134fcd0afb4fa6eb12d73df4b9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trigger
+    second: {fileID: 2100000, guid: b6973da106a06e040a028bfd3eb45739, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -31,7 +51,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
