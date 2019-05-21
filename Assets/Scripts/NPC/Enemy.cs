@@ -13,27 +13,38 @@ public class Enemy : MonoBehaviour, IHitable
     private Animator animator;
     public bool IsDead { private set; get;}
     private NavMeshAgent navMeshAgent;
-
-	private int hits = 0;
-	public int maxHits = 0;
+	private int _health = 100;
+	private int health {
+		get { return _health; }
+		set
+		{
+			if (value != _health)
+			{
+				Debug.Log(value);
+				_health = value;
+				if(_health <= 0)
+				{
+					Die();
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// Max number of hits in torso the enemy can withstand
+	/// </summary>
+	public int maxHits;
 
 	[System.Obsolete]
 	public void Start()
     {
         animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-		maxHits = Random.RandomRange(0, 4);
-
-		GetComponent<Transition>().Enable();
+		navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
-		if(hits == maxHits)
-		{
-			Die();
-		}
+
         switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HumanHead:
@@ -42,48 +53,50 @@ public class Enemy : MonoBehaviour, IHitable
             case HitboxType.HumanNeck:    break;
             case HitboxType.HumanPelvis:  break;
 
-            case HitboxType.HumanSpine1: animator.Play("ShoulderHit"); hits++; break;
-            case HitboxType.HumanSpine2: animator.Play("ShoulderHit"); hits++; break;
-            case HitboxType.HumanSpine3: animator.Play("ShoulderHit"); hits++; break;
+            case HitboxType.HumanSpine1: animator.Play("ShoulderLeftHit"); health -= Random.Range(40, 140); break;
+            case HitboxType.HumanSpine2: animator.Play("ShoulderRightHit"); health -= Random.Range(40, 140); break;
+            case HitboxType.HumanSpine3: animator.Play("ShoulderLeftHit"); health -= Random.Range(40, 140); break;
 
             case HitboxType.HumanThighLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
-                animator.SetBool("Limbing", true);
-				hits += 1;
+				animator.SetBool("Limbing", true);
+				health -= Random.Range(20, 50);
 				break;
             case HitboxType.HumanThighRight:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
-				hits += 1;
+				health -= Random.Range(20, 50);
 				break;
 
             case HitboxType.HumanCalfLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
-				hits += 1;
+				health -= Random.Range(20, 50);
 				break;
 
             case HitboxType.HumanCalfRight:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
                 animator.SetBool("Limbing", true);
-				hits += 1;
+				health -= Random.Range(20, 50);
 				break;
 
             case HitboxType.HumanFootLeft: break;
             case HitboxType.HumanFootRight: break;
 
-            case HitboxType.HumanUpperArmLeft: animator.Play("ShoulderHit"); break;
+            case HitboxType.HumanUpperArmLeft: animator.Play("ShoulderLeftHit"); break;
             case HitboxType.HumanUpperArmRight:
-				animator.Play("ShoulderHit");
-                    break;
+				animator.Play("ShoulderRightHit");
+				health -= Random.Range(20, 50);
+				break;
 
-            case HitboxType.HumanLowerArmLeft: animator.Play("ShoulderHit"); break;
+            case HitboxType.HumanLowerArmLeft: animator.Play("ShoulderLeftHit"); break;
             case HitboxType.HumanLowerArmRight:
-				animator.Play("ShoulderHit");
-                break;
+				animator.Play("ShoulderRightHit");
+				health -= Random.Range(20, 50);
+				break;
 
-            case HitboxType.HumanHandLeft: animator.Play("ShoulderHit"); break;
-            case HitboxType.HumanHandRight: animator.Play("ShoulderHit"); break;
+            case HitboxType.HumanHandLeft: animator.Play("ShoulderLeftHit"); break;
+            case HitboxType.HumanHandRight: animator.Play("ShoulderRightHit"); break;
         }
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());

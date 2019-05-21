@@ -12,7 +12,6 @@ public class ShootingTarget : ExcersiseState, IHitable
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
 		step.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
 
-		Debug.Log("ShootingTarrget::OnHit() " + partHit);
         ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         if(partHit == Goal)
         {
@@ -30,7 +29,6 @@ public class ShootingTarget : ExcersiseState, IHitable
             case HitboxType.TargetTorso: return HitType.UNWANTED;
         }
 		
-
         return HitType.MISS;
     }
 

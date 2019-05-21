@@ -5,8 +5,8 @@
 /// </summary>
 public class ApplyGunRotation : MonoBehaviour
 {
-	private readonly Quaternion ControllerRotation = Quaternion.Euler(-45, -180, 0);
-	private readonly Quaternion GunRotation = Quaternion.Euler(0, -88, 90);
+	private readonly Quaternion ControllerRotation = Quaternion.Euler(120, 180, 180);
+	private readonly Quaternion GunRotation = Quaternion.Euler(180, -88, 90);
 	private readonly Vector3 ControllerOffset = new Vector3(0, -0.05f, -0.05f);
 	private readonly Vector3 GunOffset = new Vector3(0.05f, 0, -0.1f);
 

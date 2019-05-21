@@ -6,33 +6,43 @@ public class StateModel : ExcersiseState
     public GameObject WomanPrefab;
     public Animator WomanAnimator;
 	public GameObject RespawnPoint;
+	private IEnumerator CurrentCoroutine;
 
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 6f;
 
+	public override void OnInitialize()
+	{
+		base.OnInitialize();
+
+		Exercise.PreviousScenarioButton.SetState(true);
+		Exercise.NextScenarioButton.SetState(true);
+	}
+
 	public override void OnStart()
     {
         base.OnStart();
+
         Randomizer();
-
-        Exercise.PreviousScenarioButton.SetState(true);
-        Exercise.NextScenarioButton.SetState(true);
-
-		Exercise.OnStart();
     }
 
     public override void OnExit()
     {
         base.OnExit();
-        RespawnWoman();
+
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		RespawnWoman();
     }
 
     private void Randomizer()
     {
         float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
-        StartCoroutine(PullItem(waitTime, Random.Range(0, 5)));    
+
+		if(CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		CurrentCoroutine = PullItem(waitTime, Random.Range(0, 5));
+		if (isActiveAndEnabled) StartCoroutine(CurrentCoroutine);    
     }
 
 	public override void OnUpdate()
@@ -101,8 +111,8 @@ public class StateModel : ExcersiseState
         RespawnWoman();
         Randomizer();
 
-		Exercise.OnStart();
-    }
+		BulletLines.SetActive(Exercise.Settings.DrawLines);
+	}
 
     private void RespawnWoman()
     {

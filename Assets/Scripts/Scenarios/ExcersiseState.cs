@@ -1,14 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public enum ExerciseProgress
-{
-    NotStarted,
-    Started,
-    Succeeded,
-    Failed
-}
-
 public abstract class ExcersiseState : MonoBehaviour
 {
 	public IList<LoggedHit> hits;
@@ -20,22 +12,33 @@ public abstract class ExcersiseState : MonoBehaviour
     protected float StartTime;
     protected Exercise Exercise;
 
+	public virtual void OnInitialize()
+	{
+		Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
+		GetComponent<Transform>().gameObject.SetActive(true);
+		Exercise.Progress = ExerciseProgress.NotStarted;
+
+		Exercise.whiteboard.ClearBoard();
+		Exercise.StartButton.SetState(true);
+		Exercise.RestartButton.SetState(false);
+	}
+
 	public virtual void OnStart()
     {
 		leftGun?.Reload();
 		rightGun?.Reload();
 
-        Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
-        GetComponent<Transform>().gameObject.SetActive(true);
-		Exercise.Progress = ExerciseProgress.NotStarted;
-
-		Exercise.whiteboard.ClearBoard();
 		StartTime = Time.realtimeSinceStartup;
-		Exercise.OnStart();
-    }
+		BulletLines.SetActive(Exercise.Settings.DrawLines);
+		Exercise.Progress = ExerciseProgress.Started;
+		Exercise.StartButton.SetState(false);
+		Exercise.RestartButton.SetState(true);
+	}
 
 	public virtual void OnUpdate()
 	{
+		if (Exercise.Progress == ExerciseProgress.NotStarted) return;
+
 		if ((leftGun != null && !leftGun.HasAmmo()) || (rightGun != null && !rightGun.HasAmmo()))
 		{
 			Exercise.Progress = ExerciseProgress.Succeeded;
@@ -48,7 +51,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
 		Exercise.DeleteBulletHoles();
 		Exercise.DeleteLines();
-		Exercise.Progress = ExerciseProgress.NotStarted;
+		Exercise.Progress = ExerciseProgress.Started;
 
 		if(leftGun) leftGun.Reload();
 		if (rightGun) rightGun.Reload();

@@ -2,6 +2,14 @@
 using UnityEngine;
 using Valve.VR;
 
+public enum ExerciseProgress
+{
+	NotStarted,
+	Started,
+	Succeeded,
+	Failed
+}
+
 public class Exercise : MonoBehaviour
 {
     /// <summary>
@@ -12,6 +20,7 @@ public class Exercise : MonoBehaviour
 
 	public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
+	public GazeButton StartButton, RestartButton;
 	public GameObject ShootingRange, City;
 
 	public Whiteboard whiteboard;
@@ -22,8 +31,6 @@ public class Exercise : MonoBehaviour
 	public GameObject Explanation;
 
     public static int CurrentState = 0;
-
-	private bool Active = true;
 
 	private ExerciseProgress _progress;
 	public ExerciseProgress Progress
@@ -45,7 +52,7 @@ public class Exercise : MonoBehaviour
         Settings.SettingsChanged += OnSettingsChanged;
         foreach(ExcersiseState state in States) state.OnExit();
         CurrentState = 0;
-        States[CurrentState].OnStart();
+        States[CurrentState].OnInitialize();
     }
 
 	public void Update()
@@ -58,22 +65,17 @@ public class Exercise : MonoBehaviour
     {
         States[CurrentState].OnExit();
 		CurrentState -= 1;
-        States[CurrentState].OnStart();
+        States[CurrentState].OnInitialize();
 
         DeleteBulletHoles();
         DeleteLines();
     }
 
-	public void OnStart()
-	{
-		BulletLines.SetActive(Settings.DrawLines);
-	}
-
 	public void NextStep()
     {  
 		States[CurrentState].OnExit();
 		CurrentState++;
-		States[CurrentState].OnStart();
+		States[CurrentState].OnInitialize();
 		DeleteBulletHoles();
 		DeleteLines();
     }
@@ -124,6 +126,8 @@ public class Exercise : MonoBehaviour
 			foreach (ApplyGunRotation gun in guns) gun.Toggle();
 			Settings.NormalGun = !Settings.NormalGun;
 		}
+
+		if (UI.GetButtonActivatedAndTurnOff("Start_Scenario"))  States[CurrentState].OnStart();
 	}
 
 	private void OnSettingsChanged()
