@@ -51,7 +51,7 @@ public abstract class ExcersiseState : MonoBehaviour
 
 		Exercise.DeleteBulletHoles();
 		Exercise.DeleteLines();
-		Exercise.Progress = ExerciseProgress.NotStarted;
+		Exercise.Progress = ExerciseProgress.Started;
 
 		if(leftGun) leftGun.Reload();
 		if (rightGun) rightGun.Reload();

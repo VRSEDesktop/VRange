@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class StateCovers : ExcersiseState
 {
-    public GameObject WomanPrefab;
+	private IEnumerator CurrentCoroutine;
+
+	public GameObject WomanPrefab;
     public Animator Anim;
     /// <summary>
     /// Minimum and maximum time in seconds after which the model will decide which item to take
     /// </summary>
-    public float MinWaitTime = 2f, MaxWaitTime = 5f;
+    public float MinWaitTime = 2f, MaxWaitTime = 5f, TimeForReaction = 6f;
 
 	public GameObject RespawnPoint;
 
@@ -36,13 +38,18 @@ public class StateCovers : ExcersiseState
     public override void OnExit()
     {
         base.OnExit();
-        RespawnWoman();
+
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		RespawnWoman();
     }
 
     private void Randomizer()
     {
         float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
-        StartCoroutine(PullItem(waitTime));
+
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		CurrentCoroutine = PullItem(waitTime);
+		if (isActiveAndEnabled) StartCoroutine(CurrentCoroutine);
     }
 
     /// <summary>
@@ -57,7 +64,10 @@ public class StateCovers : ExcersiseState
         yield return new WaitForSecondsRealtime(0.8f);
         Anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
         Anim.GetComponent<Enemy>().isAgressive = true;
-    }
+
+		yield return new WaitForSecondsRealtime(TimeForReaction);
+		Restart();
+	}
 
     public override void Restart()
     {

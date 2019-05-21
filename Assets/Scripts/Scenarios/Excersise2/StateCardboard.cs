@@ -7,7 +7,7 @@ public class StateCardboard : ExcersiseState
     /// <summary>
     /// Time in seconds after which the cardboard with shooting target will filp
     /// </summary>
-    public float TimeToStart = 5f, ReapearTime = 2f, TimeToReact = 3f;
+    public float TimeToStart = 5f, ReapearTime = 2f, TimeToReact = 2f;
 	private int Iteration = 1;
 
 	private const int Repetitions = 7;
@@ -35,7 +35,8 @@ public class StateCardboard : ExcersiseState
     {
         base.OnExit();
 
-        FlipAnimation.SetBool("Visible", false);
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		FlipAnimation.SetBool("Visible", false);
 		Iteration = 1;
     }
 
@@ -86,8 +87,9 @@ public class StateCardboard : ExcersiseState
     /// </summary>
 	public void OnHit()
 	{
+		Debug.Log("OnHit() " + Exercise.Progress);
 		if (Exercise.Progress == ExerciseProgress.NotStarted) return;
-
+		
 		FlipAnimation.SetBool("Visible", false);
 		RestartCourutine(ReapearTime);
 	}
@@ -100,6 +102,6 @@ public class StateCardboard : ExcersiseState
     {
         if(CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
         CurrentCoroutine = TurningCardBoard(_time);
-        StartCoroutine(CurrentCoroutine);
+        if(isActiveAndEnabled) StartCoroutine(CurrentCoroutine);
     }
 }

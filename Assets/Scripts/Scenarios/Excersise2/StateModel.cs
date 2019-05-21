@@ -6,6 +6,7 @@ public class StateModel : ExcersiseState
     public GameObject WomanPrefab;
     public Animator WomanAnimator;
 	public GameObject RespawnPoint;
+	private IEnumerator CurrentCoroutine;
 
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
@@ -30,13 +31,18 @@ public class StateModel : ExcersiseState
     public override void OnExit()
     {
         base.OnExit();
-        RespawnWoman();
+
+		if (CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		RespawnWoman();
     }
 
     private void Randomizer()
     {
         float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
-        StartCoroutine(PullItem(waitTime, Random.Range(0, 5)));    
+
+		if(CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+		CurrentCoroutine = PullItem(waitTime, Random.Range(0, 5));
+		if (isActiveAndEnabled) StartCoroutine(CurrentCoroutine);    
     }
 
 	public override void OnUpdate()
