@@ -27,9 +27,7 @@ public class StateStreet : ExcersiseState
     {
         base.OnStart();
 
-		Exercise.ShootingRange.gameObject.GetComponent<Transition>().Disable();
-		Exercise.City.gameObject.SetActive(true);
-		Exercise.City.gameObject.GetComponent<Transition>().Enable();
+		StartCoroutine(DoTransition());
 
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
         foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
@@ -37,12 +35,25 @@ public class StateStreet : ExcersiseState
 		Randomizer();
 	}
 
+	private IEnumerator DoTransition()
+	{
+		Exercise.ShootingRange.gameObject.GetComponent<Transition>().Disable();
+		yield return new WaitForSecondsRealtime(2);
+		Exercise.City.gameObject.SetActive(true);
+		Exercise.City.gameObject.GetComponent<Transition>().Enable();
+	}
+
+	private IEnumerator UndoTransition()
+	{
+		Exercise?.City.gameObject.GetComponent<Transition>().Disable();
+		yield return new WaitForSecondsRealtime(2);
+		Exercise?.ShootingRange.gameObject.SetActive(true);
+		Exercise?.ShootingRange.gameObject.GetComponent<Transition>().Enable();
+	}
+
 	public override void OnExit()
 	{
 		base.OnExit();
-		Exercise?.City.gameObject.GetComponent<Transition>().Disable();
-		Exercise?.ShootingRange.gameObject.SetActive(true);
-		Exercise?.ShootingRange.gameObject.GetComponent<Transition>().Enable();
 		RespawnWoman();
 	}
 
