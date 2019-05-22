@@ -3,7 +3,15 @@ using UnityEngine;
 
 public class Transition : MonoBehaviour
 {
-	public void Disable()
+	[SerializeField] private bool OnGameObjectEnable = false;
+	[SerializeField] private float DefaultDuration = 2f;
+
+	public void OnEnable()
+	{
+		if (OnGameObjectEnable) Enable();
+	}
+
+	public void Disable(float duration = 0f)
 	{
 		foreach (Renderer childRenderer in GetComponentsInChildren<Renderer>())
 		{
@@ -11,7 +19,7 @@ public class Transition : MonoBehaviour
 			{
 				if(childRenderer.material.shader.name == "dissolve")
 				{
-					StartCoroutine(Dissolve(childRenderer, 2));
+					StartCoroutine(Dissolve(childRenderer, duration > 0 ? duration : DefaultDuration));
 				}
 				else
 				{
@@ -26,7 +34,7 @@ public class Transition : MonoBehaviour
 		}
 	}
 
-	public void Enable()
+	public void Enable(float duration = 0f)
 	{
 		foreach(Renderer childRenderer in GetComponentsInChildren<Renderer>())
 		{
@@ -36,7 +44,7 @@ public class Transition : MonoBehaviour
 				{
 					if (mat.shader.name == "dissolve")
 					{
-						StartCoroutine(UnDissolve(childRenderer, 2));
+						StartCoroutine(UnDissolve(childRenderer, duration > 0 ? duration : DefaultDuration));
 					}
 					else
 					{

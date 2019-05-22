@@ -1449,6 +1449,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2179,6 +2180,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2557,6 +2559,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -3307,6 +3310,7 @@ GameObject:
   - component: {fileID: 8062746389514038027}
   - component: {fileID: 8062746389523552632}
   - component: {fileID: 6109456817081413637}
+  - component: {fileID: 9171888238499625039}
   m_Layer: 0
   m_Name: Woman NPC Ragdoll
   m_TagString: Untagged
@@ -3423,6 +3427,18 @@ MonoBehaviour:
   Axe: {fileID: 6585271590542385205}
   isAgressive: 0
   maxHits: 0
+--- !u!114 &9171888238499625039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062746389523552633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdcd3aabecc692f4f80991535bf2a5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8062746389523552635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,6 +3605,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4030,15 +4047,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b0217fd2f43544448e1564f36c855f7, type: 3}
---- !u!4 &7870264957908472358 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2424023825873137044, guid: 4b0217fd2f43544448e1564f36c855f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 5520023998195744690}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6585271590542385205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1727276741331165063, guid: 4b0217fd2f43544448e1564f36c855f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5520023998195744690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7870264957908472358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2424023825873137044, guid: 4b0217fd2f43544448e1564f36c855f7,
     type: 3}
   m_PrefabInstance: {fileID: 5520023998195744690}
   m_PrefabAsset: {fileID: 0}

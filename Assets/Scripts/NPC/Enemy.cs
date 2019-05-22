@@ -41,6 +41,11 @@ public class Enemy : MonoBehaviour, IHitable
 		navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+	public void OnEnable()
+	{
+		GetComponent<Transition>().Enable();
+	}
+
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
