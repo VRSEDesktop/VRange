@@ -14,6 +14,8 @@ public class StateCardboard : ExcersiseState
 
     private IEnumerator CurrentCoroutine;
 
+	public GameObject spawn;
+
 	public override void OnInitialize()
 	{
 		base.OnInitialize();
@@ -27,7 +29,6 @@ public class StateCardboard : ExcersiseState
 	public override void OnStart()
     {
 		base.OnStart();
-
         RestartCourutine(TimeToStart);
     }
 
@@ -87,10 +88,8 @@ public class StateCardboard : ExcersiseState
     /// </summary>
 	public void OnHit()
 	{
-		Debug.Log("OnHit() " + Exercise.Progress);
 		if (Exercise.Progress == ExerciseProgress.NotStarted) return;
 		
-		FlipAnimation.SetBool("Visible", false);
 		RestartCourutine(ReapearTime);
 	}
 
