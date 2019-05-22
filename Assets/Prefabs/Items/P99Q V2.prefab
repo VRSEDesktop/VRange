@@ -609,7 +609,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -734,6 +734,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4974488144622022448}
     m_Modifications:
+    - target: {fileID: 4878110358739580065, guid: af28dee66819b6b45b93d0b8acf08d10,
+        type: 3}
+      propertyPath: m_Name
+      value: MuzzleFlash
+      objectReference: {fileID: 0}
     - target: {fileID: 4880471644851061693, guid: af28dee66819b6b45b93d0b8acf08d10,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -803,11 +808,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878110358739580065, guid: af28dee66819b6b45b93d0b8acf08d10,
-        type: 3}
-      propertyPath: m_Name
-      value: MuzzleFlash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af28dee66819b6b45b93d0b8acf08d10, type: 3}

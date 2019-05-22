@@ -21,8 +21,8 @@ public class GunController : HandController
     }
 
     public void Update()
-    {     
-        gun.gameObject.SetActive(input.IsControllerWorking());
+    {
+		gun.gameObject.SetActive(input.IsControllerWorking());
     }
 
     private void PushTrigger()
