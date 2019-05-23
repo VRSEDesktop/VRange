@@ -3,16 +3,13 @@ using UnityEngine;
 
 public class Whiteboard : MonoBehaviour
 {
+	private Gun leftGun, rightGun;
+	private int head, torso, leftarm, rightarm, leftleg, rightleg, mis;
+	private bool HasSetGUI;
+
 	public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg, gMis;
 	public GameObject ExplanationUI, FeedbackUI;
-
 	public Exercise exercise;
-
-	public Gun leftGun, rightGun;
-
-	private int head, torso, leftarm, rightarm, leftleg, rightleg, mis;
-
-	private bool HasSetGUI;
 
 	public void Start()
 	{
@@ -20,6 +17,9 @@ public class Whiteboard : MonoBehaviour
 			ExplanationUI.SetActive(true);
 		if (FeedbackUI != null)
 			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+
+		leftGun = exercise.Player.leftHand.gun;
+		rightGun = exercise.Player.rightHand.gun;
 
 		ClearBoard();
 	}

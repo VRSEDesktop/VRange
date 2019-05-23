@@ -7,9 +7,11 @@ public class StateStreet : ExcersiseState
 	public GameObject WomanPrefab;
 	public Animator WomanAnimator;
 	public GameObject RespawnPoint;
+	public GameObject CurrentButtonSpawn;
+
 	public GameObject player;
 
-	public List<GameObject> PlayerSpawnPoints, SpawnPointsWoman;
+	public List<GameObject> PlayerSpawnPoints, SpawnPointsWoman, ButtonSpawn;
 
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
@@ -23,8 +25,8 @@ public class StateStreet : ExcersiseState
 		Exercise.ShootingRange.gameObject.SetActive(false);
 		Exercise.City.gameObject.SetActive(true);
 
-		//GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-		//foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 	}
 
 	public override void OnStart()
@@ -33,9 +35,10 @@ public class StateStreet : ExcersiseState
 
 		StartCoroutine(DoTransition());
 
-		//GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-		//foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
+		CurrentButtonSpawn.SetActive(true);
 		Randomizer();
 		Respawn();		
 	}
@@ -92,9 +95,13 @@ public class StateStreet : ExcersiseState
 	public void Respawn()
 	{
 		int spawnNum = Random.Range(0, 4);
+		if (CurrentButtonSpawn) { CurrentButtonSpawn.SetActive(false); }
 
 		GameObject spawnPlayer = PlayerSpawnPoints[spawnNum];
 		GameObject spawnWoman = SpawnPointsWoman[spawnNum];
+		CurrentButtonSpawn = ButtonSpawn[spawnNum];
+
+		CurrentButtonSpawn.SetActive(true);
 
 		// Spawning woman
 		Enemy woman = GetComponentInChildren<Enemy>();

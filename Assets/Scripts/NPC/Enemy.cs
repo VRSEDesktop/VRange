@@ -55,9 +55,9 @@ public class Enemy : MonoBehaviour, IHitable
             case HitboxType.HumanNeck:    break;
             case HitboxType.HumanPelvis:  break;
 
-            case HitboxType.HumanSpine1: animator.Play("ShoulderLeftHit"); health -= Random.Range(40, 140); break;
-            case HitboxType.HumanSpine2: animator.Play("ShoulderRightHit"); health -= Random.Range(40, 140); break;
-            case HitboxType.HumanSpine3: animator.Play("ShoulderLeftHit"); health -= Random.Range(40, 140); break;
+            case HitboxType.HumanSpine1: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
+            case HitboxType.HumanSpine2: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
+            case HitboxType.HumanSpine3: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
 
             case HitboxType.HumanThighLeft:
                 if (navMeshAgent) navMeshAgent.speed = 0.5f;
