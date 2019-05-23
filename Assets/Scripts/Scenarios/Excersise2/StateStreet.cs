@@ -9,8 +9,7 @@ public class StateStreet : ExcersiseState
 	public GameObject RespawnPoint;
 	public GameObject player;
 
-	public List<GameObject> SpawnPoints;
-	public List<GameObject> SpawnPointsWoman;
+	public List<GameObject> PlayerSpawnPoints, SpawnPointsWoman;
 
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
@@ -38,8 +37,7 @@ public class StateStreet : ExcersiseState
 		//foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
 		Randomizer();
-		Respawn();
-		
+		Respawn();		
 	}
 
 	private IEnumerator DoTransition()
@@ -95,7 +93,7 @@ public class StateStreet : ExcersiseState
 	{
 		int spawnNum = Random.Range(0, 4);
 
-		GameObject spawnPlayer = SpawnPoints[spawnNum];
+		GameObject spawnPlayer = PlayerSpawnPoints[spawnNum];
 		GameObject spawnWoman = SpawnPointsWoman[spawnNum];
 
 		// Spawning woman

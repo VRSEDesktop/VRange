@@ -49,13 +49,10 @@ public abstract class ExcersiseState : MonoBehaviour
 
 	public virtual void Restart()
     {
-        ScenarioLogs.Clear();
-
-		Exercise.DeleteBulletHoles();
-		Exercise.DeleteLines();
+		Exercise.Clear();
 		Exercise.Progress = ExerciseProgress.Started;
 
-		if(leftGun) leftGun.Reload();
+		if (leftGun) leftGun.Reload();
 		if (rightGun) rightGun.Reload();
 
 		StartTime = Time.realtimeSinceStartup;
@@ -67,17 +64,13 @@ public abstract class ExcersiseState : MonoBehaviour
 	public virtual void OnExit()
     {
         GetComponent<Transform>().gameObject.SetActive(false);
-        ScenarioLogs.Clear();
-		if(Exercise) Exercise.whiteboard.ClearBoard();
-    }
 
-    /// <summary>
-    /// Checks if the stats needs to be changed
-    /// </summary>
-    public void UpdateGUI()
-    {
-		Debug.Log("updategui()");
-    }
+		if (Exercise)
+		{
+			Exercise.whiteboard.ClearBoard();
+			Exercise.Clear();
+		}
+	}
 
 	public void OnProgressChanged()
 	{

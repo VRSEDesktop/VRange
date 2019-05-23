@@ -225,11 +225,11 @@ GameObject:
   - component: {fileID: 4974488144622022448}
   - component: {fileID: 4058842928785216774}
   - component: {fileID: 7741513249921870335}
+  - component: {fileID: 3979304058291887644}
   - component: {fileID: 5080882892478897663}
+  - component: {fileID: 820348236}
   - component: {fileID: 820348238}
   - component: {fileID: 820348237}
-  - component: {fileID: 820348236}
-  - component: {fileID: 3979304058291887644}
   - component: {fileID: 5981456611876758391}
   m_Layer: 0
   m_Name: P99Q V2
@@ -301,6 +301,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3979304058291887644
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310187241725009187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 3395854897396022967, guid: e1a75105ddd2670488b21b01426a8182, type: 3}
 --- !u!95 &5080882892478897663
 Animator:
   serializedVersion: 3
@@ -320,6 +334,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &820348236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310187241725009187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c8a112d13248b4cbb57dd342836eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawLines: 1
+  magCapacity: 7
+  currentAmmo: 0
+  ShotSound: {fileID: 820348237}
+  TriggerSound: {fileID: 820348238}
+  ReloadSound: {fileID: 5981456611876758391}
+  anim: {fileID: 5080882892478897663}
+  barrelExit: {fileID: 7325429671316518414}
+  bulletHole: {fileID: 7538701054403910283, guid: 3985f3f9a2ad914448c53471afec37db,
+    type: 3}
+  BulletLine: {fileID: 1203314897797445067, guid: 85ed9aebe16e9634cb2d3afab654eac5,
+    type: 3}
 --- !u!82 &820348238
 AudioSource:
   m_ObjectHideFlags: 0
@@ -514,44 +552,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &820348236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8310187241725009187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1c8a112d13248b4cbb57dd342836eec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawLines: 1
-  magCapacity: 7
-  currentAmmo: 0
-  ShotSound: {fileID: 820348237}
-  TriggerSound: {fileID: 820348238}
-  ReloadSound: {fileID: 5981456611876758391}
-  anim: {fileID: 5080882892478897663}
-  barrelExit: {fileID: 7325429671316518414}
-  bulletHole: {fileID: 7538701054403910283, guid: 3985f3f9a2ad914448c53471afec37db,
-    type: 3}
-  BulletLine: {fileID: 1203314897797445067, guid: 85ed9aebe16e9634cb2d3afab654eac5,
-    type: 3}
---- !u!64 &3979304058291887644
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8310187241725009187}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 3395854897396022967, guid: e1a75105ddd2670488b21b01426a8182, type: 3}
 --- !u!82 &5981456611876758391
 AudioSource:
   m_ObjectHideFlags: 0

@@ -14,8 +14,6 @@ public class StateCardboard : ExcersiseState
 
     private IEnumerator CurrentCoroutine;
 
-	public GameObject spawn;
-
 	public override void OnInitialize()
 	{
 		base.OnInitialize();
