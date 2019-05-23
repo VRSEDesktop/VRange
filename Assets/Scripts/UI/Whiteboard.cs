@@ -4,8 +4,7 @@ using UnityEngine;
 public class Whiteboard : MonoBehaviour
 {
 	public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg, gMis;
-	public GameObject ExplanationUI;
-	public GameObject FeedbackUI;
+	public GameObject ExplanationUI, FeedbackUI;
 
 	public Exercise exercise;
 
@@ -104,14 +103,8 @@ public class Whiteboard : MonoBehaviour
 
 	private Gun CorrectGun()
 	{
-		if(rightGun.currentAmmo != rightGun.magCapacity)
-		{
-			return rightGun;
-		}
-		else
-		{
-			return leftGun;
-		}
+		if(rightGun.currentAmmo != rightGun.magCapacity) return rightGun;
+		else return leftGun;
 	}
 
 	private bool AddLine(GameObject g, int amount)
