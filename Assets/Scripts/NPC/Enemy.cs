@@ -45,6 +45,8 @@ public class Enemy : MonoBehaviour, IHitable
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
 
+		//raycastHit.transform.position()
+
         switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HumanHead:

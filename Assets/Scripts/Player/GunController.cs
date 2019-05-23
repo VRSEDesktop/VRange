@@ -3,6 +3,8 @@
 /// <summary>
 /// Player interface for controlling the gun
 /// </summary>
+/// 
+[RequireComponent(typeof(ApplyGunRotation))]
 public class GunController : HandController
 {
     private static readonly float DoubleClickDelay = 0.35f;

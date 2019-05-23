@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-	public IList<LoggedHit> hits;
+	private Gun leftGun, rightGun;
 
-    public Gun leftGun, rightGun;
+	public IList<LoggedHit> hits;
 
     public bool HasSetGUI { get; set; }
 
@@ -15,6 +15,8 @@ public abstract class ExcersiseState : MonoBehaviour
 	public virtual void OnInitialize()
 	{
 		Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
+		rightGun = Exercise.Player.rightHand.gun;
+		leftGun = Exercise.Player.leftHand.gun;
 		GetComponent<Transform>().gameObject.SetActive(true);
 		Exercise.Progress = ExerciseProgress.NotStarted;
 
