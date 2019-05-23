@@ -15,7 +15,6 @@ public class ApplyGunRotation : MonoBehaviour
 
 	public Settings Settings;
 
-
 	public void Start()
     {
 		Gun = GetComponent<GunController>().gun;

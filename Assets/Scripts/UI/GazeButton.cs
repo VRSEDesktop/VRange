@@ -6,10 +6,11 @@ using UnityEngine;
 /// </summary>
 public class GazeButton : UIElement, IGazeable
 {
-	public Color HoverColor;
 	private bool activated;
-	private int framesSinceActive = 0;
+	private int framesSinceActive;
+
 	[HideInInspector] public Color DefaultColor;
+	public Color HoverColor;
 
 	public void OnEnable()
 	{
