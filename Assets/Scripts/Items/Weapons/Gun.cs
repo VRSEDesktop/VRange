@@ -15,6 +15,7 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     public Transform barrelExit;
     public GameObject bulletHole;
+	public ParticleSystem bleedingEffect;
     /// <summary>
     /// Prefab for the bulletline, should just be a square.
     /// </summary>
@@ -100,8 +101,11 @@ public class Gun : Weapon, IReloadable
 
     private void SpawnBulletHole(RaycastHit hit)
     {
-        if (hit.collider.GetComponentInParent<Enemy>()) return;
-
+		if (hit.collider.GetComponentInParent<Enemy>())
+		{
+			return;
+		}
+		
         Vector3 offset = transform.rotation * Vector3.forward;
         offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
         Vector3 position = hit.point - offset;
@@ -139,4 +143,9 @@ public class Gun : Weapon, IReloadable
     {
         return currentAmmo > 0;
     }
+
+	public void RemoveAmmo()
+	{
+		currentAmmo = 0;
+	}
 }

@@ -27,7 +27,6 @@ public class StateCardboard : ExcersiseState
 	public override void OnStart()
     {
 		base.OnStart();
-
         RestartCourutine(TimeToStart);
     }
 
@@ -70,8 +69,8 @@ public class StateCardboard : ExcersiseState
 		yield return new WaitForSecondsRealtime(TimeToReact);
 
 		if (Iteration < Repetitions)
-        {          
-            FlipAnimation.SetBool("Visible", false);
+        {
+			FlipAnimation.SetBool("Visible", false);
 			Iteration++;
 
 			RestartCourutine(ReapearTime);
@@ -87,9 +86,8 @@ public class StateCardboard : ExcersiseState
     /// </summary>
 	public void OnHit()
 	{
-		Debug.Log("OnHit() " + Exercise.Progress);
 		if (Exercise.Progress == ExerciseProgress.NotStarted) return;
-		
+
 		FlipAnimation.SetBool("Visible", false);
 		RestartCourutine(ReapearTime);
 	}
@@ -101,7 +99,8 @@ public class StateCardboard : ExcersiseState
     private void RestartCourutine(float _time)
     {
         if(CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
+
         CurrentCoroutine = TurningCardBoard(_time);
-        if(isActiveAndEnabled) StartCoroutine(CurrentCoroutine);
+		if (isActiveAndEnabled) StartCoroutine(CurrentCoroutine);
     }
 }

@@ -10,8 +10,10 @@ public class GazeButtonToggle : GazeButton
 	[SerializeField] private Texture2D ActiveTexture;
 	private Texture2D DefaultTexture;
 
-	public void Start()
+	public override void OnEnable()
 	{
+		base.OnEnable();
+
 		DefaultTexture = (Texture2D) GetComponent<Renderer>().material.GetTexture("_BaseMap");
 	}
 

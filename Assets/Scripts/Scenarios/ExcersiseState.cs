@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-	public IList<LoggedHit> hits;
+	private Gun leftGun, rightGun;
 
-    public Gun leftGun, rightGun;
+	public IList<LoggedHit> hits;
 
     public bool HasSetGUI { get; set; }
 
@@ -15,6 +15,10 @@ public abstract class ExcersiseState : MonoBehaviour
 	public virtual void OnInitialize()
 	{
 		Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
+		rightGun = Exercise.Player.rightHand.gun;
+		leftGun = Exercise.Player.leftHand.gun;
+		rightGun.RemoveAmmo();
+		leftGun.RemoveAmmo();
 		GetComponent<Transform>().gameObject.SetActive(true);
 		Exercise.Progress = ExerciseProgress.NotStarted;
 
@@ -47,13 +51,10 @@ public abstract class ExcersiseState : MonoBehaviour
 
 	public virtual void Restart()
     {
-        ScenarioLogs.Clear();
-
-		Exercise.DeleteBulletHoles();
-		Exercise.DeleteLines();
+		Exercise.Clear();
 		Exercise.Progress = ExerciseProgress.Started;
 
-		if(leftGun) leftGun.Reload();
+		if (leftGun) leftGun.Reload();
 		if (rightGun) rightGun.Reload();
 
 		StartTime = Time.realtimeSinceStartup;
@@ -65,17 +66,13 @@ public abstract class ExcersiseState : MonoBehaviour
 	public virtual void OnExit()
     {
         GetComponent<Transform>().gameObject.SetActive(false);
-        ScenarioLogs.Clear();
-		if(Exercise) Exercise.whiteboard.ClearBoard();
-    }
 
-    /// <summary>
-    /// Checks if the stats needs to be changed
-    /// </summary>
-    public void UpdateGUI()
-    {
-		Debug.Log("updategui()");
-    }
+		if (Exercise)
+		{
+			Exercise.whiteboard.ClearBoard();
+			Exercise.Clear();
+		}
+	}
 
 	public void OnProgressChanged()
 	{

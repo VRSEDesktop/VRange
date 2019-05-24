@@ -3,6 +3,7 @@
 /// <summary>
 /// Script used to adjuct a transform of a controller
 /// </summary>
+[RequireComponent(typeof(GunController))]
 public class ApplyGunRotation : MonoBehaviour
 {
 	private readonly Quaternion ControllerRotation = Quaternion.Euler(120, 180, 180);
@@ -10,11 +11,14 @@ public class ApplyGunRotation : MonoBehaviour
 	private readonly Vector3 ControllerOffset = new Vector3(0, -0.05f, -0.05f);
 	private readonly Vector3 GunOffset = new Vector3(0.05f, 0, -0.1f);
 
-	public Gun Gun;
+	private Gun Gun;
+
 	public Settings Settings;
 
 	public void Start()
     {
+		Gun = GetComponent<GunController>().gun;
+
 		if (Settings.NormalGun) ApplyRealGunRotation();
 		else ApplyControllerRotation();
 	}

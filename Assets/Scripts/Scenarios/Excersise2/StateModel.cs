@@ -25,7 +25,8 @@ public class StateModel : ExcersiseState
     {
         base.OnStart();
 
-        Randomizer();
+		if (WomanAnimator == null || WomanAnimator.GetComponent<Enemy>().IsDead) Restart();
+		Randomizer();
     }
 
     public override void OnExit()
@@ -49,7 +50,11 @@ public class StateModel : ExcersiseState
 	{
 		base.OnUpdate();
 
-		if(WomanAnimator.GetComponent<Enemy>().IsDead) Exercise.Progress = ExerciseProgress.Succeeded;
+		if (WomanAnimator == null || WomanAnimator.GetComponent<Enemy>().IsDead)
+		{
+			Exercise.Progress = ExerciseProgress.Succeeded;
+			//Restart();
+		}
 	}
 
     /// <summary>
@@ -101,7 +106,7 @@ public class StateModel : ExcersiseState
 		}
 
         yield return new WaitForSecondsRealtime(LoopTime);
-        Restart();
+        //Restart();
     }
 
     public override void Restart()
@@ -119,7 +124,7 @@ public class StateModel : ExcersiseState
         Enemy woman = GetComponentInChildren<Enemy>();
         GameObject newWoman = Instantiate(WomanPrefab, RespawnPoint.transform.position, RespawnPoint.transform.rotation);
         newWoman.transform.parent = transform;
-        Destroy(woman.gameObject);
+        if(woman) Destroy(woman.gameObject);
         WomanAnimator = newWoman.GetComponent<Animator>();
     }
 }

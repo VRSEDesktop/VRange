@@ -60,10 +60,10 @@ namespace Valve.VR
 
         void OnEnable()
         {
-            if (fadeMaterial == null)
-            {
-                fadeMaterial = new Material(Shader.Find("Lightweight Render Pipeline/Unlit"));
-            }
+            //if (fadeMaterial == null)
+            //{
+                //fadeMaterial = new Material(Shader.Find("Lightweight Render Pipeline/Unlit"));
+            //}
 
             SteamVR_Events.Fade.Listen(OnStartFade);
             SteamVR_Events.FadeReady.Send();

@@ -7,6 +7,7 @@ public class Settings : ScriptableObject
 {
     [SerializeField] private bool _drawLines = true;
 	public bool NormalGun = false;
+
 	public event PropertyChanged SettingsChanged;
 
 	public bool DrawLines
