@@ -37,11 +37,6 @@ public class StateStreet : ExcersiseState
 	{
 		base.OnStart();
 
-		StartCoroutine(DoTransition());
-
-		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
-
 		Randomizer();
 		Respawn();
 	}
@@ -65,8 +60,6 @@ public class StateStreet : ExcersiseState
 	public override void OnExit()
 	{
 		base.OnExit();
-
-		Respawn();
 		StartCoroutine(UndoTransition());
 	}
 
@@ -115,7 +108,7 @@ public class StateStreet : ExcersiseState
 		Enemy woman = GetComponentInChildren<Enemy>();
 		GameObject newWoman = Instantiate(WomanPrefab, spawnWoman.transform.position, spawnWoman.transform.rotation);
 		newWoman.transform.parent = transform;
-		Destroy(woman.gameObject);
+		if(woman) Destroy(woman.gameObject);
 		WomanAnimator = newWoman.GetComponent<Animator>();
 
 		// Spawning player

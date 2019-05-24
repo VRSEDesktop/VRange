@@ -58,8 +58,8 @@ public class Enemy : MonoBehaviour, IHitable
 			case HitboxType.HumanHead:
                 if (!IsDead) Die();
             break;
-            case HitboxType.HumanNeck:    break;
-            case HitboxType.HumanPelvis:  break;
+            case HitboxType.HumanNeck: if (!IsDead) Die();  break;
+            case HitboxType.HumanPelvis: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
 
             case HitboxType.HumanSpine1: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
             case HitboxType.HumanSpine2: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
@@ -88,8 +88,8 @@ public class Enemy : MonoBehaviour, IHitable
 				health -= Random.Range(20, 50);
 				break;
 
-            case HitboxType.HumanFootLeft: break;
-            case HitboxType.HumanFootRight: break;
+            case HitboxType.HumanFootLeft: health -= Random.Range(1, 20); break;
+            case HitboxType.HumanFootRight: health -= Random.Range(1, 20); break;
 
             case HitboxType.HumanUpperArmLeft: animator.Play("ShoulderLeftHit"); break;
             case HitboxType.HumanUpperArmRight:
@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour, IHitable
         IsDead = true;
         animator.enabled = false;
         if (navMeshAgent) navMeshAgent.speed = 0f;
-		StartCoroutine(Dissolve(1));
+		StartCoroutine(Dissolve(2.5f));
     }
 
 	/// <summary>
@@ -145,5 +145,6 @@ public class Enemy : MonoBehaviour, IHitable
 	{
 		yield return new WaitForSeconds(delay);
 		GetComponent<Transition>().Disable();
+		Destroy(gameObject, 5f);
 	}
 }

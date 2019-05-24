@@ -50,12 +50,16 @@ public class Exercise : MonoBehaviour
     {
 		BulletLines.SetActive(Settings.DrawLines);
         Settings.SettingsChanged += OnSettingsChanged;
-        foreach(ExcersiseState state in States) state.OnExit();
+
+		foreach (ExcersiseState state in States) state.gameObject.SetActive(false);
+
         States[CurrentState].OnInitialize();
     }
 
 	public void Update()
-    {      
+    {
+		Debug.Log("Gun " + Settings.NormalGun);
+
         States[CurrentState].OnUpdate();
         HandleButtons();
     }

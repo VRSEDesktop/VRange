@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-565756801980049621
+--- !u!114 &-6610748382385164244
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,25 +20,41 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayButton
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Name: TopPart
+  m_Shader: {fileID: -6465566751694194690, guid: 4baa4e71a7760e748b38dbcbc95ef830,
+    type: 3}
   m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_7724F8B8:
+        m_Texture: {fileID: 2800000, guid: 8a5c4424cee40dc4b89c297ad92ef4bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_BA322E43:
+        m_Texture: {fileID: 2800000, guid: 40cea8261ceae704597741f6a058ad35, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E4FEA7BC:
+        m_Texture: {fileID: 2800000, guid: 4d09a7baeaad5124d85b726bf1b79655, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E6A28724:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f5099847c18a02448950f3b9dc04928f, type: 3}
+        m_Texture: {fileID: 2800000, guid: d45a06d02a3413b42ab83d57fda78873, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 7147194fac62ac44f93e5b31f6d48e23, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3dbebde7dbdbedd4daf5db967cd5f7c7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -46,11 +62,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f5099847c18a02448950f3b9dc04928f, type: 3}
+        m_Texture: {fileID: 2800000, guid: d45a06d02a3413b42ab83d57fda78873, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: a7c952eb7fd65c5428659beb4f512eda, type: 3}
+        m_Texture: {fileID: 2800000, guid: c3afe6f95dac6e94f8be2326526e4aef, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -63,6 +79,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
+    - _Amount: 0
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
@@ -76,7 +93,7 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.6
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -84,7 +101,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - Color_3EA9AD0C: {r: 0.1002772, g: 1.011246, b: 1.741176, a: 0}
+    - _BaseColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.19999999}
+    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 0.19999999}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

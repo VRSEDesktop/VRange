@@ -26,13 +26,13 @@ public class StateCovers : ExcersiseState
     {
         base.OnStart();
 
-        Randomizer();
+		Randomizer();
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-		if (Anim.GetComponent<Enemy>().IsDead) Exercise.Progress = ExerciseProgress.Succeeded;
+		if (Anim == null || Anim.GetComponent<Enemy>().IsDead) Exercise.Progress = ExerciseProgress.Succeeded;
 	}
 
     public override void OnExit()
@@ -66,7 +66,6 @@ public class StateCovers : ExcersiseState
         Anim.GetComponent<Enemy>().isAgressive = true;
 
 		yield return new WaitForSecondsRealtime(TimeForReaction);
-		Restart();
 	}
 
     public override void Restart()
@@ -82,7 +81,7 @@ public class StateCovers : ExcersiseState
         Enemy woman = GetComponentInChildren<Enemy>();
         GameObject newWoman = Instantiate(WomanPrefab, RespawnPoint.transform.position, RespawnPoint.transform.rotation);
         newWoman.transform.parent = transform;
-        Destroy(woman.gameObject);
+        if(woman) Destroy(woman.gameObject);
         Anim = newWoman.GetComponent<Animator>();
     }
 }

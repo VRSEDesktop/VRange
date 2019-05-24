@@ -143,4 +143,9 @@ public class Gun : Weapon, IReloadable
     {
         return currentAmmo > 0;
     }
+
+	public void RemoveAmmo()
+	{
+		currentAmmo = 0;
+	}
 }

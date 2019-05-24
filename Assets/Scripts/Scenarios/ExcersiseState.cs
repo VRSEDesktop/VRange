@@ -17,6 +17,8 @@ public abstract class ExcersiseState : MonoBehaviour
 		Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
 		rightGun = Exercise.Player.rightHand.gun;
 		leftGun = Exercise.Player.leftHand.gun;
+		rightGun.RemoveAmmo();
+		leftGun.RemoveAmmo();
 		GetComponent<Transform>().gameObject.SetActive(true);
 		Exercise.Progress = ExerciseProgress.NotStarted;
 
