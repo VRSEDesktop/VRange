@@ -2685,7 +2685,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95426488474601636, guid: 64456890bd7e7b34daf976bd91cf60ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64456890bd7e7b34daf976bd91cf60ca, type: 3}
 --- !u!4 &452890686 stripped
 Transform:
@@ -17061,6 +17062,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 118193537}
     m_Modifications:
+    - target: {fileID: 8062746389523552633, guid: fc80e481f241eff448fb8334f1a35518,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1425110093101052, guid: 7b1f97df6f08cf74aaaed2a80907cb54, type: 3}
       propertyPath: m_Name
       value: Mercedes police car
@@ -17068,11 +17074,6 @@ PrefabInstance:
     - target: {fileID: 1425110093101052, guid: 7b1f97df6f08cf74aaaed2a80907cb54, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8062746389523552633, guid: fc80e481f241eff448fb8334f1a35518,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8062746389514038027, guid: fc80e481f241eff448fb8334f1a35518,
         type: 3}
@@ -22143,7 +22144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8550125847607444933
 MonoBehaviour:
   m_ObjectHideFlags: 0
