@@ -12,7 +12,7 @@ public class GazeButton : UIElement, IGazeable
 	[HideInInspector] public Color DefaultColor;
 	public Color HoverColor;
 
-	public void OnEnable()
+	public virtual void OnEnable()
 	{
 		DefaultColor = gameObject.GetComponent<Renderer>().material.GetColor("_BaseColor");
 	}

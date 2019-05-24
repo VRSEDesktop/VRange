@@ -54,12 +54,12 @@ public class Exercise : MonoBehaviour
 		foreach (ExcersiseState state in States) state.gameObject.SetActive(false);
 
         States[CurrentState].OnInitialize();
+
+		if (Settings.NormalGun) GameObject.Find("Toggle Controller").GetComponent<GazeButtonToggle>().Activate();
     }
 
 	public void Update()
     {
-		Debug.Log("Gun " + Settings.NormalGun);
-
         States[CurrentState].OnUpdate();
         HandleButtons();
     }
