@@ -16,8 +16,7 @@ public class StateStreet : ExcersiseState
 	{
 		base.OnInitialize();
 
-		Exercise.ShootingRange.gameObject.SetActive(false);
-		Exercise.City.gameObject.SetActive(true);
+		StartCoroutine(DoTransition());
 
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
 		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
@@ -26,11 +25,6 @@ public class StateStreet : ExcersiseState
 	public override void OnStart()
     {
         base.OnStart();
-
-		StartCoroutine(DoTransition());
-
-		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-        foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
 		Randomizer();
 	}
@@ -54,7 +48,9 @@ public class StateStreet : ExcersiseState
 	public override void OnExit()
 	{
 		base.OnExit();
+
 		RespawnWoman();
+		StartCoroutine(UndoTransition());
 	}
 
 	private void RespawnWoman()

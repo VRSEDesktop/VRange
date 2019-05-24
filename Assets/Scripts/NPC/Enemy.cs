@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IHitable
@@ -130,6 +131,17 @@ public class Enemy : MonoBehaviour, IHitable
         IsDead = true;
         animator.enabled = false;
         if (navMeshAgent) navMeshAgent.speed = 0f;
-		GetComponent<Transition>().Disable();
+		StartCoroutine(Dissolve(1));
     }
+
+	/// <summary>
+	/// Dissolves into the void.
+	/// </summary>
+	/// <param name="delay"></param>
+	/// <returns></returns>
+	private IEnumerator Dissolve(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		GetComponent<Transition>().Disable();
+	}
 }
