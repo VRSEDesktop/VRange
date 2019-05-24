@@ -66,20 +66,8 @@ public class StateStreet : ExcersiseState
 	{
 		base.OnExit();
 
-		RespawnWoman();
+		Respawn();
 		StartCoroutine(UndoTransition());
-	}
-
-	private IEnumerator UndoTransition()
-	{
-		yield return new WaitForSecondsRealtime(2);
-		Exercise?.ShootingRange.gameObject.SetActive(true);
-	}
-
-	public override void OnExit()
-	{
-		base.OnExit();
-
 	}
 
 	private void Randomizer()
