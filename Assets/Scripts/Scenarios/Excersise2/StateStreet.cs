@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StateStreet : ExcersiseState
@@ -6,11 +7,19 @@ public class StateStreet : ExcersiseState
 	public GameObject WomanPrefab;
 	public Animator WomanAnimator;
 	public GameObject RespawnPoint;
+	public GameObject CurrentButtonSpawn;
+
+	public GameObject player;
+
+	public List<GameObject> PlayerSpawnPoints, SpawnPointsWoman;
+
+	public List<Vector3> positions;
+	public List<Quaternion> rotations;
 
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
 	/// </summary>
-	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 5f;
+	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 8f;
 
 	public override void OnInitialize()
 	{
@@ -20,13 +29,21 @@ public class StateStreet : ExcersiseState
 
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
 		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
+
+		OnStart();
 	}
 
 	public override void OnStart()
-    {
-        base.OnStart();
+	{
+		base.OnStart();
+
+		StartCoroutine(DoTransition());
+
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
 		Randomizer();
+		Respawn();
 	}
 
 	private IEnumerator DoTransition()
@@ -53,13 +70,16 @@ public class StateStreet : ExcersiseState
 		StartCoroutine(UndoTransition());
 	}
 
-	private void RespawnWoman()
+	private IEnumerator UndoTransition()
 	{
-		Enemy woman = GetComponentInChildren<Enemy>();
-		GameObject newWoman = Instantiate(WomanPrefab, RespawnPoint.transform.position, RespawnPoint.transform.rotation);
-		newWoman.transform.parent = transform;
-		Destroy(woman.gameObject);
-		WomanAnimator = newWoman.GetComponent<Animator>();
+		yield return new WaitForSecondsRealtime(2);
+		Exercise?.ShootingRange.gameObject.SetActive(true);
+	}
+
+	public override void OnExit()
+	{
+		base.OnExit();
+
 	}
 
 	private void Randomizer()
@@ -84,7 +104,6 @@ public class StateStreet : ExcersiseState
 				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
 				break;
 		}
-
 		yield return new WaitForSeconds(LoopTime);
 		Restart();
 	}
@@ -93,7 +112,25 @@ public class StateStreet : ExcersiseState
 	{
 		base.Restart();
 
-		RespawnWoman();
+		Respawn();
 		Randomizer();
+	}
+
+	public void Respawn()
+	{
+		int spawnNum = Random.Range(0, 4);
+
+		GameObject spawnPlayer = PlayerSpawnPoints[spawnNum];
+		GameObject spawnWoman = SpawnPointsWoman[spawnNum];
+
+		// Spawning woman
+		Enemy woman = GetComponentInChildren<Enemy>();
+		GameObject newWoman = Instantiate(WomanPrefab, spawnWoman.transform.position, spawnWoman.transform.rotation);
+		newWoman.transform.parent = transform;
+		Destroy(woman.gameObject);
+		WomanAnimator = newWoman.GetComponent<Animator>();
+
+		// Spawning player
+		player.transform.SetPositionAndRotation(spawnPlayer.transform.position, spawnPlayer.transform.rotation);
 	}
 }
