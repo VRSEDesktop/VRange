@@ -11,7 +11,10 @@ public class StateStreet : ExcersiseState
 
 	public GameObject player;
 
-	public List<GameObject> PlayerSpawnPoints, SpawnPointsWoman, ButtonSpawn;
+	public List<GameObject> PlayerSpawnPoints, SpawnPointsWoman;
+
+	public List<Vector3> positions;
+	public List<Quaternion> rotations;
 
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
@@ -27,6 +30,8 @@ public class StateStreet : ExcersiseState
 
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
 		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
+
+		OnStart();
 	}
 
 	public override void OnStart()
@@ -38,7 +43,6 @@ public class StateStreet : ExcersiseState
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
 		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
-		CurrentButtonSpawn.SetActive(true);
 		Randomizer();
 		Respawn();		
 	}
@@ -58,6 +62,7 @@ public class StateStreet : ExcersiseState
 	public override void OnExit()
 	{
 		base.OnExit();
+		
 	}
 
 	private void Randomizer()
@@ -82,6 +87,8 @@ public class StateStreet : ExcersiseState
 				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
 				break;
 		}
+		yield return new WaitForSeconds(LoopTime);
+		Restart();
 	}
 
 	public override void Restart()
@@ -95,13 +102,9 @@ public class StateStreet : ExcersiseState
 	public void Respawn()
 	{
 		int spawnNum = Random.Range(0, 4);
-		if (CurrentButtonSpawn) { CurrentButtonSpawn.SetActive(false); }
 
 		GameObject spawnPlayer = PlayerSpawnPoints[spawnNum];
 		GameObject spawnWoman = SpawnPointsWoman[spawnNum];
-		CurrentButtonSpawn = ButtonSpawn[spawnNum];
-
-		CurrentButtonSpawn.SetActive(true);
 
 		// Spawning woman
 		Enemy woman = GetComponentInChildren<Enemy>();
