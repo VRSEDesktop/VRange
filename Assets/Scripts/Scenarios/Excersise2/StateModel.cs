@@ -106,7 +106,7 @@ public class StateModel : ExcersiseState
 		}
 
         yield return new WaitForSecondsRealtime(LoopTime);
-        //Restart();
+        Restart();
     }
 
     public override void Restart()

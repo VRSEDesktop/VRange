@@ -19,7 +19,7 @@ public class StateStreet : ExcersiseState
 	/// <summary>
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
 	/// </summary>
-	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 8f;
+	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 15f;
 
 	public override void OnInitialize()
 	{
@@ -27,6 +27,10 @@ public class StateStreet : ExcersiseState
 
 		StartCoroutine(DoTransition());
 
+		Exercise.PreviousScenarioButton.SetState(true);
+		Exercise.NextScenarioButton.SetState(true);
+		Exercise.RestartButton.SetState(true);
+		Exercise.StartButton.SetState(true);
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
 		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 
@@ -38,7 +42,7 @@ public class StateStreet : ExcersiseState
 		base.OnStart();
 
 		Randomizer();
-		Respawn();
+		Respawn(true);
 	}
 
 	private IEnumerator DoTransition()
@@ -93,13 +97,14 @@ public class StateStreet : ExcersiseState
 	{
 		base.Restart();
 
-		Respawn();
+		Respawn(false);
 		Randomizer();
 	}
 
-	public void Respawn()
+	public void Respawn(bool _fistSpawn)
 	{
-		int spawnNum = Random.Range(0, 4);
+		int spawnNum = 0;
+		if (!_fistSpawn) spawnNum = Random.Range(0, 4);
 
 		GameObject spawnPlayer = PlayerSpawnPoints[spawnNum];
 		GameObject spawnWoman = SpawnPointsWoman[spawnNum];
@@ -112,6 +117,6 @@ public class StateStreet : ExcersiseState
 		WomanAnimator = newWoman.GetComponent<Animator>();
 
 		// Spawning player
-		player.transform.SetPositionAndRotation(spawnPlayer.transform.position, spawnPlayer.transform.rotation);
+		if(!_fistSpawn) player.transform.SetPositionAndRotation(spawnPlayer.transform.position, spawnPlayer.transform.rotation);
 	}
 }

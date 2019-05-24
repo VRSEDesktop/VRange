@@ -6,6 +6,11 @@ public class MainMenu : MonoBehaviour
     public SteamVR_LoadLevel levelLoader;
 	public Settings Settings;
 
+	public void Start()
+	{
+		if (Settings.NormalGun) GameObject.Find("Toggle Controller").GetComponent<GazeButtonToggle>().Activate();
+	}
+
 	public void Update()
     {
         HandleButtons();

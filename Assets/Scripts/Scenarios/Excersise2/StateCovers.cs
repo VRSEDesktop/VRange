@@ -66,6 +66,7 @@ public class StateCovers : ExcersiseState
         Anim.GetComponent<Enemy>().isAgressive = true;
 
 		yield return new WaitForSecondsRealtime(TimeForReaction);
+		Restart();
 	}
 
     public override void Restart()

@@ -104,7 +104,8 @@ public class Exercise : MonoBehaviour
 
             LevelLoader.levelName = "MainMenu";
             LevelLoader.Trigger();
-        }
+			CurrentState = 0;
+		}
 
         if (UI.GetButtonActivatedAndTurnOff("Next Scenario")) NextStep();
         if (UI.GetButtonActivatedAndTurnOff("Previous Scenario")) PreviousStep();
