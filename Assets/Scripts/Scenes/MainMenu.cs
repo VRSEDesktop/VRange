@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Valve.VR;
 
 public class MainMenu : MonoBehaviour
 {
     public SteamVR_LoadLevel levelLoader;
 	public Settings Settings;
+	private string debug;
 
 	public void Start()
 	{
@@ -18,12 +20,16 @@ public class MainMenu : MonoBehaviour
 
     private void HandleButtons()
     {
-        if (UI.GetButtonActivated("Exercise 2"))
+        if (UI.GetButtonActivated("Exercise_2"))
         {
-            ScenarioLogs.Clear();
-            levelLoader.levelName = "Exercise_2_Scenario";
-            levelLoader.Trigger();
-        }
+			//ScenarioLogs.Clear();
+			debug = "1";
+
+			levelLoader.levelName = "Exercise_2_Scenario";
+			debug = "2";
+			levelLoader.Trigger();
+			debug = "3";
+		}
 
 		if (Settings.NormalGun != UI.GetButtonActivated("Toggle Controller"))
 		{
@@ -37,4 +43,12 @@ public class MainMenu : MonoBehaviour
             Application.Quit();
         }
     }
+
+	public void OnGUI()
+	{
+		for (int i = 0; i < 1; i++)
+		{
+			GUI.Label(new Rect(Screen.width / 12, Screen.height / 24 * i, Screen.width / 4 * 2, Screen.height / 6), debug);
+		}
+	}
 }

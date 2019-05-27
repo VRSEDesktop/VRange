@@ -24,7 +24,7 @@ public class GazeButton : UIElement, IGazeable
 		framesSinceActive = Time.frameCount;
 	}
 
-	public void Update()
+	public void LateUpdate()
 	{
 		if (activated && framesSinceActive < Time.frameCount)
 		{
@@ -40,7 +40,7 @@ public class GazeButton : UIElement, IGazeable
 
 	public virtual void OnHoverEnd()
 	{
-		StartCoroutine(ChangeColor(DefaultColor, 1f));
+		if(isActiveAndEnabled) StartCoroutine(ChangeColor(DefaultColor, 1f));
 	}
 
 	public void SetState(bool _isVisible)
