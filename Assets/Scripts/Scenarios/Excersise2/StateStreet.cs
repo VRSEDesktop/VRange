@@ -51,6 +51,9 @@ public class StateStreet : ExcersiseState
 		yield return new WaitForSecondsRealtime(2);
 		Exercise.City.gameObject.SetActive(true);
 		Exercise.City.gameObject.GetComponent<Transition>().Enable();
+
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
 	}
 
 	private IEnumerator UndoTransition()
@@ -59,6 +62,9 @@ public class StateStreet : ExcersiseState
 		yield return new WaitForSecondsRealtime(2);
 		Exercise?.ShootingRange.gameObject.SetActive(true);
 		Exercise?.ShootingRange.gameObject.GetComponent<Transition>().Enable();
+
+		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(true);
 	}
 
 	public override void OnExit()

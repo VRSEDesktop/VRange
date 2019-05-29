@@ -25,6 +25,8 @@ public class ApplyGunRotation : MonoBehaviour
 
 	public void Toggle()
 	{
+		Debug.Log("Aplly::Toggle()");
+
 		if (!Settings.NormalGun) ApplyRealGunRotation();
 		else ApplyControllerRotation();
 	}

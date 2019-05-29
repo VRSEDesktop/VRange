@@ -18,7 +18,6 @@ public class FadeOut : MonoBehaviour
 		else
 			ColorName = "_BaseColor";
 
-		Debug.Log(name);
 		DefaultAlpha = Renderer.material.GetColor(ColorName).a;
 	}
 
