@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour, IHitable
 		{
 			if (value != _health)
 			{
-				Debug.Log(value);
 				_health = value;
 				if(_health <= 0)
 				{
@@ -90,8 +89,6 @@ public class Enemy : MonoBehaviour, IHitable
 			case HitboxType.HumanUpperArmRight: RightShoulderHit(); break;
 
 		}
-
-        Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
         ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         return isAgressive ? HitType.RIGHT : HitType.UNWANTED;

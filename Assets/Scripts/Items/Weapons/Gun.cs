@@ -61,8 +61,6 @@ public class Gun : Weapon, IReloadable
 
         if (hasHit)
         {
-            Debug.Log("Gun::DetecHit() " + hit.collider.name);
-
             if (!hit.collider.gameObject.GetComponent<Enemy>()) SpawnBulletHole(hit);
 
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
@@ -101,10 +99,7 @@ public class Gun : Weapon, IReloadable
 
     private void SpawnBulletHole(RaycastHit hit)
     {
-		if (hit.collider.GetComponentInParent<Enemy>())
-		{
-			return;
-		}
+		if (hit.collider.GetComponentInParent<Enemy>()) return;
 		
         Vector3 offset = transform.rotation * Vector3.forward;
         offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
