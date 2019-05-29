@@ -22,8 +22,6 @@ public class GazeButton : UIElement, IGazeable
 		SetActive();
 		activated = true;
 		framesSinceActive = Time.frameCount;
-
-		Debug.Log("Activate() " + Name);
 	}
 
 	public void LateUpdate()
@@ -32,8 +30,6 @@ public class GazeButton : UIElement, IGazeable
 		{
 			activated = false;
 			SetInactive();
-
-			Debug.Log("Deactivate() " + Name);
 		}
 	}
 
@@ -49,7 +45,6 @@ public class GazeButton : UIElement, IGazeable
 
 	public void SetState(bool _isVisible)
 	{
-		activated = !_isVisible;
 		GetComponent<MeshRenderer>().enabled = _isVisible;
 		if(GetComponentInChildren<TextMeshPro>()) GetComponentInChildren<TextMeshPro>().enabled = _isVisible;
 		GetComponent<Collider>().enabled = _isVisible;

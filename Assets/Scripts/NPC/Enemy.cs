@@ -15,6 +15,13 @@ public class Enemy : MonoBehaviour, IHitable
     public bool IsDead { private set; get;}
     private NavMeshAgent navMeshAgent;
 	private int _health = 100;
+
+	private string bellyHit = "BellyHit";
+	private string LeftLeg = "Left Leg Hit";
+	private string LeftShoulder = "ShoulderLeftHit";
+	private string RightLeg = "Right Leg Hit";
+	private string RightShoulder = "ShoulderRightHit";
+
 	private int health {
 		get { return _health; }
 		set
@@ -59,53 +66,30 @@ public class Enemy : MonoBehaviour, IHitable
                 if (!IsDead) Die();
             break;
             case HitboxType.HumanNeck: if (!IsDead) Die();  break;
-            case HitboxType.HumanPelvis: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
 
-            case HitboxType.HumanSpine1: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
-            case HitboxType.HumanSpine2: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
-            case HitboxType.HumanSpine3: animator.Play("BellyHit"); health -= Random.Range(40, 140); break;
+			case HitboxType.HumanPelvis: Torso(); break;
+			case HitboxType.HumanSpine1: Torso(); break;
+            case HitboxType.HumanSpine2: Torso(); break;
+            case HitboxType.HumanSpine3: Torso(); break;
 
-            case HitboxType.HumanThighLeft:
-                if (navMeshAgent) navMeshAgent.speed = 0.5f;
-				animator.SetBool("Limbing", true);
-				health -= Random.Range(20, 50);
-				break;
-            case HitboxType.HumanThighRight:
-                if (navMeshAgent) navMeshAgent.speed = 0.5f;
-                animator.SetBool("Limbing", true);
-				health -= Random.Range(20, 50);
-				break;
+            case HitboxType.HumanThighLeft: LeftLegHit(); break;
+			case HitboxType.HumanCalfLeft: LeftLegHit(); break;
 
-            case HitboxType.HumanCalfLeft:
-                if (navMeshAgent) navMeshAgent.speed = 0.5f;
-                animator.SetBool("Limbing", true);
-				health -= Random.Range(20, 50);
-				break;
-
-            case HitboxType.HumanCalfRight:
-                if (navMeshAgent) navMeshAgent.speed = 0.5f;
-                animator.SetBool("Limbing", true);
-				health -= Random.Range(20, 50);
-				break;
-
-            case HitboxType.HumanFootLeft: health -= Random.Range(1, 20); break;
+			case HitboxType.HumanThighRight: RightLegHit(); break;
+			case HitboxType.HumanCalfRight: RightLegHit(); break;
+				
+			case HitboxType.HumanFootLeft: health -= Random.Range(1, 20); break;
             case HitboxType.HumanFootRight: health -= Random.Range(1, 20); break;
 
-            case HitboxType.HumanUpperArmLeft: animator.Play("ShoulderLeftHit"); break;
-            case HitboxType.HumanUpperArmRight:
-				animator.Play("ShoulderRightHit");
-				health -= Random.Range(20, 50);
-				break;
+            case HitboxType.HumanLowerArmLeft: LeftShoulderHit(); break;
+			case HitboxType.HumanHandLeft: LeftShoulderHit(); break;
+			case HitboxType.HumanUpperArmLeft: LeftShoulderHit(); break;
 
-            case HitboxType.HumanLowerArmLeft: animator.Play("ShoulderLeftHit"); break;
-            case HitboxType.HumanLowerArmRight:
-				animator.Play("ShoulderRightHit");
-				health -= Random.Range(20, 50);
-				break;
+			case HitboxType.HumanLowerArmRight: RightShoulderHit(); break;
+			case HitboxType.HumanHandRight: RightShoulderHit(); break;
+			case HitboxType.HumanUpperArmRight: RightShoulderHit(); break;
 
-            case HitboxType.HumanHandLeft: animator.Play("ShoulderLeftHit"); break;
-            case HitboxType.HumanHandRight: animator.Play("ShoulderRightHit"); break;
-        }
+		}
 
         Debug.Log("Enemy::OnHit() " + partHit.ToString());
 
@@ -113,12 +97,42 @@ public class Enemy : MonoBehaviour, IHitable
         return isAgressive ? HitType.RIGHT : HitType.UNWANTED;
     }
 
-    /// <summary>
-    /// Get HitboxType which was hit with the bulletHit
-    /// </summary>
-    /// <param name="bulletHit"></param>
-    /// <returns></returns>
-    private HitboxType GetHitboxTypeFromHit(RaycastHit raycastHit)
+	public void Torso()
+	{
+		animator.Play(bellyHit);
+		health -= Random.Range(40, 140);
+	}
+
+	public void LeftLegHit()
+	{
+		animator.Play(LeftLeg);
+		health -= Random.Range(20, 50);
+	}
+
+	public void LeftShoulderHit()
+	{
+		animator.Play(LeftShoulder);
+		health -= Random.Range(20, 50);
+	}
+
+	public void RightLegHit()
+	{
+		animator.Play(RightLeg);
+		health -= Random.Range(20, 50);
+	}
+
+	private void RightShoulderHit()
+	{
+		animator.Play(RightShoulder);
+		health -= Random.Range(20, 50);
+	}
+
+	/// <summary>
+	/// Get HitboxType which was hit with the bulletHit
+	/// </summary>
+	/// <param name="bulletHit"></param>
+	/// <returns></returns>
+	private HitboxType GetHitboxTypeFromHit(RaycastHit raycastHit)
     {
         foreach (Hitbox hitbox in hitboxes)
         {

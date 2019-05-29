@@ -80,7 +80,7 @@ public class SightLoader : MonoBehaviour
 
     private void ResetLoader()
     {
-        LastUIElement?.OnHoverEnd();
+        if(LastUIElement != null) LastUIElement.OnHoverEnd();
         LastUIElement = null;
         Timer = 0;
         Activated = false;

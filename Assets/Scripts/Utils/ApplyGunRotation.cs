@@ -19,15 +19,15 @@ public class ApplyGunRotation : MonoBehaviour
     {
 		Gun = GetComponent<GunController>().gun;
 
-		if (Settings.NormalGun) ApplyRealGunRotation();
+		if (Settings.UseNormalGuns) ApplyRealGunRotation();
 		else ApplyControllerRotation();
 	}
 
-	public void Toggle()
+	public void Apply()
 	{
-		Debug.Log("Aplly::Toggle()");
+		Debug.Log("ApllyGunRotation::Apply()");
 
-		if (!Settings.NormalGun) ApplyRealGunRotation();
+		if (Settings.UseNormalGuns) ApplyRealGunRotation();
 		else ApplyControllerRotation();
 	}
 

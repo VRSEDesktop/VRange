@@ -10,14 +10,14 @@ public class Player : MonoBehaviour, IHitable
     public static Player Instance { get; private set; }
 
     public GunController leftHand, rightHand;
-    private Gun leftGun, rightGun;
+    //public Gun leftGun, rightGun;
 
     public Hitbox hitbox;
 
 	public void Start()
 	{
-		leftGun = leftHand.gun;
-		rightGun = rightHand.gun;
+		//leftGun = leftHand.gun;
+		//rightGun = rightHand.gun;
 	}
 
     private void Awake()

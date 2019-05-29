@@ -26,14 +26,6 @@ public class StateStreet : ExcersiseState
 		base.OnInitialize();
 
 		StartCoroutine(DoTransition());
-
-		Exercise.PreviousScenarioButton.SetState(true);
-		Exercise.NextScenarioButton.SetState(true);
-		Exercise.RestartButton.SetState(true);
-		Exercise.StartButton.SetState(true);
-		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-		foreach (GameObject button in buttons) button.GetComponent<GazeButton>().SetState(false);
-
 		OnStart();
 	}
 

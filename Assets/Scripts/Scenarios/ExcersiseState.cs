@@ -17,8 +17,8 @@ public abstract class ExcersiseState : MonoBehaviour
 		Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
 		rightGun = Exercise.Player.rightHand.gun;
 		leftGun = Exercise.Player.leftHand.gun;
-		rightGun.RemoveAmmo();
-		leftGun.RemoveAmmo();
+		if(rightGun) rightGun.RemoveAmmo();
+		if(leftGun) leftGun.RemoveAmmo();
 		GetComponent<Transform>().gameObject.SetActive(true);
 		Exercise.Progress = ExerciseProgress.NotStarted;
 
@@ -29,8 +29,8 @@ public abstract class ExcersiseState : MonoBehaviour
 
 	public virtual void OnStart()
     {
-		leftGun?.Reload();
-		rightGun?.Reload();
+		if (leftGun) leftGun.Reload();
+		if (rightGun) rightGun.Reload();
 
 		StartTime = Time.realtimeSinceStartup;
 		BulletLines.SetActive(Exercise.Settings.DrawLines);

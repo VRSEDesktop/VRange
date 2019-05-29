@@ -55,7 +55,7 @@ public class Exercise : MonoBehaviour
 
         States[CurrentState].OnInitialize();
 
-		if (Settings.NormalGun) GameObject.Find("Toggle Controller").GetComponent<GazeButtonToggle>().Activate();
+		if (Settings.UseNormalGuns) GameObject.Find("Toggle Controller").GetComponent<GazeButtonToggle>().Activate();
     }
 
 	public void Update()
@@ -95,8 +95,9 @@ public class Exercise : MonoBehaviour
 	private void HandleButtons()
     {
         Settings.DrawLines = UI.GetButtonActivated("Toggle Bulletlines");
+		Settings.UseNormalGuns = UI.GetButtonActivated("Toggle Controller");
 
-        if (UI.GetButtonActivated("Restart Scenario")) Restart();
+		if (UI.GetButtonActivated("Restart Scenario")) Restart();
 
         if (UI.GetButtonActivated("Mainmenu"))
         {
@@ -110,13 +111,6 @@ public class Exercise : MonoBehaviour
         if (UI.GetButtonActivatedAndTurnOff("Next Scenario")) NextStep();
         if (UI.GetButtonActivatedAndTurnOff("Previous Scenario")) PreviousStep();
 
-		if (Settings.NormalGun != UI.GetButtonActivated("Toggle Controller"))
-		{
-			ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
-			foreach (ApplyGunRotation gun in guns) gun.Toggle();
-			Settings.NormalGun = !Settings.NormalGun;
-		}
-
 		if (UI.GetButtonActivatedAndTurnOff("Start_Scenario"))
 		{
 			Clear();
@@ -128,6 +122,9 @@ public class Exercise : MonoBehaviour
 	private void OnSettingsChanged()
 	{
 		BulletLines.SetActive(Settings.DrawLines);
+
+		ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
+		foreach (ApplyGunRotation gun in guns) gun.Apply();
 	}
 
 	/// <summary>
