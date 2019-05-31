@@ -9,10 +9,16 @@ public class Player : MonoBehaviour, IHitable
     public float playerHeight = 1.8f;
     public static Player Instance { get; private set; }
 
-    public VR_Controller leftHand, rightHand;
-    public Gun lefGun, rightGun;
+    public GunController leftHand, rightHand;
+    //public Gun leftGun, rightGun;
 
     public Hitbox hitbox;
+
+	public void Start()
+	{
+		//leftGun = leftHand.gun;
+		//rightGun = rightHand.gun;
+	}
 
     private void Awake()
     {
@@ -31,11 +37,9 @@ public class Player : MonoBehaviour, IHitable
         return HitType.UNWANTED;
     }
 
-    void OnGUI()
+    public void OnGUI()
     {
-        IList<LoggedHit> hits = Scenario.GetHits();
-
-        //GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Shot count: " + (Scenario.GetShotsFromGun(leftGun).Count + Scenario.GetShotsFromGun(rightGun).Count));
+        IList<LoggedHit> hits = ScenarioLogs.GetHits();
 
         for (int i = 0; i < hits.Count; i++)
         {

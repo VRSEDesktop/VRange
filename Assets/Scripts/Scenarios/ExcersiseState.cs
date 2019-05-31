@@ -1,251 +1,87 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
-
-public enum ExerciseProgress
-{
-    NotStarted,
-    Started,
-    Succeeded,
-    Failed
-}
 
 public abstract class ExcersiseState : MonoBehaviour
 {
-	private ExerciseProgress _progress;
-    public ExerciseProgress Progress {
-		get { return _progress; }
-		set {
-			if(value != _progress)
-			{
-				_progress = value;
-				OnProgressChanged();
-			}
-		}
-	}
-    public Gun leftGun, rightGun;
+	private Gun leftGun, rightGun;
 
-	[HideInInspector]
-    public GameObject gHead, gNeck, gTorso, gLeftarm, gRightarm, gLeftleg, gRightleg;
-
-    private int head, torso, leftarm, rightarm, leftleg, rightleg, mis;
-    private int AlignDistance = 20;
+	public IList<LoggedHit> hits;
 
     public bool HasSetGUI { get; set; }
 
     protected float StartTime;
     protected Exercise Exercise;
 
-	public GameObject ExplanationUI;
-	public GameObject FeedbackUI;
+	public virtual void OnInitialize()
+	{
+		Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
+		rightGun = Exercise.Player.rightHand.gun;
+		leftGun = Exercise.Player.leftHand.gun;
+		if(rightGun) rightGun.RemoveAmmo();
+		if(leftGun) leftGun.RemoveAmmo();
+		GetComponent<Transform>().gameObject.SetActive(true);
+		Exercise.Progress = ExerciseProgress.NotStarted;
 
-    public virtual void OnStart()
+		Exercise.whiteboard.ClearBoard();
+		Exercise.StartButton.SetState(true);
+		Exercise.RestartButton.SetState(false);
+	}
+
+	public virtual void OnStart()
     {
-        Progress = ExerciseProgress.NotStarted;
-        Exercise = GameObject.FindGameObjectWithTag("Exercise").GetComponent<Exercise>();
-        GetComponent<Transform>().gameObject.SetActive(true);
+		if (leftGun) leftGun.Reload();
+		if (rightGun) rightGun.Reload();
 
-		if (ExplanationUI != null)
-			ExplanationUI.SetActive(true);
-		if (FeedbackUI != null)
-			FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+		StartTime = Time.realtimeSinceStartup;
+		BulletLines.SetActive(Exercise.Settings.DrawLines);
+		Exercise.Progress = ExerciseProgress.Started;
+		Exercise.StartButton.SetState(false);
+		Exercise.RestartButton.SetState(true);
+	}
 
-		InitializeWhiteboard();
-        StartTime = Time.realtimeSinceStartup;
-        leftGun?.Reload();
-        rightGun?.Reload();
+	public virtual void OnUpdate()
+	{
+		if (Exercise.Progress == ExerciseProgress.NotStarted) return;
+
+		if ((leftGun != null && !leftGun.HasAmmo()) || (rightGun != null && !rightGun.HasAmmo()))
+		{
+			Exercise.Progress = ExerciseProgress.Succeeded;
+		}
     }
 
-    public virtual void OnUpdate()
+	public virtual void Restart()
     {
-        if(!leftGun.HasAmmo() || !rightGun.HasAmmo())
-        {
-            Progress = ExerciseProgress.Succeeded;
-            UpdateGUI();
-        }
-    }
+		Exercise.Clear();
+		Exercise.Progress = ExerciseProgress.Started;
 
-    public virtual void Restart()
-    {
-        Scenario.Clear();
-		Progress = ExerciseProgress.NotStarted;
+		if (leftGun) leftGun.Reload();
+		if (rightGun) rightGun.Reload();
 
-		leftGun?.Reload();
-        rightGun?.Reload();
-        StartTime = Time.realtimeSinceStartup;
+		StartTime = Time.realtimeSinceStartup;
+		Exercise.whiteboard.ClearBoard();
+	}
 
-        HasSetGUI = false;
-    }
+	public virtual void OnFinish() {}
 
-    public virtual void OnExit()
+	public virtual void OnExit()
     {
         GetComponent<Transform>().gameObject.SetActive(false);
 
-        Scenario.Clear();
-
-        HasSetGUI = false;
-    }
-
-    /// <summary>
-    /// Checks if the stats needs to be changed
-    /// </summary>
-    public void UpdateGUI()
-    {
-       if (!HasSetGUI)
-       {
-            DisplayStats();
-       }
-       else HasSetGUI = false;
-    }
-
-    /// <summary>
-    /// Sets the gui
-    /// </summary>
-    private void DisplayStats()
-    {
-        float time = Time.realtimeSinceStartup - StartTime;
-
-        ResetGUI();
-        ConvertingHits();
-
-        // Header
-        //AddLine("Tijd:", time.ToString("0.00") + " s");
-        //AddLine("Schoten", "Aantal");
-
-        // The stats
-        if(gHead != null)AddLine(gHead, head);
-        if(gTorso != null)AddLine(gTorso, torso);
-        if(gLeftarm != null)AddLine(gLeftarm, leftarm);
-        if (gRightarm != null) AddLine(gRightarm, rightarm);
-        if (gLeftleg != null) AddLine(gLeftleg, leftleg);
-        if (gRightarm != null) AddLine(gRightleg, rightleg);
-
-        HasSetGUI = true;
-    }
-
-    private void ResetGUI()
-    {
-        head = 0;
-        torso = 0;
-        leftarm = 0;
-        rightarm = 0;
-        leftleg = 0;
-        rightleg = 0;
-        mis = 0;
-    }
-
-    private void ConvertingHits()
-    {
-        foreach (var hit in Scenario.GetHits())
-        {
-            if (hit.part.ToDescriptionString() == "Hoofd")
-            {
-                head += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Torso")
-            {
-                torso += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Linkerarm")
-            {
-                leftarm += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Rechterarm")
-            {
-                rightarm += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Linkerbeen")
-            {
-                leftleg += 1;
-            }
-            else if (hit.part.ToDescriptionString() == "Rechterbeen")
-            {
-                rightleg += 1;
-            }
-            else
-            {
-                mis += 1;
-            }
-        }
-    }
-
-	private void OnProgressChanged()
-	{
-		Debug.Log(Progress.ToString());
-		if(Progress == ExerciseProgress.Succeeded || Progress == ExerciseProgress.Failed)
+		if (Exercise)
 		{
-			BulletLines.ForceActive();
-			ExplanationUI.SetActive(false);
-			if (ExplanationUI != null)
-				ExplanationUI.SetActive(false);
-			if (FeedbackUI != null)
-				FeedbackUI.GetComponent<MeshRenderer>().enabled = true;
-		}
-		else
-		{
-			if(ExplanationUI != null)
-				ExplanationUI.SetActive(true);
-			if (FeedbackUI != null)
-				FeedbackUI.GetComponent<MeshRenderer>().enabled = false;
+			Exercise.whiteboard.ClearBoard();
+			Exercise.Clear();
 		}
 	}
 
-    private bool AddLine(GameObject g, int amount)
-    {
-        if(amount == 0)
-        {
-            g.SetActive(false);
-        }
-        else
-        {
-            g.SetActive(true);
-            RetrieveTextMesh(g).text = amount.ToString();
-        }
-        return true;
-    }
+	public void OnProgressChanged()
+	{
+		Exercise.whiteboard.CheckProgress();
 
-    public void InitializeWhiteboard()
-    {
-        List<GameObject> whiteboardparts = new List<GameObject>();
-        whiteboardparts.AddRange(GameObject.FindGameObjectsWithTag("WhiteboardPart"));
-
-        foreach (var item in whiteboardparts)
-        {
-            string name = item.name;
-
-            if (name == "Head")
-            {
-                gHead = item;
-                gHead.SetActive(false);
-            } else if (name == "Neck")
-            {
-
-            } else if (name == "Torso")
-            {
-                gTorso = item;
-                gTorso.SetActive(false);
-            } else if (name == "Leftarm")
-            {
-                gLeftarm = item;
-                gLeftarm.SetActive(false);
-            } else if (name == "Rightarm")
-            {
-                gRightarm = item;
-                gRightarm.SetActive(false);
-            }else if(name == "Rightleg")
-            {
-                gRightleg = item;
-                gRightleg.SetActive(false);
-            }else if(name == "Leftleg")
-            {
-                gLeftleg = item;
-                gLeftleg.SetActive(false);
-            }
-        }
-    }
-
-    public TextMeshPro RetrieveTextMesh(GameObject item)
-    {
-        return item.GetComponentInChildren<TextMeshPro>();
-    }
+		if (Exercise.Progress == ExerciseProgress.Succeeded || Exercise.Progress == ExerciseProgress.Failed)
+		{
+			BulletLines.ForceActive();
+			OnFinish();
+		}
+	}
 }

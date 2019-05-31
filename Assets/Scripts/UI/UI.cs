@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public static class UI
 {
@@ -11,7 +9,12 @@ public static class UI
         return ActiveButtons.Contains(name);
     }
 
-    public static void ActivateButton(string name)
+	public static bool GetButtonActivatedAndTurnOff(string name)
+	{
+		return ActiveButtons.Remove(name);
+	}
+
+	public static void ActivateButton(string name)
     {
         ActiveButtons.Add(name);
     }

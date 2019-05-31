@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FadeOut : MonoBehaviour
@@ -9,11 +8,17 @@ public class FadeOut : MonoBehaviour
 	private IEnumerator Coroutine;
 	private float DefaultAlpha;
 	private bool ShouldDisappear = false;
+	private string ColorName;
 
 	public void OnEnable()
 	{
 		Renderer = gameObject.GetComponent<Renderer>();
-		DefaultAlpha = Renderer.material.GetColor("_BaseColor").a;
+		if (Renderer.material.shader.name == "GUI/3D Text Shader")
+			ColorName = "_Color";
+		else
+			ColorName = "_BaseColor";
+
+		DefaultAlpha = Renderer.material.GetColor(ColorName).a;
 	}
 
 	public void Update()
@@ -25,10 +30,17 @@ public class FadeOut : MonoBehaviour
 		}
 	}
 
-    public void StartFadeOut(float delay)
+    public void StartFadeOut(float delay, float duration = 2)
 	{
-		Coroutine = DisableLine(delay, 2);
+		Coroutine = DisableLine(delay, duration);
 		if(gameObject.activeSelf)
+			StartCoroutine(Coroutine);
+	}
+
+	public void StartFadeIn(float delay, float duration = 2)
+	{
+		Coroutine = EnableLine(delay, duration);
+		if (gameObject.activeSelf)
 			StartCoroutine(Coroutine);
 	}
 
@@ -39,8 +51,9 @@ public class FadeOut : MonoBehaviour
 
 		float lerpStarttime = Time.time;
 		float lerpProgress;
-		Color startingColor = Renderer.material.GetColor("_BaseColor");
+		Color startingColor = Renderer.material.GetColor(ColorName);
 		Color endingColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
+
 		while(true)
 		{
 			yield return null;
@@ -54,7 +67,41 @@ public class FadeOut : MonoBehaviour
 			lerpProgress = Time.time - lerpStarttime;
 			if(Renderer != null)
 			{
-				Renderer.material.SetColor("_BaseColor", Color.Lerp(startingColor, endingColor, lerpProgress / fadeoutduration));
+				Renderer.material.SetColor(ColorName, Color.Lerp(startingColor, endingColor, lerpProgress / fadeoutduration));
+			}
+			else
+			{
+				break;
+			}
+
+			if (lerpProgress >= fadeoutduration)
+				break;
+		}
+	}
+
+	private IEnumerator EnableLine(float delay, float fadeoutduration)
+	{
+		yield return new WaitForSeconds(delay);
+		ShouldDisappear = true;
+
+		float lerpStarttime = Time.time;
+		float lerpProgress;
+		Color startingColor = Renderer.material.GetColor(ColorName);
+		Color endingColor = new Color(startingColor.r, startingColor.g, startingColor.b, 255);
+		while (true)
+		{
+			yield return null;
+
+			if (ForceEnable && Renderer != null)
+			{
+				Enable();
+				break;
+			}
+
+			lerpProgress = Time.time - lerpStarttime;
+			if (Renderer != null)
+			{
+				Renderer.material.SetColor(ColorName, Color.Lerp(startingColor, endingColor, lerpProgress / fadeoutduration));
 			}
 			else
 			{
@@ -72,8 +119,8 @@ public class FadeOut : MonoBehaviour
 		{
 			if (!ShouldDisappear || ForceEnable)
 			{
-				Color currentColor = Renderer.material.GetColor("_BaseColor");
-				Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, DefaultAlpha));
+				Color currentColor = Renderer.material.GetColor(ColorName);
+				Renderer.material.SetColor(ColorName, new Color(currentColor.r, currentColor.g, currentColor.b, DefaultAlpha));
 			}
 		}
 	}
@@ -82,8 +129,8 @@ public class FadeOut : MonoBehaviour
 	{
 		if(Renderer != null)
 		{
-			Color currentColor = Renderer.material.GetColor("_BaseColor");
-			Renderer.material.SetColor("_BaseColor", new Color(currentColor.r, currentColor.g, currentColor.b, 0));
+			Color currentColor = Renderer.material.GetColor(ColorName);
+			Renderer.material.SetColor(ColorName, new Color(currentColor.r, currentColor.g, currentColor.b, 0));
 		}
 	}
 }

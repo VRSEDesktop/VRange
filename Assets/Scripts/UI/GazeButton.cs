@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -6,10 +6,13 @@ using UnityEngine;
 /// </summary>
 public class GazeButton : UIElement, IGazeable
 {
-	public Color HoverColor;
-	[HideInInspector] public Color DefaultColor;
+	private bool activated;
+	private int framesSinceActive;
 
-	public void OnEnable()
+	[HideInInspector] public Color DefaultColor;
+	public Color HoverColor;
+
+	public virtual void OnEnable()
 	{
 		DefaultColor = gameObject.GetComponent<Renderer>().material.GetColor("_BaseColor");
 	}
@@ -17,7 +20,17 @@ public class GazeButton : UIElement, IGazeable
 	public virtual void Activate()
 	{
 		SetActive();
-		StartCoroutine(DeactivateAfterFrame());
+		activated = true;
+		framesSinceActive = Time.frameCount;
+	}
+
+	public void LateUpdate()
+	{
+		if (activated && framesSinceActive < Time.frameCount)
+		{
+			activated = false;
+			SetInactive();
+		}
 	}
 
 	public virtual void OnHoverStart()
@@ -27,28 +40,13 @@ public class GazeButton : UIElement, IGazeable
 
 	public virtual void OnHoverEnd()
 	{
-		try
-		{
-			StartCoroutine(ChangeColor(DefaultColor, 1f));
-		}
-		catch
-		{
-
-		}
+		if(isActiveAndEnabled) StartCoroutine(ChangeColor(DefaultColor, 1f));
 	}
 
-	/// <summary>
-	/// Waits one frame until deactivating.
-	/// </summary>
-	/// <returns>The IEnumerator used in MonoBehaviour::StartCoroutine</returns>
-	private IEnumerator DeactivateAfterFrame()
+	public void SetState(bool _isVisible)
 	{
-		//Waits one frame. For some reason WaitForEndOfFrame seems stable in the editor, while null seems stable in build.
-#if UNITY_EDITOR
-		yield return new WaitForEndOfFrame();
-#else
-		yield return null;
-#endif
-		SetInactive();
+		GetComponent<MeshRenderer>().enabled = _isVisible;
+		if(GetComponentInChildren<TextMeshPro>()) GetComponentInChildren<TextMeshPro>().enabled = _isVisible;
+		GetComponent<Collider>().enabled = _isVisible;
 	}
 }

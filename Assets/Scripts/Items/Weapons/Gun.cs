@@ -6,12 +6,8 @@ public class Gun : Weapon, IReloadable
     /// Used for drawing bullet's path
     /// </summary>
     public bool drawLines;
-
-    public int magCapacity;
-    private int currentAmmo;
-
-    public AudioSource shotSound;
-    public AudioSource triggerSound;
+    public int magCapacity, currentAmmo;
+    public AudioSource ShotSound, TriggerSound, ReloadSound;
 
     public Animator anim;
     /// <summary>
@@ -19,6 +15,7 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     public Transform barrelExit;
     public GameObject bulletHole;
+	public ParticleSystem bleedingEffect;
     /// <summary>
     /// Prefab for the bulletline, should just be a square.
     /// </summary>
@@ -35,23 +32,23 @@ public class Gun : Weapon, IReloadable
     /// <returns></returns>
     public override bool Use()
     {
-        triggerSound.Play();
+        TriggerSound.Play();
 
         if (!CanShoot())
         {
-            Scenario.logs.Add(new LoggedShot(this, true));
+            ScenarioLogs.logs.Add(new LoggedShot(this, true));
             return false;
         }
 
-        shotSound.Play();
+        ShotSound.Play();
         DetectHit();
 
         currentAmmo--;
 
         GetComponentInChildren<ParticleSystem>().Play();
-        anim.Play("Fire");
+		anim.Play("Fire");
 
-        Scenario.logs.Add(new LoggedShot(this, true));
+        ScenarioLogs.logs.Add(new LoggedShot(this, true));
         return true;
     }
 
@@ -60,18 +57,16 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     private void DetectHit()
     {
-        bool hasHit = Physics.Raycast(barrelExit.transform.position, transform.rotation * -Vector3.forward, out RaycastHit hit);
+        bool hasHit = Physics.Raycast(barrelExit.transform.position, transform.rotation * Vector3.forward, out RaycastHit hit);
 
         if (hasHit)
         {
-            Debug.Log("Gun::DetecHit() " + hit.collider.name);
-
             if (!hit.collider.gameObject.GetComponent<Enemy>()) SpawnBulletHole(hit);
 
             IHitable target = hit.transform.GetComponentInParent<IHitable>();
             if (target == null)
             {
-                if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+                if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * Vector3.forward * 10, Color.red);
                 return;
             }
 
@@ -92,22 +87,21 @@ public class Gun : Weapon, IReloadable
                         linecolor = Color.magenta;
                         break;
                 }
-                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, linecolor);
+                BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * Vector3.forward * 10, linecolor);
             }
 
         }
         else
         {
-            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * -Vector3.forward * 10, Color.red);
+            if (drawLines) BulletLines.SpawnLine(BulletLine, barrelExit.transform.position, barrelExit.transform.position + transform.rotation * Vector3.forward * 10, Color.red);
         }
     }
 
     private void SpawnBulletHole(RaycastHit hit)
     {
-        //tmp TODO FIX IT
-        if (hit.collider.GetComponentInParent<Enemy>()) return;
-
-        Vector3 offset = transform.rotation * -Vector3.forward;
+		if (hit.collider.GetComponentInParent<Enemy>()) return;
+		
+        Vector3 offset = transform.rotation * Vector3.forward;
         offset.Scale(new Vector3(0.005f, 0.005f, 0.005f));
         Vector3 position = hit.point - offset;
 
@@ -132,8 +126,8 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     public void Reload()
     {
-        currentAmmo = magCapacity;
-        //FindObjectOfType<Exercise>()?.Restart();
+		if(currentAmmo != magCapacity) ReloadSound.Play();
+		currentAmmo = magCapacity;		
     }
 
     /// <summary>
@@ -144,4 +138,9 @@ public class Gun : Weapon, IReloadable
     {
         return currentAmmo > 0;
     }
+
+	public void RemoveAmmo()
+	{
+		currentAmmo = 0;
+	}
 }

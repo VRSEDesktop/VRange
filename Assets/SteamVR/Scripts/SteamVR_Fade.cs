@@ -43,17 +43,6 @@ namespace Valve.VR
                 compositor.FadeToColor(duration, newColor.r, newColor.g, newColor.b, newColor.a, false);
         }
 
-#if TEST_FADE_VIEW
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			SteamVR_Fade.View(Color.black, 0);
-			SteamVR_Fade.View(Color.clear, 1);
-		}
-	}
-#endif
-
         public void OnStartFade(Color newColor, float duration, bool fadeOverlay)
         {
             if (duration > 0.0f)
@@ -68,15 +57,13 @@ namespace Valve.VR
         }
 
         static Material fadeMaterial = null;
-        static int fadeMaterialColorID = -1;
 
         void OnEnable()
         {
-            if (fadeMaterial == null)
-            {
-                fadeMaterial = new Material(Shader.Find("Custom/SteamVR_Fade"));
-                fadeMaterialColorID = Shader.PropertyToID("fadeColor");
-            }
+            //if (fadeMaterial == null)
+            //{
+                //fadeMaterial = new Material(Shader.Find("Lightweight Render Pipeline/Unlit"));
+            //}
 
             SteamVR_Events.Fade.Listen(OnStartFade);
             SteamVR_Events.FadeReady.Send();
@@ -89,7 +76,8 @@ namespace Valve.VR
 
         void OnPostRender()
         {
-            if (currentColor != targetColor)
+			Debug.Log("OnPostRender");
+			if (currentColor != targetColor)
             {
                 // if the difference between the current alpha and the desired alpha is smaller than delta-alpha * deltaTime, then we're pretty much done fading:
                 if (Mathf.Abs(currentColor.a - targetColor.a) < Mathf.Abs(deltaColor.a) * Time.deltaTime)
@@ -112,13 +100,14 @@ namespace Valve.VR
                 }
             }
 
-            if (currentColor.a > 0 && fadeMaterial)
+            if (currentColor.a > 0)
             {
-                fadeMaterial.SetColor(fadeMaterialColorID, currentColor);
-                fadeMaterial.SetPass(0);
+				// fadeMaterial.SetColor("_BaseColor", currentColor);
+				//fadeMaterial.SetPass(0);
+				Debug.Log("RENDER QUAD");
                 GL.Begin(GL.QUADS);
-
-                GL.Vertex3(-1, -1, 0);
+				GL.Color(currentColor);
+				GL.Vertex3(-1, -1, 0);
                 GL.Vertex3(1, -1, 0);
                 GL.Vertex3(1, 1, 0);
                 GL.Vertex3(-1, 1, 0);

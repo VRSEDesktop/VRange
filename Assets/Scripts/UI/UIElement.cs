@@ -26,6 +26,7 @@ public abstract class UIElement : MonoBehaviour
 		float lerpStarttime = Time.time;
 		float lerpProgress;
 		Color startingColor = renderer.material.GetColor("_BaseColor");
+
 		while (true)
 		{
 			yield return null;

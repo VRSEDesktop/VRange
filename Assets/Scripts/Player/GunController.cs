@@ -3,6 +3,8 @@
 /// <summary>
 /// Player interface for controlling the gun
 /// </summary>
+/// 
+[RequireComponent(typeof(ApplyGunRotation))]
 public class GunController : HandController
 {
     private static readonly float DoubleClickDelay = 0.35f;
@@ -16,18 +18,17 @@ public class GunController : HandController
         if (!triggerPushed && input.GetTriggerState()) PushTrigger();
         else if(triggerPushed && !input.GetTriggerState()) ReleaseTrigger();
 
-        //if (!reloadPushed && input.GetGripState()) PushReload();
-        //else if (reloadPushed && !input.GetGripState()) ReleaseReload();
+        // if (!reloadPushed && input.GetGripState()) PushReload();
+        // else if (reloadPushed && !input.GetGripState()) ReleaseReload();
     }
 
     public void Update()
-    {     
-        gun.gameObject.SetActive(input.IsControllerWorking());
+    {
+		gun.gameObject.SetActive(input.IsControllerWorking());
     }
 
     private void PushTrigger()
     {
-		//Debug.Log(triggerPushed + " " + Time.realtimeSinceStartup);
 		if (triggerPushed || Time.realtimeSinceStartup - LastTime <= DoubleClickDelay) return;
         triggerPushed = true;
         LastTime = Time.realtimeSinceStartup;

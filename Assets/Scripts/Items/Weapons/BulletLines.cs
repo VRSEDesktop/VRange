@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public static class BulletLines
@@ -15,7 +14,7 @@ public static class BulletLines
 	/// <param name="end">Ending position.</param>
 	/// <param name="color">The color of the line.</param>
 	/// <param name="lifespan">The time before the line should disappear. If null it will not disappear.</param>
-	public static void SpawnLine(GameObject linePrefab, Vector3 start, Vector3 end, Color color, float? lifespan = 5f)
+	public static void SpawnLine(GameObject linePrefab, Vector3 start, Vector3 end, Color color, float? lifespan = 1f)
     {
         if (Parent == null) Parent = new GameObject("ShotRays");
 
@@ -33,10 +32,7 @@ public static class BulletLines
 		lineObject.GetComponent<Collider>().enabled = false;
 		lineObject.GetComponent<Renderer>().material.SetColor("_BaseColor", color);
 
-        if(lifespan != null)
-		{
-			lineObject.GetComponent<FadeOut>().StartFadeOut((float)lifespan);
-		}
+        if(lifespan != null) lineObject.GetComponent<FadeOut>().StartFadeOut((float)lifespan);
 
 		if (!Active)
 			lineObject.GetComponent<FadeOut>().Disable();

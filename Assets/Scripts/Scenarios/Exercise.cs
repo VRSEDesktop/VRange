@@ -1,6 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR;
+
+public enum ExerciseProgress
+{
+	NotStarted,
+	Started,
+	Succeeded,
+	Failed
+}
 
 public class Exercise : MonoBehaviour
 {
@@ -9,109 +16,133 @@ public class Exercise : MonoBehaviour
     /// </summary>
     public ExcersiseState[] States;
 	public Settings Settings;
+	public Player Player;
 
 	public SteamVR_LoadLevel LevelLoader;
     public GazeButton PreviousScenarioButton, NextScenarioButton;
+	public GazeButton StartButton, RestartButton;
 	public GameObject ShootingRange, City;
+
+	public Whiteboard whiteboard;
 
 	/// <summary>
 	/// Object with explanation of the exercise, reference used for turning it on/off
 	/// </summary>
 	public GameObject Explanation;
 
-    private static int CurrentState = 0;
+    public static int CurrentState;
 
-    public void Start()
+	private ExerciseProgress _progress;
+	public ExerciseProgress Progress
+	{
+		get { return _progress; }
+		set
+		{
+			if (value != _progress)
+			{
+				_progress = value;
+				States[CurrentState].OnProgressChanged();
+			}
+		}
+	}
+
+	public void Start()
     {
 		BulletLines.SetActive(Settings.DrawLines);
         Settings.SettingsChanged += OnSettingsChanged;
-        foreach(ExcersiseState state in States) state.OnExit();
-        CurrentState = 0;
-        States[CurrentState].OnStart();
+
+		foreach (ExcersiseState state in States) state.gameObject.SetActive(false);
+
+        States[CurrentState].OnInitialize();
+
+		if (Settings.UseNormalGuns) GameObject.Find("Toggle Controller").GetComponent<GazeButtonToggle>().Activate();
     }
 
-    public void Update()
-    {      
+	public void Update()
+    {
         States[CurrentState].OnUpdate();
         HandleButtons();
     }
 
-    public void PreviousStep()
+	public void PreviousStep()
     {
         States[CurrentState].OnExit();
-        CurrentState--;
-        States[CurrentState].OnStart();
+		CurrentState--;
+        States[CurrentState].OnInitialize();
 
-        DeleteBulletHoles();
-        DeleteLines();
-    }
+		Clear();
+	}
 
-    public void NextStep()
+	public void NextStep()
     {  
-		if(CurrentState != 2)
-		{
-			States[CurrentState].OnExit();
-			CurrentState++;
-			States[CurrentState].OnStart();
-			DeleteBulletHoles();
-			DeleteLines();
-		}
-    }
+		States[CurrentState].OnExit();
+		CurrentState++;
+		States[CurrentState].OnInitialize();
 
-    public void Restart()
+		Clear();
+	}
+
+
+	public void Restart()
     {
 		BulletLines.SetActive(Settings.DrawLines);
-		DeleteBulletHoles();
-        DeleteLines();
-        States[CurrentState].Restart();
+
+		Clear();
+
+		States[CurrentState].Restart();
     }
 
-    private void HandleButtons()
+	private void HandleButtons()
     {
         Settings.DrawLines = UI.GetButtonActivated("Toggle Bulletlines");
+		Settings.UseNormalGuns = UI.GetButtonActivated("Toggle Controller");
 
-        if (UI.GetButtonActivated("Restart Scenario"))
-        {
-            Scenario.Clear();
-            Restart();
-            UI.DeactivateButton("Restart Scenario");
-        }
+		if (UI.GetButtonActivated("Restart Scenario")) Restart();
 
         if (UI.GetButtonActivated("Mainmenu"))
         {
-            Scenario.Clear();
+            ScenarioLogs.Clear();
+
             LevelLoader.levelName = "MainMenu";
             LevelLoader.Trigger();
-        }
+			CurrentState = 0;
+		}
 
-        if (UI.GetButtonActivated("Next Scenario"))
-        {
-            Scenario.Clear();
-            NextStep();
-            UI.DeactivateButton("Next Scenario");
-        }
+        if (UI.GetButtonActivatedAndTurnOff("Next Scenario")) NextStep();
+        if (UI.GetButtonActivatedAndTurnOff("Previous Scenario")) PreviousStep();
 
-        if (UI.GetButtonActivated("Previous Scenario"))
-        {
-            Scenario.Clear();
-            PreviousStep();
-            UI.DeactivateButton("Previous Scenario");
-        }
+		if (UI.GetButtonActivatedAndTurnOff("Start_Scenario"))
+		{
+			Clear();
+
+			States[CurrentState].OnStart();
+		}
 	}
 
 	private void OnSettingsChanged()
 	{
 		BulletLines.SetActive(Settings.DrawLines);
+
+		ApplyGunRotation[] guns = GameObject.Find("[CameraRig]").GetComponentsInChildren<ApplyGunRotation>();
+		foreach (ApplyGunRotation gun in guns) gun.Apply();
 	}
 
-    private void DeleteBulletHoles()
-    {
-        GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
-        foreach (GameObject obj in bulletHoles) Destroy(obj);
-    }
+	/// <summary>
+	/// Clears the exercise from bullet lines, bullet holes and scenario logs
+	/// </summary>
+	public void Clear()
+	{
+		ScenarioLogs.Clear();
+		BulletLines.Destroy();
+		DeleteBulletHoles();
+	}
 
-    private void DeleteLines()
-    {
-        BulletLines.Destroy();
-    }
+	/// <summary>
+	/// Deletes all game objects from folder-object with tag Bullet Hole 
+	/// </summary>
+	private void DeleteBulletHoles()
+	{
+		GameObject[] bulletHoles = GameObject.FindGameObjectsWithTag("Bullet Hole");
+		foreach (GameObject obj in bulletHoles) Destroy(obj);
+	}
 }

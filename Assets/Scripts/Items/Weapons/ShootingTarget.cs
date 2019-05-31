@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShootingTarget : ExcersiseState, IHitable
 {
@@ -10,12 +9,10 @@ public class ShootingTarget : ExcersiseState, IHitable
 
 	public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
-
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
-		step.SendMessage("Hit", SendMessageOptions.DontRequireReceiver);
+		step.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
 
-		Debug.Log("ShootingTarrget::OnHit() " + partHit.ToString());
-        Scenario.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
+        ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
         if(partHit == Goal)
         {
             return HitType.RIGHT;
@@ -32,7 +29,6 @@ public class ShootingTarget : ExcersiseState, IHitable
             case HitboxType.TargetTorso: return HitType.UNWANTED;
         }
 		
-
         return HitType.MISS;
     }
 

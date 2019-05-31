@@ -1,0 +1,140 @@
+{
+  "app_key": "application.generated.unity.shootingexam.exe",
+  "bindings": {
+    "/actions/buggy": {
+      "chords": [],
+      "poses": [],
+      "haptics": [],
+      "sources": [],
+      "skeleton": []
+    },
+    "/actions/default": {
+      "chords": [],
+      "poses": [
+        {
+          "output": "/actions/default/in/pose",
+          "path": "/user/hand/left/pose/raw"
+        },
+        {
+          "output": "/actions/default/in/pose",
+          "path": "/user/hand/right/pose/raw"
+        }
+      ],
+      "haptics": [],
+      "sources": [
+        {
+          "path": "/user/hand/left/input/grip",
+          "mode": "button",
+          "parameters": {
+            "click_activate_threshold": "0.05",
+            "click_deactivate_threshold": "0",
+            "force_input": "force"
+          },
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/reload"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/grip",
+          "mode": "button",
+          "parameters": {
+            "click_activate_threshold": "0.05",
+            "click_deactivate_threshold": "0",
+            "force_input": "force"
+          },
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/reload"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/trigger",
+          "mode": "trigger",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/trigger"
+            },
+            "pull": {
+              "output": "/actions/default/in/squeeze"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trigger",
+          "mode": "trigger",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/trigger"
+            },
+            "pull": {
+              "output": "/actions/default/in/squeeze"
+            }
+          }
+        },
+        {
+          "path": "/input/trigger",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/trigger"
+            }
+          }
+        },
+        {
+          "path": "/input/grip",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/reload"
+            }
+          }
+        },
+        {
+          "path": "/devices/htc/vive_trackerLHR-01B62448/input/trigger",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/trigger"
+            }
+          }
+        },
+        {
+          "path": "/devices/htc/vive_trackerLHR-01B62448/input/grip",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/default/in/reload"
+            }
+          }
+        }
+      ],
+      "skeleton": []
+    },
+    "/actions/legacy": {
+      "chords": [],
+      "poses": [],
+      "haptics": [],
+      "sources": [],
+      "skeleton": []
+    },
+    "/actions/platformer": {
+      "chords": [],
+      "poses": [],
+      "haptics": [],
+      "sources": [],
+      "skeleton": []
+    }
+  },
+  "controller_type": "vive_tracker_handed",
+  "description": "",
+  "name": "vive_controller our 21.5.2019"
+}
