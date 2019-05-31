@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IHitable
     /// </summary>
     public GameObject Gun, Phone, BaseballBat, Axe;
     public bool isAgressive;
+	public bool hitCorrectPart;
 
     private Animator animator;
     public bool IsDead { private set; get;}
@@ -56,42 +57,49 @@ public class Enemy : MonoBehaviour, IHitable
     public HitType OnHit(Gun gun, RaycastHit raycastHit)
     {
         HitboxType partHit = GetHitboxTypeFromHit(raycastHit);
+		hitCorrectPart = false;
 
 		//raycastHit.transform.position()
+		ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
 
-        switch (partHit) // add sth related to the part hit if we will need it
+		switch (partHit) // add sth related to the part hit if we will need it
 		{
 			case HitboxType.HumanHead:
                 if (!IsDead) Die();
             break;
-            case HitboxType.HumanNeck: if (!IsDead) Die();  break;
+            case HitboxType.HumanNeck: if (!IsDead) Die(); hitCorrectPart = false; break;
 
-			case HitboxType.HumanPelvis: Torso(); break;
-			case HitboxType.HumanSpine1: Torso(); break;
-            case HitboxType.HumanSpine2: Torso(); break;
-            case HitboxType.HumanSpine3: Torso(); break;
+			case HitboxType.HumanPelvis: Torso(); hitCorrectPart = true;  break;
+			case HitboxType.HumanSpine1: Torso(); hitCorrectPart = true; break;
+            case HitboxType.HumanSpine2: Torso(); hitCorrectPart = true; break;
+            case HitboxType.HumanSpine3: Torso(); hitCorrectPart = true; break;
 
-            case HitboxType.HumanThighLeft: LeftLegHit(); break;
-			case HitboxType.HumanCalfLeft: LeftLegHit(); break;
+            case HitboxType.HumanThighLeft: LeftLegHit(); hitCorrectPart = false; break;
+			case HitboxType.HumanCalfLeft: LeftLegHit(); hitCorrectPart = false; break;
 
-			case HitboxType.HumanThighRight: RightLegHit(); break;
-			case HitboxType.HumanCalfRight: RightLegHit(); break;
+			case HitboxType.HumanThighRight: RightLegHit(); hitCorrectPart = false; break;
+			case HitboxType.HumanCalfRight: RightLegHit(); hitCorrectPart = false; break;
 				
-			case HitboxType.HumanFootLeft: health -= Random.Range(1, 20); break;
-            case HitboxType.HumanFootRight: health -= Random.Range(1, 20); break;
+			case HitboxType.HumanFootLeft: health -= Random.Range(1, 20); hitCorrectPart = false; break;
+            case HitboxType.HumanFootRight: health -= Random.Range(1, 20); hitCorrectPart = false; break;
 
-            case HitboxType.HumanLowerArmLeft: LeftShoulderHit(); break;
-			case HitboxType.HumanHandLeft: LeftShoulderHit(); break;
-			case HitboxType.HumanUpperArmLeft: LeftShoulderHit(); break;
+            case HitboxType.HumanLowerArmLeft: LeftShoulderHit(); hitCorrectPart = false; break;
+			case HitboxType.HumanHandLeft: LeftShoulderHit(); hitCorrectPart = false; break;
+			case HitboxType.HumanUpperArmLeft: LeftShoulderHit(); hitCorrectPart = false; break;
 
-			case HitboxType.HumanLowerArmRight: RightShoulderHit(); break;
-			case HitboxType.HumanHandRight: RightShoulderHit(); break;
-			case HitboxType.HumanUpperArmRight: RightShoulderHit(); break;
+			case HitboxType.HumanLowerArmRight: RightShoulderHit(); hitCorrectPart = false; break;
+			case HitboxType.HumanHandRight: RightShoulderHit(); hitCorrectPart = false; break;
+			case HitboxType.HumanUpperArmRight: RightShoulderHit(); hitCorrectPart = false; break;
 
 		}
-
-        ScenarioLogs.logs.Add(new LoggedHit(this, partHit, gun, raycastHit));
-        return isAgressive ? HitType.RIGHT : HitType.UNWANTED;
+		if(isAgressive == false || hitCorrectPart == false)
+		{
+			return HitType.UNWANTED;
+		}
+		else
+		{
+			return HitType.RIGHT;
+		}
     }
 
 	public void Torso()
