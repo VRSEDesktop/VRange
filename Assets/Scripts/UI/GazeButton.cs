@@ -43,6 +43,10 @@ public class GazeButton : UIElement, IGazeable
 		if(isActiveAndEnabled) StartCoroutine(ChangeColor(DefaultColor, 1f));
 	}
 
+	/// <summary>
+	/// Used to make the button deactive. Fixes errors connected with animations and deactivated button objects.
+	/// </summary>
+	/// <param name="_isVisible"></param>
 	public void SetState(bool _isVisible)
 	{
 		GetComponent<MeshRenderer>().enabled = _isVisible;

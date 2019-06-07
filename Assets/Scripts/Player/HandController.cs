@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Valve.VR;
+﻿using UnityEngine;
 
 /// <summary>
 /// Abstract class for adding new types of controllers

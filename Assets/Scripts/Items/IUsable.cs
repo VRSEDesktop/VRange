@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IUsable
+﻿public interface IUsable
 {
     /// <summary>
     /// Use the item
