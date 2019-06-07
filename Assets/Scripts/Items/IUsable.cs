@@ -8,3 +8,11 @@
     /// </returns>
     bool Use();
 }
+
+/// <summary>
+/// Can be used like in exercise states for randomizing drawn weapon
+/// </summary>
+public enum Item
+{
+	GUN, PHONE
+}

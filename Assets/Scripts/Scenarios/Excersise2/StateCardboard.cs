@@ -10,7 +10,7 @@ public class StateCardboard : ExcersiseState
     public float TimeToStart = 5f, ReapearTime = 2f, TimeToReact = 2f;
 	private int Iteration = 1;
 
-	private const int Repetitions = 7;
+	private static readonly int Repetitions = 7;
 
     private IEnumerator CurrentCoroutine;
 
@@ -75,7 +75,7 @@ public class StateCardboard : ExcersiseState
 
 			RestartCourutine(ReapearTime);
         }
-        else if (Iteration == Repetitions) // On last repetition dont restart and finish step
+        else if (Iteration == Repetitions) // On last repetition don't restart and finish step
         {
 			Exercise.Progress = ExerciseProgress.Succeeded;
         }

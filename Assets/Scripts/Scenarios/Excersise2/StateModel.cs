@@ -13,10 +13,10 @@ public class StateModel : ExcersiseState
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 6f;
 
-	private enum Item
-	{
-		GUN, PHONE
-	}
+	/// <summary>
+	/// Time for animated human to reach their pocket for item
+	/// </summary>
+	private static readonly float TimeToReachPocket = 0.8f;
 
 	public override void OnInitialize()
 	{
@@ -62,7 +62,6 @@ public class StateModel : ExcersiseState
 		if (WomanAnimator == null || WomanAnimator.GetComponent<Enemy>().IsDead)
 		{
 			Exercise.Progress = ExerciseProgress.Succeeded;
-			//Restart();
 		}
 	}
 
@@ -78,14 +77,14 @@ public class StateModel : ExcersiseState
         {
             case Item.GUN:
 		        WomanAnimator.SetBool("Equip Pistol", true);
-                yield return new WaitForSecondsRealtime(0.8f);
+                yield return new WaitForSecondsRealtime(TimeToReachPocket);
                 WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = true;
             break;
 
             case Item.PHONE:
 		        WomanAnimator.SetBool("Equip Phone", true);
-                yield return new WaitForSecondsRealtime(0.8f);
+                yield return new WaitForSecondsRealtime(TimeToReachPocket);
                 WomanAnimator.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = false;
             break;

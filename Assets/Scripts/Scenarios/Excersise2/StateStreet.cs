@@ -20,6 +20,15 @@ public class StateStreet : ExcersiseState
 	/// Minimum and maximum time in seconds after which the model will decide which item to take
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 15f;
+	/// <summary>
+	/// Time for animated human to reach their pocket for item
+	/// </summary>
+	private static readonly float TimeToReachPocket = 0.8f;
+	/// <summary>
+	/// Time for delaying part of the transition to make it more smoother
+	/// </summary>
+	private static readonly float TransitionDelay = 2f;
+
 
 	public override void OnInitialize()
 	{
@@ -40,7 +49,7 @@ public class StateStreet : ExcersiseState
 	private IEnumerator DoTransition()
 	{
 		Exercise.ShootingRange.gameObject.GetComponent<Transition>().Disable();
-		yield return new WaitForSecondsRealtime(2);
+		yield return new WaitForSecondsRealtime(TransitionDelay);
 		Exercise.City.gameObject.SetActive(true);
 		Exercise.City.gameObject.GetComponent<Transition>().Enable();
 
@@ -51,7 +60,7 @@ public class StateStreet : ExcersiseState
 	private IEnumerator UndoTransition()
 	{
 		Exercise?.City.gameObject.GetComponent<Transition>().Disable();
-		yield return new WaitForSecondsRealtime(2);
+		yield return new WaitForSecondsRealtime(TransitionDelay);
 		Exercise?.ShootingRange.gameObject.SetActive(true);
 		Exercise?.ShootingRange.gameObject.GetComponent<Transition>().Enable();
 
@@ -68,25 +77,27 @@ public class StateStreet : ExcersiseState
 	private void Randomizer()
 	{
 		float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
-		StartCoroutine(PullItem(waitTime, Random.Range(0, 1)));
+		StartCoroutine(PullItem(waitTime, Item.GUN));
 	}
 
 	/// <summary>
 	/// Triggers the pullgun animation
 	/// </summary>
 	/// <returns></returns>
-	private IEnumerator PullItem(float waitTime, int num)
+	private IEnumerator PullItem(float waitTime, Item item)
 	{
 		yield return new WaitForSeconds(waitTime);
-		switch (num)
+
+		switch(item)
 		{
-			case 0:
+			case Item.GUN:
 				WomanAnimator.SetBool("Equip Pistol", true);
-				yield return new WaitForSeconds(0.8f);
+				yield return new WaitForSeconds(TimeToReachPocket);
 				WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
 				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
-				break;
+			break;
 		}
+
 		yield return new WaitForSeconds(LoopTime);
 		Restart();
 	}
@@ -99,10 +110,10 @@ public class StateStreet : ExcersiseState
 		Randomizer();
 	}
 
-	public void Respawn(bool _fistSpawn)
+	public void Respawn(bool _firstSpawn)
 	{
 		int spawnNum = 0;
-		if (!_fistSpawn) spawnNum = Random.Range(0, 4);
+		if (!_firstSpawn) spawnNum = Random.Range(0, PlayerSpawnPoints.Capacity);
 
 		GameObject spawnPlayer = PlayerSpawnPoints[spawnNum];
 		GameObject spawnWoman = SpawnPointsWoman[spawnNum];
@@ -115,6 +126,6 @@ public class StateStreet : ExcersiseState
 		WomanAnimator = newWoman.GetComponent<Animator>();
 
 		// Spawning player
-		if(!_fistSpawn) player.transform.SetPositionAndRotation(spawnPlayer.transform.position, spawnPlayer.transform.rotation);
+		if(!_firstSpawn) player.transform.SetPositionAndRotation(spawnPlayer.transform.position, spawnPlayer.transform.rotation);
 	}
 }
