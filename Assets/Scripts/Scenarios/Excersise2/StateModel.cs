@@ -13,6 +13,11 @@ public class StateModel : ExcersiseState
 	/// </summary>
 	public float MinWaitTime = 2f, MaxWaitTime = 5f, LoopTime = 6f;
 
+	private enum Item
+	{
+		GUN, PHONE
+	}
+
 	public override void OnInitialize()
 	{
 		base.OnInitialize();
@@ -42,7 +47,11 @@ public class StateModel : ExcersiseState
         float waitTime = Random.Range(MinWaitTime, MaxWaitTime);
 
 		if(CurrentCoroutine != null) StopCoroutine(CurrentCoroutine);
-		CurrentCoroutine = PullItem(waitTime, Random.Range(0, 5));
+
+		// 80% for gun, 20% phone
+		Item item = Random.Range(0, 100) < 80 ? Item.GUN : Item.PHONE;
+
+		CurrentCoroutine = PullItem(waitTime, item);
 		if (isActiveAndEnabled) StartCoroutine(CurrentCoroutine);    
     }
 
@@ -61,48 +70,25 @@ public class StateModel : ExcersiseState
     /// Triggers the pullgun animation
     /// </summary>
     /// <returns></returns>
-    private IEnumerator PullItem(float waitTime, int num)
+    private IEnumerator PullItem(float waitTime, Item item)
     {
-        yield return new WaitForSecondsRealtime(waitTime);      
-        switch (num)
+        yield return new WaitForSecondsRealtime(waitTime);
+
+        switch(item)
         {
-            case 0:
+            case Item.GUN:
 		        WomanAnimator.SetBool("Equip Pistol", true);
                 yield return new WaitForSecondsRealtime(0.8f);
                 WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = true;
-            break; 
-            case 1:
+            break;
+
+            case Item.PHONE:
 		        WomanAnimator.SetBool("Equip Phone", true);
                 yield return new WaitForSecondsRealtime(0.8f);
                 WomanAnimator.GetComponent<Enemy>().Phone.gameObject.SetActive(true);
                 WomanAnimator.GetComponent<Enemy>().isAgressive = false;
-                break;
-			case 2:
-				WomanAnimator.SetBool("Equip Pistol", true);
-				yield return new WaitForSecondsRealtime(0.8f);
-				WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
-				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
-				break;
-			case 3:
-				WomanAnimator.SetBool("Equip Pistol", true);
-				yield return new WaitForSecondsRealtime(0.8f);
-				WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
-				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
-				break;
-			case 4:
-				WomanAnimator.SetBool("Equip Pistol", true);
-				yield return new WaitForSecondsRealtime(0.8f);
-				WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
-				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
-				break;
-
-			case 5:
-				WomanAnimator.SetBool("Equip Pistol", true);
-				yield return new WaitForSecondsRealtime(0.8f);
-				WomanAnimator.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
-				WomanAnimator.GetComponent<Enemy>().isAgressive = true;
-				break;
+            break;
 		}
 
         yield return new WaitForSecondsRealtime(LoopTime);
