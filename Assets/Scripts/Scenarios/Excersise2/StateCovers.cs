@@ -11,6 +11,10 @@ public class StateCovers : ExcersiseState
     /// Minimum and maximum time in seconds after which the model will decide which item to take
     /// </summary>
     public float MinWaitTime = 2f, MaxWaitTime = 5f, TimeForReaction = 6f;
+	/// <summary>
+	/// Time for animated human to reach their pocket for item
+	/// </summary>
+	private static readonly float TimeToReachPocket = 0.8f;
 
 	public GameObject RespawnPoint;
 
@@ -61,7 +65,7 @@ public class StateCovers : ExcersiseState
         yield return new WaitForSecondsRealtime(waitTime);
 
         Anim.SetBool("Equip Pistol", true);
-        yield return new WaitForSecondsRealtime(0.8f);
+        yield return new WaitForSecondsRealtime(TimeToReachPocket);
         Anim.GetComponent<Enemy>().Gun.gameObject.SetActive(true);
         Anim.GetComponent<Enemy>().isAgressive = true;
 

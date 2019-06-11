@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
-using Assets.Scripts.StateMachine;
+﻿using UnityEngine;
 
 class Surrender : State<AIController>
 {

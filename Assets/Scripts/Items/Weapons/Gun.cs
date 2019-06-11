@@ -15,7 +15,7 @@ public class Gun : Weapon, IReloadable
     /// </summary>
     public Transform barrelExit;
     public GameObject bulletHole;
-	public ParticleSystem bleedingEffect;
+
     /// <summary>
     /// Prefab for the bulletline, should just be a square.
     /// </summary>

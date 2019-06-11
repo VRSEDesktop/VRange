@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Selector<T> : Node<T>
+﻿public class Selector<T> : Node<T>
 {
     public Node<T>[] Nodes;
 

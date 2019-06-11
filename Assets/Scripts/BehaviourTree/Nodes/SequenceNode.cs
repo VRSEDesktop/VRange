@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Sequence<T> : Node<T>
+﻿public class Sequence<T> : Node<T>
 {
     public Node<T>[] Children;
 
